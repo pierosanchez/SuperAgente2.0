@@ -63,12 +63,6 @@ public class LoginActivity extends Activity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);*/
 
-        if (!obtenerDataSQLite()){
-            Intent intent = new Intent(this, VentanaErrores.class);
-            startActivity(intent);
-            finish();
-        }
-
         tv_olvido_contraseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +123,12 @@ public class LoginActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        if (obtenerDataSQLite() == false) {
+            Intent intent = new Intent(LoginActivity.this, VentanaErrores.class);
+            startActivityForResult(intent, 0);
+            finish();
+        }
     }
 
     private String getPhoneNumber() {
@@ -251,7 +251,7 @@ public class LoginActivity extends Activity {
     }
 
     public boolean obtenerDataSQLite() {
-        boolean result = false;
+        boolean result;
         SuperAgenteBD superAgenteBD = new SuperAgenteBD(this);
         /*SQLiteDatabase db = superAgenteBD.getReadableDatabase();
 
@@ -261,6 +261,8 @@ public class LoginActivity extends Activity {
 
         if (cursor.getCount() > 0) {
             result = true;
+        } else {
+            result = false;
         }
 
         return result;
