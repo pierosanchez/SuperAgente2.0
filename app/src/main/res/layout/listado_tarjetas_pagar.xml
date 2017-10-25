@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.ListadoTarjetasPagar">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/tv_titulo_listado_tarjetas_pagar"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/tv_aviso"
+                android:textColor="@color/color_amarillo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_tarjeta1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="BCP 1994-5555-4654-1155"
+                    android:textColor="@color/color_blanco" />
+
+                <TextView
+                    android:id="@+id/tv_tarjeta2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Interbank 19847-5445-4609-1505"
+                    android:textColor="@color/color_blanco" />
+
+                <TextView
+                    android:id="@+id/tv_tarjeta3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="BBVA 1907-5750-4671-1751"
+                    android:textColor="@color/color_blanco" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

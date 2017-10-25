@@ -1,0 +1,189 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorfondoactivity"
+    tools:context="com.example.ctorres.superagentemovil3.fragments.InformacionTarjetaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="INGRESO DE INFORMACIÓN DE TARJETA"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="#051194"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="INGRESE SU NÚMERO DE TARJETA"
+                    android:textColor="#EFFF00"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/linearLayoutStyle">
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/nroTarjetaDigito1"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/nroTarjetaDigito2"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/nroTarjetaDigito3"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/nroTarjetaDigito4"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="CONFIRME SU NÚMERO DE TARJETA"
+                    android:textColor="#EFFF00"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/linearLayoutStyle">
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/confirmNroTarjetaDigito1"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/confirmNroTarjetaDigito2"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/confirmNroTarjetaDigito3"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+                <EditText style="@style/editTextStyle"
+                    android:id="@+id/confirmNroTarjetaDigito4"
+                    android:layout_height="30dp"
+                    android:maxLength="4"
+                    android:textAlignment="center"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:src="@drawable/tarjeta"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="Se puede ingresar hasta 5 tarjetas del mismo banco"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/agregarTarjeta"
+                    android:text="MÁS TARJETAS"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/terminar"
+                    android:text="TERMINAR"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

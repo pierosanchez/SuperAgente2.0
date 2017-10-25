@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.ContrasenaOlvidada">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_recuperacion_clave"
+            android:textColor="@color/color_blanco"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_numero_cel_olvido"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/tx_valida_num_cel_usuario"
+                        android:layout_width="180dp"
+                        android:layout_height="30dp"
+                        android:background="@color/color_blanco"
+                        android:maxLength="9"/>
+
+                    <Button
+                        android:id="@+id/btn_validar"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="@string/btn_validar" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_pregunta_autenticacion"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_pregunta_autenticacion"
+                    android:layout_width="280dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/color_blanco"
+                    android:enabled="false"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_ingrese_respuesta_olvide_contraseña"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_respuesta_pregunta"
+                    android:layout_width="280dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/color_blanco"
+                    android:enabled="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_nueva_clave_por_olvido"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/txt_nueva_clave_por_olvido"
+                    android:layout_width="280dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/color_blanco"
+                    android:enabled="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_olvide_pregunta_secreta"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_botones_olvido_contra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_aceptar"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/btn_aceptar" />
+
+                <Button
+                    android:id="@+id/btn_salir"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:text="@string/btn_salir" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

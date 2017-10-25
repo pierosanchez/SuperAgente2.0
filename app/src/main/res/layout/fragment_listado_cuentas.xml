@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ctorres.superagentemovil3.fragments.ListadoCuentasFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/tv_fr_codigo_interbancario"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center">
+
+        <!--<EditText
+            android:id="@+id/txt_codigo_interbancario"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@color/color_amarillo" />-->
+        <ListView
+            android:id="@+id/lv_cuentas_beneficiario"
+            android:layout_width="300dp"
+            android:layout_height="40dp">
+
+
+        </ListView>
+
+    </LinearLayout>
+
+</FrameLayout>

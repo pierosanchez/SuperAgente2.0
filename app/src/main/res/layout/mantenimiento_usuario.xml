@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.MantenimientoUsuario">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/tv_mantenimiento_usuario"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TITULAR DE LA CUENTA:"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/tv_nombre_titular_cuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rdgrp_mantenimiento_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <RadioButton
+                android:id="@+id/rdbtn_cuentas_usuario_mant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rdbtn_cuentas_usuario" />
+
+            <RadioButton
+                android:id="@+id/rdbtn_tarjetas_usuario_mant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rdbtn_tarjetas_usuario" />
+
+            <RadioButton
+                android:id="@+id/rdbtn_beneficiarios_usuario_mant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rdbtn_beneficiarios_usuario" />
+
+            <RadioButton
+                android:id="@+id/rdbtn_domicilio_usuario_mant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rdbtn_domicilio_usuario" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_regresar_mantenimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_regresar"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

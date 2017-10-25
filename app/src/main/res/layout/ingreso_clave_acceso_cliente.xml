@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.IngresoClaveAccesoCliente">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_ingreso_clave_cliente"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
+                    android:text="@string/ingrese_clave_acceso"
+                    android:textColor="@color/color_amarillo"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/txt_ingresi_clave_acceso"
+                    android:layout_width="370dp"
+                    android:layout_height="50dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"/>
+
+                <!--
+                <EditText
+                    android:id="@+id/txt_ingrese_clave1"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave2"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave3"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave4"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave5"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave6"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave7"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/txt_ingrese_clave8"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="7dp"
+                    android:background="@color/color_blanco" />
+                    -->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/btn_entrar_ing_cli"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_entrar"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/lnk_clave_olvidada"
+                    android:textColor="@color/color_amarillo"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/advertencia_acceso"
+                    android:textColor="@color/color_amarillo"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

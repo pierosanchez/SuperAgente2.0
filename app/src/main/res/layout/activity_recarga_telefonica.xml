@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorfondoactivity"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.RecargaTelefonica">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_recarga_telefonica"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/color_amarillo"
+        android:text="@string/tv_clave_para_consulta" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/color_blanco"
+            android:text="@string/tv_nro_telefono"/>
+
+        <EditText
+            android:id="@+id/txt_pricipal_nombreRecarga"
+            android:layout_width="170dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/color_blanco"
+            android:inputType="text" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textViewNombre2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/color_blanco"
+            android:text="@string/tv_operador" />
+
+
+        <Spinner
+            android:id="@+id/sp_principal_operadorRecarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:background="@drawable/spinner_selector" />
+
+    </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       android:orientation="vertical">
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:textColor="@color/color_blanco"
+           android:layout_marginLeft="15dp"
+           android:text="@string/tv_selec_monto" />
+
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:layout_gravity="center"
+           android:gravity="center">
+
+           <Spinner
+               android:id="@+id/sp_principal_monedaRecarga"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+               android:background="@drawable/spinner_selector" />
+
+           <EditText
+               android:id="@+id/txt_principal_montoRecarga"
+               android:layout_width="170dp"
+               android:layout_height="30dp"
+               android:layout_marginLeft="15dp"
+               android:background="@color/color_blanco"
+               android:inputType="text" />
+
+       </LinearLayout>
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/btn_principal_regMenuRecarga"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_regresar_menu" />
+
+        <Button
+            android:id="@+id/btn_principal_salirRecarga"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="@string/btn_salir_recarga"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

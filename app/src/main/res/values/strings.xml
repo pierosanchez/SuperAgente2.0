@@ -1,0 +1,710 @@
+<resources>
+    <string name="app_name">SÚPER AGENTE MÓVIL</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="super_agente">Super Agente</string>
+    <string name="msg_error_sin_conexion">Este aplicativo requiere una conexión a internet, por favor asegúrate de disponer de una conexión y vuelve a intentarlo.</string>
+    <string name="msg_error_ingresar_nombre">Ingrese el nombre</string>
+    <string name="msg_error_ingresar_apellido">Ingrese el apellido</string>
+    <string name="msg_error_ingresar_email">Ingrese el email</string>
+    <string name="msg_error_ingresar_movil">Ingrese el movil</string>
+    <string name="titulo_salir">Salir</string>
+    <string name="title_confirmar">Confirmar</string>
+    <string name="msg_confirmacion_salida">¿Seguro que desea salir?</string>
+    <string name="titulo_si">Sí</string>
+    <string name="titulo_no">No</string>
+    <string name="password">Password</string>
+    <string name="description">Ingrese Password</string>
+    <string name="termCond">Acepto términos y condiciones</string>
+
+    <!-- Botones -->
+
+    <string name="btn_aceptar">ACEPTAR</string>
+    <string name="btn_salir">SALIR</string>
+    <string name="btn_siguiente">SIGUIENTE</string>
+    <string name="btn_cancelar">CANCELAR</string>
+    <string name="btn_moneda_nacional">MONEDA NACIONAL</string>
+    <string name="btn_firmar">FIRMAR</string>
+    <string name="btn_dolares">U$ DOLARES</string>
+    <string name="btn_continuar">CONTINUAR</string>
+    <string name="btn_ingrese_otra_cuenta">INGRESE OTRA CUENTA</string>
+    <string name="btn_afiliar_transferencias">AFILIAR TRANSFERENCIAS</string>
+    <string name="btn_terminar_afiliacion">TERMINAR AFILIACIÓN</string>
+    <string name="btn_efectuar_otra_operacion">EFECTUAR OTRA OPERACIÓN</string>
+    <string name="btn_entrar">ENTRAR</string>
+    <string name="btn_otra_pregunta">INGRESAR PREGUNTA PROPIA</string>
+    <string name="btn_pagar_otra_tarjeta">PAGAR OTRA TARJETA</string>
+    <string name="btn_regresar">REGRESAR</string>
+    <string name="btn_nuevo_beneficiario">AGREGAR BENEFICIARIO</string>
+    <string name="btn_nuevo">AGREGAR</string>
+    <string name="btn_cuentas_beneficiario">AGREGAR CUENTAS AL BENEFICIARIO</string>
+    <string name="btn_guardar">GUARDAR</string>
+    <string name="btn_actualizar">MODIFICAR</string>
+    <string name="btn_eliminar">ELIMINAR</string>
+    <string name="btn_cuentas_beneficiario_editar">CUENTAS BENEFICIARIO</string>
+    <string name="btn_registrarse">REGISTRARSE</string>
+    <string name="btn_reintentar">REINTENTAR</string>
+    <string name="btn_confirmar_operacion">CONFIRMAR OPERACIÓN</string>
+    <string name="btn_pagar_otros_servicios">PAGAR OTROS SERVICIOS</string>
+    <string name="btn_cancelar_pago_servicio">CANCELAR OPERACIÓN</string>
+    <string name="btn_agregar_cuenta">AREGAR CUENTA</string>
+    <string name="btn_agregar_tarjeta">AREGAR TARJETA</string>
+    <string name="btn_validar">VALIDAR</string>
+    <string name="btn_reniec">RENIEC</string>
+
+
+    <!-- Fragmentos -->
+
+    <string name="tv_fr_codigo_interbancario">CÓDIGO INTERBANCARIO</string>
+    <string name="tv_fr_numero_tarjeta">NÚMERO DE TARJETA</string>
+
+    <!--Pantalla de Acceso al sistema-->
+
+    <string name="titulo_acceso_sistema">ACCESO AL SISTEMA</string>
+    <string name="advertencia_acceso">AL TERCER INTENTO NO VÁLIDO SE LE SOLICITARÁ LA SEGUNDA CLAVE DE AUTENTICACIÓN</string>
+    <string name="clave_acceso">CLAVE DE ACCESO</string>
+    <string name="lnk_clave_olvidada">¿HAZ OLVIDADO TU CLAVE?</string>
+
+    <!--Pantalla de Ingreso de Información Electronica-->
+
+    <string name="ing_informacion_electronica">INGRESO DE INFORMACIÓN ELECTRÓNICA</string>
+    <string name="telefono_fijo">Teléfono Fijo</string>
+    <string name="telefono_movil">Teléfono Móvil</string>
+    <string name="email">e-mail</string>
+    <string name="redes_sociales">Redes Sociales</string>
+
+    <!--Pantalla Servicio a Pagar-->
+
+    <string name="selec_servicio_pagar">SELECCIÓN DEL SERVICIO A PAGAR</string>
+    <string name="ingreso_num_servicio">INGRESE EL NÚMERO DE SERVICIO</string>
+    <string name="hint_ingrese_numero">Ingrese el Número</string>
+
+    <!--Pantalla Seleccion de cuenta de abono para deposito en efectivo-->
+
+    <string name="titulo_seleccion_cuenta_abono">REGISTRE SU CUENTA PARA ABONOS O CARGOS</string>
+    <string name="selecciona_moneda_cuenta_banco">SELECCIONA LA MONEDA, EL TIPO DE CUENTA Y EL BANCO</string>
+    <string name="tv_ingrese_cuenta">Ingrese su número de cuenta CCI</string>
+    <string name="monto_depositar">INGRESA EL MONTO A DEPOSITAR</string>
+    <string name="hint_ejemplo">EJEMPLO 1,200.00</string>
+
+
+    <!--Pantalla de Clave de Acceso al Cliente -->
+
+    <string name="titulo_ingreso_clave_cliente">INGRESO DE CLAVE DE ACCESO DEL CLIENTE</string>
+    <string name="ingrese_clave_acceso">INGRESE SU CLAVE DE ACCESO</string>
+
+    <!--Pantalla de Afiliacion Exitosa en Consulta-->
+
+    <string name="titulo_afiliacion_exitosa">AFILIACIÓN EXITOSA EN CONSULTA</string>
+    <string name="afiliacion_terminada">AFILIACIÓN TERMINADA POR EL CLIENTE ALGÚN DATO YA EXISTE EN LA BASE DE DATOS</string>
+    <string name="gracias_afiliacion_satisfactoria">GRACIAS, AFILIACION SATISFACTORIA, EN LAS PROXIMAS HORAS LO VISITARÁ UN REPRESENTANTE PARA AUTENTICAR Y ACTIVAR SU AFILIACIÓN.
+        POR HABER REGISTRADO DATOS SENSIBLES YA EXISTENTES, LOS VALIDAREMOS CON QUIEN LOS INGRESÓ PREVIAMENTE</string>
+
+    <!--Pantalla de Ingreso de datos del Beneficiario 2 de 4-->
+
+    <string name="titulo_ingreso_datos_beneficiario">INGRESO DE DATOS DEL BENEFICIARIO</string>
+    <string name="tv_celular1">Celular 1:</string>
+    <string name="tv_celular2">Celular 2:</string>
+    <string name="tv_email">E-mail:</string>
+    <string name="tv_fecha_nac">Fecha Nac.:</string>
+    <string name="tv_clave_para_consulta">CLAVE PARA CONSULTA DE ESTADO DE LA TRANSFERENCIA</string>
+    <string name="tv_password">Password:</string>
+    <string name="tv_re_password">Re-Password:</string>
+    <string name="tv_apellido">Apellido:</string>
+    <string name="tv_nombre_benef">Nombres:</string>
+    <string name="tv_dni_benef">DNI:</string>
+    <string name="tv_guardar_transf_recurrente">Guardar Transferencia Recurrente:</string>
+    <string name="tv_codigo_interbancario_benef">CÓDIGO DE CUENTA INTERBANCARIO</string>
+    <string name="tv_numero_tarjeta_beneficiario">NUMERO DE TARJETA</string>
+    <string name="tv_tipo_abonos_beneficiario">TIPO DE ABONOS</string>
+
+    <!--Pantalla de Afiliacion de Comercio -->
+
+    <string name="titulo_afiliacion_comercio">AFILIACIÓN DE COMERCIO</string>
+    <string name="tv_ing_clave_acceso">INGRESE SU CLAVE DE ACCESO</string>
+    <string name="tv_confirm_clave_acceso">CONFIRME SU CLAVE DE ACCESO</string>
+    <string name="tv_ing_correo_elec">INGRESE SU CORREO ELECTRÓNICO</string>
+    <string name="tv_int_cel_acceso_inter">INGRESE CELULAR CON ACCESO A INTERNET</string>
+
+    <!--Pantalla de Rechazo de anulación de consumos-->
+
+    <string name="titulo_rechzo_consumos">RECHAZO DE ANULACIÓN DE CONSUMOS</string>
+    <string name="tv_rechazo_operacion">RECHAZO DE OPERACIÓN DE ANULACIÓN</string>
+
+    <!--Pantalla de Control de Importe Maximo a depositar-->
+
+    <string name="titulo_control_importe_max_depositar">CONTROL DEL IMPORTE MÁXIMO A DEPOSITAR</string>
+    <string name="tv_control_monto_deposito">CONTROL DEL MONTO DE DEPÓSITOS</string>
+
+    <!--Pantalla rechazo operador telefonico a la solicitud de recarga-->
+
+    <string name="titulo_rechazo_operador_solicitud_recarga">RECHAZO DEL OPERADOR TELEFÓNICO A LA SOLICITUD DE RECARGA</string>
+    <string name="tv_rechazo_operador_servicio">RECHAZO DEL OPERADOR DEL SERVICIO</string>
+    <string name="tv_operacion_denegada_op_serv">OPERACIÓN DENEGADA POR EL OPERADOR DEL SERVICIO</string>
+
+    <!--Pantalla Saldos por pagar tarjeta de credito-->
+
+    <string name="titulo_saldo_pagar_tarjeta">SALDOS POR PAGAR TARJETA DE CRÉDITO</string>
+    <string name="tv_pago_minimo">PAGO MÍNIMO:</string>
+    <string name="tv_sol">S/.</string>
+    <string name="tv_pago_mensual">PAGO MENSUAL:</string>
+    <string name="tv_pago_total">PAGO TOTAL:</string>
+    <string name="tv_ver_movimientos">VER MOVIMIENTOS CON EL SUPER AGENTE</string>
+
+    <!--Pantalla de Relacion de beneficiarios -->
+
+    <string name="titulo_relacion_beneficiarios">RELACIÓN DE BENEFICIARIOS</string>
+    <string name="tv_reporte_beneficiarios">REPORTE DE BENEFICIARIOS AFILIADOS</string>
+    <string name="rbtn_beneficiarioB">Beneficiario B</string>
+    <string name="rbtn_beneficiarioC">Beneficiario C</string>
+    <string name="rbtn_beneficiarioD">Beneficiario D</string>
+    <string name="rbtn_beneficiarioE">Beneficiario E</string>
+    <string name="rbtn_beneficiarioF">Beneficiario F</string>
+    <string name="rbtn_beneficiarioG">Beneficiario G</string>
+    <string name="tv_seleccione_beneficiario">SELECCIONE EL BENEFICIARIO AL CUAL VA A ENVIAR DINERO</string>
+
+    <!-- Pantalla de Informacion Personal-->
+
+    <string name="titulo_ingreso_info_personal">INGRESO DE INFORMACIÓN PERSONAL</string>
+    <string name="seleccione_beneficiario">SELECCIONE EL BENEFICIARIO AL CUAL VA A ENVIAR DINERO</string>
+    <string name="tv_dni">DNI</string>
+    <string name="tv_nombre">NOMBRES</string>
+    <string name="tv_ap_paterno">AP. PATERNO</string>
+    <string name="tv_ap_materno">AP. MATERNO</string>
+    <string name="tv_ap_sexo">SEXO</string>
+    <string name="tv_f_nacimiento">F. NACIMIENTO</string>
+    <string name="tv_e_civil">E. CIVIL</string>
+
+    <!-- Pantalla de control maximo de numero de cuentas -->
+
+    <string name="ingresar_hasta_seis_cuentas">Se pueden ingresar hasta seis cuentas del mismo banco y moneda, esta es la séptima, puede ingresar más cuentas de otra moneda o banco.</string>
+
+    <!-- Pantalla de informacion de tarjetas -->
+
+    <string name="titulo_ingreso_info_tarjeta">INGRESO DE INFORMACIÓN DE TARJETAS</string>
+    <string name="ingrese_num_terjeta">INGRESE SU NÚMERO DE TARJETA</string>
+    <string name="hasta_5_tarjetas">Se pueden ingresar hasta 5 tarjetas del mismo banco</string>
+    <string name="btn_mas_tarjetas">MÁS TARJETAS</string>
+    <string name="btn_terminar">TERMINAR</string>
+
+    <!-- Pantalla de Menu del cliente 1 - 2 -->
+
+    <string name="titulo_menu_cliente">MENÚ DEL CLIENTE</string>
+    <string name="tv_manu_principal">MENÚ PRINCIPAL</string>
+    <string name="ckbox_pago_consumos">Pago de Consumos</string>
+    <string name="ckbox_pago_servicios">Pago de Servicios</string>
+    <string name="ckbox_pago_tarjetas">Pago de Tarjetas</string>
+    <string name="ckbox_retiro_efectivo">Retiro de Efectivo</string>
+    <string name="ckbox_deposito_efectivo">Depósito de Efectivo</string>
+    <string name="ckbox_recargas">Recargas</string>
+    <string name="ckbox_transferencias">Transferencias</string>
+    <string name="ckbox_cambio_clave">Cambio de Clave</string>
+    <string name="ckbox_mantenimiento">Mantenimiento</string>
+
+    <!-- Pantalla de seleccion de medio de pago -->
+
+    <string name="titulo_seleccion_medio_pago">SELECCIÓN DE MEDIO DE PAGO</string>
+    <string name="rdbtn_tarjeta">TARJETA</string>
+    <string name="rdbtn_efectivo">EFECTIVO</string>
+    <string name="tv_pago_a_realizar">EL PAGO SE PUEDE REALIZAR CON TARJETA DE DÉBITO O PREPAGO DE CUALQUIER BANCO O CON TARJETAS DE CRÉDITO DE OTRO BANCO</string>
+
+    <!-- Pantalla por cargo y abono con la misma tarjeta -->
+
+    <string name="titulo_rechazo_cargo_abono_tarjeta">RECHAZO POR CARGO Y ABONO CON LA MISMA TARJETA A PAGAR</string>
+    <string name="tv_rechazar_pago_misma_tarjeta">RECHAZAR PAGO Y ABONO CON LA MISMA TARJETA</string>
+    <string name="msg_no_pagar_misma_tarjeta">NO SE PUEDE PAGAR CON LA MISMA TARJETA DE CRÉDITO QUE RECIBE EL ABONO</string>
+
+    <!-- Pantalla de control de retiros por dia -->
+
+    <string name="titulo_control_retiros">CONTROL DE RETIROS</string>
+    <string name="tv_control_retiros">CONTROL DEL NÚMERO DE RETIROS POR DÍA</string>
+    <string name="msg_realizado_max_retiros">YA HAS REALIZADO EL NÚMERO MÁXIMO DE RETIROS DE EFECTIVO PERMITIDOS POR DÍA</string>
+
+    <!-- Pantalla de control de retiros por mes -->
+
+    <string name="tv_control_retiros_mes">CONTROL DEL MONTO DE RETIROS POR MES</string>
+    <string name="msg_realizado_max_retiros_mes">YA HAS RETIRADO EL MONTO MÁXIMO DE EFECTIVO PERMITIDO POR MES</string>
+
+    <!-- Pantalla de control de abono a la cuenta -->
+
+    <string name="titulo_control_abono_cuenta">CONTROL DE ABONO A LA CUENTA</string>
+    <string name="tv_banco_deniega_operacion">EL BANCO DENIEGA LA OPERACIÓN</string>
+    <string name="msg_operacion_denegada">OPERACIÓN DENEGADA POR EL BANCO DEL CLIENTE</string>
+
+    <!-- Pantalla modificar datos del beneficiario transferencias 1 - 2 -->
+
+    <string name="titulo_modificar_datos_deneficiario_transferencias">MODIFICAR DATOS DEL BENEFICIARIO TRANSFERENCIAS 1-2</string>
+    <string name="tv_nombres">Nombres:</string>
+    <string name="tv_apellidos">Apellidos:</string>
+    <string name="tv_sexo">Sexo:</string>
+    <string name="tv_estado_civil">Estado Civil:</string>
+    <string name="tv_pais">País:</string>
+    <string name="tv_region">Región:</string>
+    <string name="tv_direccion1">Dirección 1:</string>
+    <string name="tv_direccion2">Dirección 2:</string>
+
+
+    <!-- Pantalla modificar tarjetas afiliadas del beneficiario -->
+
+    <string name="titulo_modifica_tarjetas_afiliadas">MODIFICAR TARJETAS AFILIADAS DEL BENEFICIARIO
+    </string>
+    <string name="tv_seleccione_tarjeta_eliminar">SELECCIONE TARJETA A ELIMINAR</string>
+    <string name="tv_ingrese_nueva_tarjeta">INGRESE NUEVA TARJETA</string>
+
+    <!-- Pantalla de Cambio de clave de acceso denegada por segunda clave errada -->
+
+    <string name="titulo_cambio_clave_acceso_denegada">CAMBIO DE CLAVE DE ACCESO DENEGADA POR SEGUNDA CLAVE ERRADA</string>
+    <string name="tv_rechazo_operacion_cambio_clave">RECHAZO DE OPERACIÓN DE CAMBIO DE CLAVE</string>
+    <string name="tv_operacion_denegada">OPERACIÓN DENEGADA</string>
+    <string name="tv_tres_intentos_error">TRES INTENTOS CON ERROR</string>
+    <string name="tv_respues_igual_ingresadas">LA RESPUESTA DEBE SER IGUAL A UNA DE LAS INGRESADAS AL MOMENTO DE AFILIARSE</string>
+    <string name="tv_consulte_servicio_atencion">DE SER NECESARIO CONSULTE AL SERVICIO DE ATENCION AL CLIENTE</string>
+    <string name="tv_telefono">TEL.: 326-0026</string>
+
+    <!-- Pantalla de seleccion de recibos a pagar -->
+
+    <string name="titulo_seleccion_recibos_pagar">SELECCION DE RECIBOS A PAGAR</string>
+    <string name="tv_suministros">Suministro:</string>
+    <string name="tv_titular">Titutlar:</string>
+
+    <!-- Pantalla de servicio de atencion al cliente -->
+
+    <string name="titulo_llamar_servicio_atencion_cliente">LLAMAR AL SERVICIO DE ATENCIÓN AL CLIENTE</string>
+    <string name="tv_servicio_atencion_cliente">SERVICIO DE ATENCIÓN AL CLIENTE</string>
+    <string name="tv_telefono_atencion_cliente">(511) 455-9988</string>
+
+    <!-- Pantalla de seleccion de la tarjeta de pago -->
+
+    <string name="titulo_seleccion_tarjeta_pago">SELECCIÓN DE LA TARJETA A PAGAR</string>
+    <string name="tv_seleccione_tarjeta_pagar">SELECCIONE LA TARJETA A PAGAR</string>
+
+    <!-- Pantalla de Ingreso del monto de pago - con pun -->
+
+    <string name="titulo_ingreso_monto_pago">INGRESO DE PIN - TARJETA DE CARGO</string>
+    <string name="tv_datos_comercio">Datos del comercio</string>
+    <string name="tv_ingrese_ping">INGRESE PIN</string>
+    <string name="tv_titular_cuenta">Titular: </string>
+
+    <!-- Pantalla de terminos y condiciones -->
+
+    <string name="tv_terminos">NO! utilice nuestros servicios de forma indebida. Por ejemplo, no interfiera en nustros Servicios ni intente diferente a la interfaz y las instrucciones que le proporcionamos.
+    Puede utilizar nuestros servicios solo con las leyes y regulaciones correspondientes de control de exportacion y reexportacion. Podremos suspender el servicio si usted incumple nuestras condiciones o politicas o si estamos investigando una presunta confraternidad.
+    El uso de nuestos servicios nos otrosga derechos de propiedad intelectual.</string>
+
+    <!-- Pantalla de ingreso de clave de acceso -->
+
+    <string name="tv_titulo_clave_acceso">INGRESO DE CLAVE DE ACCESO</string>
+    <string name="tv_clave_acceso">GENERE SU CLAVE DE ACCESO</string>
+    <string name="tv_segunda_clave_acceso">ELIGA SU SEGUNDA CLAVE DE ACCESO</string>
+    <string name="tv_confirm_segunda_clave_acceso">CONFIRME SU SEGUNDA CLAVE DE ACCESO</string>
+
+    <!-- Pantalla de ingreso de pregunta personal -->
+
+    <string name="tv_titulo_ingreso_pregunta">INGRESO DE PREGUNTA PERSONAL</string>
+    <string name="tv_ingrese_pregunta">INGRESE UNA PREGUNTA PERSONAL LA QUE SERÀ SU SEGUNDA CLAVE DE ACCESO PARA CASOS DE SEGURIDAD - MÀXIMO 25 CARATERES</string>
+    <string name="ht_ejemplo_pregunta">EJEMPLO: NOMBRE DE MI ESPOSA</string>
+    <string name="tv_ingrese_respuesta">INGRESE LA RESPUESTA - MÀXIMO 8 CARACTERES - EJEMPLO:</string>
+    <string name="tv_conrme_respuesta">CONFIRME SU RESPUESTA</string>
+    <string name="ht_ejemplo_respuesta">EJEMPLO: MARIELLA</string>
+    <string name="tv_superagente_seguro">EL SUPER AGENTE ES SEGURO RECUERDE SU RESPUESTA</string>
+
+    <!-- Pantalla de ingreso de datos del beneficiario 4 de 4 -->
+
+    <string name="tv_titulo_ingreso_datos_beneficiario_4de4">INGRESO DE DATOS DEL BENEFICIARIO 4 DE 4</string>
+    <string name="tv_relacion_beneficiarios">RELACIÓN DE BENEFICIARIOS DE TRANSFERENCIAS PRE AFILIADOS</string>
+    <string name="tv_terminada_afiliacion">Una vez terminada la afiliación puede ingresar, eliminar y modificar los datos de los beneficiarios afiliados ingresando a la opción de "Transferencias" del menú principal del SUPER AGENTE</string>
+
+    <!-- Pantalla de listado total de tarjetas -->
+
+    <string name="tv_titulo_listado_tarjetas_pagar">SELECCIONE TARJETA A PAGAR</string>
+    <string name="tv_aviso">SELECCIONE LA TARJETA QUE DESEE PAGAR</string>
+
+    <!-- Pantalla de Seleccion de modo y monto a pagar -->
+
+    <string name="tv_seleccion_modo_monto_pagar">SELECCIÓN DEL MODO Y MONTO DEL PAGO</string>
+    <string name="rdbtn_minimo">MÍNIMO</string>
+    <string name="rdbtn_total">TOTAL</string>
+    <string name="rdbtn_cuenta">A CUENTA</string>
+    <string name="rdbtn_mensual">MENSUAL</string>
+    <string name="txt_monto_minimo">50.78</string>
+    <string name="txt_monto_mensual">120.44</string>
+    <string name="txt_monto_total">236.11</string>
+    <string name="htn_ingrese_un_monto">0.00</string>
+    <string name="tv_seleccione_tipo_tarjeta">SELECCIONE LA CON LA QUE DESEA PAGAR</string>
+    <string name="tv_tarjeta_pagar">TARJETA A PAGAR</string>
+    <string name="tv_tipo_moneda_modo_monto_pago">MONEDA</string>
+
+    <!-- Voucher de pago con tarjeta -->
+
+    <string name="tv_titulo_voucher_pago_tarjeta">VOUCHER DE PAGO CON TARJETA</string>
+    <string name="tv_transaccion_exitosa">TRANSACCIÓN EXITOSA</string>
+    <string name="tv_rayitas">==========================================</string>
+    <string name="tv_fecha">FECHAS:</string>
+    <string name="tv_numero_unico">NÚMERO ÚNICO:</string>
+    <string name="tv_banco">BANCO:</string>
+    <string name="tv_hora">HORA:</string>
+    <string name="tv_importe">IMPORTE DE PAGO:</string>
+    <string name="tv_tarjeta">TARJETA CIFRADA:</string>
+    <string name="tv_datos_comercio_voucher">DATOS DE COMERCIO:</string>
+    <string name="tv_superagente_voucher">*** SÚPER AGENTE ***</string>
+    <string name="tv_pin_verificado">PIN VERIFICADO POR EL EMISOR</string>
+    <string name="tv_tarjeta_cargo">TARJETA DE CARGO</string>
+    <string name="tv_amex">Amex</string>
+    <string name="tv_gracias_preferencia">*** GRACIAS POR SU PREFERENCIA ***</string>
+
+
+    <!-- Pantalla de seleccion de medio de pago -->
+
+    <string name="tv_seleccion_medio_pago">SELECCIÓN DE MEDIO DE PAGO</string>
+    <string name="tv_tarjeta_medio_pago">TARJETA</string>
+    <string name="tv_efectivo_medio_pago">EFECTIVO</string>
+    <string name="tv_mensaje_tarjeta_puede_ser">EL PAGO SE PUEDE REALIZAR CON TARJETA DE DÉBITO O PREPAGO DE CUALQUIER BANCO O CON TARJETAS DE CRÉDITO DE OTRO BANCO</string>
+
+    <!-- Pantalla efectuar otro pago de tarjeta -->
+
+    <string name="tv_titulo_efectuar_otro_pago_tarjeta">EFECTUAR OTRO PAGO DE TARJETA</string>
+    <string name="tv_otras_tarjetas">OTRAS TARJETAS</string>
+    <string name="tv_desea_pagar_mas_tarjetas">¿Desea pagar otras tarjeta?</string>
+    <string name="tv_conelsuperagente">CON EL SUPER AGENTE PUEDE PAGAR TODAS TUS TARJETAS DE CRÉDITO USANDO TU SMARTHPHONE, DESDE LA COMODIDAD DE TU HOGAR (7 X 24 CON TARJETA DE CRÉDITO O DÉBITO) O DESDE CUALQUIER ESTABLECIMIENTO AFILIADO CON EFECTIVO.</string>
+    <string name="tv_si">SI</string>
+    <string name="tv_no">NO</string>
+
+    <!-- Pantalla Seleccion de tarjeta de cargo -->
+
+    <string name="tv_titulo_seleccione_tarjeta_cargo">SELECCIONE LA TARJETA DE CARGO</string>
+
+    <!-- Pantalla de Confirmacion - Tarjeta de Cargo -->
+
+    <string name="tv_confirmacion_tarjeta_cargo">CONFIRMACIÓN - TARJETA DE CARGO</string>
+    <string name="tv_nombre_cliente_tarjeta_cargo">Titular</string>
+    <string name="tv_tarjeta_cifrada_cargo">Tarjeta</string>
+
+    <!-- Pantalla Voucher de pago de tarjeta con tarjetas de credito -->
+
+    <string name="tv_couhcer_pago_tarjeta_credito">VOUCHER PAGO DE TARJETA CON CRÉDITO</string>
+
+    <!-- Pantalla de ingreso de Firma -->
+
+    <string name="tv_titulo_ingresar_firma">INGRESE SU FIRMA</string>
+
+    <!-- Pantalla de ingreso de usuario -->
+
+    <string name="tv_dni_cliente">DNI</string>
+
+    <!-- Pantalla de ingreso de monto de pago con pin -->
+
+    <string name="titulo_ingreso_monto_transferencias">INGRESO DEL MONTO DE PAGO - CON PIN</string>
+    <string name="tv_ingrese_pin">INGRESE PIN</string>
+
+    <!-- Pantalla de TARJETA DE PAGO DEL REMITENTE -->
+
+    <string name="titulo_tarjeta_pago_remitente">TARJETA DE PAGO DEL REMITENTE</string>
+    <string name="tv_seleccione_tarjeta_cargo">SELECCIONE LA TARJETA DE CARGO</string>
+
+    <!-- Pantalla de RELACION DE BENEFICIARIOS -->
+
+    <string name="tv_reporte_beneficiarios_afiliados">NOMBRE Y APELLIDOS</string>
+    <string name="titulo_relacion_beneficiarios_transferencias">RELACIÓN DE BENEFICIARIOS</string>
+    <string name="tv_seleccione_beneficiario_enviar_dinero">SELECCIONE EL BENEFICIARIO AL CUAL VA A ENVIAR DINERO</string>
+
+    <!-- Pantalla de INGRESO DE CUENTA O TARJETA DE ABONO -->
+
+    <string name="titulo_ingresa_cuenta_tarjeta_abono">SELECCION DEL TIPO DE ABONO</string>
+    <string name="tv_importe_cuenta_tarjeta">IMPORTE DE TRANSFERENCIA</string>
+    <string name="tv_comision_transferencia">COMISION DE TRANSFERENCIA</string>
+    <string name="tv_comision_cheque_importe">EMISIÓN DE CHEQUE</string>
+    <string name="tv_comision_cheque_importe_delivery">GASTOS DE DELIVERY</string>
+    <string name="tv_tipo_cuenta_abono">TIPO DE ABONO</string>
+    <string name="tv_tipo_cuenta_ahorro">Ahorro</string>
+    <string name="tv_tipo_tarjeta">Tarjeta</string>
+    <string name="tv_tipo_cheque">cheque</string>
+    <string name="tv_tipo_cta_cte">CTA. CTE.</string>
+    <string name="tv_codigo_interbancario">CÓDIGO INTERBANCARIO</string>
+    <string name="rdbtn_cuenta_benef">CUENTA</string>
+    <string name="rdbtn_tarjeta_benef">TARJETA</string>
+    <string name="rdbtn_cheque_benef">CHEQUE</string>
+    <string name="tv_total_pagar_transferencia">TOTAL A PAGAR:</string>
+
+    <!-- Pantalla de COMISION DE TRANSFERENCIAS - CHEQUE  -->
+
+    <string name="titulo_comision_transferencias_cheque">COMISIÓN DE TRANSFERENCIAS - CHEQUE</string>
+    <string name="tv_comision_cheque">Comisión:</string>
+    <string name="tv_emision_cheque">Emisión de Cheque</string>
+    <string name="tv_total_cheque">TOTAL:</string>
+
+    <!-- Pantalla de COMISION DE TRANSFERENCIAS - CHEQUE  -->
+
+    <string name="titulo_informacion_domicilio_electronica">INFORMACIÓN DE DOMICILIO Y ELECTRÓNICA</string>
+    <string name="tv_info_departamento">Departamento</string>
+    <string name="tv_info_provincia">Provincia</string>
+    <string name="tv_info_distrito">Distrito</string>
+    <string name="tv_info_direccion">Direccion</string>
+    <string name="tv_info_tel_fijo">Telefono Fijo</string>
+
+    <!-- Pantalla de INGRESO DE INFORMACION DE TARJETA  -->
+
+    <string name="titulo_informacion_tarjetas">INGRESO DE INFORMACIÓN DE TARJETA</string>
+    <string name="tv_fecha_vcto_tarjeta">Fecha de Vencimiento</string>
+    <string name="tv_tipo_tarjeta_ingreso_tarjeta">Tipo de Tarjeta</string>
+    <string name="tv_banco_tarjeta_ingreso_tarjeta">Banco</string>
+    <string name="tv_tarjeta_cvv">CVV</string>
+    <string name="tv_mensaje_ingreso_tarjetas">Se puede ingresar hasta 5 tarjetas del mismo banco</string>
+    <string name="tv_ingrese_numero_tarjeta">INGRESE SU NÚMERO DE TARJETA</string>
+
+    <!-- Pantalla de INGRESO DATOS DE BENEFICIARIO 2 DE 2  -->
+
+    <string name="tv_seleccione_tarjeta_cargo_transferencia">SELECCIONE TARJETA DE CARGO PARA LA TRANSFERENCIA</string>
+    <string name="tv_disfruta_enorme_potencial">Disfruta del enorme potencial de efectuar transferencias de manera automática, sencilla y segura, desde cualquier pais del mundo y desde cualquier lugar del Perú, solo con tu Smartphone y al estilo del Súper Agente</string>
+
+    <!-- Pantalla de INGRESO DATOS DE BENEFICIARIO 2 DE 2  -->
+
+    <string name="titulo_ingreso_monto_pago_firma_transferencia">INGRESO DEL MONTO DE PAGO - CON FIRMA</string>
+    <string name="tv_nombre_cliente">Nombre del Cliente</string>
+    <string name="tv_tarjeta_cifrada">Tarjeta Cifrada</string>
+
+    <!-- Pantalla de VOUCHER DE TRANSFERENCIAS  -->
+
+    <string name="titulo_voucher_transferencias">VOUCHER DE TRANSFERENCIAS</string>
+    <string name="tv_remitente_transferencia">REMITENTE</string>
+    <string name="tv_datos_comercio_transferencia">DATOS DEL REMITENTE</string>
+    <string name="tv_datos_beneficiario_transferencia">DATOS DEL BENEFICIARIO</string>
+    <string name="tv_beneficiario_transferencia">BENEFICIARIO</string>
+    <string name="tv_tipo_cuenta_transferencia">TIPO DE CUENTA</string>
+    <string name="tv_comision_oper_transferencia">COMISIÓN OPER.:</string>
+    <string name="tv_importe_transferencia_voucher">IMPORTE DE TRANSFERENCIA:</string>
+    <string name="tv_total_transferencia">TOTAL</string>
+    <string name="tv_pin_verificado_emisor">PIN VERIFICADO POR EL EMISOR</string>
+    <string name="tv_importe_total_voucher_transferencias">IMPORTE TOTAL</string>
+
+    <!-- Pantalla de mantenimiendo de usuarios -->
+
+    <string name="tv_mantenimiento_usuario">MANTENIMIENTO DE CUENTA</string>
+    <string name="rdbtn_cuentas_usuario">Cuentas del Usuario</string>
+    <string name="rdbtn_tarjetas_usuario">Tarjetas del Usuario</string>
+    <string name="rdbtn_beneficiarios_usuario">Beneficiarios del Usuario</string>
+    <string name="rdbtn_domicilio_usuario">Domicilio del Usuario</string>
+
+    <!-- Pantalla de Listado de Cuentas del Usuario -->
+
+    <string name="titulo_listado_cuentas_usuario">LISTADO TOTAL DE CUENTAS</string>
+    <string name="tv_seleccione_cuenta">Seleccione una de las cuentas</string>
+    <string name="tv_cci_mantenimiento_cuentas">Codigo de Cuenta Interbancario</string>
+
+    <!-- Pantalla de Listado de tarjetas del usuario -->
+
+    <string name="titulo_listado_tarjetas_usuario">LISTADO DE TARJETAS DE USUARIO</string>
+    <string name="tv_seleccione_tarjeta">Seleccione una de las tarjetas</string>
+    <string name="tv_tarjetas_mantenimiento">Tarjetas de Crédito y Débito</string>
+
+    <!-- Pantalla de Listado de Beneficiarios del usuario -->
+
+    <string name="titulo_listado_beneficiarios_usuario">LISTADO DE BENEFICIARIOS DE USUARIO</string>
+    <string name="tv_seleccione_beneficiario_mant">Seleccione una de los beneficiarios</string>
+
+    <!-- Pantalla de Listado de Beneficiarios del usuario -->
+
+    <string name="titulo_cuentas_beneficiario">INGRESO DE CUENTAS DEL BENEFICIARIO</string>
+
+    <!-- Pantalla de Actualizacion de Cuentas del Usuario -->
+
+    <string name="titulo_actualizar_cuenta_usuario">ACTUALIZAR CUENTA DEL USUARIO</string>
+    <string name="tv_nuevo_num_cuenta">INGRESE EL NUEVO NUMERO DE CUENTA</string>
+
+    <!-- Pantalla de Actualizacion de Tarjetas del usuario -->
+
+    <string name="titulo_actualizar_tarjeta_usuario">ACTUALIZAR TARJETA DEL USUARIO</string>
+
+    <!-- Pantalla de Listado de Cuentas y Tarjetas del Beneficiario -->
+
+    <string name="titulo_cuentas_tarjeta_beneficiario">CUENTAS Y TARJETAS DEL BENEFICIARIO</string>
+    <string name="tv_tarjeta_beneficiario">Tarjetas del Beneficiario</string>
+    <string name="tv_cuentas_beneficiario">Cuentas del Beneficiario</string>
+
+    <!-- Pantalla de Actualizacion de Cuentas del Beneficiario -->
+
+    <string name="titulo_actualizar_cuenta_benficiario">ACTUALIZAR CUENTA DEL BENEFICIARIO</string>
+
+    <!-- Pantalla de Actualizacion de Cuentas del Beneficiario -->
+
+    <string name="titulo_Actualizar_tarjeta_beneficiario">ACTUALIZAR TARJETA BENEFICARIO</string>
+
+    <!-- Pantalla de Seleccion del servicio a pagar -->
+
+    <string name="titulo_seleccion_servicio_pagar">SELECCIÓN DEL SERVICIO A PAGAR</string>
+    <string name="tv_seleccione_servicio">SELECCIONE SERVICIO</string>
+    <string name="tv_seleccione_tipo_servicio">SELECCIONE TIPO DE SERVICIO</string>
+    <string name="tv_ingrese_numero_servicio">CODIGO DE SERVICIO</string>
+
+    <!-- Pantalla de Cambio de Clave de Acceso -->
+
+    <string name="titulo_cambio_clave_acceso">CAMBIO DE CLAVE DE ACCESO</string>
+    <string name="tv_ingrese_clave_acceso_actual">INGRESE SU CLAVE DE ACCESO ACTUAL</string>
+    <string name="tv_primera_pregunta">PREGUNTA SECRETA</string>
+    <string name="tv_responda_pregunta">RESPONDA PREGUNTA: </string>
+    <string name="tv_ingrese_nueva_clave_acceso">INGRESE NUEVA CLAVE DE ACCESO</string>
+    <string name="tv_confirme_nueva_clave_acceso">CONFIRME NUEVA CLAVE DE ACCESO</string>
+
+    <!-- Pantalla de Cambio de Clave de acceso exitosa -->
+
+    <string name="titulo_cambio_clave_acceso_exitosa">CAMBIO DE CLAVE DE ACCESO EXITOSA</string>
+    <string name="tv_confirmacion_operacion_cambio_clave">CONFIRMACIÓN DE OPERACIÓN DE CAMBIO DE CLAVE</string>
+    <string name="tv_operacion_exitosa">OPERACIÓN EXITOSA</string>
+    <string name="tv_clave_cambiada_exito">SU CLAVE HA SIDO CAMBIADA CON ÉXITO</string>
+    <string name="tv_ok">OK</string>
+
+    <!-- Pantalla de Cambio de Clave de acceso exitosa -->
+
+    <string name="titulo_seleccion_recibos_servicios_pagar">SELECCIÓN DE RECIBOS A PAGAR</string>
+    <string name="tv_suministro_pago_servicio">SUMINISTRO: </string>
+    <string name="tv_titular_pago_servicio">TITULAR: </string>
+    <string name="tv_f_vencimiento_recibo_servicio">F. VENCIMIENTO</string>
+    <string name="tv_monto_recibo_servicio">MONTO</string>
+
+    <!-- Pantalla de Cambio de Clave de acceso exitosa -->
+
+    <string name="tv_numero_celular_no_registrado">NÚMERO DE CELULAR NO REGISTRADO</string>
+    <string name="tv_ingrese_num_celular">INGRESE SU NÚMERO DE CELULAR</string>
+    <string name="tv_duda_queja">SI TIENES ALGUNA DUDA O INCONVENIENTE PUEDES LLAMARNOS AL:</string>
+    <string name="tv_telefono_central_atencion_cliente">(511) 601-1360</string>
+    <string name="tv_email_atencion_cliente">E-Mail</string>
+    <string name="tv_correo_cliente_base_peru">correocliente@baseperu.com</string>
+
+    <!-- Pantalla de Monto de Pago con Pin - Pago de Servicios -->
+
+    <string name="titulo_monto_pago_pin_pago_servicios">MONTO DE PAGO - CON PIN</string>
+    <string name="tv_nombre_cliente_pago_servicio">NOMBRE DEL CLIENTE: </string>
+    <string name="tv_tarjeta_cifrada_pago_servicios">TARJETA CIFRADA: </string>
+    <string name="tv_ingrese_pin_tarjeta_servicio">INGRESE PIN</string>
+    <string name="tv_servicio_pagar">SERVICIO A PAGAR:</string>
+    <string name="tv_tipo_servicio_pagar">TIPO DE SERVICIO:</string>
+
+    <!-- Pantalla de Conformidad de pago de servicios -->
+
+    <string name="titulo_conformidad_pago_servicios">CONFORMIDAD DE PAGO DE SERVICIOS</string>
+    <string name="tv_numero_tarjeta_pagar_servicios">NÚMERO DE TARJETA:</string>
+    <string name="tv_servicio_pagar_conformidad">SERVICIO A PAGAR:</string>
+    <string name="tv_comision_servicio_pagar">COMISIÓN/SERVICIO:</string>
+    <string name="tv_total_servicio_pagar">IMPORTE TOTAL:</string>
+    <string name="tv_importe_pago_servicio">COSTO/SERVICIO</string>
+    <string name="tv_numero_recibo">NÚMERO DE RECIBO</string>
+    <string name="tv_nombre_titular">NOMBRE DEL TITULAR</string>
+
+    <!-- Pantalla de Voucher de pago de servicios -->
+
+    <string name="titulo_voucher_pago_servicio">VOUCHER PAGO DE SERVICIO</string>
+    <string name="tv_servicio_voucher">SERVICIO:</string>
+    <string name="tv_num_suministro_voucher">SUMINISTRO:</string>
+    <string name="tv_pagado_por_voucher">PAGADO POR:</string>
+    <string name="tv_numero_unico_voucher">NÚMERO ÚNICO:</string>
+    <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>
+    <string name="tv_importe_voucher">IMPORTE:</string>
+    <string name="tv_comision_operacion_voucher">COMISIÓN OPER.:</string>
+    <string name="tv_total_servicio_pagar_voucher">TOTAL:</string>
+
+    <!-- Pantallad e olvido de Contraseña -->
+
+    <string name="titulo_recuperacion_clave">RECUPERACIÓN DE CLAVE</string>
+    <string name="tv_pregunta_autenticacion">PREGUNTA DE AUTENTICACIÓN</string>
+    <string name="tv_ingrese_respuesta_olvide_contraseña">INGRESE RESPUESTA</string>
+    <string name="tv_olvide_pregunta_secreta">¿HAZ OLVIDADO TU PREGUNTA SECRETA?</string>
+    <string name="tv_nueva_clave_por_olvido">INGRESE SU NUEVA CLAVE</string>
+    <string name="tv_numero_cel_olvido">INGRESE SU NÚMERO DE CELULAR</string>
+
+    <!-- Pantalla de lectura de informacion del comercio -->
+
+    <string name="titulo_lectura_informacion_comercio">LECTURA DE INFORMACIÓN DEL COMERCIO</string>
+    <string name="tv_seleccione_comercio">SELECCIONE EL COMERCIO</string>
+
+    <!-- Pantalla de ingreso del monto de pago con pin de pago de consumos -->
+
+    <string name="titulo_ingreso_monto_pago_pin_consumos">INGRESO DEL MONTO DE PAGO - CON PIN</string>
+    <string name="tv_nombre_cliente_consumos">NOMBRE DEL CLIENTE</string>
+    <string name="tv_tarjeta_ingresada_consumo">TARJETA CIFRADA</string>
+    <string name="tv_ingrese_pin_consumo">INGRESE PIN</string>
+    <string name="tv_datos_comercio_consumo">DATOS DEL COMERCIO</string>
+
+    <!-- Pantalla de conformidad del comercio -->
+
+    <string name="titulo_conformidad_comercio">CONFORMIDAD DEL COMERCIO</string>
+    <string name="tv_dni_cliente_consumo">DNI DEL CLIENTE</string>
+    <string name="tv_nombre_cliente_consumo">NOMBRE DEL CLIENTE</string>
+    <string name="tv_numero_tarjeta_consumo">NÚMERO DE TARJETA</string>
+    <string name="tv_ingreso_clave_comercio">INGRESO DE CLAVE DEL COMERCIO POR PERSONAL DEL MISMO COMERCIO</string>
+    <string name="tv_comercio_valida_cliente">EL COMERCIO DEBE VALIDAR LOS DATOS DEL CLIENTE Y DEL COMERCIO</string>
+
+    <!-- Pantalla de voucher de pago de consumo -->
+
+    <string name="titulo_voucher_pago_consumo">VOUCHER DE PAGO DE CONSUMO</string>
+    <string name="tv_fecha_voucher_consumo">FECHA:</string>
+    <string name="tv_hora_voucher_consumo">HORA:</string>
+    <string name="tv_nro_unico_voucher_consumo">NRO. ÚNICO:</string>
+    <string name="tv_importe_voucher_consumo">IMPORTE:</string>
+    <string name="tv_banco_voucher_consumo">BANCO:</string>
+
+    <!-- Pantalla de ingreso de pago de COnsumos con firma -->
+
+    <string name="titulo_ingreso_monto_pago_firma_consumos">INGRESO DEL MONTO DE PAGO - CON FIRMA</string>
+
+    <!-- Pantalla de ingreso de pago de servicios con firma -->
+
+    <string name="titulo_ingreso_monto_pago_firma_servicios">INGRESO DEL MONTO DE PAGO - CON FIRMA</string>
+
+    <!-- pantalla de recargas - Principal -->
+    <string name="titulo_recarga_telefonica">SELECCIÓN DE OPERADOR TELEFÓNICO PARA RECARGA</string>
+    <string name="tv_nro_telefono">NRO. DE TELÉFONO :</string>
+    <string name="tv_operador">OPERADOR :</string>
+    <string name="tv_selec_monto">SELECCIONAR MONTO :</string>
+    <string name="btn_regresar_menu">REGRESAR MENÚ</string>
+    <string name="btn_salir_recarga">SALIR</string>
+
+    <!-- pantalla de recargas - Seleccion Medio Pago -->
+    <string name="tv_titulo_recarga_medPago">SELECCIÓN MEDIO DE PAGO</string>
+    <string name="rdb_recarga_tarjeta">TARJETA</string>
+    <string name="rdb_recarga_efectivo">EFECTIVO</string>
+    <string name="tv_nota_recarga_medPago">LA TARJETA DE CARGO PUEDE SER DE DEBITO O PREPAGO DE CUALQUIER BANCO O DE CRÉDITO DE OTRO BANCO</string>
+
+    <!-- pantalla de recargas - Seleccion Tarjeta Pago -->
+    <string name="tv_titulo_recarga_tarjetaPago">SELECCIONE LA TARJETA DE PAGO</string>
+
+    <!-- pantalla de recargas - Monto Pago -->
+    <string name="tv_titulo_recarga_montoPago">MONTO DE PAGO - CON PIN</string>
+    <string name="tv_nom_cliRecarga">NOMBRE DEL CLIENTE :</string>
+    <string name="tv_tarjeta_cifradaRecarga">TARJETA CIFRADA :</string>
+    <string name="tv_ingresa_pinRecarga">INGRESE PIN :</string>
+    <string name="btn_continuarRecarga">CONTINUAR</string>
+
+    <!-- pantalla de recargas - Monto Pago -->
+    <string name="tv_titulo_recarga_conforCli">CONFORMIDAD DEL CLIENTE</string>
+    <string name="tv_nom_cli_confor_Recarga">NOMBRE DEL CLIENTE :</string>
+    <string name="tv_nro_confor_cliRecarga">NÚMERO DE TELEFONO :</string>
+    <string name="tv_tarje_confor_cliRecarga">TARJETA DE PAGO :</string>
+    <string name="tv_comi_confor_cliRecarga">COMISIÓN DE RECARGA :</string>
+    <string name="tv_total_confor_cliRecarga">TOTAL :</string>
+    <string name="btn_confor_confirmaRecarga">CONFIRMAR OPERACIÓN</string>
+    <string name="tv_resp_confor_cliRecarga">CRISTOPHER TORRES</string>
+
+    <!-- pantalla de recargas - Monto Pago -->
+    <string name="tv_titulo_recarga_voucherCli">VOUCHER DE RECARGA TELEFÓNICA</string>
+    <string name="tv_fecha_voucher_Recarga">FECHA:</string>
+    <string name="tv_hora_voucher_Recarga">HORA:</string>
+    <string name="tv_nroUnico_voucher_Recarga">NÚMERO ÚNICO:</string>
+    <string name="tv_recarga_voucher_Recarga">RECARGA:</string>
+    <string name="tv_fonoTarjeta_voucher_Recarga">TELÉFONO/TARJETA:</string>
+    <string name="tv_importe_voucher_Recarga">IMPORTE:</string>
+    <string name="tv_comision_voucher_Recarga">COMISIÓN DE RECARGA:</string>
+    <string name="tv_total_voucher_Recarga">TOTAL PAGADO:</string>
+    <string name="tv_formPago_voucher_Recarga">FORMA DE PAGO:</string>
+    <string name="tv_banco_voucher_Recarga">BANCO:</string>
+    <string name="tv_nroTarjeta_voucher_Recarga">NRO. DE TARJETA:</string>
+
+    <string name="tv_notaPin_voucher_Recarga">PIN VERIFICADO POR EL EMISOR</string>
+
+    <string name="btn_otraOpe_voucher_Recarga">EFECTUAR OTRA OPERACIÓN</string>
+    <string name="btn_otraReca_voucher_Recarga">EFECTUAR OTRA RECARGA</string>
+
+
+
+
+
+</resources>

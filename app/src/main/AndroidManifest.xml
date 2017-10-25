@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ctorres.superagentemovil3">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <!--
+    <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
+    <uses-permission android:name="android.permission.BIND_INCALL_SERVICE"/>
+    -->
+    <!-- android:icon="@mipmap/ic_launcher" -->
+    <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icono_agente"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icono_agente"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".superagente.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".superagente.LoginActivity" />
+        <activity android:name=".superagente.IngresoClaveAccesoCliente" />
+        <activity android:name=".superagente.ControlMaximoNumeroCuentas" />
+        <activity android:name=".superagente.InformacionPersonalActivity" />
+        <activity android:name=".superagente.PrincipalActivity" />
+        <activity android:name=".superagente.TerminosCondiciones" />
+        <activity android:name=".superagente.IngresoDatosBeneficiarios2De4" />
+        <activity android:name=".superagente.MenuCliente" />
+        <activity android:name=".superagente.AfiliacionExitosaConsulta" />
+        <activity android:name=".superagente.ClaveAcceso" />
+        <activity android:name=".superagente.IngresoPreguntaPersonal" />
+        <activity android:name=".superagente.InformacionTarjeta" />
+        <activity android:name=".superagente.IngresoDatosBeneficiario4De4" />
+        <activity android:name=".superagente.CambioClaveAcceso" />
+        <activity android:name=".superagente.ListadoTarjetasPagar" />
+        <activity android:name=".superagente.SeleccionModoMontoPago" />
+        <activity android:name=".superagente.SeleccionTarjetaPago" />
+        <activity android:name=".superagente.IngresoMontoPagoPin" />
+        <activity android:name=".superagente.VoucherPagoTarjeta" />
+        <activity android:name=".superagente.EfectuarOtroPagoTarjeta" />
+        <activity android:name=".superagente.SeleccionMedioPago" />
+        <activity android:name=".superagente.SeleccionTarjetaCargo" />
+        <activity android:name=".superagente.ConfirmacionTarjetaCargo" />
+        <activity android:name=".superagente.VoucherPagoTarjetaConCredito" />
+        <activity android:name=".superagente.CaptureSignature" />
+        <activity android:name=".superagente.TarjetaPagoRemitente" />
+        <activity android:name=".superagente.IngresoMontoPagoPinTransferencias" />
+        <activity android:name=".superagente.RelacionBeneficiarios" />
+        <activity android:name=".superagente.IngresoCuentaTarjetaAbono" />
+        <activity android:name=".superagente.InformacionDomicilioElectronicaPersonal" />
+        <activity android:name=".superagente.IngresoDatosBeneficiario2De2" />
+        <activity android:name=".superagente.IngresoMontoPagoFirmaTransferencias" />
+        <activity android:name=".superagente.VoucherTransferencias" />
+        <activity android:name=".superagente.MantenimientoUsuario" />
+        <activity android:name=".superagente.ListadoCuentasUsuario" />
+        <activity android:name=".superagente.ListadoTarjetasUsuario" />
+        <activity android:name=".superagente.ListadoBeneficiariosUsuario" />
+        <activity android:name=".superagente.CuentasBeneficiarios" />
+        <activity android:name=".superagente.ActualizarCuenta" />
+        <activity android:name=".superagente.ActualizarTarjeta" />
+        <activity android:name=".superagente.ActualizarBeneficiario" />
+        <activity android:name=".superagente.ListadoCuentasTarjetasBeneficiario" />
+        <activity android:name=".superagente.ActualizarCuentasBeneficiario" />
+        <activity android:name=".superagente.ActualizarTarjetaBeneficiario" />
+        <activity android:name=".superagente.AgregarCuentasUsuario" />
+        <activity android:name=".superagente.AgregarTarjetasUsuario" />
+        <activity android:name=".superagente.AgregarBeneficiarioUsuario" />
+        <activity android:name=".superagente.AgregarCuentasBeneficiario" />
+        <activity android:name=".superagente.SeleccionServicioPagar" />
+        <activity android:name=".superagente.CambioClaveAccesoExitosa" />
+        <activity android:name=".superagente.SeleccionRecibosPagar" />
+        <activity android:name=".superagente.VentanaErrores" />
+        <activity android:name=".superagente.MontoPagoPinPagoServicios" />
+        <activity android:name=".superagente.ConformidadPagoServicios" />
+        <activity android:name=".superagente.VoucherPagoServicio" />
+        <activity android:name=".superagente.ActualizarDomicilio" />
+        <activity android:name=".superagente.ContrasenaOlvidada" />
+        <activity android:name=".superagente.AgregarCuentaBeneficiario" />
+        <activity android:name=".superagente.AgregarTarjetaBeneficiario" />
+        <activity android:name=".superagente.IngresoClaveAcceso" />
+        <activity android:name=".superagente.LecturaInformacionComercio" />
+        <activity android:name=".superagente.IngresoMontoPagoPinConsumos" />
+        <activity android:name=".superagente.ConformidadComercioConsumos" />
+        <activity android:name=".superagente.VoucherPagoConsumo" />
+        <activity android:name=".superagente.IngresoMontoPagoFirmaConsumos" />
+        <activity android:name=".superagente.IngresoMontoPagoFirmaServicios" />
+        <activity android:name=".superagente.RecargaTelefonica" />
+        <activity android:name=".superagente.SeleccionMedPagoRecarga" />
+        <activity android:name=".superagente.SeleccionTarjetaRecarga" />
+        <activity android:name=".superagente.MontoPagoRecarga" />
+        <activity android:name=".superagente.ConformidadClienteRecarga" />
+        <activity android:name=".superagente.VoucherRecargaTelefonica"></activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.CuentasBeneficiarios">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_cuentas_beneficiario"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCodigoInterbancario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cod_interbancario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_codigo_interbancario_benef" />
+
+            <!--<EditText
+                android:id="@+id/txt_cod_interbancario"
+                android:layout_width="340dp"
+                android:layout_height="30dp"
+                android:background="@color/color_blanco"
+                android:inputType="number"
+                android:maxLength="20" />-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/txt_cod_interbancario1"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/txt_cod_interbancario2"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/txt_cod_interbancario3"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/txt_cod_interbancario4"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_numero_tarjeta_beneficiario" />
+
+            <EditText
+                android:id="@+id/txt_numero_tarjeta_beneficiario"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@color/color_blanco"
+                android:inputType="number"
+                android:maxLength="16" />
+
+        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_numero_tarjeta_beneficiario" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:id="@+id/txt_numero_tarjeta_beneficiario1"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/txt_numero_tarjeta_beneficiario2"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/txt_numero_tarjeta_beneficiario3"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/txt_numero_tarjeta_beneficiario4"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_datos_tarjeta_beneficiario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_visa_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:src="@drawable/visaicon" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_amex_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:src="@drawable/americanexpressicon" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_mc_option"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:layout_width="38dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:src="@drawable/mastercardlogo" />
+
+                </LinearLayout>
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/tv_tipo_tarjeta_ingreso_tarjeta"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerTipoTarjeta"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/spinner_selector" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/tv_banco_tarjeta_ingreso_tarjeta"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerBancoTarjeta"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="85dp"
+                    android:background="@drawable/spinner_selector" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <Button
+                android:id="@+id/btn_agregar_cuenta_beneficiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_continuar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/btn_nuevo_beneficiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_nuevo_beneficiario" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

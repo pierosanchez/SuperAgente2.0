@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.IngresoCuentaTarjetaAbono">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_ingresa_cuenta_tarjeta_abono"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_importe_cuenta_tarjeta"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tipo_moneda_importe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_importe_cuenta_tarjeta"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_tipo_cuenta_abono"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
+                <RadioGroup
+                    android:id="@+id/rdgp_tipo_pago"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_cuenta_transferencia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rdbtn_cuenta_benef" />
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_tarjeta_transferencia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rdbtn_tarjeta_benef" />
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_cheque_transferencia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rdbtn_cheque_benef" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <!-- Parte de la tarjetas del Beneficiario -->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutCuentaTarjetasBeneficiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_tipo_abono_transferencia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/tv_fr_numero_tarjeta"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
+
+                    <!--<EditText
+                        android:id="@+id/txt_codigo_interbancario"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:background="@color/color_amarillo" />-->
+                    <ListView
+                        android:id="@+id/lv_cuentas_beneficiario"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp">
+
+
+                    </ListView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Fin de la parte de tarjetas del beneficiario -->
+
+            <!-- Parte de la Cheque del Beneficiario -->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutChequeBeneficiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <Spinner
+                        android:id="@+id/spinnerTipoCheque"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_selector" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_fr_tipo_cheque"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/hello_blank_fragment"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutGastosEnvio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_comision_cheque_importe_delivery"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_tipo_moneda_comision_cheque_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="70dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_comision_cheque_delivery"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:background="@color/color_blanco"
+                            android:gravity="center"
+                            android:text="10.00"
+                            android:textStyle="bold"
+                            android:textSize="16dp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_comision_cheque_importe"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_tipo_moneda_comision_cheque"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="79dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_comision_cheque"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:background="@color/color_blanco"
+                            android:gravity="center"
+                            android:text="10.00"
+                            android:textStyle="bold"
+                            android:textSize="16dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Fin de la parte del Cheque del Beneficiario -->
+
+            <!--<FrameLayout
+                android:id="@+id/flContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" />-->
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center">-->
+
+            <!--<EditText
+                android:id="@+id/txt_codigo_interbancario"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:background="@color/color_amarillo" />-->
+            <!--<ListView
+                android:id="@+id/lv_cuentas_beneficiario"
+                android:layout_width="300dp"
+                android:layout_height="40dp">
+
+
+            </ListView>
+
+        </LinearLayout>-->
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center">
+
+                <Spinner
+                    android:id="@+id/spinnerTipoCheque"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/spinner_selector"
+                    android:visibility="invisible"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutGastosEnvio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:visibility="invisible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_comision_cheque_importe_delivery"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tipo_moneda_comision_cheque_delivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="90dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_comision_cheque_delivery"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:text="10.00"
+                    android:textStyle="bold" />
+
+            </LinearLayout>-->
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_comision_cheque_importe"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tipo_moneda_comision_cheque"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="79dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_comision_cheque"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:text="10.00"
+                    android:textStyle="bold" />
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_comision_transferencia"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_tipo_moneda_comision"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_comision_monto"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:text="10.00"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+                <!--<ListView
+                    android:id="@+id/tv_comision_monto"
+                    android:layout_width="100dp"
+                    android:layout_height="16dp"
+                    android:layout_marginLeft="15dp"
+                    android:textStyle="bold"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="0.00"
+                android:gravity="center">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_total_pagar_transferencia"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_pagar_transferencia_simbolo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="105dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_total_pagar_transferencia"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:text="monto total"
+                    android:textStyle="bold"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp">
+
+                <LinearLayout
+                    android:id="@+id/btn_aceptar_cuenta_tarjeta_abono"
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_aceptar"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_cancelar_cuenta_tarjeta_abono"
+                    android:layout_width="190dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_cancelar"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

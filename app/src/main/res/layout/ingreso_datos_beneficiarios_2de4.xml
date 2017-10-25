@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_ingreso_datos_beneficiario"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutDniBeneficiario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_dni_benef" />
+
+                    <EditText
+                        android:id="@+id/txt_dni"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="145dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="number"
+                        android:maxLength="8" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutNombres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textViewNombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_nombre_benef" />
+
+                    <EditText
+                        android:id="@+id/txt_nombre"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="110dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewApellido"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_apellido" />
+
+                    <EditText
+                        android:id="@+id/txt_apellido"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="115dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="text" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutCelular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textViewCelular1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_celular1" />
+
+                    <EditText
+                        android:id="@+id/txt_celular1"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="112dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="number"
+                        android:maxLength="9" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/textViewCelular2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_celular2" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/txt_celular2"
+                            android:layout_width="170dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="111dp"
+                            android:background="@color/color_blanco"
+                            android:inputType="number"
+                            android:maxLength="9" />
+
+                        <TextView
+                            android:layout_gravity="right"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(*) Dato opcional"
+                            android:layout_marginRight="65dp"
+                            android:textColor="@android:color/holo_red_light"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutEmailFechaNac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textViewEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_email" />
+
+                    <EditText
+                        android:id="@+id/txt_Email"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="128dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="textEmailAddress" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewFechaNac"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_fecha_nac" />
+
+                    <TextView
+                        android:id="@+id/txt_fechaNac"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="100dp"
+                        android:background="@color/color_blanco"
+                        android:gravity="center"
+                        android:onClick="setDate" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--<LinearLayout
+                android:id="@+id/linearLayoutCodigoInterbancario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_cod_interbancario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_codigo_interbancario_benef" />
+
+                    <EditText
+                        android:id="@+id/txt_cod_interbancario"
+                        android:layout_width="340dp"
+                        android:layout_height="30dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="number"
+                        android:maxLength="20" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_numero_tarjeta_beneficiario" />
+
+                    <EditText
+                        android:id="@+id/txt_numero_tarjeta_beneficiario"
+                        android:layout_width="340dp"
+                        android:layout_height="30dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="number"
+                        android:maxLength="16" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rdbtn_visa_option"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:src="@drawable/visaicon" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rdbtn_amex_option"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:src="@drawable/americanexpressicon" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rdbtn_mc_option"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:layout_width="38dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:src="@drawable/mastercardlogo" />
+
+                        </LinearLayout>
+
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="@string/tv_tipo_tarjeta_ingreso_tarjeta"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerTipoTarjeta"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="30dp"
+                            android:background="@drawable/spinner_selector" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:gravity="center"
+                            android:text="@string/tv_banco_tarjeta_ingreso_tarjeta"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/spinnerBancoTarjeta"
+                            android:layout_width="180dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="85dp"
+                            android:background="@drawable/spinner_selector" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutClaveComsulta"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/tv_clave_para_consulta" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutPassword1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="70dp"
+                            android:text="@string/tv_password" />
+
+                        <EditText
+                            android:id="@+id/txt_contraseña"
+                            android:layout_width="190dp"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="20.3dp"
+                            android:background="@color/color_blanco"
+                            android:inputType="textPassword" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutRePassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/linearLayoutPassword1"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="70dp"
+                            android:text="@string/tv_re_password" />
+
+                        <EditText
+                            android:id="@+id/txt_re_contraseña"
+                            android:layout_width="190dp"
+                            android:layout_height="30dp"
+                            android:background="@color/color_blanco"
+                            android:inputType="textPassword" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="90dp"
+                        android:text="@string/tv_tipo_abonos_beneficiario" />
+
+                    <Spinner
+                        android:id="@+id/sp_tipo_abono_beneficiario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:background="@drawable/spinner_selector" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--
+            <LinearLayout
+                android:id="@+id/linearLayoutGuardarTransferencia"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/linearLayoutPassword"
+                android:gravity="center">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tv_guardar_transf_recurrente"
+                    android:textColor="@color/color_blanco" />
+
+            </LinearLayout>-->
+
+            <LinearLayout
+                android:id="@+id/linearLayoutContinuar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayoutPassword"
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_cuentas_beneficiario"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:text="@string/btn_cuentas_beneficiario" />
+
+                <Button
+                    android:id="@+id/btn_continuar_beneficiario"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:text="@string/btn_continuar" />
+
+                <Button
+                    android:id="@+id/btn_nuevo_beneficiario"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/btn_nuevo_beneficiario" />
+
+                <Button
+                    android:id="@+id/btnRegresar"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/btn_regresar" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
+
+
+

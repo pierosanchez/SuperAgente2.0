@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorfondoactivity"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.MontoPagoRecarga">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/tv_titulo_recarga_montoPago"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_nom_cliRecarga"
+                android:textColor="@color/color_blanco" />
+
+            <EditText
+                android:id="@+id/txt_monto_cliRecarga"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_tarjeta_cifradaRecarga"
+                android:textColor="@color/color_blanco" />
+
+            <EditText
+                android:id="@+id/txt_monto_tarcifradaRecarga"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="32dp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imv_tarjeta"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_ingresa_pinRecarga"
+                android:textColor="@color/color_blanco" />
+
+            <EditText
+                android:id="@+id/txt_monto_pinRecarga"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:background="@color/color_blanco"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <Spinner
+                android:id="@+id/sp_principal_monedaRecarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/spinner_selector" />
+
+            <EditText
+                android:id="@+id/txt_monto_montoRecarga"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/color_blanco"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <Button
+                android:id="@+id/btn_monto_regMenuRecarga"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_continuarRecarga" />
+
+            <Button
+                android:id="@+id/btn_monto_salirRecarga"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:text="@string/btn_salir_recarga"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.SplashActivity">
+
+    <TextView
+        android:id="@+id/super_agente_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="SUPER AGENTE MOVIL"
+        android:textColor="@color/color_blanco"
+        android:textSize="20dp"
+        />
+
+</RelativeLayout>

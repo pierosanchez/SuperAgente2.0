@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/textViewControlMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorFondo"
+                    android:gravity="center"
+                    android:text="@string/titulo_menu_cliente"
+                    android:textColor="@color/color_blanco"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutMenuCliente"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/tv_manu_principal"
+                    android:textColor="@color/color_blanco"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/relativeLayoutPagos"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/color_blanco"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/ckbox_pago_consumos"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_pago_consumos"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/ckbox_pago_servicios"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_pago_servicios"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/ckbox_pago_tarjetas"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_pago_tarjetas"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/ckbox_retiro_efectivo"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_retiro_efectivo"
+                    android:textSize="20dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/ckbox_deposito_efectivo"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_deposito_efectivo"
+                    android:textSize="20dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/ckbox_recargas"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_recargas"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/ckbox_transferencias"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_transferencias"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/ckbox_cambio_clave"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_cambio_clave"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/btn_mantenimiento_usuario"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:text="@string/ckbox_mantenimiento"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp">
+
+                <LinearLayout
+                    android:id="@+id/salir_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/color_blanco"
+                    android:gravity="center"
+                    android:textColor="@color/color_blanco"
+                    android:textStyle="bold">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_salir"
+                        android:textColor="@color/colorOscuro"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
