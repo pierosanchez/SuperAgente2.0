@@ -176,6 +176,7 @@ public class InformacionPersonalActivity extends Activity {
                 SQLiteDatabase db = superAgenteBD.getWritableDatabase();
                 db.execSQL("INSERT INTO Cliente(movil) VALUES('" + _movilUsuario + "')");
                 db.close();
+
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;

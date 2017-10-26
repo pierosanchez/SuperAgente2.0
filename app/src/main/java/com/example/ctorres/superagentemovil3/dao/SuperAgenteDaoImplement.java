@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.net.URLEncoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -815,22 +816,27 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarDomicilioCliente/?codcliente=" + idcliente + "&departamento=" + departamento + "&provincia=" + provincia + "&distrito=" + distrito + "&direccion=" + direccion + "&tel_fijo=" + tel_fijo;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarDomicilioCliente/?codcliente=" + idcliente +
+                    "&departamento=" + URLEncoder.encode(departamento, "UTF-8") +
+                    "&provincia=" + URLEncoder.encode(provincia, "UTF-8") +
+                    "&distrito=" + URLEncoder.encode(distrito, "UTF-8") +
+                    "&direccion=" + URLEncoder.encode(direccion, "UTF-8") +
+                    "&tel_fijo=" + tel_fijo;
 
-            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            /*String arrayJason = utils.getJsonarrayFromUrl(url);*/
-            Log.e("Json", arrayJason.toString());
+            //JSONArray arrayJason = utils.getJSONArrayfromURL(url);
+            Log.e("METHOD","getUsuarioDomicilioLogin");
+            Log.e("URL",url);
+
+            String arrayJason = utils.getJsonarrayFromUrl(url);
+            //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {
-                    JSONObject jsonObject = arrayJason.getJSONObject(0);
-
                     user.setUsuarioId(idcliente);
                     user.setDepartamento(departamento);
                     user.setProvincia(provincia);
                     user.setDistrito(distrito);
                     user.setDireccion(direccion);
                     user.setTel_fijo(tel_fijo);
-                    //user.setClave(Cpassword);
                 } else {
                     user = null;
                 }
@@ -852,12 +858,19 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarClave/?idcliente_usu=" + usuarioId + "&pass1_usu=" + claveAcceso + "&pregunta_usu=" + pregunta + "&respuesta_usu=" + segundaClaveAcceso;
-            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            Log.e("Json", arrayJason.toString());
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarClave/?idcliente_usu=" + usuarioId +
+                    "&pass1_usu=" + URLEncoder.encode(claveAcceso, "UTF-8") +
+                    "&pregunta_usu=" + URLEncoder.encode(pregunta, "UTF-8") +
+                    "&respuesta_usu=" + URLEncoder.encode(segundaClaveAcceso, "UTF-8");
+
+            Log.e("METHOD","getClaveAcceso");
+            Log.e("URL",url);
+
+            String arrayJason = utils.getJsonarrayFromUrl(url);
+            //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {
-                    JSONObject jsonObject = arrayJason.getJSONObject(0);
+                    //JSONObject jsonObject = arrayJason.getJSONObject(0);
                     //user.setCodCliente(utils.getValueStringOrNull(jsonObject, "codcliente"));
                     user.setCodCliente(usuarioId);
                     user.setClaveAcceso(claveAcceso);

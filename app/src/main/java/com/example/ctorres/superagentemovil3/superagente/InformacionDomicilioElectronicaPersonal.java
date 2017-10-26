@@ -61,10 +61,8 @@ public class InformacionDomicilioElectronicaPersonal extends Activity {
             @Override
             public void onClick(View v) {
 
-                ActivityCompat.requestPermissions(InformacionDomicilioElectronicaPersonal.this, new String[] {Manifest.permission.INTERNET}, INTERNET);
-
-                /*InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion valida = new InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion();
-                valida.execute();*/
+                InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion validarUsuarioDireccion = new InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion();
+                validarUsuarioDireccion.execute();
 
                 /*Intent sanipesIntent = new Intent(InformacionDomicilioElectronicaPersonal.this, ClaveAcceso.class);
                 sanipesIntent.putExtra("usuario", usuario);

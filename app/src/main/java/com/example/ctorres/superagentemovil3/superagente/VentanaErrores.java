@@ -41,6 +41,7 @@ public class VentanaErrores extends Activity {
             usuario = bundle.getParcelable("usuario");
             numCliente = bundle.getString("movil");*/
 
+
             btn_opcion1.setText("Reintentar");
             btn_opcion2.setText("Registrarse");
 
