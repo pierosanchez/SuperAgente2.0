@@ -98,7 +98,10 @@
         <activity android:name=".superagente.SeleccionTarjetaRecarga" />
         <activity android:name=".superagente.MontoPagoRecarga" />
         <activity android:name=".superagente.ConformidadClienteRecarga" />
-        <activity android:name=".superagente.VoucherRecargaTelefonica"></activity>
+        <activity android:name=".superagente.VoucherRecargaTelefonica" />
+        <activity android:name=".superagente.VoucherPagoConsumoFirma" />
+        <activity android:name=".superagente.VoucherTransferenciasFirma" />
+        <activity android:name=".superagente.VoucherPagoServicioFirma"></activity>
     </application>
 
 </manifest>

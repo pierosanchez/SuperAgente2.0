@@ -38,7 +38,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
     private ProgressBar circleProgressBar;
     Button btn_agregar_beneficiario, btn_regresar_mantenimiento;
     ImageView img1, img2, img3;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         /*arrayBenefeciarioEntity = null;
         adapterBeneficiario = new BeneficiarioAdapter(arrayBenefeciarioEntity, getApplication());
@@ -89,6 +90,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
                         intent.putExtra("dni_benef", dni_benef);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -112,6 +114,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
                         intent.putExtra("dni_benef", dni_benef);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -135,6 +138,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
                 Intent intent = new Intent(ListadoBeneficiariosUsuario.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -146,6 +150,7 @@ public class ListadoBeneficiariosUsuario extends Activity {
                 Intent intent = new Intent(ListadoBeneficiariosUsuario.this, AgregarBeneficiarioUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

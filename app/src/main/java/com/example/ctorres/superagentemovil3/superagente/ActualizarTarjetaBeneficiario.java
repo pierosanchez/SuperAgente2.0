@@ -41,7 +41,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
     int id_cuenta_benef;
     String dni_benef;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
         usuario = bundle.getParcelable("usuario");
         dni_benef = bundle.getString("dni_benef");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         rdbtn_mc_option.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +117,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -128,6 +130,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

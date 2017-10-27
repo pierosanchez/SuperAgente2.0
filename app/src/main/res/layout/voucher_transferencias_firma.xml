@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorfondoactivity"
     android:orientation="vertical"
-    tools:context="com.example.ctorres.superagentemovil3.superagente.VoucherTransferencias">
+    tools:context="com.example.ctorres.superagentemovil3.superagente.VoucherTransferenciasFirma">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,13 +19,13 @@
             android:layout_height="40dp"
             android:background="@color/colorFondo"
             android:gravity="center"
-            android:text="@string/titulo_voucher_transferencias"
+            android:text="@string/titulo_voucher_transferencias_firma"
             android:textColor="@color/color_blanco"
             android:textSize="16dp" />
 
     </LinearLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -45,7 +43,7 @@
 
                 <LinearLayout
                     android:layout_width="350dp"
-                    android:layout_height="500dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/color_blanco"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -53,7 +51,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="20dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -312,7 +310,7 @@
                                 android:id="@+id/tv_comision3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="58dp" />
+                                android:layout_marginLeft="61dp" />
 
                         </LinearLayout>
 
@@ -330,15 +328,14 @@
                                 android:id="@+id/tv_tipo_moneda_importe_total_voucher"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="95dp"
+                                android:layout_marginLeft="98dp"
                                 android:text="" />
 
                             <TextView
                                 android:id="@+id/tv_monto_total_pagar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="5dp"
-                                android:text="" />
+                                android:layout_marginLeft="5dp" />
 
                         </LinearLayout>
 
@@ -418,43 +415,10 @@
 
                         </LinearLayout>
 
-                        <!--<LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="20dp">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:id="@+id/textView9"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/tv_importe_transferencia_voucher" />
-
-                                <TextView
-                                    android:id="@+id/tv_tipo_moneda_importe_voucher"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
-                                    android:text="" />
-
-                                <TextView
-                                    android:id="@+id/tv_importe_voucher"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
-                                    android:text="" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>-->
-
                         <TableLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp">
 
                             <TableRow android:layout_marginLeft="20dp">
 
@@ -482,15 +446,33 @@
 
                         </TableLayout>
 
-                        <!--<TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="COMISION OPER.: 10.00" />-->
+                    </LinearLayout>
 
-                        <!--<TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:gravity="center">
+
+                        <Button
+                            android:id="@+id/btn_firmar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="TOTAL: S/. 260.00" />-->
+                            android:text="@string/btn_firmar" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/signImage"
+                            android:layout_width="200dp"
+                            android:layout_height="130dp"
+                            android:text="@string/btn_firmar" />
 
                     </LinearLayout>
 
@@ -501,71 +483,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center">
 
-                <LinearLayout
-                    android:layout_width="350dp"
-                    android:layout_height="70dp"
-                    android:background="@drawable/borders_pin_background"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="@string/tv_pin_verificado"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center">
-
-                <LinearLayout
+                <Button
                     android:id="@+id/btn_efectuar_otra_operacion"
                     android:layout_width="190dp"
                     android:layout_height="50dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:text="@string/btn_efectuar_otra_operacion"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="130dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="@string/btn_efectuar_otra_operacion"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/btn_salir_transferencias"
+                <Button
+                    android:id="@+id/btn_salir"
                     android:layout_width="190dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="5dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="50dp"
-                        android:gravity="center"
-                        android:text="@string/btn_salir"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+                    android:gravity="center"
+                    android:text="@string/btn_salir"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>
-
-

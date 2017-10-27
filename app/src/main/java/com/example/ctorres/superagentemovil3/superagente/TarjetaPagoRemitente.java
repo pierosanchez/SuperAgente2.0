@@ -39,7 +39,7 @@ public class TarjetaPagoRemitente extends Activity {
     TarjetasUsuarioAdapter tarjetasUsuarioAdapter;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     ListView lv_tarjeta_cargo_remitente;
-    String cliente;
+    String cliente, cli_dni;
     private ProgressBar circleProgressBar;
     Button btn_regresar, btn_cancelar_seleccion_tarjeta_cargo;
 
@@ -64,6 +64,7 @@ public class TarjetaPagoRemitente extends Activity {
         nombreBeneficiario = bundle.getString("nombrebenef");
         dni_benef = bundle.getString("dni_benef");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
 
         usuarioEntityArrayList = null;
@@ -80,6 +81,7 @@ public class TarjetaPagoRemitente extends Activity {
                 emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
                 num_tarjeta = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                 banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta();
+                int tipo_tarjeta = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
                     Intent intent = new Intent(TarjetaPagoRemitente.this, IngresoMontoPagoPinTransferencias.class);
                     intent.putExtra("usuario", usuario);
@@ -89,6 +91,8 @@ public class TarjetaPagoRemitente extends Activity {
                     intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                     intent.putExtra("banco", banco);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else {
@@ -100,6 +104,8 @@ public class TarjetaPagoRemitente extends Activity {
                     intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                     intent.putExtra("banco", banco);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 }
@@ -192,6 +198,7 @@ public class TarjetaPagoRemitente extends Activity {
                 Intent intent = new Intent(TarjetaPagoRemitente.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

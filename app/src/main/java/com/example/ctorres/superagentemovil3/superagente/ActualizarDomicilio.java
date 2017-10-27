@@ -26,7 +26,7 @@ public class ActualizarDomicilio extends Activity {
     EditText txt_departamento, txt_provincia, txt_distrito, txt_direccion, txt_tel_fijo;
     ArrayList<UsuarioEntity> usuarioEntityList;
     DomicilioUsuarioAdapter domicilioUsuarioAdapter;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class ActualizarDomicilio extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         usuarioEntityList = null;
         domicilioUsuarioAdapter = new DomicilioUsuarioAdapter(usuarioEntityList, getApplication());
@@ -60,6 +61,7 @@ public class ActualizarDomicilio extends Activity {
                 Intent sanipesIntent = new Intent(ActualizarDomicilio.this, MantenimientoUsuario.class);
                 sanipesIntent.putExtra("usuario", usuario);
                 sanipesIntent.putExtra("cliente", cliente);
+                sanipesIntent.putExtra("cli_dni", cli_dni);
                 startActivity(sanipesIntent);
                 finish();
             }
@@ -71,6 +73,7 @@ public class ActualizarDomicilio extends Activity {
                 Intent intent =new Intent(ActualizarDomicilio.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

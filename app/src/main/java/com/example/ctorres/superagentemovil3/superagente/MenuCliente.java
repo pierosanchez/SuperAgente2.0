@@ -15,7 +15,7 @@ public class MenuCliente extends Activity {
 
     Button btn_pagoTarjetas, btn_transferencias, btn_mantenimiento_usuario, btn_pago_consumos, btn_pago_servicios, ckbox_retiro_efectivo, ckbox_deposito_efectivo, ckbox_recargas, btn_cambio_clave;
     private UsuarioEntity usuario;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MenuCliente extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         salir_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, SeleccionTarjetaPago.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -62,6 +64,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, RelacionBeneficiarios.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -73,6 +76,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -84,6 +88,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, SeleccionServicioPagar.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -95,6 +100,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, CambioClaveAcceso.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -106,6 +112,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, SeleccionTarjetaCargo.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivityForResult(intent, 0);
                 finish();
             }

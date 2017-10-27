@@ -19,7 +19,7 @@ public class MantenimientoUsuario extends Activity {
     RadioGroup rdgrp_mantenimiento_usuario;
     private UsuarioEntity usuario;
     Button btn_regresar_mantenimiento;
-    String cliente;
+    String cliente, cli_dni;
     TextView tv_nombre_titular_cuenta;
 
     @Override
@@ -35,6 +35,7 @@ public class MantenimientoUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         tv_nombre_titular_cuenta.setText(cliente);
 
@@ -45,24 +46,28 @@ public class MantenimientoUsuario extends Activity {
                     Intent intent = new Intent(MantenimientoUsuario.this, ListadoCuentasUsuario.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else if (checkedId == R.id.rdbtn_tarjetas_usuario_mant){
                     Intent intent = new Intent(MantenimientoUsuario.this, ListadoTarjetasUsuario.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else if (checkedId == R.id.rdbtn_domicilio_usuario_mant){
                     Intent intent = new Intent(MantenimientoUsuario.this, ActualizarDomicilio.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else {
                     Intent intent = new Intent(MantenimientoUsuario.this, ListadoBeneficiariosUsuario.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 }
@@ -75,6 +80,7 @@ public class MantenimientoUsuario extends Activity {
                 Intent intent = new Intent(MantenimientoUsuario.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

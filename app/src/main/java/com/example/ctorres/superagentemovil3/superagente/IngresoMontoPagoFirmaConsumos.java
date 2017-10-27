@@ -31,7 +31,8 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
     Spinner spinnerTipoMoneda;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
-    String tipo_moneda;
+    String tipo_moneda, cli_dni;
+    int tipo_tarjeta_pago;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,8 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
         tarjeta_cargo = extras.getString("tarjeta_cargo");
         emisor_tarjeta = extras.getString("emisor_tarjeta");
         banco = extras.getString("banco");
+        tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
+        cli_dni = extras.getString("cli_dni");
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
@@ -69,6 +72,8 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
                 intent.putExtra("monto_pagar", txt_monto_pago_consumo.getText().toString());
                 intent.putExtra("tipo_moneda", tipo_moneda);
                 intent.putExtra("banco", banco);
+                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
             }
         });

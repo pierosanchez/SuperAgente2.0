@@ -28,7 +28,7 @@ public class IngresoMontoPagoPin extends Activity {
     EditText txt_moneda_pagar;
     ImageView imageView;
     Bitmap bmp;
-    String monto, tipo_moneda_deuda;
+    String monto, tipo_moneda_deuda, cli_dni;
     String num_tarjeta, tarjeta_cargo;
     TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_deuda;
     int tipo_tarjeta, emisor_tarjeta;
@@ -62,6 +62,7 @@ public class IngresoMontoPagoPin extends Activity {
         num_tarjeta = extras.getString("num_tarjeta");
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         tarjeta_cargo = extras.getString("tarjeta_cargo");
+        cli_dni = extras.getString("cli_dni");
 
         focTipoTarjeta();
 
@@ -77,6 +78,7 @@ public class IngresoMontoPagoPin extends Activity {
                 intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
                 intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                 intent.putExtra("num_tarjeta", num_tarjeta);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -106,6 +108,7 @@ public class IngresoMontoPagoPin extends Activity {
                 Intent intent = new Intent(IngresoMontoPagoPin.this, MenuCliente.class);
                 intent.putExtra("monto", monto);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

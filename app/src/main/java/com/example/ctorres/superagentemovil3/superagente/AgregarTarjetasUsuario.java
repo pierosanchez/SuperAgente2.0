@@ -54,7 +54,7 @@ public class AgregarTarjetasUsuario extends Activity {
     BancosAdapter bancosAdapter;
     GetTarjetaBinAdapter getTarjetaBinAdapter;
     int bancos;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,7 @@ public class AgregarTarjetasUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         numeroTarjeta();
         cargarTipoTarjeta();
@@ -158,6 +159,7 @@ public class AgregarTarjetasUsuario extends Activity {
                 Intent intent = new Intent(AgregarTarjetasUsuario.this, ListadoTarjetasUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -281,6 +283,7 @@ public class AgregarTarjetasUsuario extends Activity {
                     Intent intent = new Intent(AgregarTarjetasUsuario.this, ListadoTarjetasUsuario.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 }

@@ -41,7 +41,7 @@ public class ActualizarTarjeta extends Activity {
     private Calendar calendar;
     private int year, month, day;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
-    String cliente;
+    String cliente, cli_dni;
     DetalleTarjetaAdapter detalleTarjetaAdapter;
     ArrayList<UsuarioEntity> tarjetaList;
 
@@ -83,6 +83,7 @@ public class ActualizarTarjeta extends Activity {
         id_tarjeta = bundle.getString("id_tarjeta");
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         tarjetaList = null;
         detalleTarjetaAdapter = new DetalleTarjetaAdapter(tarjetaList, getApplication());
@@ -121,6 +122,7 @@ public class ActualizarTarjeta extends Activity {
                 Intent intent = new Intent(ActualizarTarjeta.this, ListadoTarjetasUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -132,6 +134,7 @@ public class ActualizarTarjeta extends Activity {
                 Intent intent = new Intent(ActualizarTarjeta.this, ListadoTarjetasUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

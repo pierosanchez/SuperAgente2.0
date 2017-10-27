@@ -36,7 +36,7 @@ public class ListadoTarjetasUsuario extends Activity {
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     Button btn_regresar_mantenimiento, btn_agregar_tarjetas;
     ImageView img1, img2;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,8 @@ public class ListadoTarjetasUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
+
 
         circleProgressBar.setVisibility(View.VISIBLE);
 
@@ -82,6 +84,7 @@ public class ListadoTarjetasUsuario extends Activity {
                         intent.putExtra("id_tarjeta", id_tarjeta);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -104,6 +107,7 @@ public class ListadoTarjetasUsuario extends Activity {
                 Intent intent = new Intent(ListadoTarjetasUsuario.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -115,6 +119,7 @@ public class ListadoTarjetasUsuario extends Activity {
                 Intent intent = new Intent(ListadoTarjetasUsuario.this, AgregarTarjetasUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

@@ -31,7 +31,7 @@ public class RelacionBeneficiarios extends Activity {
     RelacionBeneficiarioAdapter adapterBeneficiario;
     ArrayList<BeneficiarioEntity> arrayBenefeciarioEntity;
     ListView listView;
-    String cliente;
+    String cliente, cli_dni;
     private ProgressBar circleProgressBar;
 
     @Override
@@ -47,6 +47,7 @@ public class RelacionBeneficiarios extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         arrayBenefeciarioEntity = null;
         adapterBeneficiario = new RelacionBeneficiarioAdapter(arrayBenefeciarioEntity, getApplication());
@@ -78,6 +79,7 @@ public class RelacionBeneficiarios extends Activity {
                 intent.putExtra("nombrebenef", nomyape);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

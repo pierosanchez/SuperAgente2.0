@@ -41,7 +41,7 @@ public class ListadoCuentasUsuario extends Activity {
     Button btn_regresar_mantenimiento, btn_agregar_cuentas;
     ImageView img1, img2;
     View v;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class ListadoCuentasUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         circleProgressBar.setVisibility(View.VISIBLE);
 
@@ -87,6 +88,7 @@ public class ListadoCuentasUsuario extends Activity {
                         intent.putExtra("id_cuenta", id_cuenta);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -110,6 +112,7 @@ public class ListadoCuentasUsuario extends Activity {
                 Intent intent = new Intent(ListadoCuentasUsuario.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -121,6 +124,7 @@ public class ListadoCuentasUsuario extends Activity {
                 Intent intent = new Intent(ListadoCuentasUsuario.this, AgregarCuentasUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

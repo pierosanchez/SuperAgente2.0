@@ -579,16 +579,21 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarLogin/?usuario=" + Cmovil + "&contraseña=" + Cpassword;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarLogin/?usuario=" + URLEncoder.encode(Cmovil, "UTF-8") + "&contraseña=" + URLEncoder.encode(Cpassword, "UTF-8");
+
+            Log.e("METHOD","getUsuarioLog");
+            Log.e("URL",url);
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            Log.e("Json", arrayJason.toString());
+            //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {
                     JSONObject jsonObject = arrayJason.getJSONObject(0);
 
                     user.setUsuarioId(utils.getValueStringOrNull(jsonObject, "respuesta"));
                     user.setNombreApellido(utils.getValueStringOrNull(jsonObject, "cliente"));
+                    user.setDni(utils.getValueStringOrNull(jsonObject, "dni_cliente"));
+
                 } else {
                     user = null;
                 }

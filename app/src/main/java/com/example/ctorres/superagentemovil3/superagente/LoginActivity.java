@@ -199,6 +199,7 @@ public class LoginActivity extends Activity {
                         Intent sanipesIntent = new Intent(LoginActivity.this, MenuCliente.class);
                         sanipesIntent.putExtra("usuario", userEntity);
                         sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                        sanipesIntent.putExtra("cli_dni", userEntity.getDni());
                         startActivity(sanipesIntent);
                         finish();
                     } catch (Exception e) {

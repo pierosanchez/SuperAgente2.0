@@ -29,7 +29,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
     UsuarioEntity usuario;
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
     String cliente;
-    int emisor_tarjeta;
+    int emisor_tarjeta, tipo_tarjeta;
     TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
     Spinner spinnerMonedaPagar;
     EditText txt_moneda_pagar;
@@ -37,7 +37,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
     Button btn_continuar_pago, btn_cancelar_pago;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
-    String tipo_moneda;
+    String tipo_moneda, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,8 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
         emisor_tarjeta = extras.getInt("emisor_tarjeta");
         banco = extras.getString("banco");
         cliente = extras.getString("cliente");
+        tipo_tarjeta = extras.getInt("tipo_tarjeta");
+        cli_dni = extras.getString("cli_dni");
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
@@ -88,6 +90,8 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
                 intent.putExtra("banco", banco);
                 intent.putExtra("num_tarjeta", num_tarjeta);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -122,6 +126,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
                 Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

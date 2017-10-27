@@ -38,7 +38,7 @@ public class SeleccionTarjetaPago extends Activity {
     ListView lv_tarjetas_usuario;
     String num_tarjeta, banco_tarjeta;
     int tipo_tarjeta, emisor_tarjeta;
-    String cliente;
+    String cliente, cli_dni;
     private ProgressBar circleProgressBar;
 
 
@@ -64,6 +64,7 @@ public class SeleccionTarjetaPago extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         usuarioEntityArrayList = null;
         tarjetasUsuarioAdapter = new TarjetasUsuarioAdapter(usuarioEntityArrayList, getApplication());
@@ -90,6 +91,7 @@ public class SeleccionTarjetaPago extends Activity {
                     intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                     intent.putExtra("banco_tarjeta", banco_tarjeta);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 }

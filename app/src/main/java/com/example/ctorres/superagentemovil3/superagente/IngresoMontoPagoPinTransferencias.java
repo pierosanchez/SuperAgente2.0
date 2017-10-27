@@ -27,10 +27,10 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     Bitmap bmp;
     ImageView imageView;
     UsuarioEntity usuario;
-    int emisor_tarjeta;
+    int emisor_tarjeta, tipo_tarjeta;
     TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,8 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         emisor_tarjeta = extras.getInt("emisor_tarjeta");
         banco = extras.getString("banco");
         cliente = extras.getString("cliente");
+        tipo_tarjeta = extras.getInt("tipo_tarjeta");
+        cli_dni = extras.getString("cli_dni");
 
         //imageView.setImageBitmap(bmp);
 
@@ -80,6 +82,8 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                 intent.putExtra("banco", banco);
                 intent.putExtra("num_tarjeta", num_tarjeta);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -120,6 +124,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                 Intent intent = new Intent(IngresoMontoPagoPinTransferencias.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

@@ -23,7 +23,7 @@ public class VoucherPagoTarjeta extends Activity {
     TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada, tv_tarjeta_cifrada_cargo;
     String importe, tipo_moneda_deuda, tarjeta_cargo;
     private UsuarioEntity usuario;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class VoucherPagoTarjeta extends Activity {
         usuario = extras.getParcelable("usuario");
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         cliente = extras.getString("cliente");
+        cli_dni = extras.getString("cli_dni");
         num_tarjeta = "TARJETA CIFRADA: " + extras.getString("num_tarjeta");
         tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
 
@@ -62,6 +63,7 @@ public class VoucherPagoTarjeta extends Activity {
                 Intent intent = new Intent(VoucherPagoTarjeta.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -80,6 +82,7 @@ public class VoucherPagoTarjeta extends Activity {
                 Intent intent = new Intent(VoucherPagoTarjeta.this, SeleccionTarjetaPago.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

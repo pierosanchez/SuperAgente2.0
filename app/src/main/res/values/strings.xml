@@ -52,6 +52,8 @@
     <string name="btn_agregar_tarjeta">AREGAR TARJETA</string>
     <string name="btn_validar">VALIDAR</string>
     <string name="btn_reniec">RENIEC</string>
+    <string name="btn_otraOpe_voucher_Recarga">EFECTUAR OTRA OPERACIÓN</string>
+    <string name="btn_otraReca_voucher_Recarga">EFECTUAR OTRA RECARGA</string>
 
 
     <!-- Fragmentos -->
@@ -700,11 +702,16 @@
 
     <string name="tv_notaPin_voucher_Recarga">PIN VERIFICADO POR EL EMISOR</string>
 
-    <string name="btn_otraOpe_voucher_Recarga">EFECTUAR OTRA OPERACIÓN</string>
-    <string name="btn_otraReca_voucher_Recarga">EFECTUAR OTRA RECARGA</string>
+    <!-- pantalla de voucher de pago de servicio con firma -->
 
+    <string name="titulo_voucher_pago_consumos_firma">VOUCHER DE PAGO DE CONSUMOS CON FIRMA</string>
 
+    <!-- pantalla de voucher de transferencias con firma -->
 
+    <string name="titulo_voucher_transferencias_firma">VOUCHER DE TRANSFERENCIAS CON FIRMA</string>
 
+    <!-- pantalla de voucher de pago de servicios con firma -->
+
+    <string name="titulo_voucher_pago_servicios_firma">VOUCHER DE PAGO DE SERVICIOS CON FIRMA</string>
 
 </resources>

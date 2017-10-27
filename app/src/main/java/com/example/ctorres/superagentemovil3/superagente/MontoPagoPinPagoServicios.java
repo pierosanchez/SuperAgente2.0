@@ -18,7 +18,7 @@ import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 public class MontoPagoPinPagoServicios extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago;
-    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio, servicio, num_servicio, cliente, tipo_servicio;
+    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio, servicio, num_servicio, cliente, tipo_servicio, cli_dni;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     ImageView imageView;
     TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar, tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar;
@@ -59,6 +59,7 @@ public class MontoPagoPinPagoServicios extends Activity {
         cod_banco = extras.getInt("cod_banco");
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
+        cli_dni = extras.getString("cli_dni");
 
         tv_tarjeta_cifrada_pago_servicios.setText(num_tarjeta);
         txt_servicio_pagar.setText(servicio);
@@ -90,6 +91,7 @@ public class MontoPagoPinPagoServicios extends Activity {
                 intent.putExtra("cod_banco", cod_banco);
                 intent.putExtra("tipo_servicio", tipo_servicio);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -122,6 +124,8 @@ public class MontoPagoPinPagoServicios extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(MontoPagoPinPagoServicios.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

@@ -40,7 +40,7 @@ public class ActualizarBeneficiario extends Activity {
     ArrayList<BeneficiarioEntity> arrayBenefeciarioEntity;
     String[] tipo_abono = {"Cuentas", "Tarjetas", "Cheques"};
     Spinner sp_tipo_abono_beneficiario;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +74,7 @@ public class ActualizarBeneficiario extends Activity {
         usuario = bundle.getParcelable("usuario");
         dni_benef = bundle.getString("dni_benef");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         arrayBenefeciarioEntity = null;
         detalleBeneficiarioAdapter = new DetalleBeneficiarioAdapter(arrayBenefeciarioEntity, getApplication());
@@ -96,6 +97,7 @@ public class ActualizarBeneficiario extends Activity {
                 Intent intent = new Intent(ActualizarBeneficiario.this, ListadoBeneficiariosUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -107,6 +109,7 @@ public class ActualizarBeneficiario extends Activity {
                 Intent intent = new Intent(ActualizarBeneficiario.this, ListadoBeneficiariosUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

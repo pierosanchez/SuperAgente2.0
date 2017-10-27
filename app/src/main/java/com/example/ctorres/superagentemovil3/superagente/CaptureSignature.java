@@ -26,7 +26,7 @@ public class CaptureSignature extends Activity {
     Paint paint;
     LinearLayout mContent;
     Button clear, save;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,7 @@ public class CaptureSignature extends Activity {
 
         Bundle extras = getIntent().getExtras();
         cliente = extras.getString("cliente");
+        cli_dni = extras.getString("cli_dni");
     }
 
     Button.OnClickListener onButtonClick = new Button.OnClickListener() {
@@ -102,6 +103,7 @@ public class CaptureSignature extends Activity {
             Intent intent = new Intent();
             intent.putExtra("byteArray", bs.toByteArray());
             intent.putExtra("cliente", cliente);
+            intent.putExtra("cli_dni", cli_dni);
             setResult(1, intent);
             finish();
         }

@@ -46,7 +46,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
     int tipo_tarjeta, emisor_tarjeta;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     UsuarioAdapter usuarioAdapter;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         tarjeta_cargo = extras.getString("tarjeta_cargo");
         cliente = extras.getString("cliente");
+        cli_dni = extras.getString("cli_dni");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
@@ -101,6 +102,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("num_tarjeta", num_tarjeta);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else if (tipo_tarjeta==2) {
@@ -111,6 +113,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("num_tarjeta", num_tarjeta);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 }
@@ -184,6 +187,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                 Intent intent = new Intent(ConfirmacionTarjetaCargo.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

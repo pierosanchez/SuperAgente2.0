@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 public class SeleccionRecibosPagar extends Activity {
 
     private UsuarioEntity usuario;
-    String num_servicio, servicio, cliente, tipo_servicio;
+    String num_servicio, servicio, cliente, tipo_servicio, cli_dni;
     Button btn_aceptar_recibo_pagar, btn_cancelar_recibo_pagar;
     CheckBox chbxk_fecha_vencimiento1, chbxk_fecha_vencimiento2;
     TextView tv_monto_recibo1, tv_monto_recibo2, txt_empresa_servicio_pagar, txt_numero_suministro, txt_nombre_titular_servicio;
@@ -48,6 +48,7 @@ public class SeleccionRecibosPagar extends Activity {
         num_servicio = bundle.getString("num_servicio");
         cliente = bundle.getString("cliente");
         tipo_servicio = bundle.getString("tipo_servicio");
+        cli_dni = bundle.getString("cli_dni");
 
         txt_empresa_servicio_pagar.setText(servicio);
         txt_numero_suministro.setText(num_servicio);
@@ -71,6 +72,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivityForResult(intent, 0);
                         finish();
                     } else {
@@ -81,6 +83,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivityForResult(intent, 0);
                         finish();
                     }
@@ -117,6 +120,8 @@ public class SeleccionRecibosPagar extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(SeleccionRecibosPagar.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
                 startActivity(intent);
                 finish();
             }

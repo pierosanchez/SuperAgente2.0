@@ -45,7 +45,7 @@ public class SeleccionServicioPagar extends Activity {
     EmpresasServiciosAdapter empresasServiciosAdapter;
     ServiciosPublicosAdapter serviciosPublicosAdapter;
     ClubesAdapter clubesAdapter;
-    String servicio, cliente, tipo_servicio;
+    String servicio, cliente, tipo_servicio, cli_dni;
     int tipo_servicio_publico;
     TextView tv_seleccion_tipo_servicio;
 
@@ -69,6 +69,7 @@ public class SeleccionServicioPagar extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         empresasServiciosEntityArrayList = null;
         empresasServiciosAdapter = new EmpresasServiciosAdapter(empresasServiciosEntityArrayList, getApplication());
@@ -154,6 +155,7 @@ public class SeleccionServicioPagar extends Activity {
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tipo_servicio", tipo_servicio);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else {
@@ -294,6 +296,8 @@ public class SeleccionServicioPagar extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(SeleccionServicioPagar.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
                 startActivity(intent);
                 finish();
             }

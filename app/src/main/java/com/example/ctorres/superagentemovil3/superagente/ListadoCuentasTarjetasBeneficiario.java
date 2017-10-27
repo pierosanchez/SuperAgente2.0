@@ -34,7 +34,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
     MentenimientoTarjetasBeneficiarioAdapter adapterTarjetasBeneficiario;
     ListView lv_lista_cuentas_beneficiario, lv_lista_tarjetas_beneficiario;
     int id_cuenta_benef, id_tarjeta_benef;
-    String dni_benef;
+    String dni_benef, cli_dni;
     UsuarioEntity usuario;
     Button btn_regresar_cuentas, btn_agregar_cuenta_beneficiario;
     ImageView iv_editar_tarjeta_beneficiario, iv_eliminar_tarjeta_beneficiario, iv_editar_cuenta_beneficiario, iv_eliminar_cuenta_beneficiario;
@@ -55,6 +55,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
         usuario = bundle.getParcelable("usuario");
         dni_benef = bundle.getString("dni_benef");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         arrayBenefeciarioEntity = null;
         adapterCuentasBeneficiario = new MantenimientoCuentasBeneficiarioAdapter(arrayBenefeciarioEntity, getApplication());
@@ -88,6 +89,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                         intent.putExtra("dni_benef", dni_benef);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -128,6 +130,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("dni_benef", dni_benef);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -154,6 +157,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                 Intent intent = new Intent(ListadoCuentasTarjetasBeneficiario.this, ListadoBeneficiariosUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -166,6 +170,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

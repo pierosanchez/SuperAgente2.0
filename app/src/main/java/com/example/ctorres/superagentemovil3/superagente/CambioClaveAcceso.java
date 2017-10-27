@@ -27,7 +27,7 @@ public class CambioClaveAcceso extends Activity {
     String usu;
     DetalleClaveAccesoAdapter detalleClaveAccesoAdapter;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class CambioClaveAcceso extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         usuarioEntityArrayList = null;
         detalleClaveAccesoAdapter = new DetalleClaveAccesoAdapter(usuarioEntityArrayList, getApplication());
@@ -73,6 +74,7 @@ public class CambioClaveAcceso extends Activity {
                 Intent intent = new Intent(CambioClaveAcceso.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

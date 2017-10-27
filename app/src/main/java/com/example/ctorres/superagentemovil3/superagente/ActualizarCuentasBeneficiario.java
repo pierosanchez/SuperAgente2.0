@@ -22,7 +22,7 @@ public class ActualizarCuentasBeneficiario extends Activity {
     int id_cuenta_benef;
     private UsuarioEntity usuario;
     String dni_benef;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class ActualizarCuentasBeneficiario extends Activity {
         usuario = bundle.getParcelable("usuario");
         dni_benef = bundle.getString("dni_benef");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         btn_guardar_actualizacion_cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,7 @@ public class ActualizarCuentasBeneficiario extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -62,6 +64,7 @@ public class ActualizarCuentasBeneficiario extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("dni_benef", dni_benef);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

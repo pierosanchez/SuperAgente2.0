@@ -26,7 +26,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
     TextView tv_fecha_pago, txt_hora_pago, txt_importe_pagar, tv_tarjeta_cifrada_credito, tv_tarjeta_cifrada_cargo_credito;
     private UsuarioEntity usuario;
     String monto, importe, tipo_moneda_deuda, num_tarjeta, tarjeta_cargo;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         num_tarjeta = "TARJETA CIFRADA: " + extras.getString("num_tarjeta");
         tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
         cliente = extras.getString("cliente");
+        cli_dni = extras.getString("cli_dni");
 
         /*bmp = (Bitmap) extras.getParcelable("firmabitmap");
         if (bmp != null) {
@@ -69,6 +70,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, CaptureSignature.class);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivityForResult(intent, 0);
                 /*startActivity(intent);
                 finish();*/
@@ -81,6 +83,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
                 Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -99,6 +102,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
                 Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, SeleccionTarjetaPago.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

@@ -45,7 +45,7 @@ public class SeleccionTarjetaCargo extends Activity {
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     ListView lv_tarjetas_cargo_usuario;
     Button btn_regresar, btn_cancelar_seleccion_tarjeta_cargo;
-    String callingActivity;
+    String callingActivity, cli_dni;
     private ProgressBar circleProgressBar;
 
     @Override
@@ -81,6 +81,7 @@ public class SeleccionTarjetaCargo extends Activity {
         num_servicio = extras.getString("num_servicio");
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
+        cli_dni = extras.getString("cli_dni");
 
         callingActivity = this.getCallingActivity().getClassName();
 
@@ -239,6 +240,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("cod_banco", cod_banco);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -262,6 +264,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("cod_banco", cod_banco);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -298,6 +301,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
                         intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -315,6 +319,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
                         intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                         intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();
                     }
@@ -341,12 +346,15 @@ public class SeleccionTarjetaCargo extends Activity {
                     banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
                     String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
                     String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                    int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaConsumos.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                     intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                     intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
 
@@ -354,12 +362,15 @@ public class SeleccionTarjetaCargo extends Activity {
                     banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
                     String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
                     String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                    int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPinConsumos.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                     intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                     intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
 
