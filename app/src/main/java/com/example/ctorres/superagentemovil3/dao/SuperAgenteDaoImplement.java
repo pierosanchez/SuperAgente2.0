@@ -827,6 +827,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             Log.e("METHOD","getUsuarioDomicilioLogin");
             Log.e("URL",url);
 
+
             String arrayJason = utils.getJsonarrayFromUrl(url);
             //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
@@ -865,6 +866,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
             Log.e("METHOD","getClaveAcceso");
             Log.e("URL",url);
+
 
             String arrayJason = utils.getJsonarrayFromUrl(url);
             //Log.e("Json", arrayJason.toString());

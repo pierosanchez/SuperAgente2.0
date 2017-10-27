@@ -125,11 +125,11 @@ public class LoginActivity extends Activity {
             }
         });
 
-        if (obtenerDataSQLite() == false) {
+        /*if (obtenerDataSQLite() == false) {
             Intent intent = new Intent(LoginActivity.this, VentanaErrores.class);
             startActivityForResult(intent, 0);
             finish();
-        }
+        }*/
     }
 
     private String getPhoneNumber() {
