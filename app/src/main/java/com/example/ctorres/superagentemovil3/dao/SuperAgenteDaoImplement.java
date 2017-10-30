@@ -38,6 +38,38 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public UsuarioEntity InsertarFirmaCliente(String img, String idcliente) {
+        UsuarioEntity user;
+
+        try {
+            user = new UsuarioEntity();
+
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarFirmaCliente/?img=" + URLEncoder.encode(img, "UTF-8") + "&keyCliente=" + URLEncoder.encode(idcliente, "UTF-8");
+
+            Log.e("METHOD", "InsertarFirmaCliente");
+            Log.e("URL", url);
+
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    UsuarioEntity usuarioEntity = new UsuarioEntity();
+                    usuarioEntity.setCodCliente(utils.getValueStringOrNull(jsonObject, "codcliente"));
+                } else {
+                    user = null;
+                }
+            } else {
+                user = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            user = null;
+        }
+
+        return user;
+    }
+
+    @Override
     public ArrayList<MonedaEntity> ListarMoneda() {
 
         ArrayList<MonedaEntity> listaMoneda = new ArrayList<>();
@@ -581,8 +613,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
             String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarLogin/?usuario=" + URLEncoder.encode(Cmovil, "UTF-8") + "&contraseña=" + URLEncoder.encode(Cpassword, "UTF-8");
 
-            Log.e("METHOD","getUsuarioLog");
-            Log.e("URL",url);
+            Log.e("METHOD", "getUsuarioLog");
+            Log.e("URL", url);
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             //Log.e("Json", arrayJason.toString());
@@ -829,8 +861,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     "&tel_fijo=" + tel_fijo;
 
             //JSONArray arrayJason = utils.getJSONArrayfromURL(url);
-            Log.e("METHOD","getUsuarioDomicilioLogin");
-            Log.e("URL",url);
+            Log.e("METHOD", "getUsuarioDomicilioLogin");
+            Log.e("URL", url);
 
 
             String arrayJason = utils.getJsonarrayFromUrl(url);
@@ -869,8 +901,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     "&pregunta_usu=" + URLEncoder.encode(pregunta, "UTF-8") +
                     "&respuesta_usu=" + URLEncoder.encode(segundaClaveAcceso, "UTF-8");
 
-            Log.e("METHOD","getClaveAcceso");
-            Log.e("URL",url);
+            Log.e("METHOD", "getClaveAcceso");
+            Log.e("URL", url);
 
 
             String arrayJason = utils.getJsonarrayFromUrl(url);

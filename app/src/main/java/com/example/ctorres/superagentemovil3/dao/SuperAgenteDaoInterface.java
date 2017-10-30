@@ -66,4 +66,5 @@ public interface SuperAgenteDaoInterface {
     ArrayList<CuentaEntity> DetalleCuenta(String id_Tarjeta);
     ArrayList<MonedaEntity> ListarMoneda();
     ArrayList<OperadorEntity> ListarOperador();
+    UsuarioEntity InsertarFirmaCliente(String img, String idcliente);
 }

@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,8 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 
 public class VoucherPagoServicioFirma extends Activity {
@@ -88,6 +97,9 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
+                    /*VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
+                    insertarFirma.execute();*/
+
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -197,5 +209,46 @@ public class VoucherPagoServicioFirma extends Activity {
         }
 
         return tipo;
+    }
+
+    public String drawableToBitmapToString(ImageView imageView){
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] b = byteArrayOutputStream.toByteArray();
+        String temp = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return temp;
+    }
+
+    private class insertarFirmaCliente extends AsyncTask<String, Void, UsuarioEntity> {
+
+        @Override
+        protected UsuarioEntity doInBackground(String... params) {
+            UsuarioEntity user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.InsertarFirmaCliente(drawableToBitmapToString(signImage), usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(UsuarioEntity usuarioEntity) {
+            usuario = usuarioEntity;
+            if (usuarioEntity.getUsuarioId().equals("00")) {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "ok", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(VoucherPagoServicioFirma.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 }
