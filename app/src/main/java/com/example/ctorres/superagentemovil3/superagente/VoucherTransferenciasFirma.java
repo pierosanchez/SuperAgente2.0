@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -138,19 +139,27 @@ public class VoucherTransferenciasFirma extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherTransferenciasFirma.this, MenuCliente.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherTransferenciasFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(VoucherTransferenciasFirma.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherTransferenciasFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    finish();
+                }
             }
         });
     }

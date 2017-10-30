@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -80,45 +81,46 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         btn_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, MenuCliente.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherPagoTarjetaConCredito.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                salir();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherPagoTarjetaConCredito.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    salir();
+                }
             }
         });
 
         btn_pagar_otra_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, SeleccionTarjetaPago.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherPagoTarjetaConCredito.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, SeleccionTarjetaPago.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
-
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        if (resultCode == 1) {
-            b = BitmapFactory.decodeByteArray(
-                    data.getByteArrayExtra("byteArray"), 0,
-                    data.getByteArrayExtra("byteArray").length);
-            signImage.setImageBitmap(b);
-        }
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

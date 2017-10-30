@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -84,24 +85,32 @@ public class VoucherPagoServicioFirma extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
         btn_pagar_otros_servicios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherPagoServicioFirma.this, SeleccionServicioPagar.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (signImage.getDrawable() == null) {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(VoucherPagoServicioFirma.this, SeleccionServicioPagar.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
