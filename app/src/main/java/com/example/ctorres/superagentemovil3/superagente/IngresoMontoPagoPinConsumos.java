@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +66,8 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
 
+        txt_pin_pago_consumo.requestFocus();
+
         monedaEntityArrayList = null;
         monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());
         spinnerTipoMoneda.setAdapter(monedaAdapter);
@@ -108,6 +112,13 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                 }
             }
         });
+
+        btn_cancelar_pago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
+            }
+        });
     }
 
     private void ejecutarLista() {
@@ -140,5 +151,32 @@ public class IngresoMontoPagoPinConsumos extends Activity {
             monedaAdapter.setNewListMoneda(monedaEntityArrayList);
             monedaAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(IngresoMontoPagoPinConsumos.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

@@ -138,25 +138,4 @@ public class InformacionDomicilioElectronicaPersonal extends Activity {
             txt_distrito.setText(usuarioEntityArrayList.get(0).getDistrito());
         }
     }
-
-    private void askPermission(String permission, int requestCode){
-        if (ContextCompat.checkSelfPermission(this, permission)!= PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
-        } else if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(this, "Permission already Granted", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
-            case INTERNET:
-                if (grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED) {
-                    InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion valida = new InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion();
-                    valida.execute();
-                } else {
-                    Toast.makeText(this, "Permission denided", Toast.LENGTH_LONG).show();
-                }
-        }
-    }
 }

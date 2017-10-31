@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -23,7 +24,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     Button btn_continuar_pago, btn_cancelar_pago;
     String tipoMoneda[] = {"S/.", "US$"};
     Spinner spinnerMonedaPagar;
-    EditText txt_moneda_pagar;
+    EditText txt_moneda_pagar, txt_pin;
     Bitmap bmp;
     ImageView imageView;
     UsuarioEntity usuario;
@@ -43,6 +44,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         spinnerMonedaPagar = (Spinner) findViewById(R.id.spinnerMonedaPagar);
 
         txt_moneda_pagar = (EditText) findViewById(R.id.txt_moneda_pagar);
+        txt_pin = (EditText) findViewById(R.id.txt_pin);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -73,19 +75,24 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMontoPagoPinTransferencias.this, IngresoCuentaTarjetaAbono.class);
-                intent.putExtra("monto", ObtenerMonto());
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("tipomoneda", ObtenerTipoMoneda());
-                intent.putExtra("nombrebenef", nombreBeneficiario);
-                intent.putExtra("dni_benef", dni_benef);
-                intent.putExtra("banco", banco);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                String pin = txt_pin.getText().toString();
+                if (pin.length()!=0) {
+                    Intent intent = new Intent(IngresoMontoPagoPinTransferencias.this, IngresoCuentaTarjetaAbono.class);
+                    intent.putExtra("monto", ObtenerMonto());
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("tipomoneda", ObtenerTipoMoneda());
+                    intent.putExtra("nombrebenef", nombreBeneficiario);
+                    intent.putExtra("dni_benef", dni_benef);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el número de pin", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

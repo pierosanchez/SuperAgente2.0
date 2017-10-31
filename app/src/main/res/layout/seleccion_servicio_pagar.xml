@@ -48,6 +48,7 @@
                     android:text="@string/tv_seleccione_servicio" />
 
                 <Spinner
+                    android:gravity="center"
                     android:id="@+id/sp_seleccion_servicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,6 +63,7 @@
                     android:text="@string/tv_seleccione_tipo_servicio" />
 
                 <Spinner
+                    android:gravity="center"
                     android:id="@+id/sp_seleccion_tipo_servicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

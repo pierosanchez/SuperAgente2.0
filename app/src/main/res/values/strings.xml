@@ -384,7 +384,7 @@
 
     <!-- Pantalla Voucher de pago de tarjeta con tarjetas de credito -->
 
-    <string name="tv_couhcer_pago_tarjeta_credito">VOUCHER PAGO DE TARJETA CON CRÉDITO</string>
+    <string name="tv_couhcer_pago_tarjeta_credito">VOUCHER PAGO DE TARJETA DE CRÉDITO</string>
 
     <!-- Pantalla de ingreso de Firma -->
 
@@ -534,9 +534,9 @@
     <!-- Pantalla de Seleccion del servicio a pagar -->
 
     <string name="titulo_seleccion_servicio_pagar">SELECCIÓN DEL SERVICIO A PAGAR</string>
-    <string name="tv_seleccione_servicio">SELECCIONE SERVICIO</string>
+    <string name="tv_seleccione_servicio">SELECCIONE EL SERVICIO</string>
     <string name="tv_seleccione_tipo_servicio">SELECCIONE TIPO DE SERVICIO</string>
-    <string name="tv_ingrese_numero_servicio">CODIGO DE SERVICIO</string>
+    <string name="tv_ingrese_numero_servicio">NÚMERO DE SERVICIO</string>
 
     <!-- Pantalla de Cambio de Clave de Acceso -->
 
@@ -558,7 +558,7 @@
     <!-- Pantalla de Cambio de Clave de acceso exitosa -->
 
     <string name="titulo_seleccion_recibos_servicios_pagar">SELECCIÓN DE RECIBOS A PAGAR</string>
-    <string name="tv_suministro_pago_servicio">SUMINISTRO: </string>
+    <string name="tv_suministro_pago_servicio">NÚMERO DE RECIBO:</string>
     <string name="tv_titular_pago_servicio">TITULAR: </string>
     <string name="tv_f_vencimiento_recibo_servicio">F. VENCIMIENTO</string>
     <string name="tv_monto_recibo_servicio">MONTO</string>
@@ -594,14 +594,14 @@
 
     <!-- Pantalla de Voucher de pago de servicios -->
 
-    <string name="titulo_voucher_pago_servicio">VOUCHER PAGO DE SERVICIO</string>
+    <string name="titulo_voucher_pago_servicio">VOUCHER PAGO DEL SERVICIO</string>
     <string name="tv_servicio_voucher">SERVICIO:</string>
-    <string name="tv_num_suministro_voucher">SUMINISTRO:</string>
+    <string name="tv_num_suministro_voucher">NÚMERO DE SERVICIO:</string>
     <string name="tv_pagado_por_voucher">PAGADO POR:</string>
     <string name="tv_numero_unico_voucher">NÚMERO ÚNICO:</string>
     <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>
     <string name="tv_importe_voucher">IMPORTE:</string>
-    <string name="tv_comision_operacion_voucher">COMISIÓN OPER.:</string>
+    <string name="tv_comision_operacion_voucher">COMISIÓN:</string>
     <string name="tv_total_servicio_pagar_voucher">TOTAL:</string>
 
     <!-- Pantallad e olvido de Contraseña -->
@@ -712,6 +712,6 @@
 
     <!-- pantalla de voucher de pago de servicios con firma -->
 
-    <string name="titulo_voucher_pago_servicios_firma">VOUCHER DE PAGO DE SERVICIOS CON FIRMA</string>
+    <string name="titulo_voucher_pago_servicios_firma">VOUCHER DE PAGO DEL SERVICIOS CON FIRMA</string>
 
 </resources>
