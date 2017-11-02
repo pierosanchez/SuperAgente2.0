@@ -9,6 +9,7 @@ import android.telecom.Call;
 import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
+import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
@@ -66,5 +67,6 @@ public interface SuperAgenteDaoInterface {
     ArrayList<CuentaEntity> DetalleCuenta(String id_Tarjeta);
     ArrayList<MonedaEntity> ListarMoneda();
     ArrayList<OperadorEntity> ListarOperador();
+    ArrayList<ComercioEntity> ListarComercio();
     UsuarioEntity InsertarFirmaCliente(String img, String idcliente);
 }

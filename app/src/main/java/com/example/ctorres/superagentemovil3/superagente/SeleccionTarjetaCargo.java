@@ -40,7 +40,7 @@ public class SeleccionTarjetaCargo extends Activity {
     int tipo_tarjeta, emisor_tarjeta;
     String monto, tipo_moneda_deuda, cliente, tipo_servicio;
     Bitmap bmp;
-    String usu, num_tarjeta, banco_tarjeta, banco, monto_servicio, servicio, num_servicio;
+    String usu, num_tarjeta, banco_tarjeta, banco, monto_servicio, servicio, num_servicio, cadena_scanneo;
     TarjetasUsuarioAdapter tarjetasUsuarioAdapter;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     ListView lv_tarjetas_cargo_usuario;
@@ -82,6 +82,7 @@ public class SeleccionTarjetaCargo extends Activity {
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
         cli_dni = extras.getString("cli_dni");
+        cadena_scanneo = extras.getString("cadena_scanneo");
 
         callingActivity = this.getCallingActivity().getClassName();
 
@@ -94,6 +95,9 @@ public class SeleccionTarjetaCargo extends Activity {
             actionSeleccionModoMontoPago();
 
         } else if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")) {
+
+            actionPagoConsumos();
+        }else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")) {
 
             actionPagoConsumos();
         }
@@ -129,6 +133,12 @@ public class SeleccionTarjetaCargo extends Activity {
                     startActivity(intent);
                     finish();
                 } else if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")){
+                    Intent intent = new Intent(SeleccionTarjetaCargo.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    startActivity(intent);
+                    finish();
+                }else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")){
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);

@@ -46,6 +46,8 @@ public class MenuCliente extends Activity {
             }
         });
 
+
+
         btn_pagoTarjetas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,10 +108,11 @@ public class MenuCliente extends Activity {
             }
         });
 
+
         btn_pago_consumos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuCliente.this, SeleccionTarjetaCargo.class);
+                Intent intent = new Intent(MenuCliente.this, LecturaInformacionComercio.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
                 intent.putExtra("cli_dni", cli_dni);

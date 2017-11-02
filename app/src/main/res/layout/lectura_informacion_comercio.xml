@@ -33,6 +33,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PARA PAGAR ESCANEE EL CÓDIGO QR QUE ESTÁ EN LUGAR VISIBLE DEL COMERCIO"
+                android:textColor="@color/color_amarillo"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Scannear"
+                android:background="@color/color_blanco"
+                android:id="@+id/scan_btn"
+                android:layout_marginTop="20px"
+                android:layout_marginBottom="30px"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/codqrandroid" />
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,23 +79,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/tv_seleccione_comercio"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
+                    android:textColor="@color/color_amarillo"
                     android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_blanco"
-                    android:text="@string/btn_aceptar" />
+                    android:layout_marginTop="10dp"
+                    android:text="@string/btn_aceptar"
+                    android:id="@+id/btn_aceptar_comercio"/>
 
             </LinearLayout>
+
+
 
         </LinearLayout>
 

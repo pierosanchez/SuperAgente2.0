@@ -139,6 +139,47 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public ArrayList<ComercioEntity> ListarComercio() {
+
+        ArrayList<ComercioEntity> listaComercio = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoComercio/";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        ComercioEntity comercioEntity = new ComercioEntity();
+
+                        comercioEntity.setId_comercio(utils.getValueStringOrNull(jsonObject, "id_comercio"));
+                        comercioEntity.setNombre_comerciante(utils.getValueStringOrNull(jsonObject, "nombre_comerciante"));
+                        comercioEntity.setApellido_comerciante(utils.getValueStringOrNull(jsonObject, "apellido_comerciante"));
+                        comercioEntity.setRuc_comercio(utils.getValueStringOrNull(jsonObject, "ruc_comercio"));
+                        comercioEntity.setRazon_social(utils.getValueStringOrNull(jsonObject, "razon_social_comercio"));
+                        comercioEntity.setDni_comerciante(utils.getValueStringOrNull(jsonObject, "dni_comerciante"));
+                        comercioEntity.setPais_comercio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "pais_comercio")));
+                        comercioEntity.setProvincia_comercio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "provincia_comercio")));
+                        comercioEntity.setDireccion_comercio(utils.getValueStringOrNull(jsonObject, "direccion_comercio"));
+                        listaComercio.add(comercioEntity);
+                    }
+                } else {
+                    listaComercio = null;
+                }
+            } else {
+                listaComercio = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaComercio;
+    }
+
+    @Override
     public ArrayList<CuentaEntity> DetalleCuenta(String id_Tarjeta) {
 
         ArrayList<CuentaEntity> listaTarjeta = new ArrayList<>();
