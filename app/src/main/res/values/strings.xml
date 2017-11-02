@@ -450,6 +450,7 @@
     <string name="tv_fecha_vcto_tarjeta">Fecha de Vencimiento</string>
     <string name="tv_tipo_tarjeta_ingreso_tarjeta">Tipo de Tarjeta</string>
     <string name="tv_banco_tarjeta_ingreso_tarjeta">Banco</string>
+    <string name="tv_tipo_validacion_tarjeta">Tipo de validación</string>
     <string name="tv_tarjeta_cvv">CVV</string>
     <string name="tv_mensaje_ingreso_tarjetas">Se puede ingresar hasta 5 tarjetas del mismo banco</string>
     <string name="tv_ingrese_numero_tarjeta">INGRESE SU NÚMERO DE TARJETA</string>

@@ -27,7 +27,7 @@ public interface SuperAgenteDaoInterface {
     UsuarioEntity getUsuarioLogin(String dni, String Cnombre, String CapellidoP, String CapellidoM, String Csexo, String Cemail, String Cmovil);
     UsuarioEntity getClaveAcceso(String usuarioId, String claveAcceso, String pregunta, String segundaClaveAcceso);
     UsuarioEntity getInsertarTarjeta(String usuarioId, String numeroTarjeta);
-    UsuarioEntity getValidarTarjeta(String usuarioId, String numeroTarjeta, String fecha_venci, int cod_tipo_tarjeta, int cod_emisor_tarjeta, int banco_tarjeta);
+    UsuarioEntity getValidarTarjeta(String usuarioId, String numeroTarjeta, String fecha_venci, int cod_tipo_tarjeta, int cod_emisor_tarjeta, int banco_tarjeta, String validacionTarjeta);
     BeneficiarioEntity getInsertarBeneficiario(String nombre, String apellido, String celular1, String celular2, String email, String fechaNac, String pass, String dni, String idcliente, int tip_abono); //, String cod_interbancario, String num_tarjeta_beneficiario, int emisor_tarjeta, int cod_banco, int cod_tipo_cuenta);
     CuentaEntity getInsertarCuenta(String numCuenta, String idcliente, int cod_banco, int tipo_moneda);
     ArrayList<BeneficiarioEntity> listarBeneficiario(String idcliente);

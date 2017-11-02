@@ -32,6 +32,7 @@ public class AgregarCuentasBeneficiario extends Activity {
     private LinearLayout ll_datos_tarjeta_beneficiario;
     private Button btn_agregar_cuenta_beneficiario, btn_regresar;
     private UsuarioEntity usuario;
+    private BeneficiarioEntity beneficiarioEntityU;
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     EditText txt_cod_interbancario1, txt_cod_interbancario2, txt_cod_interbancario3, txt_cod_interbancario4;
     String cliente, cli_dni;
@@ -232,7 +233,7 @@ public class AgregarCuentasBeneficiario extends Activity {
 
         @Override
         protected BeneficiarioEntity doInBackground(String... params) {
-            BeneficiarioEntity user = null;
+            BeneficiarioEntity user;
 
             try {
 
@@ -250,6 +251,18 @@ public class AgregarCuentasBeneficiario extends Activity {
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(BeneficiarioEntity beneficiarioEntity) {
+            beneficiarioEntityU = beneficiarioEntity;
+            if (beneficiarioEntity.getError() != null) {
+                if (beneficiarioEntity.getError().equals("000")) {
+                    Toast.makeText(AgregarCuentasBeneficiario.this, "Solo se puede ingresar una tarjeta o cuenta para el beneficiario", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

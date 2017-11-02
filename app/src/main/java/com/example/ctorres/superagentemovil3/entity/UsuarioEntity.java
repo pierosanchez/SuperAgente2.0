@@ -56,7 +56,16 @@ public class UsuarioEntity implements Parcelable {
     private String desc_cortaBanco;
     private String desc_cortaEmisorTarjeta;
     private String firmaCliente;
+    private String validacionTarjeta;
 
+
+    public String getValidacionTarjeta() {
+        return validacionTarjeta;
+    }
+
+    public void setValidacionTarjeta(String validacionTarjeta) {
+        this.validacionTarjeta = validacionTarjeta;
+    }
 
     public String getFirmaCliente() {
         return firmaCliente;

@@ -31,6 +31,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
     private EditText txt_num_cel1, txt_num_cel2, txt_email_beneficiario, txt_password_beneficiario1, txt_password_beneficiario2, txt_nombre, txt_apellido, txt_dni;
     private TextView txt_fecha_beneficiario;
     private UsuarioEntity usuario;
+    private BeneficiarioEntity beneficiarioEntityU;
     private DatePicker datePicker;
     private Calendar calendar;
     private int year, month, day;
@@ -283,6 +284,18 @@ public class AgregarBeneficiarioUsuario extends Activity {
             }
             return user;
         }
+
+        /*@Override
+        protected void onPostExecute(BeneficiarioEntity beneficiarioEntity) {
+            beneficiarioEntityU = beneficiarioEntity;
+            if (beneficiarioEntity.getError() != null) {
+                if (beneficiarioEntity.getError().equals("000")) {
+                    Toast.makeText(AgregarBeneficiarioUsuario.this, "Solo se puede ingresar una tarjeta o cuenta para el beneficiario", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(AgregarBeneficiarioUsuario.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+            }
+        }*/
     }
 
     @SuppressWarnings("deprecation")

@@ -271,9 +271,9 @@ public class InformacionTarjeta extends Activity {
         protected UsuarioEntity doInBackground(String... params) {
             UsuarioEntity user;
             try {
-
+                String validar="123";
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta());
+                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta(), validar);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
 
             } catch (Exception e) {
@@ -319,9 +319,9 @@ public class InformacionTarjeta extends Activity {
         protected UsuarioEntity doInBackground(String... params) {
             UsuarioEntity user;
             try {
-
+                String validar="123";
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta());
+                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta(), validar);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
 
             } catch (Exception e) {

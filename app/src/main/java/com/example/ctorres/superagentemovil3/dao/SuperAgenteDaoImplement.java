@@ -990,12 +990,12 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public UsuarioEntity getValidarTarjeta(String usuarioId, String numeroTarjeta, String fecha_venci, int cod_tipo_tarjeta, int cod_emisor_tarjeta, int banco_tarjeta) {
+    public UsuarioEntity getValidarTarjeta(String usuarioId, String numeroTarjeta, String fecha_venci, int cod_tipo_tarjeta, int cod_emisor_tarjeta, int banco_tarjeta, String validacionTarjeta) {
         UsuarioEntity user;
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarTarjeta/?cliente=" + usuarioId + "&tarjeta=" + numeroTarjeta + "&fecha_venci=" + fecha_venci + "&cod_tipo_tarjeta=" + cod_tipo_tarjeta + "&cod_emisor_tarjeta=" + cod_emisor_tarjeta + "&banco_tarjeta=" + banco_tarjeta;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarTarjeta/?cliente=" + usuarioId + "&tarjeta=" + numeroTarjeta + "&fecha_venci=" + fecha_venci + "&cod_tipo_tarjeta=" + cod_tipo_tarjeta + "&cod_emisor_tarjeta=" + cod_emisor_tarjeta + "&banco_tarjeta=" + banco_tarjeta + "&validacionTarjeta=" + validacionTarjeta;
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
@@ -1009,6 +1009,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     user.setTipo_tarjeta(cod_tipo_tarjeta);
                     user.setCod_emisor_tarjeta(cod_emisor_tarjeta);
                     user.setBanco_tarjeta_registro(banco_tarjeta);
+                    user.setValidacionTarjeta(validacionTarjeta);
                     user.setRespTarjeta(utils.getValueStringOrNull(jsonObject, "tarjeta"));
 
                 } else {
@@ -1214,12 +1215,15 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {
+                    JSONObject jsonObject = arrayJason.getJSONObject(0);
+
                     benef.setDni(dni_b);
                     benef.setCod_interbancario(cod_interbancario);
                     benef.setNum_tarjeta_beneficiario(num_tarjeta_beneficiario);
                     benef.setCod_emisor_tarjeta(cod_emisor_tarjeta);
                     benef.setCod_banco(cod_banco);
                     benef.setCod_tipo_cuenta(cod_tipo_cuenta);
+                    benef.setError(utils.getValueStringOrNull(jsonObject, "error"));
                 } else {
                     benef = null;
                 }

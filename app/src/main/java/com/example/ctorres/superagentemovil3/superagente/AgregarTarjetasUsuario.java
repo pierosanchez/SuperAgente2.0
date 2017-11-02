@@ -43,8 +43,9 @@ public class AgregarTarjetasUsuario extends Activity {
     private String numeroTarjeta, confirmNumeroTarjeta;
     private UsuarioEntity usuario;
     private UsuarioEntity usResp;
-    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
+    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
+    String tipoValidacion[] = {"Pin", "Firma"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
     private Calendar calendar;
     private int year, month, day;
@@ -54,7 +55,7 @@ public class AgregarTarjetasUsuario extends Activity {
     BancosAdapter bancosAdapter;
     GetTarjetaBinAdapter getTarjetaBinAdapter;
     int bancos;
-    String cliente, cli_dni;
+    String cliente, cli_dni, validacionTipoTarjeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class AgregarTarjetasUsuario extends Activity {
 
         spinnerTipoTarjeta = (Spinner) findViewById(R.id.spinnerTipoTarjeta);
         spinnerBancoTarjeta = (Spinner) findViewById(R.id.spinnerBancoTarjeta);
+        spinnerValidacionTarjeta = (Spinner) findViewById(R.id.spinnerValidacionTarjeta);
 
         terminar = (Button) findViewById(R.id.terminar);
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
@@ -93,6 +95,7 @@ public class AgregarTarjetasUsuario extends Activity {
 
         numeroTarjeta();
         cargarTipoTarjeta();
+        cargarValidacionTarjeta();
         //cargarBancoTarjeta();
 
         bancosEntityArrayList = null;
@@ -129,6 +132,18 @@ public class AgregarTarjetasUsuario extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bancos = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerValidacionTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                validacionTipoTarjeta = parent.getAdapter().getItem(position).toString();
             }
 
             @Override
@@ -262,7 +277,7 @@ public class AgregarTarjetasUsuario extends Activity {
             UsuarioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), bancos);
+                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), bancos, validacionTipoTarjeta);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
             } catch (Exception e) {
                 user = null;
@@ -335,6 +350,11 @@ public class AgregarTarjetasUsuario extends Activity {
     public void cargarTipoTarjeta() {
         ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipoTarjeta);
         spinnerTipoTarjeta.setAdapter(adaptadorBanco);
+    }
+
+    public void cargarValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorBanco);
     }
 
     /*public void cargarBancoTarjeta() {
