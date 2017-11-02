@@ -258,10 +258,10 @@ public class AgregarCuentasBeneficiario extends Activity {
             beneficiarioEntityU = beneficiarioEntity;
             if (beneficiarioEntity.getError() != null) {
                 if (beneficiarioEntity.getError().equals("000")) {
-                    Toast.makeText(AgregarCuentasBeneficiario.this, "Solo se puede ingresar una tarjeta o cuenta para el beneficiario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AgregarCuentasBeneficiario.this, "Solo se puede ingresar una tarjeta o cuenta para el beneficiario", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_LONG).show();
             }
         }
     }
