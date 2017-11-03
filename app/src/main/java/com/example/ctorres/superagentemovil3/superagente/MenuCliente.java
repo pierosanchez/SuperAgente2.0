@@ -60,6 +60,17 @@ public class MenuCliente extends Activity {
             }
         });
 
+        ckbox_recargas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuCliente.this, RecargaTelefonica.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         btn_transferencias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -108,7 +108,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         ArrayList<OperadorEntity> listaOperador = new ArrayList<>();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoOperador/";
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoOperador/?nullyy";
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
@@ -143,7 +143,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         ArrayList<ComercioEntity> listaComercio = new ArrayList<>();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoComercio/";
+        String url = Constante.IPORHOST + "webapi_2/apigeneral/ApiGeneral/ListadoComercio/?nul=";
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
@@ -154,14 +154,10 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         ComercioEntity comercioEntity = new ComercioEntity();
 
                         comercioEntity.setId_comercio(utils.getValueStringOrNull(jsonObject, "id_comercio"));
-                        comercioEntity.setNombre_comerciante(utils.getValueStringOrNull(jsonObject, "nombre_comerciante"));
-                        comercioEntity.setApellido_comerciante(utils.getValueStringOrNull(jsonObject, "apellido_comerciante"));
-                        comercioEntity.setRuc_comercio(utils.getValueStringOrNull(jsonObject, "ruc_comercio"));
-                        comercioEntity.setRazon_social(utils.getValueStringOrNull(jsonObject, "razon_social_comercio"));
-                        comercioEntity.setDni_comerciante(utils.getValueStringOrNull(jsonObject, "dni_comerciante"));
-                        comercioEntity.setPais_comercio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "pais_comercio")));
-                        comercioEntity.setProvincia_comercio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "provincia_comercio")));
+                        comercioEntity.setRaz_social_comercio(utils.getValueStringOrNull(jsonObject, "raz_social_comercio"));
                         comercioEntity.setDireccion_comercio(utils.getValueStringOrNull(jsonObject, "direccion_comercio"));
+                        comercioEntity.setDesc_distrito(utils.getValueStringOrNull(jsonObject, "desc_distrito"));
+
                         listaComercio.add(comercioEntity);
                     }
                 } else {
