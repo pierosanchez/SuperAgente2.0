@@ -34,6 +34,7 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
     String tipo_moneda, cli_dni;
     int tipo_tarjeta_pago;
 
+
     //Variables Proceso QR
     String cadena_scanneo;
     TextView tv_razonsoc_comercio,tv_direccion_comercio,tv_distrito_comercio;
@@ -43,10 +44,6 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
 
     //Variables Proceso ComboBox
     String nom_comerciosp,direccion_comerciosp,distrito_comerciosp;
-
-
-
-
 
 
     @Override
@@ -78,10 +75,16 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         cli_dni = extras.getString("cli_dni");
 
+
         cadena_scanneo = extras.getString("cadena_scanneo");
+
         nom_comerciosp = extras.getString("nom_comerciosp");
         direccion_comerciosp = extras.getString("direccion_comerciosp");
         distrito_comerciosp = extras.getString("distrito_comerciosp");
+
+
+
+
 
 
         String[] parts = cadena_scanneo.split("-");

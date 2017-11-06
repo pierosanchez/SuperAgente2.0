@@ -112,7 +112,7 @@
                                 android:text="@string/tv_fecha_voucher_Recarga"/>
 
                             <TextView
-                                android:id="@+id/txt_numero_unico_voucher_consumos"
+                                android:id="@+id/tv_fechaRecarga"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
@@ -134,7 +134,7 @@
                             android:text="@string/tv_hora_voucher_Recarga" />
 
                         <TextView
-                            android:id="@+id/txt_importe_voucher_consumo"
+                            android:id="@+id/tv_horaRecarga"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -154,7 +154,7 @@
                             android:text="@string/tv_nroUnico_voucher_Recarga" />
 
                         <TextView
-                            android:id="@+id/txt_importe_voucher_consumo"
+                            android:id="@+id/tv_numUnicoRecarga"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -200,6 +200,7 @@
                             android:text="@string/tv_recarga_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_operadorRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -220,6 +221,7 @@
                             android:text="@string/tv_fonoTarjeta_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_numfonoRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -241,6 +243,7 @@
                             android:text="@string/tv_importe_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_importeRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -264,6 +267,7 @@
                             android:text="@string/tv_comision_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_comisionRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -287,6 +291,7 @@
                             android:text="@string/tv_total_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_totalRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -309,6 +314,7 @@
                             android:text="@string/tv_formPago_voucher_Recarga" />
 
                         <TextView
+                            android:id="@+id/tv_formapagoRecarga"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
@@ -347,6 +353,7 @@
                         android:text="@string/tv_banco_voucher_Recarga" />
 
                     <TextView
+                        android:id="@+id/tv_bancoRecarga"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -367,6 +374,7 @@
                         android:text="@string/tv_nroTarjeta_voucher_Recarga" />
 
                     <TextView
+                        android:id="@+id/tv_nroTarjetaRecarga"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

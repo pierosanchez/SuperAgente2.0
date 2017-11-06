@@ -50,6 +50,8 @@ public class SeleccionTarjetaCargo extends Activity {
     String nom_comerciosp,direccion_comerciosp,distrito_comerciosp;
     private ProgressBar circleProgressBar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -386,8 +388,10 @@ public class SeleccionTarjetaCargo extends Activity {
                     intent.putExtra("banco", banco);
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
+
                     startActivity(intent);
                     finish();
+
 
                 } else if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
                     banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
@@ -490,7 +494,7 @@ public class SeleccionTarjetaCargo extends Activity {
                     String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
                     String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                     int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
-                    Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaComercio.class);
+                    Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaRecarga.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
@@ -503,8 +507,13 @@ public class SeleccionTarjetaCargo extends Activity {
                     intent.putExtra("tipo_moneda_recarga",tipo_moneda_recarga);
                     intent.putExtra("tipo_operador",tipo_operador);
                     intent.putExtra("monto_recarga",monto_recarga);
+
                     startActivity(intent);
                     finish();
+
+
+
+
 
 
 
