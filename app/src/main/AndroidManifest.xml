@@ -101,7 +101,10 @@
         <activity android:name=".superagente.VoucherRecargaTelefonica" />
         <activity android:name=".superagente.VoucherPagoConsumoFirma" />
         <activity android:name=".superagente.VoucherTransferenciasFirma" />
-        <activity android:name=".superagente.VoucherPagoServicioFirma"></activity>
+        <activity android:name=".superagente.VoucherPagoServicioFirma" />
+        <activity android:name=".superagente.IngresoMontoPagoFirmaComercio" />
+        <activity android:name=".superagente.ConformidadComercioComercios" />
+        <activity android:name=".superagente.IngresoMontoPagoFirmaRecarga"></activity>
     </application>
 
 </manifest>

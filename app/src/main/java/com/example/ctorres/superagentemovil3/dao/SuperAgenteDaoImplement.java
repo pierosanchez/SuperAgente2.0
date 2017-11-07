@@ -108,7 +108,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         ArrayList<OperadorEntity> listaOperador = new ArrayList<>();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoOperador/";
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoOperador/?nullyy";
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
@@ -136,6 +136,43 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         }
 
         return listaOperador;
+    }
+
+    @Override
+    public ArrayList<ComercioEntity> ListarComercio() {
+
+        ArrayList<ComercioEntity> listaComercio = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webapi_2/apigeneral/ApiGeneral/ListadoComercio/?nul=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        ComercioEntity comercioEntity = new ComercioEntity();
+
+                        comercioEntity.setId_comercio(utils.getValueStringOrNull(jsonObject, "id_comercio"));
+                        comercioEntity.setRaz_social_comercio(utils.getValueStringOrNull(jsonObject, "raz_social_comercio"));
+                        comercioEntity.setDireccion_comercio(utils.getValueStringOrNull(jsonObject, "direccion_comercio"));
+                        comercioEntity.setDesc_distrito(utils.getValueStringOrNull(jsonObject, "desc_distrito"));
+
+                        listaComercio.add(comercioEntity);
+                    }
+                } else {
+                    listaComercio = null;
+                }
+            } else {
+                listaComercio = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaComercio;
     }
 
     @Override

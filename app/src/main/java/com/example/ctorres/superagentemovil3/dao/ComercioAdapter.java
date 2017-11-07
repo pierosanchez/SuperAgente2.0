@@ -8,28 +8,29 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
+import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
+import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 
 import java.util.ArrayList;
 
 /**
- * Created by CTORRES on 25/10/2017.
+ * Created by CTORRES on 03/11/2017.
  */
 
-public class OperadorAdapter extends BaseAdapter {
+public class ComercioAdapter extends BaseAdapter {
 
-    ArrayList<OperadorEntity> items;
+    ArrayList<ComercioEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public OperadorAdapter(ArrayList<OperadorEntity> items, Context context) {
+    public ComercioAdapter(ArrayList<ComercioEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
     }
+
 
     @Override
     public int getCount() {
@@ -41,7 +42,7 @@ public class OperadorAdapter extends BaseAdapter {
     }
 
     @Override
-    public OperadorEntity getItem(int position) {
+    public ComercioEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -56,32 +57,29 @@ public class OperadorAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        OperadorAdapter.ViewHolder viewHolder= new OperadorAdapter.ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_operador,null);
+        ComercioAdapter.ViewHolder viewHolder= new ComercioAdapter.ViewHolder();
+        View view = layoutInflater.inflate(R.layout.row_comercio,null);
 
-        viewHolder.tv_operadora = (TextView) view.findViewById(R.id.tv_operador);
+        viewHolder.tv_comercio = (TextView) view.findViewById(R.id.tv_comercio);
 
-        viewHolder.tv_operadora.setText(String.valueOf(getItem(position).getOpe_nomcomercial()));
+        viewHolder.tv_comercio.setText(String.valueOf(getItem(position).getRaz_social_comercio()));
 
-        OperadorEntity data = getItem(position);
+        ComercioEntity data = getItem(position);
 
         if(data!=null){
-            viewHolder.tv_operadora.setText(data.getOpe_nomcomercial());
+            viewHolder.tv_comercio.setText(data.getRaz_social_comercio());
         } else {
-            viewHolder.tv_operadora.setText("");
+            viewHolder.tv_comercio.setText("");
         }
 
         return view;
     }
 
     public static final class ViewHolder{
-        TextView tv_operadora;
+        TextView tv_comercio;
     }
 
-    public void setNewListOperador(ArrayList<OperadorEntity> listBeneficiario){
+    public void setNewListcomercio(ArrayList<ComercioEntity> listBeneficiario){
         items = listBeneficiario;
     }
-
-
-
 }
