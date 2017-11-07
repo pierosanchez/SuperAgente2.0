@@ -39,7 +39,7 @@ public class SeleccionModoMontoPago extends Activity {
     int tipo_tarjeta, emisor_tarjeta;
     ImageView imageView;
     TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_modo_monto_1, tv_tipo_moneda_modo_monto_2, tv_tipo_moneda_modo_monto_3, tv_tipo_moneda_modo_monto_4;
-    String cliente, cli_dni;
+    String cliente, cli_dni, desc_corta_banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +80,7 @@ public class SeleccionModoMontoPago extends Activity {
         banco_tarjeta = extras.getString("banco_tarjeta");
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
+        desc_corta_banco = extras.getString("desc_corta_banco");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
 
@@ -166,6 +167,7 @@ public class SeleccionModoMontoPago extends Activity {
                 intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
                 intent.putExtra("cliente", cliente);
                 intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("desc_corta_banco", desc_corta_banco);
                 startActivityForResult(intent, 0);
                 finish();
             }

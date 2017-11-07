@@ -47,7 +47,7 @@ public class SeleccionTarjetaCargo extends Activity {
     Button btn_regresar, btn_cancelar_seleccion_tarjeta_cargo;
     String callingActivity, cli_dni;
     double monto_recarga;
-    String nom_comerciosp,direccion_comerciosp,distrito_comerciosp;
+    String nom_comerciosp,direccion_comerciosp,distrito_comerciosp, desc_corta_banco;
     private ProgressBar circleProgressBar;
 
 
@@ -86,6 +86,7 @@ public class SeleccionTarjetaCargo extends Activity {
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
         cli_dni = extras.getString("cli_dni");
+        desc_corta_banco = extras.getString("desc_corta_banco");
 
         cadena_scanneo = extras.getString("cadena_scanneo");
         nom_comerciosp = extras.getString("nom_comerciosp");
@@ -335,6 +336,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("desc_corta_banco", desc_corta_banco);
                         startActivity(intent);
                         finish();
                     }
@@ -353,6 +355,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("desc_corta_banco", desc_corta_banco);
                         startActivity(intent);
                         finish();
                     }

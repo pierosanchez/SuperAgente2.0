@@ -81,6 +81,7 @@ public class SeleccionTarjetaPago extends Activity {
                 tipo_tarjeta = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                 emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
                 banco_tarjeta = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta();
+                String desc_corta_banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
                     Toast.makeText(SeleccionTarjetaPago.this, "No se puede pagar una tarjeta de Débito", Toast.LENGTH_SHORT).show();
                 } else {
@@ -92,6 +93,7 @@ public class SeleccionTarjetaPago extends Activity {
                     intent.putExtra("banco_tarjeta", banco_tarjeta);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("desc_corta_banco", desc_corta_banco);
                     startActivity(intent);
                     finish();
                 }
@@ -116,6 +118,7 @@ public class SeleccionTarjetaPago extends Activity {
                 Intent intent = new Intent(SeleccionTarjetaPago.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

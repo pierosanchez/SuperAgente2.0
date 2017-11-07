@@ -24,10 +24,10 @@ public class VoucherPagoTarjetaConCredito extends Activity {
     Bitmap b;
     ImageView signImage;
     Button btn_fimar;
-    TextView tv_fecha_pago, txt_hora_pago, txt_importe_pagar, tv_tarjeta_cifrada_credito, tv_tarjeta_cifrada_cargo_credito;
+    TextView tv_fecha_pago, txt_hora_pago, txt_importe_pagar, tv_tarjeta_cifrada_credito, tv_tarjeta_cifrada_cargo_credito, txt_banco_tarjeta_pago;
     private UsuarioEntity usuario;
     String monto, importe, tipo_moneda_deuda, num_tarjeta, tarjeta_cargo;
-    String cliente, cli_dni;
+    String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,9 +36,12 @@ public class VoucherPagoTarjetaConCredito extends Activity {
 
         signImage = (ImageView) findViewById(R.id.signImage);
         btn_fimar = (Button) findViewById(R.id.btn_firmar);
+
         btn_otra_operacion = (LinearLayout) findViewById(R.id.btn_efectuar_otra_operacion);
         btn_pagar_otra_tarjeta = (LinearLayout) findViewById(R.id.btn_pagar_otra_tarjeta);
         btn_salir = (LinearLayout) findViewById(R.id.btn_salir_operacion);
+
+        txt_banco_tarjeta_pago = (TextView) findViewById(R.id.txt_banco_tarjeta_pago);
         tv_fecha_pago = (TextView) findViewById(R.id.tv_fecha_pago);
         txt_hora_pago = (TextView) findViewById(R.id.txt_hora_pago);
         txt_importe_pagar = (TextView) findViewById(R.id.txt_importe_pagar);
@@ -55,6 +58,8 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
+        desc_corta_banco = extras.getString("desc_corta_banco");
+        banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
 
         /*bmp = (Bitmap) extras.getParcelable("firmabitmap");
         if (bmp != null) {
@@ -65,6 +70,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         txt_hora_pago.setText(obtenerHora());
         tv_tarjeta_cifrada_credito.setText(num_tarjeta);
         tv_tarjeta_cifrada_cargo_credito.setText(tarjeta_cargo);
+        txt_banco_tarjeta_pago.setText(banco_tarjeta_pago);
 
         btn_fimar.setOnClickListener(new View.OnClickListener() {
             @Override

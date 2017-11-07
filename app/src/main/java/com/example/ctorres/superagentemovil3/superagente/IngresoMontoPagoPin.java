@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class IngresoMontoPagoPin extends Activity {
@@ -25,11 +26,11 @@ public class IngresoMontoPagoPin extends Activity {
     String moneda[] = {"S/.", "US$"};
     Spinner spinnerMoneda;
     Button btn_continuar, btn_cancelar;
-    EditText txt_moneda_pagar;
+    EditText txt_moneda_pagar, txt_pin;
     ImageView imageView;
     Bitmap bmp;
     String monto, tipo_moneda_deuda, cli_dni;
-    String num_tarjeta, tarjeta_cargo;
+    String num_tarjeta, tarjeta_cargo, desc_corta_banco;
     TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_deuda;
     int tipo_tarjeta, emisor_tarjeta;
     private UsuarioEntity usuario;
@@ -45,6 +46,7 @@ public class IngresoMontoPagoPin extends Activity {
         //spinnerMoneda = (Spinner) findViewById(R.id.spinnerMonedaPagar);
 
         txt_moneda_pagar = (EditText) findViewById(R.id.txt_moneda_pagar);
+        txt_pin = (EditText) findViewById(R.id.txt_pin);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -63,9 +65,11 @@ public class IngresoMontoPagoPin extends Activity {
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         tarjeta_cargo = extras.getString("tarjeta_cargo");
         cli_dni = extras.getString("cli_dni");
+        desc_corta_banco = extras.getString("desc_corta_banco");
 
         focTipoTarjeta();
 
+        txt_pin.requestFocus();
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
 
@@ -79,6 +83,7 @@ public class IngresoMontoPagoPin extends Activity {
                 intent.putExtra("tarjeta_cargo", tarjeta_cargo);
                 intent.putExtra("num_tarjeta", num_tarjeta);
                 intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("desc_corta_banco", desc_corta_banco);
                 startActivity(intent);
                 finish();
             }
@@ -134,5 +139,6 @@ public class IngresoMontoPagoPin extends Activity {
             imageView.setImageResource(R.drawable.americanexpressicon);
         }
     }
+
 
 }
