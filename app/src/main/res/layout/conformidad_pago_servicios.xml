@@ -108,7 +108,7 @@
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/servicio_pagar_layout">
+                android:background="@color/color_blanco">
 
                 <TextView
                     android:layout_width="wrap_content"

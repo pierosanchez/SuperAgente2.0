@@ -150,7 +150,8 @@
                         android:layout_marginLeft="103dp"
                         android:background="@color/color_blanco"
                         android:gravity="center"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:enabled="false"/>
 
                 </LinearLayout>
 

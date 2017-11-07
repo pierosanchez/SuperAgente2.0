@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +17,7 @@ import java.text.DecimalFormat;
 
 public class ConformidadPagoServicios extends Activity {
 
-    Button btn_continuar_pago;
+    Button btn_continuar_pago, btn_cancelar_pago_servicio;
     private UsuarioEntity usuario;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, cliente, tipo_servicio, cli_dni;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
@@ -31,6 +33,7 @@ public class ConformidadPagoServicios extends Activity {
         ll_tipo_servicio_pagar_conforme = (LinearLayout) findViewById(R.id.ll_tipo_servicio_pagar_conforme);
 
         btn_continuar_pago = (Button) findViewById(R.id.btn_continuar_pago);
+        btn_cancelar_pago_servicio = (Button) findViewById(R.id.btn_cancelar_pago_servicio);
 
         tv_numero_tarjeta_cifrada_pago_servicio = (TextView) findViewById(R.id.tv_numero_tarjeta_cifrada_pago_servicio);
         txt_servicio_pagar = (TextView) findViewById(R.id.txt_servicio_pagar);
@@ -118,6 +121,13 @@ public class ConformidadPagoServicios extends Activity {
                 }
             }
         });
+
+        btn_cancelar_pago_servicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
+            }
+        });
     }
 
     public String totalServicioPagar(){
@@ -134,5 +144,32 @@ public class ConformidadPagoServicios extends Activity {
         //total = String.valueOf(importe);
 
         return format.format(importe);
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(ConformidadPagoServicios.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

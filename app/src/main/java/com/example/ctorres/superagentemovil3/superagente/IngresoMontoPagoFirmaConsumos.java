@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,17 +66,29 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMontoPagoFirmaConsumos.this, ConformidadComercioConsumos.class);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("monto_pagar", txt_monto_pago_consumo.getText().toString());
-                intent.putExtra("tipo_moneda", tipo_moneda);
-                intent.putExtra("banco", banco);
-                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
+                String monto = txt_monto_pago_consumo.getText().toString();
+                if (monto.length() != 0) {
+                    Intent intent = new Intent(IngresoMontoPagoFirmaConsumos.this, ConformidadComercioConsumos.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("monto_pagar", txt_monto_pago_consumo.getText().toString());
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(IngresoMontoPagoFirmaConsumos.this, "Ingrese el monto a pagar", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        btn_cancelar_pago.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                cancelar();
             }
         });
 
@@ -127,5 +141,32 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
             monedaAdapter.setNewListMoneda(monedaEntityArrayList);
             monedaAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(IngresoMontoPagoFirmaConsumos.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

@@ -91,7 +91,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el número de pin", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el pin", Toast.LENGTH_LONG).show();
                 }
             }
         });

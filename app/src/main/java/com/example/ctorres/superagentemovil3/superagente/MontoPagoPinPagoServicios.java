@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -22,7 +23,7 @@ public class MontoPagoPinPagoServicios extends Activity {
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     ImageView imageView;
     TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar, tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar;
-    EditText txt_monto_pagar;
+    EditText txt_monto_pagar, txt_pin;
     private UsuarioEntity usuario;
     LinearLayout ll_tipo_servicio_pagar;
 
@@ -45,6 +46,7 @@ public class MontoPagoPinPagoServicios extends Activity {
         tv_tipo_servicio = (TextView) findViewById(R.id.tv_tipo_servicio);
 
         txt_monto_pagar = (EditText) findViewById(R.id.txt_monto_pagar);
+        txt_pin = (EditText) findViewById(R.id.txt_pin);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -61,6 +63,7 @@ public class MontoPagoPinPagoServicios extends Activity {
         tipo_servicio = extras.getString("tipo_servicio");
         cli_dni = extras.getString("cli_dni");
 
+        txt_pin.requestFocus();
         tv_tarjeta_cifrada_pago_servicios.setText(num_tarjeta);
         txt_servicio_pagar.setText(servicio);
         txt_monto_pagar.setText(monto_servicio);
@@ -78,22 +81,27 @@ public class MontoPagoPinPagoServicios extends Activity {
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tipo_moneda_deuda = tv_tipo_moneda_deuda.getText().toString();
-                Intent intent = new Intent(MontoPagoPinPagoServicios.this, ConformidadPagoServicios.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("monto_servicio", monto_servicio);
-                intent.putExtra("servicio", servicio);
-                intent.putExtra("num_servicio", num_servicio);
-                intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                intent.putExtra("cod_banco", cod_banco);
-                intent.putExtra("tipo_servicio", tipo_servicio);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                String pin = txt_pin.getText().toString();
+                if (pin.length() == 0){
+                    Toast.makeText(MontoPagoPinPagoServicios.this, "Ingrese el número de pin", Toast.LENGTH_LONG).show();
+                } else if (pin.length() != 0) {
+                    String tipo_moneda_deuda = tv_tipo_moneda_deuda.getText().toString();
+                    Intent intent = new Intent(MontoPagoPinPagoServicios.this, ConformidadPagoServicios.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("monto_servicio", monto_servicio);
+                    intent.putExtra("servicio", servicio);
+                    intent.putExtra("num_servicio", num_servicio);
+                    intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cod_banco", cod_banco);
+                    intent.putExtra("tipo_servicio", tipo_servicio);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 

@@ -412,7 +412,7 @@
 
     <!-- Pantalla de INGRESO DE CUENTA O TARJETA DE ABONO -->
 
-    <string name="titulo_ingresa_cuenta_tarjeta_abono">SELECCION DEL TIPO DE ABONO</string>
+    <string name="titulo_ingresa_cuenta_tarjeta_abono">SELECCIÓN DEL TIPO DE ABONO</string>
     <string name="tv_importe_cuenta_tarjeta">IMPORTE DE TRANSFERENCIA</string>
     <string name="tv_comision_transferencia">COMISION DE TRANSFERENCIA</string>
     <string name="tv_comision_cheque_importe">EMISIÓN DE CHEQUE</string>
@@ -537,7 +537,7 @@
     <string name="titulo_seleccion_servicio_pagar">SELECCIÓN DEL SERVICIO A PAGAR</string>
     <string name="tv_seleccione_servicio">SELECCIONE EL SERVICIO</string>
     <string name="tv_seleccione_tipo_servicio">SELECCIONE TIPO DE SERVICIO</string>
-    <string name="tv_ingrese_numero_servicio">NÚMERO DE SERVICIO</string>
+    <string name="tv_ingrese_numero_servicio">CÓDIGO DE CLIENTE</string>
 
     <!-- Pantalla de Cambio de Clave de Acceso -->
 
@@ -575,7 +575,7 @@
 
     <!-- Pantalla de Monto de Pago con Pin - Pago de Servicios -->
 
-    <string name="titulo_monto_pago_pin_pago_servicios">MONTO DE PAGO - CON PIN</string>
+    <string name="titulo_monto_pago_pin_pago_servicios">INGRESO DEL MONTO DE PAGO CON PIN</string>
     <string name="tv_nombre_cliente_pago_servicio">NOMBRE DEL CLIENTE: </string>
     <string name="tv_tarjeta_cifrada_pago_servicios">TARJETA CIFRADA: </string>
     <string name="tv_ingrese_pin_tarjeta_servicio">INGRESE PIN</string>
@@ -590,14 +590,14 @@
     <string name="tv_comision_servicio_pagar">COMISIÓN/SERVICIO:</string>
     <string name="tv_total_servicio_pagar">IMPORTE TOTAL:</string>
     <string name="tv_importe_pago_servicio">COSTO/SERVICIO</string>
-    <string name="tv_numero_recibo">NÚMERO DE RECIBO</string>
+    <string name="tv_numero_recibo">CÓDIGO DEL CLIENTE</string>
     <string name="tv_nombre_titular">NOMBRE DEL TITULAR</string>
 
     <!-- Pantalla de Voucher de pago de servicios -->
 
-    <string name="titulo_voucher_pago_servicio">VOUCHER PAGO DEL SERVICIO</string>
+    <string name="titulo_voucher_pago_servicio">VOUCHER DE PAGO DEL SERVICIO</string>
     <string name="tv_servicio_voucher">SERVICIO:</string>
-    <string name="tv_num_suministro_voucher">NÚMERO DE SERVICIO:</string>
+    <string name="tv_num_suministro_voucher">CÓDIGO DEL CLIENTE:</string>
     <string name="tv_pagado_por_voucher">PAGADO POR:</string>
     <string name="tv_numero_unico_voucher">NÚMERO ÚNICO:</string>
     <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>

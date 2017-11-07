@@ -117,7 +117,7 @@ public class IngresoCuentaTarjetaAbono extends Activity {
 
         cargarCombos();
 
-        txt_importe_cuenta_tarjeta.setText(monto);
+        txt_importe_cuenta_tarjeta.setText(transformarMonto());
 
         tv_total_pagar_transferencia.setText(CaluloTotal());
 
@@ -575,6 +575,12 @@ public class IngresoCuentaTarjetaAbono extends Activity {
         String texto;
         texto = spinnerTipoCheque.getSelectedItem().toString();
         return texto;
+    }
+
+    public String transformarMonto(){
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double montoD = Double.parseDouble(monto);
+        return decimalFormat.format(montoD);
     }
 
 }

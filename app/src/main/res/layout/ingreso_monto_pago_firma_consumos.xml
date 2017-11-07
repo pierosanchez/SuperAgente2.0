@@ -93,7 +93,8 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="20dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:inputType="numberDecimal"/>
 
             </LinearLayout>
 
@@ -145,14 +146,16 @@
                     android:id="@+id/btn_continuar_pago"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_continuar" />
+                    android:text="@string/btn_continuar"
+                    android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/btn_cancelar_pago"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:text="@string/btn_cancelar" />
+                    android:text="@string/btn_cancelar"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 

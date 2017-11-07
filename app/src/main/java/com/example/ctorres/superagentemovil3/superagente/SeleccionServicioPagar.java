@@ -71,6 +71,8 @@ public class SeleccionServicioPagar extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
+        txt_numero_servicio.requestFocus();
+
         empresasServiciosEntityArrayList = null;
         empresasServiciosAdapter = new EmpresasServiciosAdapter(empresasServiciosEntityArrayList, getApplication());
         sp_seleccion_servicio.setAdapter(empresasServiciosAdapter);
@@ -159,7 +161,7 @@ public class SeleccionServicioPagar extends Activity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(SeleccionServicioPagar.this, "Ingrese el numero de servicio", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SeleccionServicioPagar.this, "Ingrese el codigo de cliente", Toast.LENGTH_SHORT).show();
                 }
             }
         });

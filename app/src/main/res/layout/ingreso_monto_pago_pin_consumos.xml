@@ -92,7 +92,7 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/color_blanco"
                     android:gravity="center"
-                    android:inputType="textPassword"/>
+                    android:inputType="numberPassword"/>
 
             </LinearLayout>
 
@@ -117,7 +117,8 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/color_blanco"
                     android:gravity="center"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"/>
 
             </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.dao.MonedaAdapter;
@@ -81,19 +82,19 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, IngresoCuentaTarjetaAbono.class);
-                intent.putExtra("monto", ObtenerMonto());
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("tipomoneda", tipo_moneda);
-                intent.putExtra("nombrebenef", nombreBeneficiario);
-                intent.putExtra("dni_benef", dni_benef);
-                intent.putExtra("banco", banco);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, IngresoCuentaTarjetaAbono.class);
+                    intent.putExtra("monto", ObtenerMonto());
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("tipomoneda", tipo_moneda);
+                    intent.putExtra("nombrebenef", nombreBeneficiario);
+                    intent.putExtra("dni_benef", dni_benef);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
             }
         });
 
