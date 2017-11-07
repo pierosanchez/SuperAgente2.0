@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="103dp"
                         android:background="@color/color_blanco"
-                        android:inputType="number"
+                        android:inputType="numberDecimal"
                         android:gravity="center"/>
 
                 </LinearLayout>

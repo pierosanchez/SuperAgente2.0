@@ -66,6 +66,7 @@ public class MenuCliente extends Activity {
                 Intent intent = new Intent(MenuCliente.this, RecargaTelefonica.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }

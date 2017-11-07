@@ -39,7 +39,7 @@ public class RecargaTelefonica extends Activity {
     double monto_recarga;
     String tipo_operador,tipo_moneda,nro_telefono;
     private UsuarioEntity usuario;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,7 @@ public class RecargaTelefonica extends Activity {
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
         cliente = extras.getString("cliente");
+        cli_dni = extras.getString("cli_dni");
 
         operadorEntityArrayList = null;
         operadorAdapter = new OperadorAdapter(operadorEntityArrayList, getApplication());
@@ -88,6 +89,7 @@ public class RecargaTelefonica extends Activity {
                 intent.putExtra("tipo_moneda", tipo_moneda);
                 intent.putExtra("tipo_operador", tipo_operador);
                 intent.putExtra("monto_recarga", monto_recarga);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivityForResult(intent, 0);
                 finish();
             }
@@ -186,6 +188,8 @@ public class RecargaTelefonica extends Activity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(RecargaTelefonica.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
                 startActivity(intent);
                 finish();
             }

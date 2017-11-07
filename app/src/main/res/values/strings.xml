@@ -599,6 +599,7 @@
     <string name="tv_servicio_voucher">SERVICIO:</string>
     <string name="tv_num_suministro_voucher">CÓDIGO DEL CLIENTE:</string>
     <string name="tv_pagado_por_voucher">PAGADO POR:</string>
+    <string name="tv_dni_servicios">DNI:</string>
     <string name="tv_numero_unico_voucher">NÚMERO ÚNICO:</string>
     <string name="tv_forma_pago_voucher">FORMA DE PAGO:</string>
     <string name="tv_importe_voucher">IMPORTE:</string>

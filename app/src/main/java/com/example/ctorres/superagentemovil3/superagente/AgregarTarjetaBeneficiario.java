@@ -26,7 +26,7 @@ public class AgregarTarjetaBeneficiario extends Activity {
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
     private RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
     private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
-    String dni_benef;
+    String dni_benef, cliente;
     private UsuarioEntity usuario;
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     Button btn_agregar_tarjeta_beneficiario;
@@ -57,6 +57,7 @@ public class AgregarTarjetaBeneficiario extends Activity {
         Bundle bundle = getIntent().getExtras();
         dni_benef = bundle.getString("dni_benef");
         usuario = bundle.getParcelable("usuario");
+        cliente = bundle.getString("cliente");
 
         rdbtn_mc_option.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +105,7 @@ public class AgregarTarjetaBeneficiario extends Activity {
                         Intent intent = new Intent(AgregarTarjetaBeneficiario.this, ListadoCuentasTarjetasBeneficiario.class);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("dni_benef", dni_benef);
+                        intent.putExtra("cliente", cliente);
                         startActivity(intent);
                         finish();
                     }

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ public class AgregarCuentasUsuario extends Activity {
     ArrayList<BancosEntity> bancosEntityArrayList;
     BancosAdapter bancosAdapter;
     String cliente, cli_dni;
+    int banco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class AgregarCuentasUsuario extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
-        cargarBancos();
+        cargarMoneda();
 
         bancosEntityArrayList = null;
         bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
@@ -91,6 +93,18 @@ public class AgregarCuentasUsuario extends Activity {
             }
         });
 
+        spinnerBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                banco = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +127,7 @@ public class AgregarCuentasUsuario extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                cuenta = dao.getInsertarCuenta(numCuenta, usuario.getUsuarioId(), obtenerBancoCuenta(), obtenerTipoMonedaCuenta());
+                cuenta = dao.getInsertarCuenta(numCuenta, usuario.getUsuarioId(), banco, obtenerTipoMonedaCuenta());
 
             } catch (Exception e) {
                 cuenta = null;
@@ -146,7 +160,7 @@ public class AgregarCuentasUsuario extends Activity {
         }
     }
 
-    public void cargarBancos() {
+    public void cargarMoneda() {
         ArrayAdapter<String> adaptadorMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, moneda);
         spinnerMoneda.setAdapter(adaptadorMoneda);
     }
