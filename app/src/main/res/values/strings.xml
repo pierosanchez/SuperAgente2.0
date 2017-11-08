@@ -414,7 +414,7 @@
 
     <string name="titulo_ingresa_cuenta_tarjeta_abono">SELECCIÓN DEL TIPO DE ABONO</string>
     <string name="tv_importe_cuenta_tarjeta">IMPORTE DE TRANSFERENCIA</string>
-    <string name="tv_comision_transferencia">COMISION DE TRANSFERENCIA</string>
+    <string name="tv_comision_transferencia">COMISIÓN DE TRANSFERENCIA</string>
     <string name="tv_comision_cheque_importe">EMISIÓN DE CHEQUE</string>
     <string name="tv_comision_cheque_importe_delivery">GASTOS DE DELIVERY</string>
     <string name="tv_tipo_cuenta_abono">TIPO DE ABONO</string>

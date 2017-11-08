@@ -57,7 +57,6 @@ public class IngresoMontoPagoPin extends Activity {
 
         Bundle extras = getIntent().getExtras();
         monto = extras.getString("monto");
-        txt_moneda_pagar.setText(extras.getString("monto"));
         usuario = extras.getParcelable("usuario");
         tipo_tarjeta = extras.getInt("tipo_tarjeta");
         emisor_tarjeta = extras.getInt("emisor_tarjeta");
@@ -73,6 +72,7 @@ public class IngresoMontoPagoPin extends Activity {
         txt_pin.requestFocus();
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
+        txt_moneda_pagar.setText(transformarMonto());
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,5 +142,9 @@ public class IngresoMontoPagoPin extends Activity {
         }
     }
 
-
+    public String transformarMonto(){
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double montoD = Double.parseDouble(monto);
+        return decimalFormat.format(montoD);
+    }
 }

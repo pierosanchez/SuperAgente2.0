@@ -21,10 +21,9 @@ public class VoucherTransferencias extends Activity {
     LinearLayout btn_efectuar_otra_operacion, btn_salir_transferencias, ll_comision_delivery, ll_comision_cheque;
     UsuarioEntity usuario;
     String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario,
-            num_tarjeta, banco, monto, transferencia, comision1, comision2, comision3, importe_comision1, importe_comision2, importe_comision3;
+            num_tarjeta, banco, monto, transferencia, comision0, comision1, comision2, comision3, importe_comision1, importe_comision2, importe_comision3;
     String cliente, remitente, cli_dni;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class VoucherTransferencias extends Activity {
         tv_monto_transferencia = (TextView) findViewById(R.id.tv_monto_transferencia);
         tv_monto_total_pagar = (TextView) findViewById(R.id.tv_monto_total_pagar);
         tv_tipo_moneda_importe_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_total_voucher);
-        tv_tipo_moneda_transferencia_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_transferencia_voucher);
+        //tv_tipo_moneda_transferencia_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_transferencia_voucher);
         tv_comision1 = (TextView) findViewById(R.id.tv_comision1);
         tv_comision2 = (TextView) findViewById(R.id.tv_comision2);
         tv_comision3 = (TextView) findViewById(R.id.tv_comision3);
@@ -73,6 +72,7 @@ public class VoucherTransferencias extends Activity {
         importe_comision3 = extra.getString("comision_monto");
         cliente = extra.getString("cliente");
         cli_dni = extra.getString("cli_dni");
+        comision0 = tipomoneda + " " + montoTransferencia();
         comision1 = tipomoneda + " " + importe_comision1;
         comision2 = tipomoneda + " " + importe_comision2;
         comision3 = tipomoneda + " " + importe_comision3;
@@ -105,10 +105,10 @@ public class VoucherTransferencias extends Activity {
         tv_datos_beneficiario_transaccion_voucher.setText(nombreBeneficiario);
         tv_usuario_tarjeta_num_cifrado.setText(num_tarjeta);
         tv_usuario_tarjeta_banco.setText(banco);
-        tv_monto_transferencia.setText(montoTransferencia());
+        tv_monto_transferencia.setText(comision0);
         tv_monto_total_pagar.setText(importe);
         tv_tipo_moneda_importe_total_voucher.setText(tipomoneda);
-        tv_tipo_moneda_transferencia_voucher.setText(tipomoneda);
+        //tv_tipo_moneda_transferencia_voucher.setText(tipomoneda);
         tv_comision3.setText(comision3);
         tv_remitente_transferencia_voucher.setText(remitente);
 

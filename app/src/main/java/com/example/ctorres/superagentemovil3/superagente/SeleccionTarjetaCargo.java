@@ -47,9 +47,8 @@ public class SeleccionTarjetaCargo extends Activity {
     Button btn_regresar, btn_cancelar_seleccion_tarjeta_cargo;
     String callingActivity, cli_dni;
     double monto_recarga;
-    String nom_comerciosp,direccion_comerciosp,distrito_comerciosp, desc_corta_banco;
+    String nom_comerciosp, direccion_comerciosp, distrito_comerciosp, desc_corta_banco;
     private ProgressBar circleProgressBar;
-
 
 
     @Override
@@ -112,10 +111,10 @@ public class SeleccionTarjetaCargo extends Activity {
         } else if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")) {
 
             actionPagoConsumos();
-        }else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")) {
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")) {
 
             actionPagoComercio();
-        }else if (callingActivity.equals(Constante.ACTIVITYROOT + "RecargaTelefonica")) {
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "RecargaTelefonica")) {
 
             actionPagoRecarga();
         }
@@ -150,19 +149,19 @@ public class SeleccionTarjetaCargo extends Activity {
                     intent.putExtra("cliente", cliente);
                     startActivity(intent);
                     finish();
-                } else if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")){
+                } else if (callingActivity.equals(Constante.ACTIVITYROOT + "MenuCliente")) {
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     startActivity(intent);
                     finish();
-                }else if (callingActivity.equals(Constante.ACTIVITYROOT + "RecargaTelefonica")) {
+                } else if (callingActivity.equals(Constante.ACTIVITYROOT + "RecargaTelefonica")) {
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, RecargaTelefonica.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     startActivity(intent);
                     finish();
-                }else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")){
+                } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LecturaInformacionComercio")) {
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -255,28 +254,55 @@ public class SeleccionTarjetaCargo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 1) {
-                    if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
-                        Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String num_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
-                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
-                        int emisor_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
-                        int cod_banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta_registro();
-                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaServicios.class);
-                        intent.putExtra("monto", monto);
-                        intent.putExtra("usuario", usuario);
-                        intent.putExtra("num_tarjeta", num_tarjeta_cargo);
-                        intent.putExtra("emisor_tarjeta", emisor_tarjeta_cargo);
-                        intent.putExtra("monto_servicio", monto_servicio);
-                        intent.putExtra("servicio", servicio);
-                        intent.putExtra("num_servicio", num_servicio);
-                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                        intent.putExtra("cod_banco", cod_banco);
-                        intent.putExtra("cliente", cliente);
-                        intent.putExtra("tipo_servicio", tipo_servicio);
-                        intent.putExtra("cli_dni", cli_dni);
-                        startActivity(intent);
-                        finish();
+                    if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Firma")) {
+                        if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
+                            Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String num_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                            int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                            int emisor_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
+                            int cod_banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta_registro();
+                            Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaServicios.class);
+                            intent.putExtra("monto", monto);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("num_tarjeta", num_tarjeta_cargo);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta_cargo);
+                            intent.putExtra("monto_servicio", monto_servicio);
+                            intent.putExtra("servicio", servicio);
+                            intent.putExtra("num_servicio", num_servicio);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                            intent.putExtra("cod_banco", cod_banco);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("tipo_servicio", tipo_servicio);
+                            intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("cod_banco", cod_banco);
+                            startActivity(intent);
+                            finish();
+                        }
+                    } else if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Pin")){
+                        if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
+                            Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String num_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                            int emisor_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
+                            int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                            int cod_banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta_registro();
+                            Intent intent = new Intent(SeleccionTarjetaCargo.this, MontoPagoPinPagoServicios.class);
+                            intent.putExtra("monto", monto);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("num_tarjeta", num_tarjeta_cargo);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta_cargo);
+                            intent.putExtra("monto_servicio", monto_servicio);
+                            intent.putExtra("servicio", servicio);
+                            intent.putExtra("num_servicio", num_servicio);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                            intent.putExtra("cod_banco", cod_banco);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("tipo_servicio", tipo_servicio);
+                            intent.putExtra("cli_dni", cli_dni);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 } else {
                     if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
@@ -320,27 +346,50 @@ public class SeleccionTarjetaCargo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 1) {
-                    if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
-                        Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
-                    } else {
-                        banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta();
-                        //emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
-                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
-                        String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
-                        Intent intent = new Intent(SeleccionTarjetaCargo.this, ConfirmacionTarjetaCargo.class);
-                        intent.putExtra("monto", monto);
-                        intent.putExtra("usuario", usuario);
-                        intent.putExtra("num_tarjeta", num_tarjeta);
-                        intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                        intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                        intent.putExtra("cliente", cliente);
-                        intent.putExtra("cli_dni", cli_dni);
-                        intent.putExtra("desc_corta_banco", desc_corta_banco);
-                        intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
-                        startActivity(intent);
-                        finish();
+                    if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Firma")) {
+                        if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
+                            Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
+                        } else {
+                            banco = tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta();
+                            //emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
+                            String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                            String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                            Intent intent = new Intent(SeleccionTarjetaCargo.this, ConfirmacionTarjetaCargo.class);
+                            intent.putExtra("monto", monto);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("num_tarjeta", num_tarjeta);
+                            intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                            intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                            intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("desc_corta_banco", desc_corta_banco);
+                            intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                            startActivity(intent);
+                            finish();
+                        }
+                    } else if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Pin")){
+                        if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
+                            Toast.makeText(SeleccionTarjetaCargo.this, "No puede pagar con una tarjeta del mismo banco", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                            String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                            Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPin.class);
+                            intent.putExtra("monto", monto);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("num_tarjeta", num_tarjeta);
+                            intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                            intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                            intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("desc_corta_banco", desc_corta_banco);
+                            intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                 } else if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
                     if (tarjetasUsuarioAdapter.getItem(position).getBanco_tarjeta().equals(banco_tarjeta)) {
@@ -370,7 +419,7 @@ public class SeleccionTarjetaCargo extends Activity {
         });
     }
 
-       public void actionPagoConsumos() {
+    public void actionPagoConsumos() {
         usuarioEntityArrayList = null;
         tarjetasUsuarioAdapter = new TarjetasUsuarioAdapter(usuarioEntityArrayList, getApplication());
         lv_tarjetas_cargo_usuario.setAdapter(tarjetasUsuarioAdapter);
@@ -383,21 +432,38 @@ public class SeleccionTarjetaCargo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 1) {
-                    banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
-                    String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
-                    String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
-                    int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
-                    Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaConsumos.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("banco", banco);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cli_dni", cli_dni);
+                    if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Firma")) {
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaConsumos.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
 
-                    startActivity(intent);
-                    finish();
+                        startActivity(intent);
+                        finish();
+                    } else if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Pin")){
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPinConsumos.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
+                        startActivity(intent);
+                        finish();
+                    }
 
 
                 } else if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
@@ -423,7 +489,7 @@ public class SeleccionTarjetaCargo extends Activity {
         });
     }
 
-    public void actionPagoComercio(){
+    public void actionPagoComercio() {
 
         usuarioEntityArrayList = null;
         tarjetasUsuarioAdapter = new TarjetasUsuarioAdapter(usuarioEntityArrayList, getApplication());
@@ -437,26 +503,42 @@ public class SeleccionTarjetaCargo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 1) {
-                    banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
-                    String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
-                    String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
-                    int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
-                    Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaComercio.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("banco", banco);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cli_dni", cli_dni);
+                    if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Firma")) {
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaComercio.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
 
-                    intent.putExtra("cadena_scanneo",cadena_scanneo);
-                    intent.putExtra("nom_comerciosp",nom_comerciosp);
-                    intent.putExtra("direccion_comerciosp",direccion_comerciosp);
-                    intent.putExtra("distrito_comerciosp",distrito_comerciosp);
-                    startActivity(intent);
-                    finish();
-
+                        intent.putExtra("cadena_scanneo", cadena_scanneo);
+                        intent.putExtra("nom_comerciosp", nom_comerciosp);
+                        intent.putExtra("direccion_comerciosp", direccion_comerciosp);
+                        intent.putExtra("distrito_comerciosp", distrito_comerciosp);
+                        startActivity(intent);
+                        finish();
+                    } else if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Pin")){
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPinConsumos.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
+                        startActivity(intent);
+                        finish();
+                    }
 
 
                 } else if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
@@ -483,7 +565,7 @@ public class SeleccionTarjetaCargo extends Activity {
 
     }
 
-    public void actionPagoRecarga(){
+    public void actionPagoRecarga() {
 
         usuarioEntityArrayList = null;
         tarjetasUsuarioAdapter = new TarjetasUsuarioAdapter(usuarioEntityArrayList, getApplication());
@@ -497,31 +579,48 @@ public class SeleccionTarjetaCargo extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 1) {
-                    banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
-                    String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
-                    String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
-                    int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
-                    Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaRecarga.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("banco", banco);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cli_dni", cli_dni);
+                    if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Firma")) {
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoFirmaRecarga.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
 
-                    intent.putExtra("nro_telefono",nro_telefono);
-                    intent.putExtra("tipo_moneda_recarga",tipo_moneda_recarga);
-                    intent.putExtra("tipo_operador",tipo_operador);
-                    intent.putExtra("monto_recarga",monto_recarga);
+                        intent.putExtra("nro_telefono", nro_telefono);
+                        intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
+                        intent.putExtra("tipo_operador", tipo_operador);
+                        intent.putExtra("monto_recarga", monto_recarga);
 
-                    startActivity(intent);
-                    finish();
+                        startActivity(intent);
+                        finish();
+                    } else if (tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta().equals("Pin")){
+                        banco = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
+                        String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                        Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPinConsumos.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cli_dni", cli_dni);
 
-
-
-
-
+                        intent.putExtra("nro_telefono", nro_telefono);
+                        intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
+                        intent.putExtra("tipo_operador", tipo_operador);
+                        intent.putExtra("monto_recarga", monto_recarga);
+                        startActivity(intent);
+                        finish();
+                    }
 
 
                 } else if (tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta() == 2) {
@@ -538,13 +637,12 @@ public class SeleccionTarjetaCargo extends Activity {
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
 
-                    intent.putExtra("nro_telefono",nro_telefono);
-                    intent.putExtra("tipo_moneda_recarga",tipo_moneda_recarga);
-                    intent.putExtra("tipo_operador",tipo_operador);
-                    intent.putExtra("monto_recarga",monto_recarga);
+                    intent.putExtra("nro_telefono", nro_telefono);
+                    intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
+                    intent.putExtra("tipo_operador", tipo_operador);
+                    intent.putExtra("monto_recarga", monto_recarga);
                     startActivity(intent);
                     finish();
-
 
 
                 } else {

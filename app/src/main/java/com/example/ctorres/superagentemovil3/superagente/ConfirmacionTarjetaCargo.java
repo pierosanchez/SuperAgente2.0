@@ -27,6 +27,7 @@ import com.example.ctorres.superagentemovil3.dao.TarjetasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.UsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ConfirmacionTarjetaCargo extends Activity {
@@ -87,7 +88,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
-        txt_monto_tarjeta_cargo_credito.setText(extras.getString("monto"));
+        txt_monto_tarjeta_cargo_credito.setText(transformarMonto());
         tv_nombre_cliente_tarjeta_cargo.setText(cliente);
 
         focTipoTarjeta();
@@ -208,5 +209,11 @@ public class ConfirmacionTarjetaCargo extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    public String transformarMonto(){
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double montoD = Double.parseDouble(monto);
+        return decimalFormat.format(montoD);
     }
 }

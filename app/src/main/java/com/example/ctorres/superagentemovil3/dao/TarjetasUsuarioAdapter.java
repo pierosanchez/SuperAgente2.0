@@ -73,45 +73,87 @@ public class TarjetasUsuarioAdapter extends BaseAdapter {
         if(data!=null){
             if (data.getCod_emisor_tarjeta() == 1) {
                 if (data.getTipo_tarjeta() == 1) {
-                    viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.visaicon);
-                    //viewHolder.tv_emisor_tarjeta.setText("Crédito");
-                    viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
-                    viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("FIRMA");
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
                 } else {
                     viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.visaicon);
                     //viewHolder.tv_emisor_tarjeta.setText("Débito");
                     viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
                     viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("PIN");
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
                 }
             } else if (data.getCod_emisor_tarjeta() == 2) {
                 if (data.getTipo_tarjeta() == 1) {
-                    viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.mastercardlogo);
-                    //viewHolder.tv_emisor_tarjeta.setText("Crédito");
-                    viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
-                    viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("FIRMA");
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
                 } else {
                     viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.mastercardlogo);
                     //viewHolder.tv_emisor_tarjeta.setText("Débito");
                     viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
                     viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("PIN");
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
                 }
             } else {
                 if (data.getTipo_tarjeta() == 1) {
-                    viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.americanexpressicon);
-                    //viewHolder.tv_emisor_tarjeta.setText("Crédito");
-                    viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
-                    viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("FIRMA");
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
+                        viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
                 } else {
                     viewHolder.iv_emisor_tarjeta.setImageResource(R.drawable.americanexpressicon);
                     //viewHolder.tv_emisor_tarjeta.setText("Débito");
                     viewHolder.tv_emisor_tarjeta.setText(data.getBanco_tarjeta());
                     viewHolder.tv_numero_tarjeta.setText(data.getNumeroTarjeta());
-                    viewHolder.tv_tipo_tarjeta.setText("PIN");
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
                 }
             }
         } else {
