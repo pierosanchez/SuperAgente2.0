@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -15,7 +17,7 @@ import java.text.DecimalFormat;
 
 public class VoucherPagoConsumo extends Activity {
 
-    Button btn_pagar_otros_servicios;
+    Button btn_efectuar_otra_operacion, btn_salir;
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, importe, banco, emisor_tarjeta, tarjeta, cli_dni;
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
@@ -26,7 +28,8 @@ public class VoucherPagoConsumo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voucher_pago_consumo);
 
-        btn_pagar_otros_servicios = (Button) findViewById(R.id.btn_pagar_otros_servicios);
+        btn_efectuar_otra_operacion = (Button) findViewById(R.id.btn_efectuar_otra_operacion);
+        btn_salir = (Button) findViewById(R.id.btn_salir);
 
         tv_fecha_pago = (TextView) findViewById(R.id.tv_fecha_pago);
         txt_hora_pago = (TextView) findViewById(R.id.txt_hora_pago);
@@ -53,7 +56,7 @@ public class VoucherPagoConsumo extends Activity {
         tv_banco_voucher_consumo.setText(banco);
         txt_numero_tarjeta_voucher_consumo.setText(tarjeta);
 
-        btn_pagar_otros_servicios.setOnClickListener(new View.OnClickListener() {
+        btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VoucherPagoConsumo.this, MenuCliente.class);
@@ -61,6 +64,13 @@ public class VoucherPagoConsumo extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
+            }
+        });
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
             }
         });
     }
@@ -101,5 +111,29 @@ public class VoucherPagoConsumo extends Activity {
 
         double imp = Double.parseDouble(monto_pagar);
         return decimalFormat.format(imp);
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(VoucherPagoConsumo.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

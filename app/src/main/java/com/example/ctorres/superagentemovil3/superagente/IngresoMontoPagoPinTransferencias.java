@@ -76,7 +76,8 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
             @Override
             public void onClick(View v) {
                 String pin = txt_pin.getText().toString();
-                if (pin.length()!=0) {
+                String monto = txt_moneda_pagar.getText().toString();
+                if (pin.length()!=0 && monto.length()!= 0) {
                     Intent intent = new Intent(IngresoMontoPagoPinTransferencias.this, IngresoCuentaTarjetaAbono.class);
                     intent.putExtra("monto", ObtenerMonto());
                     intent.putExtra("usuario", usuario);
@@ -90,8 +91,10 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
-                } else {
+                } else if (pin.length()==0){
                     Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el pin", Toast.LENGTH_LONG).show();
+                } else if (monto.length()==0){
+                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el monto a pagar", Toast.LENGTH_LONG).show();
                 }
             }
         });

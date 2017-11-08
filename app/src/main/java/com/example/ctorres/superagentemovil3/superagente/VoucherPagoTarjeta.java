@@ -21,10 +21,10 @@ public class VoucherPagoTarjeta extends Activity {
 
     LinearLayout btn_otra_operacion, btn_salir, btn_pagar_otra_tarjeta;
     String monto, num_tarjeta;
-    TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada, tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago;
+    TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada, tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago, tv_banco_tarjeta_cargo;
     String importe, tipo_moneda_deuda, tarjeta_cargo;
     private UsuarioEntity usuario;
-    String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago;
+    String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, banco_tarjeta_cargo, desc_corta_banco_tarjeta_cargo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class VoucherPagoTarjeta extends Activity {
         txt_hora_pago = (TextView) findViewById(R.id.txt_hora_pago);
         tv_tarjeta_cifrada = (TextView) findViewById(R.id.tv_tarjeta_cifrada);
         tv_tarjeta_cifrada_cargo = (TextView) findViewById(R.id.tv_tarjeta_cifrada_cargo);
+        tv_banco_tarjeta_cargo = (TextView) findViewById(R.id.tv_banco_tarjeta_cargo);
         //tv_fecha_pago = (TextView) findViewById(R.id.tv_fecha_pago);
 
         Bundle extras = getIntent().getExtras();
@@ -54,6 +55,8 @@ public class VoucherPagoTarjeta extends Activity {
         tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
         desc_corta_banco = extras.getString("desc_corta_banco");
         banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
+        desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
+        banco_tarjeta_cargo = "BACO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
 
         tv_monto_importe.setText(importe);
         tv_tarjeta_cifrada.setText(num_tarjeta);
@@ -61,6 +64,7 @@ public class VoucherPagoTarjeta extends Activity {
         tv_banco_tarjeta_pago.setText(banco_tarjeta_pago);
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
+        tv_banco_tarjeta_cargo.setText(banco_tarjeta_cargo);
 
 
         btn_otra_operacion.setOnClickListener(new View.OnClickListener() {

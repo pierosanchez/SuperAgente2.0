@@ -46,7 +46,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
     int tipo_tarjeta, emisor_tarjeta;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     UsuarioAdapter usuarioAdapter;
-    String cliente, cli_dni, desc_corta_banco;
+    String cliente, cli_dni, desc_corta_banco, desc_corta_banco_tarjeta_cargo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +83,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
         desc_corta_banco = extras.getString("desc_corta_banco");
+        desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
@@ -105,6 +106,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("desc_corta_banco", desc_corta_banco);
+                    intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
                     startActivity(intent);
                     finish();
                 } else if (tipo_tarjeta==2) {
@@ -117,6 +119,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("desc_corta_banco", desc_corta_banco);
+                    intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
                     startActivity(intent);
                     finish();
                 }
