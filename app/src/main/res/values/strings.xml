@@ -22,6 +22,8 @@
 
     <string name="btn_aceptar">ACEPTAR</string>
     <string name="btn_salir">SALIR</string>
+    <string name="btn_atras">ATRÁS</string>
+    <string name="btn_menu">MENÙ</string>
     <string name="btn_siguiente">SIGUIENTE</string>
     <string name="btn_cancelar">CANCELAR</string>
     <string name="btn_moneda_nacional">MONEDA NACIONAL</string>
@@ -339,7 +341,7 @@
 
     <!-- Voucher de pago con tarjeta -->
 
-    <string name="tv_titulo_voucher_pago_tarjeta">VOUCHER DE PAGO CON TARJETA</string>
+    <string name="tv_titulo_voucher_pago_tarjeta">VOUCHER DE PAGO DE TARJETA DE CRÉDITO - PIN</string>
     <string name="tv_transaccion_exitosa">TRANSACCIÓN EXITOSA</string>
     <string name="tv_rayitas">==========================================</string>
     <string name="tv_fecha">FECHAS:</string>
@@ -384,7 +386,7 @@
 
     <!-- Pantalla Voucher de pago de tarjeta con tarjetas de credito -->
 
-    <string name="tv_couhcer_pago_tarjeta_credito">VOUCHER PAGO DE TARJETA DE CRÉDITO</string>
+    <string name="tv_couhcer_pago_tarjeta_credito">VOUCHER PAGO DE TARJETA DE CRÉDITO - FIRMA</string>
 
     <!-- Pantalla de ingreso de Firma -->
 

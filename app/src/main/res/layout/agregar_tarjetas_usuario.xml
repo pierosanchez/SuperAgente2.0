@@ -8,6 +8,22 @@
     android:orientation="vertical"
     tools:context="com.example.ctorres.superagentemovil3.superagente.AgregarTarjetasUsuario">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_informacion_tarjetas"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

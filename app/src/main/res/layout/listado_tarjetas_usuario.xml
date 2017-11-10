@@ -110,6 +110,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/btn_regresar_mantenimiento"
+                    android:text="@string/btn_atras"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/color_blanco"/>
+
+                <Button
+                    android:text="@string/btn_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/color_blanco"/>
+
+                <Button
+                    android:text="@string/btn_salir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/color_blanco"/>
+
+                <Button
+                    android:text="@string/btn_continuar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/color_blanco"/>
+
+            </LinearLayout>
+
+           <!-- <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
 
@@ -119,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/btn_regresar" />
 
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 
