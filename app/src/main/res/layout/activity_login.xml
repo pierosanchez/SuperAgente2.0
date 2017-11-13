@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="ACCESO AL SISTEMA"
+            android:text="@string/titulo_acceso_sistema"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:background="@color/colorFondo"
@@ -65,7 +65,7 @@
                             android:layout_height="40dp"
                             android:layout_marginLeft="5dp"
                             android:gravity="center"
-                            android:text="INGRESE SU NÚMERO DE CELULAR"
+                            android:text="@string/tv_ingrese_numero_celular"
                             android:textColor="@color/color_blanco"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -92,7 +92,7 @@
                             android:layout_height="40dp"
                             android:layout_marginLeft="5dp"
                             android:gravity="center"
-                            android:text="INGRESE SU CLAVE ACCESO"
+                            android:text="@string/tv_ingrese_clave_acceso"
                             android:textColor="@color/color_blanco"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -136,13 +136,13 @@
                             android:id="@+id/btn_aceptar"
                             android:layout_width="258dp"
                             android:layout_height="wrap_content"
-                            android:text="ACEPTAR" />
+                            android:text="@string/btn_aceptar" />
 
                         <Button
                             android:id="@+id/btn_salir"
                             android:layout_width="258dp"
                             android:layout_height="wrap_content"
-                            android:text="SALIR"
+                            android:text="@string/btn_salir"
                             android:textSize="20dp" />
 
                     </LinearLayout>
@@ -174,7 +174,7 @@
                             android:layout_height="40dp"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="¿HA OLVIDADO SU CLAVE?"
+                            android:text="@string/btn_ha_olvidado_clave_acceso"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/color_blanco"
                             android:textStyle="bold"  />
@@ -214,6 +214,7 @@
                     android:textSize="20dp" />
             </LinearLayout>-->
         </RelativeLayout>
+
     </ScrollView>
 
 </LinearLayout>
