@@ -24,7 +24,7 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
 
 
     Button btn_continuar_pago, btn_cancelar_pago;
-    String cliente, tarjeta_cargo, banco, emisor_tarjeta;
+    String cliente, tarjeta_cargo, banco, emisor_tarjeta, validacion_tarjeta;
     TextView tv_nombre_cliente_comercio, tv_tarjeta_cifrada_comercio;
     EditText txt_monto_pago_comercio;
     private UsuarioEntity usuario;
@@ -81,6 +81,7 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
         nom_comerciosp = extras.getString("nom_comerciosp");
         direccion_comerciosp = extras.getString("direccion_comerciosp");
         distrito_comerciosp = extras.getString("distrito_comerciosp");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
 
 
@@ -113,10 +114,11 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
                 intent.putExtra("banco", banco);
                 intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                 intent.putExtra("cli_dni", cli_dni);
-
+                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 intent.putExtra("parteRazon",parteRazon);
                 intent.putExtra("parteDireccion",parteDireccion);
                 intent.putExtra("parteDistrito",parteDistrito);
+                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 startActivity(intent);
             }
         });

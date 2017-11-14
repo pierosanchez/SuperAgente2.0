@@ -19,7 +19,8 @@ import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 public class MontoPagoPinPagoServicios extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago;
-    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio, servicio, num_servicio, cliente, tipo_servicio, cli_dni;
+    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio,
+            servicio, num_servicio, cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     ImageView imageView;
     TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar, tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar;
@@ -62,6 +63,8 @@ public class MontoPagoPinPagoServicios extends Activity {
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
         cli_dni = extras.getString("cli_dni");
+        nombre_recibo = extras.getString("nombre_recibo");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         txt_pin.requestFocus();
         tv_tarjeta_cifrada_pago_servicios.setText(num_tarjeta);
@@ -99,6 +102,8 @@ public class MontoPagoPinPagoServicios extends Activity {
                     intent.putExtra("tipo_servicio", tipo_servicio);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("nombre_recibo", nombre_recibo);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
                 }

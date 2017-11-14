@@ -83,7 +83,8 @@
                     android:id="@+id/sp_monedaComercio"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:background="@drawable/spinner_selector" />
+                    android:background="@drawable/spinner_selector"
+                    android:spinnerMode="dialog"/>
 
                 <EditText
                     android:id="@+id/txt_monto_pago_comercio"

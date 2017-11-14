@@ -83,6 +83,7 @@ public class SeleccionModoMontoPago extends Activity {
         desc_corta_banco = extras.getString("desc_corta_banco");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
+        spinnerTipoMonedaPago.setEnabled(false);
 
         focTipoTarjeta();
         cargarTipoTarjetas();

@@ -19,10 +19,10 @@ import java.text.DecimalFormat;
 public class SeleccionRecibosPagar extends Activity {
 
     private UsuarioEntity usuario;
-    String num_servicio, servicio, cliente, tipo_servicio, cli_dni;
+    String num_servicio, servicio, cliente, tipo_servicio, cli_dni, nombre_recibo;
     Button btn_aceptar_recibo_pagar, btn_cancelar_recibo_pagar;
     CheckBox chbxk_fecha_vencimiento1, chbxk_fecha_vencimiento2;
-    TextView tv_monto_recibo1, tv_monto_recibo2, txt_empresa_servicio_pagar, txt_numero_suministro, txt_nombre_titular_servicio;
+    TextView tv_monto_recibo1, tv_monto_recibo2, txt_empresa_servicio_pagar, txt_numero_suministro, txt_nombre_titular_servicio, tv_nombre_recibo_usuario;
     DecimalFormat decimal = new DecimalFormat("0.00");
 
     @Override
@@ -38,6 +38,7 @@ public class SeleccionRecibosPagar extends Activity {
         txt_empresa_servicio_pagar = (TextView) findViewById(R.id.txt_empresa_servicio_pagar);
         txt_numero_suministro = (TextView) findViewById(R.id.txt_numero_suministro);
         txt_nombre_titular_servicio = (TextView) findViewById(R.id.txt_nombre_titular_servicio);
+        tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
         chbxk_fecha_vencimiento1 = (CheckBox) findViewById(R.id.chbxk_fecha_vencimiento1);
         chbxk_fecha_vencimiento2 = (CheckBox) findViewById(R.id.chbxk_fecha_vencimiento2);
@@ -49,10 +50,12 @@ public class SeleccionRecibosPagar extends Activity {
         cliente = bundle.getString("cliente");
         tipo_servicio = bundle.getString("tipo_servicio");
         cli_dni = bundle.getString("cli_dni");
+        nombre_recibo = bundle.getString("nombre_recibo");
 
         txt_empresa_servicio_pagar.setText(servicio);
         txt_numero_suministro.setText(num_servicio);
         txt_nombre_titular_servicio.setText(cliente);
+        tv_nombre_recibo_usuario.setText(nombre_recibo);
 
         chbxk_fecha_vencimiento1.setChecked(true);
 
@@ -73,6 +76,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
                         intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
                         startActivityForResult(intent, 0);
                         finish();
                     } else {
@@ -84,6 +88,7 @@ public class SeleccionRecibosPagar extends Activity {
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
                         intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
                         startActivityForResult(intent, 0);
                         finish();
                     }

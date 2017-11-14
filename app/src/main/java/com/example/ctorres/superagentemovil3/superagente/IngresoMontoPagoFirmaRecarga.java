@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class IngresoMontoPagoFirmaRecarga extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago;
-    String cliente, tarjeta_cargo, banco, emisor_tarjeta;
+    String cliente, tarjeta_cargo, banco, emisor_tarjeta, validacion_tarjeta;
     TextView tv_nombre_cliente_comercio, tv_tarjeta_cifrada_comercio, txt_moneda_pagar_recarga;
     EditText txt_monto_pago;
     private UsuarioEntity usuario;
@@ -59,6 +59,7 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
         tipo_moneda_recarga = extras.getString("tipo_moneda_recarga");
         tipo_operador = extras.getString("tipo_operador");
         monto_recarga = extras.getDouble("monto_recarga");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
 
         tv_nombre_cliente_comercio.setText(cliente);
@@ -82,7 +83,7 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
                 intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
                 intent.putExtra("tipo_operador", tipo_operador);
                 intent.putExtra("monto_recarga", monto_recarga);
-
+                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 startActivity(intent);
             }
         });

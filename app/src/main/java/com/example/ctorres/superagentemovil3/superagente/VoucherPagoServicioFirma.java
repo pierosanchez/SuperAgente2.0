@@ -32,11 +32,11 @@ public class VoucherPagoServicioFirma extends Activity {
     Bitmap b;
     ImageView signImage;
     Button btn_fimar, btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
-    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente, cli_dni;
+    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente, cli_dni, nombre_recibo;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
-            txt_dni;
+            txt_dni, tv_nombre_recibo_usuario;
     DecimalFormat decimal = new DecimalFormat("0.00");
 
     @Override
@@ -65,6 +65,7 @@ public class VoucherPagoServicioFirma extends Activity {
         tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
         tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
         txt_dni = (TextView) findViewById(R.id.txt_dni);
+        tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -79,6 +80,7 @@ public class VoucherPagoServicioFirma extends Activity {
         cod_banco = extras.getInt("cod_banco");
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
+        nombre_recibo = extras.getString("nombre_recibo");
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
@@ -93,6 +95,7 @@ public class VoucherPagoServicioFirma extends Activity {
         tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
         tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
         txt_dni.setText(cli_dni);
+        tv_nombre_recibo_usuario.setText(nombre_recibo);
 
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override

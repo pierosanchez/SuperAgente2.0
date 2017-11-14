@@ -17,7 +17,7 @@ import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 public class IngresoMontoPagoFirmaServicios extends Activity {
 
-    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio, servicio, num_servicio, cliente, tipo_servicio, cli_dni;
+    String num_tarjeta, banco_tarjeta, tipo_moneda_deuda, monto_servicio, servicio, num_servicio, cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta;
     private UsuarioEntity usuario;
     int emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     Button btn_continuar_pago, btn_cancelar_pago;
@@ -60,6 +60,8 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
         cliente = extras.getString("cliente");
         tipo_servicio = extras.getString("tipo_servicio");
         cli_dni = extras.getString("cli_dni");
+        nombre_recibo = extras.getString("nombre_recibo");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         tv_tarjeta_cifrada_pago_servicios.setText(num_tarjeta);
         txt_servicio_pagar.setText(servicio);
@@ -92,6 +94,8 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
                 intent.putExtra("tipo_servicio", tipo_servicio);
                 intent.putExtra("cliente", cliente);
                 intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("nombre_recibo", nombre_recibo);
+                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 startActivity(intent);
                 finish();
             }

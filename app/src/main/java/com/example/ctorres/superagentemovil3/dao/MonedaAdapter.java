@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.dao;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

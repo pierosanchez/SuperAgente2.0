@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorfondoactivity"
-    tools:context="com.example.ctorres.superagentemovil3.superagente.IngresoMontoPagoFirmaRecarga">
-
+    tools:context="com.example.ctorres.superagentemovil3.superagente.IngresoMontoPagoPinRecargas">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="40dp"
+        android:layout_gravity="center">
 
         <TextView
+            android:id="@+id/textViewInfoElectronica"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorFondo"
             android:gravity="center"
-            android:text="MONTO DE PAGO - CON FIRMA"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:text="@string/titulo_ingreso_monto_pago_pin_recargas"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
 
     </LinearLayout>
 
@@ -79,9 +79,6 @@
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-
-
-
             </LinearLayout>
 
             <LinearLayout
@@ -94,6 +91,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_ingrese_ping"
+                        android:spinnerMode="dialog"/>
+
+                    <EditText
+                        android:id="@+id/txt_pin_recargas"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="numberDecimal"
+                        android:editable="false"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
 
                     <Spinner
                         android:background="@drawable/spinner_selector"
@@ -142,5 +163,3 @@
     </ScrollView>
 
 </LinearLayout>
-
-

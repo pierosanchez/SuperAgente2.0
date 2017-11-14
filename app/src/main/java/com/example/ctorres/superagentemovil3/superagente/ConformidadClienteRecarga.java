@@ -15,7 +15,7 @@ public class ConformidadClienteRecarga extends Activity {
 
     Button btn_confirmar_operacion;
     private UsuarioEntity usuario;
-    String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni;
+    String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni, validacion_tarjeta;
     TextView tv_nombrecli,tv_numerofono,tv_tarjetacli,tv_tipomone,tv_montoPagar,txt_comisionRecarga,txt_totalPagar;
     int tipo_tarjeta_pago;
     String tipo_moneda_recarga,tipo_operador,nro_telefono;
@@ -48,6 +48,7 @@ public class ConformidadClienteRecarga extends Activity {
         nro_telefono = extras.getString("nro_telefono");
         tipo_operador = extras.getString("tipo_operador");
         monto_recarga = extras.getDouble("monto_recarga");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         tv_nombrecli.setText(cliente);
         tv_numerofono.setText(nro_telefono);

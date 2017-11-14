@@ -246,7 +246,8 @@
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="30dp"
-                    android:background="@drawable/spinner_selector" />
+                    android:background="@drawable/spinner_selector"
+                    android:spinnerMode="dialog"/>
 
             </LinearLayout>
 
@@ -267,7 +268,8 @@
                     android:layout_width="180dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="85dp"
-                    android:background="@drawable/spinner_selector" />
+                    android:background="@drawable/spinner_selector"
+                    android:spinnerMode="dialog"/>
 
             </LinearLayout>
 

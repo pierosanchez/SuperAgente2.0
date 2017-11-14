@@ -468,6 +468,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         empresasServiciosEntity.setCod_emp_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_emp_servicio")));
                         empresasServiciosEntity.setDes_emp_servicio(utils.getValueStringOrNull(jsonObject, "des_emp_servicio"));
                         empresasServiciosEntity.setCod_tipo_emps_servicio(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_emps_servicio")));
+                        empresasServiciosEntity.setNombre_recibo(utils.getValueStringOrNull(jsonObject, "nombre_recibo"));
                         listaServiciosEntities.add(empresasServiciosEntity);
                     }
                 } else {

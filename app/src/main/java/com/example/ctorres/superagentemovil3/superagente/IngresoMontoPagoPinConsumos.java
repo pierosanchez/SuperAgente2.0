@@ -34,7 +34,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     Spinner spinnerTipoMoneda;
-    String tipo_moneda, cli_dni;
+    String tipo_moneda, cli_dni, validacion_tarjeta;
     EditText txt_monto_pago_consumo, txt_pin_pago_consumo;
     int tipo_tarjeta_pago;
 
@@ -62,6 +62,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         banco = extras.getString("banco");
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         cli_dni = extras.getString("cli_dni");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
@@ -98,7 +99,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                 } else if (monto_pagar.equals("")) {
                     Toast.makeText(IngresoMontoPagoPinConsumos.this, "Ingrese el monto a pagar", Toast.LENGTH_LONG).show();
                 } else if (!pin_consumo.equals("") && !monto_pagar.equals("")) {
-                    Intent intent = new Intent(IngresoMontoPagoPinConsumos.this, ConformidadComercioConsumos.class);
+                    Intent intent = new Intent(IngresoMontoPagoPinConsumos.this, ConformidadComercioComercios.class);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("tipo_moneda", tipo_moneda);
@@ -108,6 +109,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                     intent.putExtra("banco", banco);
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                 }
             }

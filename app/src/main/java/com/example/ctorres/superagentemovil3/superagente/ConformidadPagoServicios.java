@@ -19,9 +19,13 @@ public class ConformidadPagoServicios extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago_servicio;
     private UsuarioEntity usuario;
-    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, cliente, tipo_servicio, cli_dni;
+    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda,
+            cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
-    TextView tv_numero_tarjeta_cifrada_pago_servicio, txt_servicio_pagar, tv_monto_servicio_pagar, tv_monto_comision_servicio_pagar, tv_monto_total_servicio_pagar, txt_tipo_moneda_servicio_pagar, tv_nro_servicio_servicio_pagar, tv_nombre_titular_pago_servicio, txt_tipo_servicio_pagar, txt_tipo_moneda_total_pagar, txt_tipo_moneda_comision_pagar;
+    TextView tv_numero_tarjeta_cifrada_pago_servicio, txt_servicio_pagar, tv_monto_servicio_pagar, tv_monto_comision_servicio_pagar,
+            tv_monto_total_servicio_pagar, txt_tipo_moneda_servicio_pagar, tv_nro_servicio_servicio_pagar,
+            tv_nombre_titular_pago_servicio, txt_tipo_servicio_pagar,
+            txt_tipo_moneda_total_pagar, txt_tipo_moneda_comision_pagar, tv_dni_cliente_conformidad, tv_nombre_recibo_usuario;
     DecimalFormat format = new DecimalFormat("0.00");
     LinearLayout ll_tipo_servicio_pagar_conforme;
 
@@ -46,6 +50,8 @@ public class ConformidadPagoServicios extends Activity {
         txt_tipo_servicio_pagar = (TextView) findViewById(R.id.txt_tipo_servicio_pagar);
         txt_tipo_moneda_total_pagar = (TextView) findViewById(R.id.txt_tipo_moneda_total_pagar);
         txt_tipo_moneda_comision_pagar = (TextView) findViewById(R.id.txt_tipo_moneda_comision_pagar);
+        tv_dni_cliente_conformidad = (TextView) findViewById(R.id.tv_dni_cliente_conformidad);
+        tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -60,6 +66,8 @@ public class ConformidadPagoServicios extends Activity {
         tipo_servicio = extras.getString("tipo_servicio");
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
+        nombre_recibo = extras.getString("nombre_recibo");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
 
         tv_numero_tarjeta_cifrada_pago_servicio.setText(num_tarjeta);
@@ -71,6 +79,8 @@ public class ConformidadPagoServicios extends Activity {
         tv_nombre_titular_pago_servicio.setText(cliente);
         txt_tipo_moneda_total_pagar.setText(tipo_moneda_deuda);
         txt_tipo_moneda_comision_pagar.setText(tipo_moneda_deuda);
+        tv_dni_cliente_conformidad.setText(cli_dni);
+        tv_nombre_recibo_usuario.setText(nombre_recibo);
 
         if (tipo_servicio == null) {
             ll_tipo_servicio_pagar_conforme.setVisibility(View.GONE);
@@ -98,26 +108,49 @@ public class ConformidadPagoServicios extends Activity {
                     intent.putExtra("tipo_servicio", tipo_servicio);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("nombre_recibo", nombre_recibo);
                     startActivity(intent);
                     finish();
                 } else if (tipo_tarjeta_pago == 1) {
-                    String comision = tv_monto_comision_servicio_pagar.getText().toString();
-                    Intent intent = new Intent(ConformidadPagoServicios.this, VoucherPagoServicioFirma.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("num_tarjeta", num_tarjeta);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("monto_servicio", monto_servicio);
-                    intent.putExtra("servicio", servicio);
-                    intent.putExtra("num_servicio", num_servicio);
-                    intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                    intent.putExtra("comision", comision);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cod_banco", cod_banco);
-                    intent.putExtra("tipo_servicio", tipo_servicio);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("cli_dni", cli_dni);
-                    startActivity(intent);
-                    finish();
+                    if (validacion_tarjeta.equals("Firma")) {
+                        String comision = tv_monto_comision_servicio_pagar.getText().toString();
+                        Intent intent = new Intent(ConformidadPagoServicios.this, VoucherPagoServicioFirma.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("num_tarjeta", num_tarjeta);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("monto_servicio", monto_servicio);
+                        intent.putExtra("servicio", servicio);
+                        intent.putExtra("num_servicio", num_servicio);
+                        intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                        intent.putExtra("comision", comision);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cod_banco", cod_banco);
+                        intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
+                        startActivity(intent);
+                        finish();
+                    } else if (validacion_tarjeta.equals("Pin")){
+                        String comision = tv_monto_comision_servicio_pagar.getText().toString();
+                        Intent intent = new Intent(ConformidadPagoServicios.this, VoucherPagoServicio.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("num_tarjeta", num_tarjeta);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("monto_servicio", monto_servicio);
+                        intent.putExtra("servicio", servicio);
+                        intent.putExtra("num_servicio", num_servicio);
+                        intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                        intent.putExtra("comision", comision);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                        intent.putExtra("cod_banco", cod_banco);
+                        intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
         });

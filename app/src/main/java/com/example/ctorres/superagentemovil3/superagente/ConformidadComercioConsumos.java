@@ -18,7 +18,7 @@ public class ConformidadComercioConsumos extends Activity {
 
     Button btn_confirmar_operacion_consumo;
     private UsuarioEntity usuario;
-    String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni;
+    String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni, validacion_tarjeta;
     TextView tv_nombre_cliente_consumo, tv_numero_tarjeta_consumo, tv_tipo_moneda_consumo, tv_monto_importe_consum, tv_dni_cliente_consumo;
     int tipo_tarjeta_pago;
     EditText txt_clave_comercio;
@@ -49,6 +49,7 @@ public class ConformidadComercioConsumos extends Activity {
         banco = extras.getString("banco");
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         cli_dni = extras.getString("cli_dni");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_numero_tarjeta_consumo.setText(tarjeta_cargo);
@@ -80,17 +81,31 @@ public class ConformidadComercioConsumos extends Activity {
                     if (claveComercio.length() == 0){
                         Toast.makeText(ConformidadComercioConsumos.this, "Ingrese la clave del comercio", Toast.LENGTH_LONG).show();
                     } else if (claveComercio.length() != 0) {
-                        Intent intent = new Intent(ConformidadComercioConsumos.this, VoucherPagoConsumoFirma.class);
-                        intent.putExtra("cliente", cliente);
-                        intent.putExtra("usuario", usuario);
-                        intent.putExtra("banco", banco);
-                        intent.putExtra("tipo_moneda", tipo_moneda);
-                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                        intent.putExtra("monto_pagar", monto_pagar);
-                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                        intent.putExtra("cli_dni", cli_dni);
-                        startActivity(intent);
+                        if (validacion_tarjeta.equals("Firma")) {
+                            Intent intent = new Intent(ConformidadComercioConsumos.this, VoucherPagoConsumoFirma.class);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("banco", banco);
+                            intent.putExtra("tipo_moneda", tipo_moneda);
+                            intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                            intent.putExtra("monto_pagar", monto_pagar);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                            intent.putExtra("cli_dni", cli_dni);
+                            startActivity(intent);
+                        } else if (validacion_tarjeta.equals("Pin")){
+                            Intent intent = new Intent(ConformidadComercioConsumos.this, VoucherPagoConsumo.class);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("banco", banco);
+                            intent.putExtra("tipo_moneda", tipo_moneda);
+                            intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                            intent.putExtra("monto_pagar", monto_pagar);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                            intent.putExtra("cli_dni", cli_dni);
+                            startActivity(intent);
+                        }
                     }
                 }
             }

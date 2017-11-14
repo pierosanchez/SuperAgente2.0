@@ -47,7 +47,7 @@ public class SeleccionServicioPagar extends Activity {
     ClubesAdapter clubesAdapter;
     String servicio, cliente, tipo_servicio, cli_dni;
     int tipo_servicio_publico;
-    TextView tv_seleccion_tipo_servicio;
+    TextView tv_seleccion_tipo_servicio, tv_nombre_recibo_usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,7 @@ public class SeleccionServicioPagar extends Activity {
         txt_numero_servicio = (EditText) findViewById(R.id.txt_numero_servicio);
 
         tv_seleccion_tipo_servicio = (TextView) findViewById(R.id.tv_seleccion_tipo_servicio);
+        tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
         //cargarCombo();
 
@@ -84,6 +85,7 @@ public class SeleccionServicioPagar extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 servicio = empresasServiciosAdapter.getItem(position).getDes_emp_servicio();
                 tipo_servicio_publico = empresasServiciosAdapter.getItem(position).getCod_tipo_emps_servicio();
+                tv_nombre_recibo_usuario.setText(empresasServiciosAdapter.getItem(position).getNombre_recibo());
 
                 if (tipo_servicio_publico == 3) {
 
@@ -150,6 +152,7 @@ public class SeleccionServicioPagar extends Activity {
             @Override
             public void onClick(View v) {
                 String numero_servicio = txt_numero_servicio.getText().toString();
+                String nombre_recibo = tv_nombre_recibo_usuario.getText().toString();
                 if (!numero_servicio.equals("")) {
                     Intent intent = new Intent(SeleccionServicioPagar.this, SeleccionRecibosPagar.class);
                     intent.putExtra("servicio", servicio);
@@ -158,6 +161,7 @@ public class SeleccionServicioPagar extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tipo_servicio", tipo_servicio);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("nombre_recibo", nombre_recibo);
                     startActivity(intent);
                     finish();
                 } else {

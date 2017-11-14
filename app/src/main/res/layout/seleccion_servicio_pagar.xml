@@ -48,13 +48,13 @@
                     android:text="@string/tv_seleccione_servicio" />
 
                 <Spinner
-                    android:gravity="center"
                     android:id="@+id/sp_seleccion_servicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/spinner_selector"
-                    android:spinnerMode="dialog"/>
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
 
                 <TextView
                     android:id="@+id/tv_seleccion_tipo_servicio"
@@ -64,19 +64,34 @@
                     android:text="@string/tv_seleccione_tipo_servicio" />
 
                 <Spinner
-                    android:gravity="center"
                     android:id="@+id/sp_seleccion_tipo_servicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/spinner_selector"
-                    android:spinnerMode="dialog"/>
+                    android:gravity="center"
+                    android:spinnerMode="dialog" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="@string/tv_ingrese_numero_servicio" />
+                    android:gravity="center"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_ingrese_numero_servicio" />
+
+                    <TextView
+                        android:id="@+id/tv_nombre_recibo_usuario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:textSize="14dp"
+                        android:text="@string/tv_ingrese_numero_servicio" />
+
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/txt_numero_servicio"
@@ -84,7 +99,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/color_blanco"
-                    android:singleLine="true"/>
+                    android:singleLine="true" />
 
             </LinearLayout>
 
@@ -98,7 +113,8 @@
                     android:layout_width="175dp"
                     android:layout_height="50dp"
                     android:background="@color/color_blanco"
-                    android:text="@string/btn_aceptar" />
+                    android:text="@string/btn_aceptar"
+                    android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/btn_cancelar_cuenta_tarjeta_abono"
@@ -106,7 +122,8 @@
                     android:layout_height="50dp"
                     android:layout_marginLeft="9dp"
                     android:background="@color/color_blanco"
-                    android:text="@string/btn_cancelar" />
+                    android:text="@string/btn_cancelar"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 

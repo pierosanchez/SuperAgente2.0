@@ -33,7 +33,7 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
     Spinner spinnerTipoMoneda;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
-    String tipo_moneda, cli_dni;
+    String tipo_moneda, cli_dni, validacion_tarjeta;
     int tipo_tarjeta_pago;
 
     @Override
@@ -59,6 +59,7 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
         banco = extras.getString("banco");
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         cli_dni = extras.getString("cli_dni");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
@@ -78,6 +79,7 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
                     intent.putExtra("banco", banco);
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                 } else {
                     Toast.makeText(IngresoMontoPagoFirmaConsumos.this, "Ingrese el monto a pagar", Toast.LENGTH_LONG).show();

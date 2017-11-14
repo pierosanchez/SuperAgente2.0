@@ -6,15 +6,24 @@ package com.example.ctorres.superagentemovil3.entity;
 
 public class EmpresasServiciosEntity {
     int cod_emp_servicio, cod_tipo_emps_servicio;
-    String des_emp_servicio;
+    String des_emp_servicio, nombre_recibo;
 
     public EmpresasServiciosEntity() {
     }
 
-    public EmpresasServiciosEntity(int cod_emp_servicio, String des_emp_servicio, int cod_tipo_emps_servicio) {
+    public EmpresasServiciosEntity(int cod_emp_servicio, String des_emp_servicio, int cod_tipo_emps_servicio, String nombre_recibo) {
         this.cod_emp_servicio = cod_emp_servicio;
         this.des_emp_servicio = des_emp_servicio;
+        this.nombre_recibo = nombre_recibo;
         this.cod_tipo_emps_servicio = cod_tipo_emps_servicio;
+    }
+
+    public String getNombre_recibo() {
+        return nombre_recibo;
+    }
+
+    public void setNombre_recibo(String nombre_recibo) {
+        this.nombre_recibo = nombre_recibo;
     }
 
     public int getCod_emp_servicio() {
