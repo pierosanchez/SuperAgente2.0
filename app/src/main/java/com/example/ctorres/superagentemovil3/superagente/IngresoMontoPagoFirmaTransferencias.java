@@ -38,7 +38,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
     Button btn_continuar_pago, btn_cancelar_pago;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
-    String tipo_moneda, cli_dni;
+    String tipo_moneda, cli_dni, validacion_tarjeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
         cliente = extras.getString("cliente");
         tipo_tarjeta = extras.getInt("tipo_tarjeta");
         cli_dni = extras.getString("cli_dni");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
@@ -93,6 +94,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tipo_tarjeta", tipo_tarjeta);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
             }

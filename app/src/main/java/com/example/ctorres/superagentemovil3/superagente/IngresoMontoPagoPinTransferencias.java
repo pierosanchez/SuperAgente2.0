@@ -31,7 +31,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     int emisor_tarjeta, tipo_tarjeta;
     TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
-    String cliente, cli_dni;
+    String cliente, cli_dni, validacion_tarjeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +64,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         cliente = extras.getString("cliente");
         tipo_tarjeta = extras.getInt("tipo_tarjeta");
         cli_dni = extras.getString("cli_dni");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
 
         //imageView.setImageBitmap(bmp);
 
@@ -89,12 +90,13 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("tipo_tarjeta", tipo_tarjeta);
                     intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
                 } else if (pin.length()==0){
-                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el pin", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "INGRESE EL PIN", Toast.LENGTH_LONG).show();
                 } else if (monto.length()==0){
-                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "Ingrese el monto a pagar", Toast.LENGTH_LONG).show();
+                    Toast.makeText(IngresoMontoPagoPinTransferencias.this, "INGRESE EL MONTO A PAGAR", Toast.LENGTH_LONG).show();
                 }
             }
         });

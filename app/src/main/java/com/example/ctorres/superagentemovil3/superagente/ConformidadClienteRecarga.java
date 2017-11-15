@@ -65,23 +65,43 @@ public class ConformidadClienteRecarga extends Activity {
         btn_confirmar_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ConformidadClienteRecarga.this, VoucherRecargaTelefonica.class);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("banco", banco);
-                intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
-                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                intent.putExtra("monto_pagar", monto_pagar);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                intent.putExtra("cli_dni", cli_dni);
-
-                intent.putExtra("nro_telefono", nro_telefono);
-                intent.putExtra("tipo_operador", tipo_operador);
-                intent.putExtra("monto_recarga", monto_recarga);
-                intent.putExtra("comisionRecarga", comisionRecarga);
-                intent.putExtra("montoTotal", montoTotal);
-                startActivity(intent);
+                if (validacion_tarjeta.equals("Pin")) {
+                    Intent intent = new Intent(ConformidadClienteRecarga.this, VoucherRecargaTelefonica.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("nro_telefono", nro_telefono);
+                    intent.putExtra("tipo_operador", tipo_operador);
+                    intent.putExtra("monto_recarga", monto_recarga);
+                    intent.putExtra("comisionRecarga", comisionRecarga);
+                    intent.putExtra("montoTotal", montoTotal);
+                    startActivity(intent);
+                    finish();
+                } else if (validacion_tarjeta.equals("Firma")){
+                    Intent intent = new Intent(ConformidadClienteRecarga.this, VoucherRecargaTelefonica.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("nro_telefono", nro_telefono);
+                    intent.putExtra("tipo_operador", tipo_operador);
+                    intent.putExtra("monto_recarga", monto_recarga);
+                    intent.putExtra("comisionRecarga", comisionRecarga);
+                    intent.putExtra("montoTotal", montoTotal);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

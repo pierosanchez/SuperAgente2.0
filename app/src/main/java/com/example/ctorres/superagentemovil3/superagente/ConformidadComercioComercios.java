@@ -59,14 +59,19 @@ public class ConformidadComercioComercios extends Activity {
         parteDistrito = extras.getString("parteDistrito");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
+        if (!parteRazon.equals("") && !parteDireccion.equals("") && !parteDistrito.equals("")){
+            tv_razonsoc_comercioConfor.setText(parteRazon);
+            tv_direccion_comercioConfor.setText(parteDireccion);
+            tv_distrito_comercioConfor.setText(parteDistrito);
+        } else {
+            Toast.makeText(ConformidadComercioComercios.this, "Hubo un error al obtener los datos del comercio", Toast.LENGTH_LONG).show();
+        }
+
         tv_nombre_cliente_comercio.setText(cliente);
         tv_numero_tarjeta_comercio.setText(tarjeta_cargo);
         tv_tipo_moneda_comercio.setText(tipo_moneda);
         tv_monto_importe_comercio.setText(montoTransferencia());
         tv_dni_cliente_comercio.setText(cli_dni);
-        tv_razonsoc_comercioConfor.setText(parteRazon);
-        tv_direccion_comercioConfor.setText(parteDireccion);
-        tv_distrito_comercioConfor.setText(parteDistrito);
 
         /*btn_confirmar_operacion_consumo.setOnClickListener(new View.OnClickListener() {
             @Override

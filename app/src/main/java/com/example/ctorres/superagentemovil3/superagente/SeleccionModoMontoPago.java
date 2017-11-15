@@ -223,6 +223,7 @@ public class SeleccionModoMontoPago extends Activity {
         } else if (rdbtn_total.isChecked()) {
             monto = txt_monto_total.getText().toString();
         } else {
+            txt_monto_cuenta.requestFocus();
             monto = txt_monto_cuenta.getText().toString();
         }
 

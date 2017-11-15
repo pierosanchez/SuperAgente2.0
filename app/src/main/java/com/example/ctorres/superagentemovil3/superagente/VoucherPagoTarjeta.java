@@ -56,7 +56,7 @@ public class VoucherPagoTarjeta extends Activity {
         desc_corta_banco = extras.getString("desc_corta_banco");
         banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
-        banco_tarjeta_cargo = "BACO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
+        banco_tarjeta_cargo = "BANCO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
 
         tv_monto_importe.setText(importe);
         tv_tarjeta_cifrada.setText(num_tarjeta);

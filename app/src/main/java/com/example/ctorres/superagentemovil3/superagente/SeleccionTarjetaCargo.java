@@ -644,6 +644,7 @@ public class SeleccionTarjetaCargo extends Activity {
                     String emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaEmisorTarjeta();
                     String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                     int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
+                    String validacion_tarjeta = tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta();
                     Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPinRecargas.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -652,7 +653,7 @@ public class SeleccionTarjetaCargo extends Activity {
                     intent.putExtra("banco", banco);
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
-
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     intent.putExtra("nro_telefono", nro_telefono);
                     intent.putExtra("tipo_moneda_recarga", tipo_moneda_recarga);
                     intent.putExtra("tipo_operador", tipo_operador);
