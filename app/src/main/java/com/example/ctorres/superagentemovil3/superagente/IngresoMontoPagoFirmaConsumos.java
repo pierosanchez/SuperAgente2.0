@@ -8,8 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class IngresoMontoPagoFirmaConsumos extends Activity {
 
@@ -30,11 +33,14 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
     private UsuarioEntity usuario;
     EditText txt_monto_pago_consumo;
     TextView tv_nombre_cliente_consumo, tv_tarjeta_cifrada_consumos;
-    Spinner spinnerTipoMoneda;
+    Spinner spinnerTipoMoneda, sp_pago_cuotas, sp_cantidad_cuotas;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     String tipo_moneda, cli_dni, validacion_tarjeta;
     int tipo_tarjeta_pago;
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    LinearLayout ll_cantidad_cuotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,10 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
         txt_monto_pago_consumo = (EditText) findViewById(R.id.txt_monto_pago_consumo);
 
         spinnerTipoMoneda = (Spinner) findViewById(R.id.spinnerTipoMoneda);
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
+
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -63,6 +73,23 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
+
+        cargarCuotas();
+        deseaCuotas();
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,5 +197,15 @@ public class IngresoMontoPagoFirmaConsumos extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaConsumos.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaConsumos.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_cantidad_cuotas.setAdapter(cuota);
     }
 }

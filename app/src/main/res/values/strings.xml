@@ -632,6 +632,8 @@
     <string name="tv_tarjeta_ingresada_consumo">TARJETA CIFRADA</string>
     <string name="tv_ingrese_pin_consumo">INGRESE PIN</string>
     <string name="tv_datos_comercio_consumo">DATOS DEL COMERCIO</string>
+    <string name="tv_pago_cuotas">¿PAGO EN CUOTAS?</string>
+    <string name="tv_cantidad_cuotas">CANTIDAD DE CUOTAS</string>
 
     <!-- Pantalla de conformidad del comercio -->
 

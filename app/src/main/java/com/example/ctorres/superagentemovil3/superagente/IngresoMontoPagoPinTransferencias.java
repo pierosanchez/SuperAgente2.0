@@ -110,7 +110,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     }
 
     public void cargarComboTipoMoneda() {
-        ArrayAdapter<String> adapterTipoMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipoMoneda);
+        ArrayAdapter<String> adapterTipoMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoMoneda);
         spinnerMonedaPagar.setAdapter(adapterTipoMoneda);
     }
 

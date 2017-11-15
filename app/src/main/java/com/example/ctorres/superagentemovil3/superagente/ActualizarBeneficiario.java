@@ -117,7 +117,7 @@ public class ActualizarBeneficiario extends Activity {
     }
 
     public void cargarTipoAbono(){
-        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipo_abono);
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipo_abono);
         sp_tipo_abono_beneficiario.setAdapter(adaptadorBanco);
     }
 

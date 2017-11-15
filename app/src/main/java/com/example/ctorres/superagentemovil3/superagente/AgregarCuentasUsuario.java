@@ -161,7 +161,7 @@ public class AgregarCuentasUsuario extends Activity {
     }
 
     public void cargarMoneda() {
-        ArrayAdapter<String> adaptadorMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, moneda);
+        ArrayAdapter<String> adaptadorMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, moneda);
         spinnerMoneda.setAdapter(adaptadorMoneda);
     }
 

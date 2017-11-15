@@ -66,7 +66,7 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
         tv_tarjeta_cifrada_comercio.setText(tarjeta_cargo);
         txt_moneda_pagar_recarga.setText(monto_recarga.toString());
         String[] unicaOpcion = {tipo_moneda_recarga};
-        spinnerTipoMoneda.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,unicaOpcion));
+        spinnerTipoMoneda.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,unicaOpcion));
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override

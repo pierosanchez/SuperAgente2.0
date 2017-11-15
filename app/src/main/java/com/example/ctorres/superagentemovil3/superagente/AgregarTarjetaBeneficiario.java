@@ -143,12 +143,12 @@ public class AgregarTarjetaBeneficiario extends Activity {
     }
 
     public void cargarTipoTarjeta(){
-        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayTipoTarjeta);
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipoTarjeta);
         spinnerTipoTarjeta.setAdapter(adaptadorBanco);
     }
 
     public void cargarBancoTarjeta(){
-        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arrayBancoTarjeta);
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayBancoTarjeta);
         spinnerBancoTarjeta.setAdapter(adaptadorBanco);
     }
 

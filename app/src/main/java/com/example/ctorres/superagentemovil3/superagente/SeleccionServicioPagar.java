@@ -179,12 +179,12 @@ public class SeleccionServicioPagar extends Activity {
     }
 
     public void cargarCombo() {
-        ArrayAdapter<String> adaptadorServicios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, servicios);
+        ArrayAdapter<String> adaptadorServicios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, servicios);
         sp_seleccion_servicio.setAdapter(adaptadorServicios);
     }
 
     public void cargarTipoServicioCombo() {
-        ArrayAdapter<String> adaptadorTipoServicios = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, tipoServicio);
+        ArrayAdapter<String> adaptadorTipoServicios = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoServicio);
         sp_seleccion_tipo_servicio.setAdapter(adaptadorTipoServicios);
     }
 

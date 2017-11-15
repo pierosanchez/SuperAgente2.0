@@ -183,7 +183,7 @@ public class SeleccionModoMontoPago extends Activity {
     }
 
     public void cargarTipoTarjetas(){
-        ArrayAdapter<String> adapterTarjetas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipoMoneda);
+        ArrayAdapter<String> adapterTarjetas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoMoneda);
         spinnerTipoMonedaPago.setAdapter(adapterTarjetas);
     }
 

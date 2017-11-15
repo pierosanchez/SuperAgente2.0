@@ -397,7 +397,7 @@ public class IngresoCuentaTarjetaAbono extends Activity {
     }
 
     public void cargarCombos() {
-        ArrayAdapter<String> adapterTipoCheque = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tipoCheque);
+        ArrayAdapter<String> adapterTipoCheque = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoCheque);
         spinnerTipoCheque.setAdapter(adapterTipoCheque);
     }
 

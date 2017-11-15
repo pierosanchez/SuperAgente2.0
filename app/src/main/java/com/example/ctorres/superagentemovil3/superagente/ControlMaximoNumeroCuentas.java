@@ -147,9 +147,9 @@ public class ControlMaximoNumeroCuentas extends Activity {
     }
 
     public void cargarBancos() {
-        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, bancos);
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bancos);
         //ArrayAdapter<String> adaptadorCuentas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cuentas);
-        ArrayAdapter<String> adaptadorMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, moneda);
+        ArrayAdapter<String> adaptadorMoneda = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, moneda);
         sp_banco.setAdapter(adaptadorBanco);
         //sp_cuentas.setAdapter(adaptadorCuentas);
         spinnerMoneda.setAdapter(adaptadorMoneda);

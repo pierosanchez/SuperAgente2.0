@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
     tools:context="com.example.ctorres.superagentemovil3.superagente.RecargaTelefonica">
 
     <LinearLayout
@@ -25,144 +25,147 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/color_amarillo"
-        android:text="@string/tv_clave_para_consulta" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/color_blanco"
-            android:text="@string/tv_nro_telefono"/>
-
-        <EditText
-            android:id="@+id/tv_nroRecargar"
-            android:layout_width="170dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/color_blanco"
-            android:inputType="text" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="6dp"
-        android:orientation="horizontal">
-
-
-        <TextView
-            android:id="@+id/textViewNombre2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textColor="@color/color_blanco"
-            android:text="@string/tv_operador" />
-
-
-        <Spinner
-            android:id="@+id/spinner_operador"
-            android:layout_width="175dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="60dp"
-            android:background="@drawable/spinner_selector"
-            android:spinnerMode="dialog"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/color_blanco"
-            android:layout_marginLeft="15dp"
-            android:text="@string/tv_selec_monto" />
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinner_tipoMoneda"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/spinner_selector"
-                android:spinnerMode="dialog"/>
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/tv_montoRecarga"
-                android:layout_width="170dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="15dp"
-                android:background="@color/color_blanco"
-                android:inputType="text" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/tv_nro_telefono"
+                    android:textColor="@color/color_blanco" />
+
+                <EditText
+                    android:id="@+id/tv_nroRecargar"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@color/color_blanco"
+                    android:inputType="number"
+                    android:maxLength="9"
+                    android:singleLine="true"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/textViewNombre2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/tv_operador"
+                    android:textColor="@color/color_blanco" />
+
+
+                <Spinner
+                    android:id="@+id/spinner_operador"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="60dp"
+                    android:background="@drawable/spinner_selector"
+                    android:spinnerMode="dialog" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/tv_selec_monto"
+                    android:textColor="@color/color_blanco" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <Spinner
+                        android:id="@+id/spinner_tipoMoneda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/spinner_selector"
+                        android:spinnerMode="dialog" />
+
+                    <EditText
+                        android:id="@+id/tv_montoRecarga"
+                        android:layout_width="170dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="15dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btn_siguiente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_siguiente" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_regresarMenu"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/btn_regresar_menu" />
+
+                <Button
+                    android:id="@+id/btn_salirRecarga"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:text="@string/btn_salir_recarga" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="100dp">
-
-        <Button
-            android:id="@+id/btn_siguiente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Siguiente"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btn_regresarMenu"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_regresar_menu" />
-
-        <Button
-            android:id="@+id/btn_salirRecarga"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:text="@string/btn_salir_recarga" />
-
-    </LinearLayout>
-
-
-
-
-
-
-
+    </ScrollView>
 
 </LinearLayout>

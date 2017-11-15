@@ -56,8 +56,6 @@ public class RecargaTelefonica extends Activity {
         btn_salirRecarga = (Button) findViewById(R.id.btn_monto_salirRecarga);
         btn_siguiente = (Button) findViewById(R.id.btn_siguiente);
 
-
-
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
         cliente = extras.getString("cliente");
@@ -127,9 +125,6 @@ public class RecargaTelefonica extends Activity {
 
             }
         });
-
-
-
 
     }
 
