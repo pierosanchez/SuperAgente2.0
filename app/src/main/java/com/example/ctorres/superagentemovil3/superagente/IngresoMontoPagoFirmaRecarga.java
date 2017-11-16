@@ -15,6 +15,7 @@ import com.example.ctorres.superagentemovil3.dao.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class IngresoMontoPagoFirmaRecarga extends Activity {
@@ -29,9 +30,10 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
     ArrayList<MonedaEntity> monedaEntityArrayList;
     String tipo_moneda, cli_dni;
     int tipo_tarjeta_pago;
-
     String nro_telefono, tipo_moneda_recarga, tipo_operador;
     Double monto_recarga;
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +63,14 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
         monto_recarga = extras.getDouble("monto_recarga");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
+        spinnerTipoMoneda.setEnabled(false);
+        txt_moneda_pagar_recarga.setEnabled(false);
 
         tv_nombre_cliente_comercio.setText(cliente);
         tv_tarjeta_cifrada_comercio.setText(tarjeta_cargo);
-        txt_moneda_pagar_recarga.setText(monto_recarga.toString());
+        txt_moneda_pagar_recarga.setText(transformarMontoRecarga());
         String[] unicaOpcion = {tipo_moneda_recarga};
+
         spinnerTipoMoneda.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,unicaOpcion));
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +90,12 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
                 intent.putExtra("monto_recarga", monto_recarga);
                 intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 startActivity(intent);
+                finish();
             }
         });
+    }
 
-
+    public String transformarMontoRecarga(){
+        return tipo_moneda_recarga + " " + decimalFormat.format(monto_recarga);
     }
 }

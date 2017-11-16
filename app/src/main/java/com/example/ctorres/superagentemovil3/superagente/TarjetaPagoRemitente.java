@@ -204,6 +204,58 @@ public class TarjetaPagoRemitente extends Activity {
             tarjetasUsuarioAdapter.setNewListBeneficiario(usuarioEntityArrayList);
             tarjetasUsuarioAdapter.notifyDataSetChanged();
             circleProgressBar.setVisibility(View.GONE);
+            if (usuarioEntityArrayList.size() == 1){
+                emisor_tarjeta = tarjetasUsuarioAdapter.getItem(0).getCod_emisor_tarjeta();
+                num_tarjeta = tarjetasUsuarioAdapter.getItem(0).getNumeroTarjeta();
+                banco = tarjetasUsuarioAdapter.getItem(0).getBanco_tarjeta();
+                int tipo_tarjeta = tarjetasUsuarioAdapter.getItem(0).getTipo_tarjeta();
+                String validacion_tarjeta = tarjetasUsuarioAdapter.getItem(0).getValidacionTarjeta();
+                if (tarjetasUsuarioAdapter.getItem(0).getTipo_tarjeta() == 2) {
+                    Intent intent = new Intent(TarjetaPagoRemitente.this, IngresoMontoPagoPinTransferencias.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("nombrebenef", nombreBeneficiario);
+                    intent.putExtra("dni_benef", dni_benef);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    if (tarjetasUsuarioAdapter.getItem(0).getValidacionTarjeta().equals("Firma")) {
+                        Intent intent = new Intent(TarjetaPagoRemitente.this, IngresoMontoPagoFirmaTransferencias.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("nombrebenef", nombreBeneficiario);
+                        intent.putExtra("dni_benef", dni_benef);
+                        intent.putExtra("num_tarjeta", num_tarjeta);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                        startActivity(intent);
+                        finish();
+                    } else if (tarjetasUsuarioAdapter.getItem(0).getValidacionTarjeta().equals("Pin")){
+                        Intent intent = new Intent(TarjetaPagoRemitente.this, IngresoMontoPagoPinTransferencias.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("nombrebenef", nombreBeneficiario);
+                        intent.putExtra("dni_benef", dni_benef);
+                        intent.putExtra("num_tarjeta", num_tarjeta);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco", banco);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
         }
     }
 

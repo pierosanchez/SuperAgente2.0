@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -159,7 +161,7 @@ public class VoucherTransferenciasFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherTransferenciasFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    finish();
+                    salir();
                 }
             }
         });
@@ -210,5 +212,27 @@ public class VoucherTransferenciasFirma extends Activity {
     public String montoTransferencia(){
         double importeTransferencia = Double.parseDouble(transferencia);
         return decimalFormat.format(importeTransferencia);
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
+        alertDialog.setTitle("Salir");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

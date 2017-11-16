@@ -93,7 +93,7 @@
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:text="@string/tv_ingrese_ping"
                         android:spinnerMode="dialog"/>
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="70dp"
                         android:background="@color/color_blanco"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberPassword"
                         android:editable="false"
                         android:gravity="center"/>
 
@@ -119,8 +119,8 @@
                     <Spinner
                         android:background="@drawable/spinner_selector"
                         android:id="@+id/spinnerMonedaPagarRecarga"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
                         android:text="@string/tv_ingrese_ping"
                         android:spinnerMode="dialog"/>
 
@@ -128,11 +128,11 @@
                         android:id="@+id/txt_moneda_pagar_recarga"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="70dp"
                         android:background="@color/color_blanco"
                         android:inputType="numberDecimal"
-                        android:editable="false"
-                        android:gravity="center"/>
+                        android:gravity="center"
+                        android:textColor="@android:color/black"/>
 
                 </LinearLayout>
 
@@ -147,14 +147,16 @@
                     android:id="@+id/btn_continuar_pagoRecarga"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/btn_continuar" />
+                    android:text="@string/btn_continuar"
+                    android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/btn_cancelar_pagoRecarga"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
-                    android:text="@string/btn_cancelar" />
+                    android:text="@string/btn_cancelar"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 

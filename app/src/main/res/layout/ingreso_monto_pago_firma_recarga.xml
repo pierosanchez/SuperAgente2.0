@@ -100,8 +100,8 @@
                         android:id="@+id/spinnerMonedaPagarRecarga"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:text="@string/tv_ingrese_ping"
-                        android:spinnerMode="dialog"/>
+                        android:spinnerMode="dialog"
+                        android:textColor="@android:color/black"/>
 
                     <EditText
                         android:id="@+id/txt_moneda_pagar_recarga"
@@ -110,7 +110,6 @@
                         android:layout_marginLeft="20dp"
                         android:background="@color/color_blanco"
                         android:inputType="numberDecimal"
-                        android:editable="false"
                         android:gravity="center"/>
 
                 </LinearLayout>

@@ -5,22 +5,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.BancosAdapter;
 import com.example.ctorres.superagentemovil3.dao.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.dao.OperadorAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -44,7 +41,7 @@ public class RecargaTelefonica extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recarga_telefonica);
+        setContentView(R.layout.recarga_telefonica);
 
         txt_nroRecarga = (EditText) findViewById(R.id.tv_nroRecargar);
         txt_montoRecarga = (EditText) findViewById(R.id.tv_montoRecarga);
@@ -53,7 +50,7 @@ public class RecargaTelefonica extends Activity {
         sp_monedaRecarga = (Spinner) findViewById(R.id.spinner_tipoMoneda);
 
         btn_regMenuRecarga = (Button) findViewById(R.id.btn_regresarMenu);
-        btn_salirRecarga = (Button) findViewById(R.id.btn_monto_salirRecarga);
+        btn_salirRecarga = (Button) findViewById(R.id.btn_salirRecarga);
         btn_siguiente = (Button) findViewById(R.id.btn_siguiente);
 
         Bundle extras = getIntent().getExtras();
@@ -72,24 +69,32 @@ public class RecargaTelefonica extends Activity {
         sp_monedaRecarga.setAdapter(monedaAdapter);
 
         ejecutarListaMoneda();
+        sp_monedaRecarga.setEnabled(false);
 
         btn_siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 nro_telefono = txt_nroRecarga.getText().toString();
-                monto_recarga = Double.parseDouble(txt_montoRecarga.getText().toString());
-
-                Intent intent = new Intent(RecargaTelefonica.this, SeleccionTarjetaCargo.class);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("nro_telefono", nro_telefono);
-                intent.putExtra("tipo_moneda", tipo_moneda);
-                intent.putExtra("tipo_operador", tipo_operador);
-                intent.putExtra("monto_recarga", monto_recarga);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivityForResult(intent, 0);
-                finish();
+                String recarga = txt_montoRecarga.getText().toString();
+                if (nro_telefono.length() != 0 && recarga.length() != 0) {
+                    monto_recarga = Double.parseDouble(recarga);
+                    Intent intent = new Intent(RecargaTelefonica.this, SeleccionTarjetaCargo.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("nro_telefono", nro_telefono);
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tipo_operador", tipo_operador);
+                    intent.putExtra("monto_recarga", monto_recarga);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivityForResult(intent, 0);
+                    finish();
+                } else if (nro_telefono.length() == 0 && recarga.length() == 0){
+                    Toast.makeText(RecargaTelefonica.this, "Ingrese el número y el monto de recarga", Toast.LENGTH_LONG).show();
+                } else if (nro_telefono.length() == 0){
+                    Toast.makeText(RecargaTelefonica.this, "Ingrese el número al cual recargar", Toast.LENGTH_LONG).show();
+                } else if (recarga.length() == 0){
+                    Toast.makeText(RecargaTelefonica.this, "Ingrese el monto de recarga", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -100,6 +105,12 @@ public class RecargaTelefonica extends Activity {
             }
         });
 
+        btn_salirRecarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
+            }
+        });
 
 
         sp_operadorRecarga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -189,6 +200,16 @@ public class RecargaTelefonica extends Activity {
                 finish();
             }
         });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 
 
@@ -215,6 +236,28 @@ public class RecargaTelefonica extends Activity {
             //listadoBeneficiario = null;
         }
 
+    }
+
+    public void salir(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
+        alertDialog.setTitle("Salir");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 
 }

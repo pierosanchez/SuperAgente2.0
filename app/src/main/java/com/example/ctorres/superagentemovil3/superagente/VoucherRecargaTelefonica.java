@@ -1,13 +1,15 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+
+import java.text.DecimalFormat;
 
 public class VoucherRecargaTelefonica extends Activity {
 
@@ -18,11 +20,12 @@ public class VoucherRecargaTelefonica extends Activity {
     int tipo_tarjeta_pago;
     String tipo_moneda_recarga,tipo_operador,nro_telefono;
     Double monto_recarga,comisionRecarga,montoTotal;
+    DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_voucher_recarga_telefonica);
+        setContentView(R.layout.voucher_recarga_telefonica);
 
 
         tv_fecha = (TextView) findViewById(R.id.tv_fechaRecarga);
@@ -33,7 +36,7 @@ public class VoucherRecargaTelefonica extends Activity {
         tv_importe = (TextView) findViewById(R.id.tv_importeRecarga);
         tv_comision = (TextView) findViewById(R.id.tv_comisionRecarga);
         tv_total = (TextView) findViewById(R.id.tv_totalRecarga);
-        tv_forpago = (TextView) findViewById(R.id.tv_formapagoRecarga);
+        tv_forpago = (TextView) findViewById(R.id.tv_recarga_forma_pago);
         tv_banco = (TextView) findViewById(R.id.tv_bancoRecarga);
         tv_nroTarjeta = (TextView) findViewById(R.id.tv_nroTarjetaRecarga);
 
@@ -52,16 +55,70 @@ public class VoucherRecargaTelefonica extends Activity {
         comisionRecarga = extras.getDouble("comisionRecarga");
         montoTotal = extras.getDouble("montoTotal");
 
-       /* tv_operadora.setText(tipo_operador);
+        tv_fecha.setText(obtenerFecha());
+        tv_hora.setText(obtenerHora());
+        tv_operadora.setText(tipo_operador);
         tv_nrofono.setText(nro_telefono);
-        tv_importe.setText(monto_recarga.toString());
-        tv_comision.setText(comisionRecarga.toString());
-        tv_total.setText(montoTotal.toString());
-        tv_forpago.setText(tipo_tarjeta_pago);
+        tv_importe.setText(transformarMontoRecarga());
+        tv_comision.setText(transformarComisionRecarga());
+        tv_total.setText(transformarMontoTotalRecarga());
+        tv_forpago.setText(transformarTipoTarjetaPago());
         tv_banco.setText(banco);
-        tv_nroTarjeta.setText(tarjeta_cargo); */
+        tv_nroTarjeta.setText(tarjeta_cargo);
 
+    }
 
+    public String obtenerHora() {
+        String hora;
 
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int horaS = today.hour;
+        int min = today.minute;
+        int seg = today.second;
+        //para probar en celulares se comenta y cuando es con emuladores se descomenta
+        //horaS = horaS - 5;
+
+        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+
+        return hora;
+    }
+
+    public String obtenerFecha() {
+
+        String fecha;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int dia = today.monthDay;
+        int mes = today.month;
+        int año = today.year;
+        mes = mes + 1;
+
+        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+
+        return fecha;
+    }
+
+    public String transformarMontoRecarga(){
+        return tipo_moneda_recarga + " " + decimalFormat.format(monto_recarga);
+    }
+
+    public String transformarComisionRecarga(){
+        return tipo_moneda_recarga + " " + decimalFormat.format(comisionRecarga);
+    }
+
+    public String transformarMontoTotalRecarga(){
+        return tipo_moneda_recarga + " " + decimalFormat.format(montoTotal);
+    }
+
+    public String transformarTipoTarjetaPago(){
+        String tipoTarjeta = "";
+        if (tipo_tarjeta_pago == 1){
+            tipoTarjeta = "Crédito";
+        } else if (tipo_tarjeta_pago == 2){
+            tipoTarjeta = "Débito";
+        }
+        return tipoTarjeta;
     }
 }

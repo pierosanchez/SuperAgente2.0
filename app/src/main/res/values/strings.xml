@@ -701,7 +701,7 @@
     <string name="tv_hora_voucher_Recarga">HORA:</string>
     <string name="tv_nroUnico_voucher_Recarga">NÚMERO ÚNICO:</string>
     <string name="tv_recarga_voucher_Recarga">RECARGA:</string>
-    <string name="tv_fonoTarjeta_voucher_Recarga">TELÉFONO/TARJETA:</string>
+    <string name="tv_fonoTarjeta_voucher_Recarga">TELÉFONO:</string>
     <string name="tv_importe_voucher_Recarga">IMPORTE:</string>
     <string name="tv_comision_voucher_Recarga">COMISIÓN DE RECARGA:</string>
     <string name="tv_total_voucher_Recarga">TOTAL PAGADO:</string>

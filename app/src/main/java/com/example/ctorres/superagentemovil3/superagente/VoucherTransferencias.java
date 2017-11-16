@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -130,9 +132,7 @@ public class VoucherTransferencias extends Activity {
         btn_salir_transferencias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VoucherTransferencias.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                salir();
             }
         });
     }
@@ -172,5 +172,27 @@ public class VoucherTransferencias extends Activity {
     public String montoTransferencia(){
         double importeTransferencia = Double.parseDouble(transferencia);
         return decimalFormat.format(importeTransferencia);
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
+        alertDialog.setTitle("Salir");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }
