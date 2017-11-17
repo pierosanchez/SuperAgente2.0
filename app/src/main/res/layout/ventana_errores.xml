@@ -42,6 +42,7 @@
                     android:id="@+id/tv_mensaje"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="@string/tv_ingrese_num_celular" />
 
             </LinearLayout>
@@ -135,6 +136,7 @@
                     android:id="@+id/btn_opcion1"
                     android:layout_width="175dp"
                     android:layout_height="50dp"
+                    android:layout_weight="1"
                     android:background="@color/color_blanco"
                     android:text="@string/btn_regresar" />
 
@@ -143,6 +145,7 @@
                     android:layout_width="175dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
                     android:background="@color/color_blanco"
                     android:text="@string/btn_salir" />
 

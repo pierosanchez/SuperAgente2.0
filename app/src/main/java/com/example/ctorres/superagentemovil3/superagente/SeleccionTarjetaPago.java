@@ -167,31 +167,32 @@ public class SeleccionTarjetaPago extends Activity {
             tarjetasUsuarioAdapter.setNewListBeneficiario(usuarioEntityArrayList);
             tarjetasUsuarioAdapter.notifyDataSetChanged();
             circleProgressBar.setVisibility(View.GONE);
-            if (tarjetasUsuarioAdapter.getItem(0).getNumeroTarjeta().equals("00")){
-                Toast.makeText(SeleccionTarjetaPago.this, "Usted no puede realizar esta accion porque solo cuenta una tarjeta", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(SeleccionTarjetaPago.this, MenuCliente.class);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("usuario", usuario);
-                startActivity(intent);
-                finish();
-            } else if (usuarioEntityArrayList.size() == 1){
-                num_tarjeta = tarjetasUsuarioAdapter.getItem(0).getNumeroTarjeta();
-                tipo_tarjeta = tarjetasUsuarioAdapter.getItem(0).getTipo_tarjeta();
-                emisor_tarjeta = tarjetasUsuarioAdapter.getItem(0).getCod_emisor_tarjeta();
-                banco_tarjeta = tarjetasUsuarioAdapter.getItem(0).getBanco_tarjeta();
-                String desc_corta_banco = tarjetasUsuarioAdapter.getItem(0).getDesc_cortaBanco();
-                Intent intent = new Intent(SeleccionTarjetaPago.this, SeleccionModoMontoPago.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("banco_tarjeta", banco_tarjeta);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("desc_corta_banco", desc_corta_banco);
-                startActivity(intent);
-                finish();
+            if (usuarioEntityArrayList.size() == 1){
+                if (tarjetasUsuarioAdapter.getItem(0).getRespTarjeta().equals("00")){
+                    Intent intent = new Intent(SeleccionTarjetaPago.this, VentanaErrores.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("usuario", usuario);
+                    startActivityForResult(intent, 0);
+                    finish();
+                } else {
+                    num_tarjeta = tarjetasUsuarioAdapter.getItem(0).getNumeroTarjeta();
+                    tipo_tarjeta = tarjetasUsuarioAdapter.getItem(0).getTipo_tarjeta();
+                    emisor_tarjeta = tarjetasUsuarioAdapter.getItem(0).getCod_emisor_tarjeta();
+                    banco_tarjeta = tarjetasUsuarioAdapter.getItem(0).getBanco_tarjeta();
+                    String desc_corta_banco = tarjetasUsuarioAdapter.getItem(0).getDesc_cortaBanco();
+                    Intent intent = new Intent(SeleccionTarjetaPago.this, SeleccionModoMontoPago.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("banco_tarjeta", banco_tarjeta);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("desc_corta_banco", desc_corta_banco);
+                    startActivity(intent);
+                    finish();
+                }
             }
             for (int i=usuarioEntityArrayList.size()-1; i>=0; i--) {
                 if (usuarioEntityArrayList.get(i).getTipo_tarjeta() == 2) {

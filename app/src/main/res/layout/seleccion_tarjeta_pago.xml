@@ -27,69 +27,25 @@
 
     </LinearLayout>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/img_atras"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_atras" />
-
-                <ImageView
-                    android:id="@+id/img_tarjeta_seleccion_pago"
-                    android:layout_width="250dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/bin424137scotiabankjockeyvisa" />
-
-                <ImageView
-                    android:id="@+id/img_adelante"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_adelante" />
-
-            </LinearLayout>-->
-
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textSize="16dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_seleccione_tarjeta_pagar" />
-
-            </LinearLayout>-->
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="250dp"
                 android:layout_marginTop="20dp"
                 android:gravity="center">
 
                 <ListView
                     android:id="@+id/lv_tarjetas_usuario"
                     android:layout_width="330dp"
-                    android:layout_height="match_parent">
-
-
-                </ListView>
+                    android:layout_height="match_parent"/>
 
             </LinearLayout>
 
@@ -109,8 +65,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="50dp"
-                android:gravity="bottom">
+                android:layout_marginTop="50dp">
 
                 <LinearLayout
                     android:id="@+id/btn_cancelar_tarjeta_pago"
@@ -134,7 +89,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    <!--</ScrollView>-->
 
 </LinearLayout>
 

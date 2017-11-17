@@ -736,6 +736,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         usuarioEntity.setDesc_cortaBanco(utils.getValueStringOrNull(jsonObject, "desc_breve_banco"));
                         usuarioEntity.setDesc_cortaEmisorTarjeta(utils.getValueStringOrNull(jsonObject, "desc_corta_tarjeta"));
                         usuarioEntity.setValidacionTarjeta(utils.getValueStringOrNull(jsonObject, "validacion_tarjeta"));
+                        usuarioEntity.setRespTarjeta(utils.getValueStringOrNull(jsonObject, "rpta_tarjeta"));
                         listaUsuario.add(usuarioEntity);
                     }
                 } else {
