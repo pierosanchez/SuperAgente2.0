@@ -21,6 +21,7 @@ public class VoucherPagoConsumo extends Activity {
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, importe, banco, emisor_tarjeta, tarjeta, cli_dni;
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
+    String parteDireccion, parteDistrito, parteRazon;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
@@ -47,6 +48,9 @@ public class VoucherPagoConsumo extends Activity {
         emisor_tarjeta = extras.getString("emisor_tarjeta");
         banco = extras.getString("banco");
         cli_dni = extras.getString("cli_dni");
+        parteDireccion = extras.getString("parteDireccion");
+        parteDistrito = extras.getString("parteDistrito");
+        parteRazon = extras.getString("parteRazon");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
 

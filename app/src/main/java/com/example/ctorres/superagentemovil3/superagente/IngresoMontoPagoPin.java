@@ -70,6 +70,7 @@ public class IngresoMontoPagoPin extends Activity {
         focTipoTarjeta();
 
         txt_pin.requestFocus();
+        txt_moneda_pagar.setEnabled(false);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
         txt_moneda_pagar.setText(transformarMonto());
@@ -77,17 +78,22 @@ public class IngresoMontoPagoPin extends Activity {
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMontoPagoPin.this, VoucherPagoTarjeta.class);
-                intent.putExtra("monto", monto);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("desc_corta_banco", desc_corta_banco);
-                intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
-                startActivity(intent);
-                finish();
+                String pin = txt_pin.getText().toString();
+                if (pin.length() == 0) {
+                    Toast.makeText(IngresoMontoPagoPin.this, "INGRESE EL PIN", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(IngresoMontoPagoPin.this, VoucherPagoTarjeta.class);
+                    intent.putExtra("monto", monto);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("num_tarjeta", num_tarjeta);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("desc_corta_banco", desc_corta_banco);
+                    intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -132,7 +138,7 @@ public class IngresoMontoPagoPin extends Activity {
         dialog.show();
     }
 
-    public void focTipoTarjeta(){
+    public void focTipoTarjeta() {
         if (emisor_tarjeta == 1) {
             imageView.setImageResource(R.drawable.visaicon);
         } else if (emisor_tarjeta == 2) {
@@ -142,7 +148,7 @@ public class IngresoMontoPagoPin extends Activity {
         }
     }
 
-    public String transformarMonto(){
+    public String transformarMonto() {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         double montoD = Double.parseDouble(monto);
         return decimalFormat.format(montoD);

@@ -217,6 +217,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/txt_clave_comercio"
                     android:gravity="center"
                     android:layout_width="270dp"
                     android:layout_height="40dp"

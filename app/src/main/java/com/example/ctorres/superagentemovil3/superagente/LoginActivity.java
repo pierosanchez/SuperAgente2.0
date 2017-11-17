@@ -175,7 +175,10 @@ public class LoginActivity extends Activity {
         @Override
         protected void onPostExecute(UsuarioEntity usuarioEntity) {
             userEntity = usuarioEntity;
-            if (userEntity.getUsuarioId() != null) {
+            if (userEntity == null) {
+                Toast.makeText(LoginActivity.this, "Error de red, por favor conectese a una red Wi-Fi o actives sus datos moviles", Toast.LENGTH_LONG).show();
+                circleProgressBar.setVisibility(View.GONE);
+            } else if (userEntity.getUsuarioId() != null) {
                 if (userEntity.getUsuarioId().equals("02")) {
                     Toast.makeText(LoginActivity.this, "La Contraseña ingresada, no es correcta", Toast.LENGTH_LONG).show();
                     clave_acceso.setText("");
@@ -207,10 +210,9 @@ public class LoginActivity extends Activity {
                     }
 
                 }
-            } else {
-                //mensaje_error = getString(R.string.msg_error_sin_conexion);
-                //sinConexion = true;
-
+            } else if (userEntity == null){
+                Toast.makeText(LoginActivity.this, "Error de red, por favor conectese a una red Wi-Fi o actives sus datos moviles", Toast.LENGTH_LONG).show();
+                circleProgressBar.setVisibility(View.GONE);
             }
         }
     }

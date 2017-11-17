@@ -59,7 +59,7 @@ public class ConformidadComercioComercios extends Activity {
         parteDistrito = extras.getString("parteDistrito");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
-        if (!parteRazon.equals("") && !parteDireccion.equals("") && !parteDistrito.equals("")){
+        if (!parteRazon.isEmpty() && !parteDireccion.isEmpty() && !parteDistrito.isEmpty()){
             tv_razonsoc_comercioConfor.setText(parteRazon);
             tv_direccion_comercioConfor.setText(parteDireccion);
             tv_distrito_comercioConfor.setText(parteDistrito);
@@ -72,37 +72,6 @@ public class ConformidadComercioComercios extends Activity {
         tv_tipo_moneda_comercio.setText(tipo_moneda);
         tv_monto_importe_comercio.setText(montoTransferencia());
         tv_dni_cliente_comercio.setText(cli_dni);
-
-        /*btn_confirmar_operacion_consumo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tipo_tarjeta_pago == 2) {
-                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("banco", banco);
-                    intent.putExtra("tipo_moneda", tipo_moneda);
-                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                    intent.putExtra("monto_pagar", monto_pagar);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cli_dni", cli_dni);
-                    startActivity(intent);
-                } else if (tipo_tarjeta_pago == 1){
-                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumoFirma.class);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("banco", banco);
-                    intent.putExtra("tipo_moneda", tipo_moneda);
-                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                    intent.putExtra("monto_pagar", monto_pagar);
-                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                    intent.putExtra("cli_dni", cli_dni);
-                    startActivity(intent);
-                }
-            }
-        });*/
 
         btn_confirmar_operacion_consumo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +91,11 @@ public class ConformidadComercioComercios extends Activity {
                         intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                         intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                         intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("parteDireccion", parteDireccion);
+                        intent.putExtra("parteDistrito", parteDistrito);
+                        intent.putExtra("parteRazon", parteRazon);
                         startActivity(intent);
+                        finish();
                     }
                 } else if (tipo_tarjeta_pago == 1){
                     if (claveComercio.length() == 0){
@@ -139,7 +112,11 @@ public class ConformidadComercioComercios extends Activity {
                             intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                             intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                             intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("parteDireccion", parteDireccion);
+                            intent.putExtra("parteDistrito", parteDistrito);
+                            intent.putExtra("parteRazon", parteRazon);
                             startActivity(intent);
+                            finish();
                         } else if (validacion_tarjeta.equals("Pin")){
                             Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
                             intent.putExtra("cliente", cliente);
@@ -151,7 +128,11 @@ public class ConformidadComercioComercios extends Activity {
                             intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                             intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                             intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("parteDireccion", parteDireccion);
+                            intent.putExtra("parteDistrito", parteDistrito);
+                            intent.putExtra("parteRazon", parteRazon);
                             startActivity(intent);
+                            finish();
                         }
                     }
                 }

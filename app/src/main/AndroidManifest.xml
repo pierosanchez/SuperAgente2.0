@@ -89,9 +89,7 @@
         <activity android:name=".superagente.IngresoClaveAcceso" />
         <activity android:name=".superagente.LecturaInformacionComercio" />
         <activity android:name=".superagente.IngresoMontoPagoPinConsumos" />
-        <activity android:name=".superagente.ConformidadComercioConsumos" />
         <activity android:name=".superagente.VoucherPagoConsumo" />
-        <activity android:name=".superagente.IngresoMontoPagoFirmaConsumos" />
         <activity android:name=".superagente.IngresoMontoPagoFirmaServicios" />
         <activity android:name=".superagente.RecargaTelefonica" />
         <activity android:name=".superagente.SeleccionMedPagoRecarga" />

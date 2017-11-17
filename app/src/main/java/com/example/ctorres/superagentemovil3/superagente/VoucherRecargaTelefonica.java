@@ -1,8 +1,12 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -13,7 +17,7 @@ import java.text.DecimalFormat;
 
 public class VoucherRecargaTelefonica extends Activity {
 
-    Button btn_confirmar_operacion;
+    Button btn_efectuar_otra_operacion, btn_efectuar_otra_recarga, btn_salir;
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, banco, emisor_tarjeta, cli_dni;
     TextView tv_fecha, tv_hora, tv_numUnico, tv_operadora, tv_nrofono, tv_importe, tv_comision, tv_total, tv_banco, tv_nroTarjeta,tv_forpago;
@@ -27,7 +31,6 @@ public class VoucherRecargaTelefonica extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.voucher_recarga_telefonica);
 
-
         tv_fecha = (TextView) findViewById(R.id.tv_fechaRecarga);
         tv_hora = (TextView) findViewById(R.id.tv_horaRecarga);
         tv_numUnico = (TextView) findViewById(R.id.tv_numUnicoRecarga);
@@ -39,6 +42,10 @@ public class VoucherRecargaTelefonica extends Activity {
         tv_forpago = (TextView) findViewById(R.id.tv_recarga_forma_pago);
         tv_banco = (TextView) findViewById(R.id.tv_bancoRecarga);
         tv_nroTarjeta = (TextView) findViewById(R.id.tv_nroTarjetaRecarga);
+
+        btn_salir = (Button) findViewById(R.id.btn_salir);
+        btn_efectuar_otra_recarga = (Button) findViewById(R.id.btn_efectuar_otra_recarga);
+        btn_efectuar_otra_operacion = (Button) findViewById(R.id.btn_efectuar_otra_operacion);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -65,6 +72,37 @@ public class VoucherRecargaTelefonica extends Activity {
         tv_forpago.setText(transformarTipoTarjetaPago());
         tv_banco.setText(banco);
         tv_nroTarjeta.setText(tarjeta_cargo);
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salir();
+            }
+        });
+
+        btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VoucherRecargaTelefonica.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btn_efectuar_otra_recarga.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(VoucherRecargaTelefonica.this, RecargaTelefonica.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -120,5 +158,29 @@ public class VoucherRecargaTelefonica extends Activity {
             tipoTarjeta = "Débito";
         }
         return tipoTarjeta;
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(VoucherRecargaTelefonica.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

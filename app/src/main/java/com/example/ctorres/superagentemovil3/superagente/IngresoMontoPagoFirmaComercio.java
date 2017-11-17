@@ -6,8 +6,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -28,12 +30,14 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
     TextView tv_nombre_cliente_comercio, tv_tarjeta_cifrada_comercio;
     EditText txt_monto_pago_comercio;
     private UsuarioEntity usuario;
-    Spinner spinnerTipoMoneda;
+    Spinner spinnerTipoMoneda, sp_pago_cuotas, sp_cantidad_cuotas;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     String tipo_moneda, cli_dni;
     int tipo_tarjeta_pago;
-
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    LinearLayout ll_cantidad_cuotas;
 
     //Variables Proceso QR
     String cadena_scanneo;
@@ -63,7 +67,10 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
         txt_monto_pago_comercio = (EditText) findViewById(R.id.txt_monto_pago_comercio);
 
         spinnerTipoMoneda = (Spinner) findViewById(R.id.sp_monedaComercio);
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
 
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
 
         Bundle extras = getIntent().getExtras();
@@ -84,10 +91,6 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
 
-
-
-
-
         String[] parts = cadena_scanneo.split("-");
         parteRazon = parts[0];
         parteDireccion = parts[1];
@@ -99,6 +102,23 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
         tv_razonsoc_comercio.setText(parteRazon);
         tv_direccion_comercio.setText(parteDireccion);
         tv_distrito_comercio.setText(parteDistrito);
+
+        cargarCuotas();
+        deseaCuotas();
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +140,7 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
                 intent.putExtra("parteDistrito",parteDistrito);
                 intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -173,5 +194,15 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
             monedaAdapter.setNewListMoneda(monedaEntityArrayList);
             monedaAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaComercio.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaComercio.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_pago_cuotas.setAdapter(cuota);
     }
 }

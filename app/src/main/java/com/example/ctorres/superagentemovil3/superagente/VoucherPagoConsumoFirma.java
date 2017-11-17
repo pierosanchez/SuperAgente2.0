@@ -26,6 +26,8 @@ public class VoucherPagoConsumoFirma extends Activity {
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, emisor_tarjeta, banco, importe, tarjeta, cli_dni;
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    int tipo_tarjeta_pago;
+    String parteDireccion, parteDistrito, parteRazon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,11 @@ public class VoucherPagoConsumoFirma extends Activity {
         monto_pagar = extras.getString("monto_pagar");
         emisor_tarjeta = extras.getString("emisor_tarjeta");
         banco = extras.getString("banco");
+        tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
         cli_dni = extras.getString("cli_dni");
+        parteDireccion = extras.getString("parteDireccion");
+        parteDistrito = extras.getString("parteDistrito");
+        parteRazon = extras.getString("parteRazon");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
 
@@ -68,6 +74,7 @@ public class VoucherPagoConsumoFirma extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(VoucherPagoConsumoFirma.this, CaptureSignature.class);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("usuario", usuario);
                 intent.putExtra("cli_dni", cli_dni);
                 startActivityForResult(intent, 0);
                 /*startActivity(intent);

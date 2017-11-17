@@ -83,6 +83,8 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String monto = txt_moneda_pagar.getText().toString();
+                if (monto.length() != 0) {
                     Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, IngresoCuentaTarjetaAbono.class);
                     intent.putExtra("monto", ObtenerMonto());
                     intent.putExtra("usuario", usuario);
@@ -97,6 +99,9 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
                     intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
+                } else if (monto.length() == 0){
+                    Toast.makeText(IngresoMontoPagoFirmaTransferencias.this, "Ingrese el monto a transferir", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

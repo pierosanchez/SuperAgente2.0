@@ -20,6 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -56,7 +57,7 @@ public class SeleccionModoMontoPago extends Activity {
         txt_monto_total = (EditText) findViewById(R.id.txt_monto_total);
         txt_monto_cuenta = (EditText) findViewById(R.id.txt_monto_cuenta);
 
-        //rdgp_montos = (RadioGroup) findViewById(R.id.rdgp_montos_pagar);
+        rdgp_montos = (RadioGroup) findViewById(R.id.rdgp_montos_pagar);
         rdbtn_minimo = (RadioButton) findViewById(R.id.rdbtn_minimo);
         rdbtn_mensual = (RadioButton) findViewById(R.id.rdbtn_mensual);
         rdbtn_total = (RadioButton) findViewById(R.id.rdbtn_total);
@@ -103,20 +104,21 @@ public class SeleccionModoMontoPago extends Activity {
         tv_tipo_moneda_modo_monto_3.setText(obtenerTipoMonedaDeuda());
         tv_tipo_moneda_modo_monto_4.setText(obtenerTipoMonedaDeuda());
 
-        /*rdgp_montos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rdgp_montos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 if (checkedId == R.id.rdbtn_minimo){
-                    txt_monto_minimo.getText().toString();
+                    txt_monto_cuenta.setEnabled(false);
                 }else if (checkedId == R.id.rdbtn_mensual){
-                    txt_monto_mensual.getText().toString();
+                    txt_monto_cuenta.setEnabled(false);
                 }else if (checkedId == R.id.rdbtn_total){
-                    txt_monto_total.getText().toString();
+                    txt_monto_cuenta.setEnabled(false);
                 }else{
-                    txt_monto_cuenta.getText().toString();
+                    txt_monto_cuenta.setEnabled(true);
+                    txt_monto_cuenta.requestFocus();
                 }
             }
-        });*/
+        });
 
         spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -157,20 +159,51 @@ public class SeleccionModoMontoPago extends Activity {
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
-                intent.putExtra("monto", obtenerMonto());
-                //intent.putExtra("imagebitmap", bmp);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("num_tarjeta", num_tarjeta);
-                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("banco_tarjeta", banco_tarjeta);
-                intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("desc_corta_banco", desc_corta_banco);
-                startActivityForResult(intent, 0);
-                finish();
+                if (rdbtn_minimo.isChecked() || rdbtn_mensual.isChecked() || rdbtn_total.isChecked() || rdbtn_cuenta.isChecked()) {
+                    if (rdbtn_cuenta.isChecked()) {
+                        String monto = txt_monto_cuenta.getText().toString();
+                        if (monto.length() != 0) {
+                            double montoCuenta = Double.parseDouble(txt_monto_cuenta.getText().toString());
+                            if (montoCuenta <= 0) {
+                                Toast.makeText(SeleccionModoMontoPago.this, "el monto ingresado debe ser mayor a 0", Toast.LENGTH_LONG).show();
+                            } else {
+                                Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
+                                intent.putExtra("monto", obtenerMonto());
+                                //intent.putExtra("imagebitmap", bmp);
+                                intent.putExtra("usuario", usuario);
+                                intent.putExtra("num_tarjeta", num_tarjeta);
+                                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                                intent.putExtra("banco_tarjeta", banco_tarjeta);
+                                intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
+                                intent.putExtra("cliente", cliente);
+                                intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("desc_corta_banco", desc_corta_banco);
+                                startActivityForResult(intent, 0);
+                                finish();
+                            }
+                        } else {
+                            Toast.makeText(SeleccionModoMontoPago.this, "Ingrese el monto a cuenta", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
+                        intent.putExtra("monto", obtenerMonto());
+                        //intent.putExtra("imagebitmap", bmp);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("num_tarjeta", num_tarjeta);
+                        intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                        intent.putExtra("banco_tarjeta", banco_tarjeta);
+                        intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("desc_corta_banco", desc_corta_banco);
+                        startActivityForResult(intent, 0);
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(SeleccionModoMontoPago.this, "SELECCIONE ALGUNA OPCION DE PAGO", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -180,6 +213,17 @@ public class SeleccionModoMontoPago extends Activity {
                 cancelar();
             }
         });
+
+        /*rdbtn_cuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rdbtn_cuenta.isChecked()) {
+                    txt_monto_cuenta.requestFocus();
+                } else {
+                    txt_monto_cuenta.setEnabled(false);
+                }
+            }
+        });*/
     }
 
     public void cargarTipoTarjetas(){
