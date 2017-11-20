@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.UsuarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.UsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.text.DecimalFormat;
