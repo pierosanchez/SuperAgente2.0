@@ -312,6 +312,24 @@
 
                             </TableRow>
 
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="20dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tv_importe_total_voucher_transferencias" />
+
+                                <TextView
+                                    android:id="@+id/tv_monto_total_pagar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:text="" />
+
+                            </TableRow>
+
                         </TableLayout>
 
                         <!--<LinearLayout
@@ -372,7 +390,7 @@
 
                         </LinearLayout>-->
 
-                        <LinearLayout
+                        <!--<LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp">
@@ -382,12 +400,12 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/tv_importe_total_voucher_transferencias" />
 
-                            <TextView
+                            &lt;!&ndash;<TextView
                                 android:id="@+id/tv_tipo_moneda_importe_total_voucher"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="95dp"
-                                android:text="" />
+                                android:text="" />&ndash;&gt;
 
                             <TextView
                                 android:id="@+id/tv_monto_total_pagar"
@@ -396,7 +414,7 @@
                                 android:layout_marginLeft="5dp"
                                 android:text="" />
 
-                        </LinearLayout>
+                        </LinearLayout>-->
 
                     </LinearLayout>
 
@@ -515,20 +533,18 @@
                             <TableRow android:layout_marginLeft="20dp">
 
                                 <TextView
-                                    android:id="@+id/textView9"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/tv_importe_transferencia_voucher" />
 
-                                <TextView
+                                <!--<TextView
                                     android:id="@+id/tv_tipo_moneda_importe_voucher"
                                     android:layout_width="30dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:text="" />
+                                    android:text="" />-->
 
                                 <TextView
-
                                     android:id="@+id/tv_importe_voucher"
                                     android:layout_width="90dp"
                                     android:layout_height="wrap_content"

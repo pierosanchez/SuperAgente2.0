@@ -30,7 +30,7 @@ public class LecturaInformacionComercio extends Activity {
     String cliente, cli_dni;
     private Button scan_btn,aceptar_btn;
     String cadena_scanneo = "";
-    Spinner sp_Comercio;
+    //Spinner sp_Comercio;
     ArrayList<ComercioEntity> comercioEntityArrayList;
     ComercioAdapter comercioAdapter;
     String nom_comerciosp, direccion_comerciosp, distrito_comerciosp;
@@ -42,7 +42,7 @@ public class LecturaInformacionComercio extends Activity {
 
         scan_btn = (Button) findViewById(R.id.scan_btn);
         aceptar_btn = (Button) findViewById(R.id.btn_aceptar_comercio);
-        sp_Comercio = (Spinner) findViewById(R.id.spinnerComercio);
+        //sp_Comercio = (Spinner) findViewById(R.id.spinnerComercio);
         final Activity activity = this;
 
         Bundle bundle = getIntent().getExtras();
@@ -50,11 +50,11 @@ public class LecturaInformacionComercio extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
-        comercioEntityArrayList = null;
+        /*comercioEntityArrayList = null;
         comercioAdapter = new ComercioAdapter(comercioEntityArrayList, getApplication());
         sp_Comercio.setAdapter(comercioAdapter);
 
-        ejecutarListaComercio();
+        ejecutarListaComercio();*/
 
         scan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,16 +78,16 @@ public class LecturaInformacionComercio extends Activity {
                 intent.putExtra("cliente", cliente);
                 intent.putExtra("cli_dni", cli_dni);
                 intent.putExtra("cadena_scanneo", cadena_scanneo);
-                intent.putExtra("nom_comerciosp",nom_comerciosp);
+                /*intent.putExtra("nom_comerciosp",nom_comerciosp);
                 intent.putExtra("direccion_comerciosp",direccion_comerciosp);
-                intent.putExtra("distrito_comerciosp",distrito_comerciosp);
+                intent.putExtra("distrito_comerciosp",distrito_comerciosp);*/
                 startActivityForResult(intent, 0);
                 finish();
             }
         });
 
 
-        sp_Comercio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*sp_Comercio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 nom_comerciosp = comercioAdapter.getItem(position).getRaz_social_comercio();
@@ -101,7 +101,7 @@ public class LecturaInformacionComercio extends Activity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
 

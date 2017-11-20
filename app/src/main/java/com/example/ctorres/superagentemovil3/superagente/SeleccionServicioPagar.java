@@ -94,6 +94,7 @@ public class SeleccionServicioPagar extends Activity {
 
                 } else if (tipo_servicio_publico == 2) {
 
+                    tv_seleccion_tipo_servicio.setText("SELECCIONE LA INSTITUCION");
                     sp_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
                     tv_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
 
@@ -113,6 +114,7 @@ public class SeleccionServicioPagar extends Activity {
 
                 } else if (tipo_servicio_publico == 4) {
 
+                    tv_seleccion_tipo_servicio.setText("SELECCIONE EL CLUB");
                     tv_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
                     sp_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
 
