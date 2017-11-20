@@ -6,9 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,17 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.GetTarjetaBinAdapter;
+import com.example.ctorres.superagentemovil3.adapter.GetTarjetaBinAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class InformacionTarjeta extends Activity {
 

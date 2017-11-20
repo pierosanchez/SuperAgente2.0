@@ -6,22 +6,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.BeneficiarioAdapter;
-import com.example.ctorres.superagentemovil3.dao.RelacionBeneficiarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.RelacionBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RelacionBeneficiarios extends Activity {
 

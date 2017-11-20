@@ -5,21 +5,16 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.DetalleClaveAccesoAdapter;
+import com.example.ctorres.superagentemovil3.adapter.DetalleClaveAccesoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

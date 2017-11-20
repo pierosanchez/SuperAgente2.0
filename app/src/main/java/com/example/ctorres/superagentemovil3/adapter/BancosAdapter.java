@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
+import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 
 import java.util.ArrayList;
 
@@ -16,13 +17,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class RelacionBeneficiarioAdapter extends BaseAdapter {
+public class BancosAdapter extends BaseAdapter {
 
-    ArrayList<BeneficiarioEntity> items;
+    ArrayList<BancosEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public RelacionBeneficiarioAdapter(ArrayList<BeneficiarioEntity> items, Context context) {
+    public BancosAdapter(ArrayList<BancosEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,7 +39,7 @@ public class RelacionBeneficiarioAdapter extends BaseAdapter {
     }
 
     @Override
-    public BeneficiarioEntity getItem(int position) {
+    public BancosEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -54,32 +55,28 @@ public class RelacionBeneficiarioAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder= new ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_relacion_beneficiario,null);
+        View view = layoutInflater.inflate(R.layout.row_bancos,null);
 
-        viewHolder.tv_apellido = (TextView) view.findViewById(R.id.tv_apellido);
-        viewHolder.tv_nombre = (TextView) view.findViewById(R.id.tv_nombre);
+        viewHolder.tv_bancos = (TextView) view.findViewById(R.id.tv_bancos);
 
-        viewHolder.tv_apellido.setText(String.valueOf(getItem(position).getApellido()));
-        viewHolder.tv_nombre.setText(String.valueOf(getItem(position).getNombre()));
+        viewHolder.tv_bancos.setText(String.valueOf(getItem(position).getDesc_breve_banco()));
 
-        BeneficiarioEntity data = getItem(position);
+        BancosEntity data = getItem(position);
 
         if(data!=null){
-            viewHolder.tv_apellido.setText(data.getApellido());
-            viewHolder.tv_nombre.setText(data.getNombre());
+            viewHolder.tv_bancos.setText(data.getDesc_breve_banco());
         } else {
-            viewHolder.tv_apellido.setText("");
-            viewHolder.tv_nombre.setText("");
+            viewHolder.tv_bancos.setText("");
         }
 
         return view;
     }
 
     public static final class ViewHolder{
-        TextView tv_nombre, tv_apellido;
+        TextView tv_bancos;
     }
 
-    public void setNewListBeneficiario(ArrayList<BeneficiarioEntity> listBeneficiario){
+    public void setNewListbancos(ArrayList<BancosEntity> listBeneficiario){
         items = listBeneficiario;
     }
 }

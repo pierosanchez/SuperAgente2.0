@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.CuentasBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasBeneficiarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.TarjetasBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
-import com.example.ctorres.superagentemovil3.superagente.IngresoCuentaTarjetaAbono;
 
 import java.util.ArrayList;
 

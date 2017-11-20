@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
 import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
-import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 
 import java.util.ArrayList;
 
@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class ServiciosPublicosAdapter extends BaseAdapter {
+public class ClubesAdapter extends BaseAdapter {
 
-    ArrayList<ServiciosPublicEntity> items;
+    ArrayList<ClubsEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public ServiciosPublicosAdapter(ArrayList<ServiciosPublicEntity> items, Context context) {
+    public ClubesAdapter(ArrayList<ClubsEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +39,7 @@ public class ServiciosPublicosAdapter extends BaseAdapter {
     }
 
     @Override
-    public ServiciosPublicEntity getItem(int position) {
+    public ClubsEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -55,28 +55,28 @@ public class ServiciosPublicosAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder= new ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_servicios_publicos,null);
+        View view = layoutInflater.inflate(R.layout.row_clubes,null);
 
-        viewHolder.tv_empresas = (TextView) view.findViewById(R.id.tv_empresas);
+        viewHolder.tv_clubes = (TextView) view.findViewById(R.id.tv_clubes);
 
-        viewHolder.tv_empresas.setText(String.valueOf(getItem(position).getDes_inst_edu()));
+        viewHolder.tv_clubes.setText(String.valueOf(getItem(position).getDes_club()));
 
-        ServiciosPublicEntity data = getItem(position);
+        ClubsEntity data = getItem(position);
 
         if(data!=null){
-            viewHolder.tv_empresas.setText(data.getDes_inst_edu());
+            viewHolder.tv_clubes.setText(data.getDes_club());
         } else {
-            viewHolder.tv_empresas.setText("");
+            viewHolder.tv_clubes.setText("");
         }
 
         return view;
     }
 
     public static final class ViewHolder{
-        TextView tv_empresas;
+        TextView tv_clubes;
     }
 
-    public void setNewListServiciosPublicos(ArrayList<ServiciosPublicEntity> listBeneficiario){
+    public void setNewListClubes(ArrayList<ClubsEntity> listBeneficiario){
         items = listBeneficiario;
     }
 }

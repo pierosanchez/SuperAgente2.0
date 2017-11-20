@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
@@ -17,13 +16,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class GetUsuarioReniecAdapter extends BaseAdapter {
+public class GetTarjetaBinAdapter extends BaseAdapter {
 
-    ArrayList<UsuarioEntity> items;
+    ArrayList<TarjetaBinEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public GetUsuarioReniecAdapter(ArrayList<UsuarioEntity> items, Context context) {
+    public GetTarjetaBinAdapter(ArrayList<TarjetaBinEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +38,7 @@ public class GetUsuarioReniecAdapter extends BaseAdapter {
     }
 
     @Override
-    public UsuarioEntity getItem(int position) {
+    public TarjetaBinEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -61,7 +60,7 @@ public class GetUsuarioReniecAdapter extends BaseAdapter {
         TextView tv_nombre, tv_apellido;
     }
 
-    public void setNewListUsuarioReniec(ArrayList<UsuarioEntity> listUsuarioReniec){
+    public void setNewListTarjetaBin(ArrayList<TarjetaBinEntity> listUsuarioReniec){
         items = listUsuarioReniec;
     }
 }

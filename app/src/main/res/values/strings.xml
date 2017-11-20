@@ -708,8 +708,11 @@
     <string name="tv_formPago_voucher_Recarga">FORMA DE PAGO:</string>
     <string name="tv_banco_voucher_Recarga">BANCO:</string>
     <string name="tv_nroTarjeta_voucher_Recarga">NRO. DE TARJETA:</string>
-
     <string name="tv_notaPin_voucher_Recarga">PIN VERIFICADO POR EL EMISOR</string>
+
+    <!-- pantalla del voucher de recargas telefonicas con firmas -->
+
+    <string name="titulo_recarga_voucher_firma">VOUCHER DE RECARGA TELEFÓNICA CON FIRMA</string>
 
     <!-- pantalla de voucher de pago de servicio con firma -->
 

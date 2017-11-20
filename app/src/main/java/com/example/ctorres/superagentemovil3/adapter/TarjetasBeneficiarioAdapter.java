@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class MentenimientoTarjetasBeneficiarioAdapter extends BaseAdapter {
+public class TarjetasBeneficiarioAdapter extends BaseAdapter {
 
     ArrayList<BeneficiarioEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public MentenimientoTarjetasBeneficiarioAdapter(ArrayList<BeneficiarioEntity> items, Context context) {
+    public TarjetasBeneficiarioAdapter(ArrayList<BeneficiarioEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -55,7 +55,7 @@ public class MentenimientoTarjetasBeneficiarioAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = new ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_mantenimiento_tarjetas_beneficiario, null);
+        View view = layoutInflater.inflate(R.layout.row_tarjetas_beneficiario, null);
 
         viewHolder.iv_emisor_tarjeta = (ImageView) view.findViewById(R.id.iv_emisor_tarjeta);
         viewHolder.tv_tarjeta_beneficiario = (TextView) view.findViewById(R.id.tv_tarjeta_beneficiario);

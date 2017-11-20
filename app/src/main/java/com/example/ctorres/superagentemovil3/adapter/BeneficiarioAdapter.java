@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 

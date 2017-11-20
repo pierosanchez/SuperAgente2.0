@@ -14,13 +14,10 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.CuentasMantenimientoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasMantenimientoAdapater;
-import com.example.ctorres.superagentemovil3.dao.TarjetasUsuarioAdapter;
-import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
-import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
+import com.example.ctorres.superagentemovil3.adapter.TarjetasMantenimientoAdapater;
+import com.example.ctorres.superagentemovil3.adapter.TarjetasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;

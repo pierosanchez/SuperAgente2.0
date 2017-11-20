@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
@@ -15,13 +16,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class DomicilioUsuarioAdapter extends BaseAdapter {
+public class DetalleCuentaAdapter extends BaseAdapter {
 
-    ArrayList<UsuarioEntity> items;
+    ArrayList<CuentaEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public DomicilioUsuarioAdapter(ArrayList<UsuarioEntity> items, Context context) {
+    public DetalleCuentaAdapter(ArrayList<CuentaEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,7 +38,7 @@ public class DomicilioUsuarioAdapter extends BaseAdapter {
     }
 
     @Override
-    public UsuarioEntity getItem(int position) {
+    public CuentaEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -59,7 +60,7 @@ public class DomicilioUsuarioAdapter extends BaseAdapter {
         TextView tv_nombre, tv_apellido;
     }
 
-    public void setNewListDomicilioUsuario(ArrayList<UsuarioEntity> listUsuarioReniec){
+    public void setNewListTarjetaBin(ArrayList<CuentaEntity> listUsuarioReniec){
         items = listUsuarioReniec;
     }
 }

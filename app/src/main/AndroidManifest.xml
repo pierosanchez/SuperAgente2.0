@@ -103,7 +103,8 @@
         <activity android:name=".superagente.IngresoMontoPagoFirmaComercio" />
         <activity android:name=".superagente.ConformidadComercioComercios" />
         <activity android:name=".superagente.IngresoMontoPagoFirmaRecarga" />
-        <activity android:name=".superagente.IngresoMontoPagoPinRecargas"></activity>
+        <activity android:name=".superagente.IngresoMontoPagoPinRecargas" />
+        <activity android:name=".superagente.VoucherRecargaTelefonicaFirma"></activity>
     </application>
 
 </manifest>

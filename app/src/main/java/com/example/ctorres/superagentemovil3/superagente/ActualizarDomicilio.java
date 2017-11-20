@@ -7,17 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.DomicilioUsuarioAdapter;
-import com.example.ctorres.superagentemovil3.dao.GetUsuarioReniecAdapter;
+import com.example.ctorres.superagentemovil3.adapter.DomicilioUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActualizarDomicilio extends Activity {
 

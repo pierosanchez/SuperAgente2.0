@@ -19,8 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.DetalleBeneficiarioAdapter;
-import com.example.ctorres.superagentemovil3.dao.DetalleTarjetaAdapter;
+import com.example.ctorres.superagentemovil3.adapter.DetalleTarjetaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;

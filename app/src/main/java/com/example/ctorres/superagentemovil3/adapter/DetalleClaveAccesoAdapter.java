@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.BancosEntity;
-import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
+import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
 
@@ -17,13 +16,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class BancosAdapter extends BaseAdapter {
+public class DetalleClaveAccesoAdapter extends BaseAdapter {
 
-    ArrayList<BancosEntity> items;
+    ArrayList<UsuarioEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public BancosAdapter(ArrayList<BancosEntity> items, Context context) {
+    public DetalleClaveAccesoAdapter(ArrayList<UsuarioEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,7 +38,7 @@ public class BancosAdapter extends BaseAdapter {
     }
 
     @Override
-    public BancosEntity getItem(int position) {
+    public UsuarioEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -54,29 +53,14 @@ public class BancosAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder= new ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_bancos,null);
-
-        viewHolder.tv_bancos = (TextView) view.findViewById(R.id.tv_bancos);
-
-        viewHolder.tv_bancos.setText(String.valueOf(getItem(position).getDesc_breve_banco()));
-
-        BancosEntity data = getItem(position);
-
-        if(data!=null){
-            viewHolder.tv_bancos.setText(data.getDesc_breve_banco());
-        } else {
-            viewHolder.tv_bancos.setText("");
-        }
-
-        return view;
+        return null;
     }
 
     public static final class ViewHolder{
-        TextView tv_bancos;
+        TextView tv_nom_usu, tv_ape_usu;
     }
 
-    public void setNewListbancos(ArrayList<BancosEntity> listBeneficiario){
+    public void setNewListBeneficiario(ArrayList<UsuarioEntity> listBeneficiario){
         items = listBeneficiario;
     }
 }

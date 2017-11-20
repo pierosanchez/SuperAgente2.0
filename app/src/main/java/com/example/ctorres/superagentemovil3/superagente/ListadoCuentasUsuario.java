@@ -4,28 +4,22 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.CuentasMantenimientoAdapter;
-import com.example.ctorres.superagentemovil3.dao.CuentasUsuarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.CuentasMantenimientoAdapter;
+import com.example.ctorres.superagentemovil3.adapter.CuentasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
-import com.example.ctorres.superagentemovil3.utils.Constante;
-import com.example.ctorres.superagentemovil3.utils.Global;
 
 import java.util.ArrayList;
 

@@ -87,7 +87,7 @@ public class  ConformidadClienteRecarga extends Activity {
                         startActivity(intent);
                         finish();
                     } else if (validacion_tarjeta.equals("Firma")) {
-                        Intent intent = new Intent(ConformidadClienteRecarga.this, VoucherRecargaTelefonica.class);
+                        Intent intent = new Intent(ConformidadClienteRecarga.this, VoucherRecargaTelefonicaFirma.class);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("usuario", usuario);
                         intent.putExtra("banco", banco);

@@ -17,18 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.ClubesAdapter;
-import com.example.ctorres.superagentemovil3.dao.EmpresasServiciosAdapter;
-import com.example.ctorres.superagentemovil3.dao.ServiciosPublicosAdapter;
+import com.example.ctorres.superagentemovil3.adapter.ClubesAdapter;
+import com.example.ctorres.superagentemovil3.adapter.EmpresasServiciosAdapter;
+import com.example.ctorres.superagentemovil3.adapter.ServiciosPublicosAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasUsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
 import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
 import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class SeleccionServicioPagar extends Activity {

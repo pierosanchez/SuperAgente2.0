@@ -1,26 +1,20 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
-import com.example.ctorres.superagentemovil3.superagente.ActualizarCuenta;
-import com.example.ctorres.superagentemovil3.superagente.ListadoCuentasUsuario;
-import com.example.ctorres.superagentemovil3.utils.Constante;
-import com.example.ctorres.superagentemovil3.utils.Global;
 
 import java.util.ArrayList;
 

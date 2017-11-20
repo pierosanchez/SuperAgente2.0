@@ -1,10 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,9 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.BancosAdapter;
-import com.example.ctorres.superagentemovil3.dao.EmpresasServiciosAdapter;
-import com.example.ctorres.superagentemovil3.dao.GetTarjetaBinAdapter;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
+import com.example.ctorres.superagentemovil3.adapter.GetTarjetaBinAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.BancosEntity;

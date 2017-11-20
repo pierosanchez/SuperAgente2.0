@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class ComisionDeliverySolesAdapter extends BaseAdapter {
+public class GetUsuarioReniecAdapter extends BaseAdapter {
 
     ArrayList<UsuarioEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public ComisionDeliverySolesAdapter(ArrayList<UsuarioEntity> items, Context context) {
+    public GetUsuarioReniecAdapter(ArrayList<UsuarioEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,33 +54,14 @@ public class ComisionDeliverySolesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder= new ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_comision_delivery_soles,null);
-
-        //viewHolder.tv_apellido = (TextView) view.findViewById(R.id.tv_apellido);
-        viewHolder.tv_importe_delivery = (TextView) view.findViewById(R.id.tv_importe_delivery);
-
-        //viewHolder.tv_apellido.setText(String.valueOf(getItem(position).getApellido()));
-        viewHolder.tv_importe_delivery.setText(String.valueOf(getItem(position).getImporte_comision()));
-
-        UsuarioEntity data = getItem(position);
-
-        if(data!=null){
-            //viewHolder.tv_apellido.setText(data.getApellido());
-            viewHolder.tv_importe_delivery.setText(String.valueOf(data.getImporte_comision()));
-        } else {
-            //viewHolder.tv_apellido.setText("");
-            viewHolder.tv_importe_delivery.setText("");
-        }
-
-        return view;
+        return null;
     }
 
     public static final class ViewHolder{
-        TextView tv_importe_delivery, tv_apellido;
+        TextView tv_nombre, tv_apellido;
     }
 
-    public void setNewListBeneficiario(ArrayList<UsuarioEntity> listBeneficiario){
-        items = listBeneficiario;
+    public void setNewListUsuarioReniec(ArrayList<UsuarioEntity> listUsuarioReniec){
+        items = listUsuarioReniec;
     }
 }

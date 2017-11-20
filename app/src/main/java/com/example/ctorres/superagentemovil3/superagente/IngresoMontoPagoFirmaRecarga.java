@@ -11,7 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.MonedaAdapter;
+import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
@@ -96,6 +96,6 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
     }
 
     public String transformarMontoRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(monto_recarga);
+        return decimalFormat.format(monto_recarga);
     }
 }

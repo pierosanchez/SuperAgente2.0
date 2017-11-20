@@ -14,8 +14,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.MonedaAdapter;
-import com.example.ctorres.superagentemovil3.dao.OperadorAdapter;
+import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
+import com.example.ctorres.superagentemovil3.adapter.OperadorAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;

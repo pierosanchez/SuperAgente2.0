@@ -2,9 +2,6 @@ package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,16 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.dao.ComisionDeliverySolesAdapter;
-import com.example.ctorres.superagentemovil3.dao.CuentasBeneficiarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.ComisionDeliverySolesAdapter;
+import com.example.ctorres.superagentemovil3.adapter.CuentasBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
-import com.example.ctorres.superagentemovil3.dao.TarjetasBeneficiarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.TarjetasBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
-import com.example.ctorres.superagentemovil3.fragments.ListadoChequeFragment;
-import com.example.ctorres.superagentemovil3.fragments.ListadoCuentasFragment;
-import com.example.ctorres.superagentemovil3.fragments.ListadoTarjetasFragment;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

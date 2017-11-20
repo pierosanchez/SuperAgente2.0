@@ -1,4 +1,4 @@
-package com.example.ctorres.superagentemovil3.dao;
+package com.example.ctorres.superagentemovil3.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,27 +8,25 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
-import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
+import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
+import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 
 import java.util.ArrayList;
 
 /**
- * Created by CTORRES on 25/10/2017.
+ * Created by CTORRES on 18/05/2017.
  */
 
-public class OperadorAdapter extends BaseAdapter {
+public class ServiciosPublicosAdapter extends BaseAdapter {
 
-    ArrayList<OperadorEntity> items;
+    ArrayList<ServiciosPublicEntity> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public OperadorAdapter(ArrayList<OperadorEntity> items, Context context) {
+    public ServiciosPublicosAdapter(ArrayList<ServiciosPublicEntity> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
     }
 
     @Override
@@ -41,7 +39,7 @@ public class OperadorAdapter extends BaseAdapter {
     }
 
     @Override
-    public OperadorEntity getItem(int position) {
+    public ServiciosPublicEntity getItem(int position) {
         if(items == null){
             return null;
         }else{
@@ -56,32 +54,29 @@ public class OperadorAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        OperadorAdapter.ViewHolder viewHolder= new OperadorAdapter.ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_operador,null);
+        ViewHolder viewHolder= new ViewHolder();
+        View view = layoutInflater.inflate(R.layout.row_servicios_publicos,null);
 
-        viewHolder.tv_operadora = (TextView) view.findViewById(R.id.tv_operador);
+        viewHolder.tv_empresas = (TextView) view.findViewById(R.id.tv_empresas);
 
-        viewHolder.tv_operadora.setText(String.valueOf(getItem(position).getOpe_nomcomercial()));
+        viewHolder.tv_empresas.setText(String.valueOf(getItem(position).getDes_inst_edu()));
 
-        OperadorEntity data = getItem(position);
+        ServiciosPublicEntity data = getItem(position);
 
         if(data!=null){
-            viewHolder.tv_operadora.setText(data.getOpe_nomcomercial());
+            viewHolder.tv_empresas.setText(data.getDes_inst_edu());
         } else {
-            viewHolder.tv_operadora.setText("");
+            viewHolder.tv_empresas.setText("");
         }
 
         return view;
     }
 
     public static final class ViewHolder{
-        TextView tv_operadora;
+        TextView tv_empresas;
     }
 
-    public void setNewListOperador(ArrayList<OperadorEntity> listBeneficiario){
+    public void setNewListServiciosPublicos(ArrayList<ServiciosPublicEntity> listBeneficiario){
         items = listBeneficiario;
     }
-
-
-
 }
