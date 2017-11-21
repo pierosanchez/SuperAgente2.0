@@ -8,10 +8,12 @@ import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +25,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago;
     String tipoMoneda[] = {"S/.", "US$"};
-    Spinner spinnerMonedaPagar;
+    Spinner spinnerMonedaPagar, sp_pago_cuotas, sp_cantidad_cuotas;
     EditText txt_moneda_pagar, txt_pin;
     Bitmap bmp;
     ImageView imageView;
@@ -32,6 +34,9 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
     String cliente, cli_dni, validacion_tarjeta;
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    LinearLayout ll_cantidad_cuotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,10 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         btn_cancelar_pago = (Button) findViewById(R.id.btn_cancelar_pago);
 
         spinnerMonedaPagar = (Spinner) findViewById(R.id.spinnerMonedaPagar);
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
+
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
         txt_moneda_pagar = (EditText) findViewById(R.id.txt_moneda_pagar);
         txt_pin = (EditText) findViewById(R.id.txt_pin);
@@ -72,6 +81,26 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
 
         focTipoTarjeta();
+        cargarCuotas();
+        deseaCuotas();
+
+        if (tipo_tarjeta == 2){
+            sp_pago_cuotas.setEnabled(false);
+        }
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,5 +190,15 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         } else {
             imageView.setImageResource(R.drawable.americanexpressicon);
         }
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(IngresoMontoPagoPinTransferencias.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoPinTransferencias.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_pago_cuotas.setAdapter(cuota);
     }
 }

@@ -6,10 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
@@ -25,6 +28,10 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
     EditText txt_monto_pagar;
     ImageView imageView;
     LinearLayout ll_tipo_servicio_pagar;
+    Spinner sp_pago_cuotas, sp_cantidad_cuotas;
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    LinearLayout ll_cantidad_cuotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,11 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
         tv_tipo_servicio = (TextView) findViewById(R.id.tv_tipo_servicio);
 
         txt_monto_pagar = (EditText) findViewById(R.id.txt_monto_pagar);
+
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
+
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -76,6 +88,22 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
         }
 
         focTipoTarjeta();
+        cargarCuotas();
+        deseaCuotas();
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,5 +172,15 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaServicios.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaServicios.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_pago_cuotas.setAdapter(cuota);
     }
 }

@@ -6,10 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +29,10 @@ public class MontoPagoPinPagoServicios extends Activity {
     TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar, tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar;
     EditText txt_monto_pagar, txt_pin;
     private UsuarioEntity usuario;
-    LinearLayout ll_tipo_servicio_pagar;
+    LinearLayout ll_tipo_servicio_pagar, ll_cantidad_cuotas;
+    Spinner sp_pago_cuotas, sp_cantidad_cuotas;
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class MontoPagoPinPagoServicios extends Activity {
         setContentView(R.layout.monto_pago_pin_pago_servicios);
 
         ll_tipo_servicio_pagar = (LinearLayout) findViewById(R.id.ll_tipo_servicio_pagar);
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
         btn_continuar_pago = (Button) findViewById(R.id.btn_continuar_pago);
         btn_cancelar_pago = (Button) findViewById(R.id.btn_cancelar_pago);
@@ -48,6 +55,9 @@ public class MontoPagoPinPagoServicios extends Activity {
 
         txt_monto_pagar = (EditText) findViewById(R.id.txt_monto_pagar);
         txt_pin = (EditText) findViewById(R.id.txt_pin);
+
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -80,6 +90,12 @@ public class MontoPagoPinPagoServicios extends Activity {
         }
 
         focTipoTarjeta();
+        cargarCuotas();
+        deseaCuotas();
+
+        if (tipo_tarjeta_pago == 2){
+            sp_pago_cuotas.setEnabled(false);
+        }
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +130,20 @@ public class MontoPagoPinPagoServicios extends Activity {
             @Override
             public void onClick(View v) {
                 cancelar();
+            }
+        });
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -153,5 +183,15 @@ public class MontoPagoPinPagoServicios extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(MontoPagoPinPagoServicios.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(MontoPagoPinPagoServicios.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_pago_cuotas.setAdapter(cuota);
     }
 }

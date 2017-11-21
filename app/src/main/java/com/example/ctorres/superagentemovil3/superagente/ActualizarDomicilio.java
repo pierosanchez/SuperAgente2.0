@@ -90,7 +90,7 @@ public class ActualizarDomicilio extends Activity {
             UsuarioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.actualizarDomicilioCliente(depa, provi, distri, direc, tel, usuario.getUsuarioId());
+                user = dao.getUsuarioDomicilioLogin(usuario.getUsuarioId(), depa, provi, distri, direc, tel);
 
             } catch (Exception e) {
                 user = null;

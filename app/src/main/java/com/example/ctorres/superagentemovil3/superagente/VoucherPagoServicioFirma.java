@@ -189,7 +189,7 @@ public class VoucherPagoServicioFirma extends Activity {
         return fecha;
     }
 
-    public String totalServicioPagar(){
+    public String totalServicioPagar() {
         String total;
 
         String monto = tv_importe_servicio.getText().toString();
@@ -205,7 +205,7 @@ public class VoucherPagoServicioFirma extends Activity {
         return decimal.format(importe);
     }
 
-    public String tipoTarjeta(){
+    public String tipoTarjeta() {
         String tipo = "";
 
         if (tipo_tarjeta_pago == 1) {
@@ -217,7 +217,7 @@ public class VoucherPagoServicioFirma extends Activity {
         return tipo;
     }
 
-    public String drawableToBitmapToString(ImageView imageView){
+    public String drawableToBitmapToString(ImageView imageView) {
         BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
         Bitmap bitmap = bitmapDrawable.getBitmap();
 
@@ -250,7 +250,7 @@ public class VoucherPagoServicioFirma extends Activity {
         protected void onPostExecute(UsuarioEntity usuarioEntity) {
             usuario = usuarioEntity;
             if (usuarioEntity.getUsuarioId().equals("00")) {
-                    Toast.makeText(VoucherPagoServicioFirma.this, "ok", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VoucherPagoServicioFirma.this, "ok", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(VoucherPagoServicioFirma.this, "Error", Toast.LENGTH_SHORT).show();
             }

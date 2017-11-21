@@ -123,7 +123,8 @@
                         android:layout_width="190dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="54dp"
-                        android:background="@color/color_blanco" />
+                        android:background="@color/color_blanco"
+                        android:singleLine="true"/>
 
                 </LinearLayout>
 

@@ -104,7 +104,57 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_pago_cuotas" />
+
+                        <Spinner
+                            android:id="@+id/sp_pago_cuotas"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="25dp"
+                            android:background="@drawable/spinner_selector" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/ll_cantidad_cuotas"
+                        android:visibility="gone"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_cantidad_cuotas" />
+
+                        <Spinner
+                            android:id="@+id/sp_cantidad_cuotas"
+                            android:layout_width="150dp"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/spinner_selector" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -116,7 +166,7 @@
                         android:id="@+id/txt_pin"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="70dp"
                         android:background="@color/color_blanco"
                         android:gravity="center"
                         android:inputType="textPassword" />
@@ -147,11 +197,11 @@
                         android:id="@+id/txt_monto_pagar"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="103dp"
+                        android:layout_marginLeft="133dp"
                         android:background="@color/color_blanco"
+                        android:enabled="false"
                         android:gravity="center"
-                        android:inputType="number"
-                        android:enabled="false"/>
+                        android:inputType="number" />
 
                 </LinearLayout>
 
