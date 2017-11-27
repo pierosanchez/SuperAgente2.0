@@ -60,8 +60,8 @@ public class InformacionPersonalActivity extends Activity {
         dni_cliente = (EditText) findViewById(R.id.dni_cliente);
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
 
-        Bundle bundle = getIntent().getExtras();
-        numCliente = bundle.getString("movil");
+        /*Bundle bundle = getIntent().getExtras();
+        numCliente = bundle.getString("movil");*/
 
         /*acepta_termino.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +70,7 @@ public class InformacionPersonalActivity extends Activity {
             }
         });*/
 
-        txt_movil.setText(numCliente);
+        //txt_movil.setText(numCliente);
 
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -206,18 +206,21 @@
                         android:text="@string/tv_datos_comercio_consumo" />
 
                     <TextView
+                        android:id="@+id/tv_nombre_comercio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:text="GRIFO SHELL - JAVIER PRADO" />
 
                     <TextView
+                        android:id="@+id/tv_direccion_comercio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"
                         android:text="AV. LA MARINA  4335 URB. MARANGA" />
 
                     <TextView
+                        android:id="@+id/tv_distrito_comercio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="30dp"

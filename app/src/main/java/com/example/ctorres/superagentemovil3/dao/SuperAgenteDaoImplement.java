@@ -49,12 +49,12 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             Log.e("METHOD", "InsertarFirmaCliente");
             Log.e("URL", url);
 
-            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            String jsonArray = utils.getJsonarrayFromUrl(url);
             if (jsonArray != null) {
                 if (jsonArray.length() > 0) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    //JSONObject jsonObject = jsonArray.getJSONObject(0);
                     UsuarioEntity usuarioEntity = new UsuarioEntity();
-                    usuarioEntity.setCodCliente(utils.getValueStringOrNull(jsonObject, "codcliente"));
+                    //usuarioEntity.setCodCliente(utils.getValueStringOrNull(jsonObject, "codcliente"));
                 } else {
                     user = null;
                 }

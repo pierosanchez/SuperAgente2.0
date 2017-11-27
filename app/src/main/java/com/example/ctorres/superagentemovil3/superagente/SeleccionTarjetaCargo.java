@@ -572,6 +572,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("cod_banco", cod_banco);
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
                         intent.putExtra("cli_dni", cli_dni);
                         startActivity(intent);
                         finish();

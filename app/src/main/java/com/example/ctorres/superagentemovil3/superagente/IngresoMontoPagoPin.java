@@ -29,9 +29,9 @@ public class IngresoMontoPagoPin extends Activity {
     EditText txt_moneda_pagar, txt_pin;
     ImageView imageView;
     Bitmap bmp;
-    String monto, tipo_moneda_deuda, cli_dni, desc_corta_banco_tarjeta_cargo;
+    String monto, tipo_moneda_deuda, cli_dni, desc_corta_banco_tarjeta_cargo, cliente;
     String num_tarjeta, tarjeta_cargo, desc_corta_banco;
-    TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_deuda;
+    TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_deuda, textViewNombreApellidoUsuario;
     int tipo_tarjeta, emisor_tarjeta;
     private UsuarioEntity usuario;
 
@@ -52,6 +52,7 @@ public class IngresoMontoPagoPin extends Activity {
 
         tv_numero_clave_cifrada_cargo = (TextView) findViewById(R.id.tv_numero_clave_cifrada_cargo);
         tv_tipo_moneda_deuda = (TextView) findViewById(R.id.tv_tipo_moneda_deuda);
+        textViewNombreApellidoUsuario = (TextView) findViewById(R.id.textViewNombreApellidoUsuario);
 
         //cargarTipoMoneda();
 
@@ -64,6 +65,7 @@ public class IngresoMontoPagoPin extends Activity {
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         tarjeta_cargo = extras.getString("tarjeta_cargo");
         cli_dni = extras.getString("cli_dni");
+        cliente = extras.getString("cliente");
         desc_corta_banco = extras.getString("desc_corta_banco");
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
 
@@ -74,6 +76,7 @@ public class IngresoMontoPagoPin extends Activity {
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
         txt_moneda_pagar.setText(transformarMonto());
+        textViewNombreApellidoUsuario.setText(cliente);
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +87,7 @@ public class IngresoMontoPagoPin extends Activity {
                 } else {
                     Intent intent = new Intent(IngresoMontoPagoPin.this, VoucherPagoTarjeta.class);
                     intent.putExtra("monto", monto);
+                    intent.putExtra("cliente", cliente);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
                     intent.putExtra("tarjeta_cargo", tarjeta_cargo);
@@ -119,9 +123,9 @@ public class IngresoMontoPagoPin extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(IngresoMontoPagoPin.this, MenuCliente.class);
-                intent.putExtra("monto", monto);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
                 startActivity(intent);
                 finish();
             }

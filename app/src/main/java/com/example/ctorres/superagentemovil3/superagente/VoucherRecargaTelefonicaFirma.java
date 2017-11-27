@@ -197,7 +197,7 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

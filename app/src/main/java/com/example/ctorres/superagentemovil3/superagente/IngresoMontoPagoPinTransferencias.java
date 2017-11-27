@@ -31,7 +31,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     ImageView imageView;
     UsuarioEntity usuario;
     int emisor_tarjeta, tipo_tarjeta;
-    TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
+    TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo, tv_pago_cuotas;
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
     String cliente, cli_dni, validacion_tarjeta;
     String[] cuotas = {"No", "Si"};
@@ -59,6 +59,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
         textViewNombreApellidoUsuario = (TextView) findViewById(R.id.textViewNombreApellidoUsuario);
         tv_numero_clave_cifrada_cargo = (TextView) findViewById(R.id.tv_numero_clave_cifrada_cargo);
+        tv_pago_cuotas = (TextView) findViewById(R.id.tv_pago_cuotas);
 
         cargarComboTipoMoneda();
 
@@ -79,13 +80,15 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
+        txt_moneda_pagar.requestFocus();
 
         focTipoTarjeta();
         cargarCuotas();
         deseaCuotas();
 
         if (tipo_tarjeta == 2){
-            sp_pago_cuotas.setEnabled(false);
+            sp_pago_cuotas.setVisibility(View.GONE);
+            tv_pago_cuotas.setVisibility(View.GONE);
         }
 
         sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

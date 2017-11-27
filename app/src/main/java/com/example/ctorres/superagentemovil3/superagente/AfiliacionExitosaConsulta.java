@@ -24,7 +24,7 @@ public class AfiliacionExitosaConsulta extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AfiliacionExitosaConsulta.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

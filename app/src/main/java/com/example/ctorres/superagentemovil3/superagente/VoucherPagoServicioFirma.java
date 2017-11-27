@@ -2,6 +2,7 @@ package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteBD;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
@@ -103,8 +105,11 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    /*VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
-                    insertarFirma.execute();*/
+                    VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
+                    insertarFirma.execute();
+                    /*SuperAgenteBD superAgenteBD = new SuperAgenteBD(VoucherPagoServicioFirma.this);
+                    SQLiteDatabase db = superAgenteBD.getWritableDatabase();
+                    db.execSQL("INSERT INTO Cliente(firma) VALUES('" + drawableToBitmapToString(signImage) + "')");*/
 
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
@@ -246,7 +251,7 @@ public class VoucherPagoServicioFirma extends Activity {
             return user;
         }
 
-        @Override
+        /*@Override
         protected void onPostExecute(UsuarioEntity usuarioEntity) {
             usuario = usuarioEntity;
             if (usuarioEntity.getUsuarioId().equals("00")) {
@@ -255,6 +260,6 @@ public class VoucherPagoServicioFirma extends Activity {
                 Toast.makeText(VoucherPagoServicioFirma.this, "Error", Toast.LENGTH_SHORT).show();
             }
 
-        }
+        }*/
     }
 }

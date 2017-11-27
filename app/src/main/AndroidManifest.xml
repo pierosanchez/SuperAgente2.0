@@ -28,7 +28,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".superagente.LoginActivity" />
-        <activity android:name=".superagente.IngresoClaveAccesoCliente" />
         <activity android:name=".superagente.ControlMaximoNumeroCuentas" />
         <activity android:name=".superagente.InformacionPersonalActivity" />
         <activity android:name=".superagente.PrincipalActivity" />
@@ -41,12 +40,10 @@
         <activity android:name=".superagente.InformacionTarjeta" />
         <activity android:name=".superagente.IngresoDatosBeneficiario4De4" />
         <activity android:name=".superagente.CambioClaveAcceso" />
-        <activity android:name=".superagente.ListadoTarjetasPagar" />
         <activity android:name=".superagente.SeleccionModoMontoPago" />
         <activity android:name=".superagente.SeleccionTarjetaPago" />
         <activity android:name=".superagente.IngresoMontoPagoPin" />
         <activity android:name=".superagente.VoucherPagoTarjeta" />
-        <activity android:name=".superagente.EfectuarOtroPagoTarjeta" />
         <activity android:name=".superagente.SeleccionMedioPago" />
         <activity android:name=".superagente.SeleccionTarjetaCargo" />
         <activity android:name=".superagente.ConfirmacionTarjetaCargo" />
@@ -57,7 +54,6 @@
         <activity android:name=".superagente.RelacionBeneficiarios" />
         <activity android:name=".superagente.IngresoCuentaTarjetaAbono" />
         <activity android:name=".superagente.InformacionDomicilioElectronicaPersonal" />
-        <activity android:name=".superagente.IngresoDatosBeneficiario2De2" />
         <activity android:name=".superagente.IngresoMontoPagoFirmaTransferencias" />
         <activity android:name=".superagente.VoucherTransferencias" />
         <activity android:name=".superagente.MantenimientoUsuario" />
@@ -92,9 +88,7 @@
         <activity android:name=".superagente.VoucherPagoConsumo" />
         <activity android:name=".superagente.IngresoMontoPagoFirmaServicios" />
         <activity android:name=".superagente.RecargaTelefonica" />
-        <activity android:name=".superagente.SeleccionMedPagoRecarga" />
         <activity android:name=".superagente.SeleccionTarjetaRecarga" />
-        <activity android:name=".superagente.MontoPagoRecarga" />
         <activity android:name=".superagente.ConformidadClienteRecarga" />
         <activity android:name=".superagente.VoucherRecargaTelefonica" />
         <activity android:name=".superagente.VoucherPagoConsumoFirma" />

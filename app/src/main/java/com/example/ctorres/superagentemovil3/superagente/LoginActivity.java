@@ -26,6 +26,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteBD;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.Constante;
 
 import java.sql.Statement;
 import java.util.Timer;
@@ -38,6 +39,7 @@ public class LoginActivity extends Activity {
     private UsuarioEntity userEntity;
     private TextView tv_olvido_contraseña;
     private ProgressBar circleProgressBar;
+    String callingActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,73 +65,139 @@ public class LoginActivity extends Activity {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);*/
 
-        tv_olvido_contraseña.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sanipesIntent = new Intent(LoginActivity.this, ContrasenaOlvidada.class);
-                //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
-                startActivity(sanipesIntent);
+        callingActivity = this.getCallingActivity().getClassName();
+
+        if (callingActivity.equals(Constante.ACTIVITYROOT + "SplashActivity")) {
+            /*if (obtenerDataSQLite() == false) {
+                Intent intent = new Intent(LoginActivity.this, VentanaErrores.class);
+                startActivityForResult(intent, 0);
                 finish();
-            }
-        });
+            }*/
 
-        btn_aceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                circleProgressBar.setVisibility(View.VISIBLE);
+            tv_olvido_contraseña.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(LoginActivity.this, ContrasenaOlvidada.class);
+                    //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
 
-                String user = usuario.getText().toString();
-                String clave = clave_acceso.getText().toString();
+            btn_aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    circleProgressBar.setVisibility(View.VISIBLE);
 
-                if (!user.trim().equals("") && !clave.trim().equals("")) {
-                    if (user.length() == 9) {
-                        try {
-                            TimerTask task = new TimerTask() {
-                                @Override
-                                public void run() {
-                                    LoginActivity.ValidarLogin validador = new LoginActivity.ValidarLogin();
-                                    validador.execute();
-                                }
-                            };
-                            Timer timer = new Timer();
-                            timer.schedule(task, 500);
-                        } catch (Exception e) {
-                            //flag_clic_ingreso = 0;
+                    String user = usuario.getText().toString();
+                    String clave = clave_acceso.getText().toString();
+
+                    if (!user.trim().equals("") && !clave.trim().equals("")) {
+                        if (user.length() == 9) {
+                            try {
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        LoginActivity.ValidarLogin validador = new LoginActivity.ValidarLogin();
+                                        validador.execute();
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 500);
+                            } catch (Exception e) {
+                                //flag_clic_ingreso = 0;
+                            }
+                        } else if (user.length() != 9) {
+                            Toast.makeText(LoginActivity.this, "Número de celular no válido", Toast.LENGTH_LONG).show();
+                            circleProgressBar.setVisibility(View.GONE);
                         }
-                    } else if (user.length() != 9) {
-                        Toast.makeText(LoginActivity.this, "Número de celular no válido", Toast.LENGTH_LONG).show();
+                    } else if (user.equals("") && clave.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese sus credenciales de acceso", Toast.LENGTH_LONG).show();
+                        circleProgressBar.setVisibility(View.GONE);
+                    } else if (clave.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese su clave de acceso", Toast.LENGTH_LONG).show();
+                        circleProgressBar.setVisibility(View.GONE);
+                    } else if (user.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese su número de celular", Toast.LENGTH_LONG).show();
                         circleProgressBar.setVisibility(View.GONE);
                     }
-                } else if (user.equals("") && clave.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Ingrese sus credenciales de acceso", Toast.LENGTH_LONG).show();
-                    circleProgressBar.setVisibility(View.GONE);
-                } else if (clave.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Ingrese su clave de acceso", Toast.LENGTH_LONG).show();
-                    circleProgressBar.setVisibility(View.GONE);
-                } else if (user.equals("")) {
-                    Toast.makeText(LoginActivity.this, "Ingrese su número de celular", Toast.LENGTH_LONG).show();
-                    circleProgressBar.setVisibility(View.GONE);
                 }
-            }
-        });
+            });
 
-        btn_salir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            btn_salir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                startActivity(intent);
-            }
-        });
+                    startActivity(intent);
+                }
+            });
+        } else {
+            tv_olvido_contraseña.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(LoginActivity.this, ContrasenaOlvidada.class);
+                    //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
 
-        /*if (obtenerDataSQLite() == false) {
-            Intent intent = new Intent(LoginActivity.this, VentanaErrores.class);
-            startActivityForResult(intent, 0);
-            finish();
-        }*/
+            btn_aceptar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    circleProgressBar.setVisibility(View.VISIBLE);
+
+                    String user = usuario.getText().toString();
+                    String clave = clave_acceso.getText().toString();
+
+                    if (!user.trim().equals("") && !clave.trim().equals("")) {
+                        if (user.length() == 9) {
+                            try {
+                                TimerTask task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        LoginActivity.ValidarLogin validador = new LoginActivity.ValidarLogin();
+                                        validador.execute();
+                                    }
+                                };
+                                Timer timer = new Timer();
+                                timer.schedule(task, 500);
+                            } catch (Exception e) {
+                                //flag_clic_ingreso = 0;
+                            }
+                        } else if (user.length() != 9) {
+                            Toast.makeText(LoginActivity.this, "Número de celular no válido", Toast.LENGTH_LONG).show();
+                            circleProgressBar.setVisibility(View.GONE);
+                        }
+                    } else if (user.equals("") && clave.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese sus credenciales de acceso", Toast.LENGTH_LONG).show();
+                        circleProgressBar.setVisibility(View.GONE);
+                    } else if (clave.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese su clave de acceso", Toast.LENGTH_LONG).show();
+                        circleProgressBar.setVisibility(View.GONE);
+                    } else if (user.equals("")) {
+                        Toast.makeText(LoginActivity.this, "Ingrese su número de celular", Toast.LENGTH_LONG).show();
+                        circleProgressBar.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            btn_salir.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private String getPhoneNumber() {
@@ -187,9 +255,9 @@ public class LoginActivity extends Activity {
                     //queDeseaHacer();
                     circleProgressBar.setVisibility(View.GONE);
                     Intent sanipesIntent = new Intent(LoginActivity.this, VentanaErrores.class);
-                    sanipesIntent.putExtra("usuario", userEntity);
-                    sanipesIntent.putExtra("movil", movil);
-                    sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                    //sanipesIntent.putExtra("usuario", userEntity);
+                    //sanipesIntent.putExtra("movil", movil);
+                    //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
                     startActivityForResult(sanipesIntent, 0);
                     finish();
                 } else if (userEntity.getUsuarioId().equals("03")) {
@@ -199,18 +267,42 @@ public class LoginActivity extends Activity {
                 } else {
                     try {
                         circleProgressBar.setVisibility(View.GONE);
+                        SuperAgenteBD superAgenteBD = new SuperAgenteBD(LoginActivity.this);
+                        if (obtenerDataSQLite() == false) {
+                            SQLiteDatabase db = superAgenteBD.getWritableDatabase();
+                            db.execSQL("INSERT INTO Cliente(movil) VALUES('" + movil + "')");
+                            db.close();
+
+                            Intent sanipesIntent = new Intent(LoginActivity.this, MenuCliente.class);
+                            sanipesIntent.putExtra("usuario", userEntity);
+                            sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                            sanipesIntent.putExtra("cli_dni", userEntity.getDni());
+                            startActivity(sanipesIntent);
+                            finish();
+                        } else {
+                            Intent sanipesIntent = new Intent(LoginActivity.this, MenuCliente.class);
+                            sanipesIntent.putExtra("usuario", userEntity);
+                            sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                            sanipesIntent.putExtra("cli_dni", userEntity.getDni());
+                            startActivity(sanipesIntent);
+                            finish();
+                        }
+                        /*SQLiteDatabase db = superAgenteBD.getWritableDatabase();
+                        db.execSQL("INSERT INTO Cliente(movil) VALUES('" + movil + "')");
+                        db.close();
+
                         Intent sanipesIntent = new Intent(LoginActivity.this, MenuCliente.class);
                         sanipesIntent.putExtra("usuario", userEntity);
                         sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
                         sanipesIntent.putExtra("cli_dni", userEntity.getDni());
                         startActivity(sanipesIntent);
-                        finish();
+                        finish();*/
                     } catch (Exception e) {
                         //flag_clic_ingreso = 0;
                     }
 
                 }
-            } else if (userEntity == null){
+            } else if (userEntity == null) {
                 Toast.makeText(LoginActivity.this, "Error de red, por favor conectese a una red Wi-Fi o actives sus datos moviles", Toast.LENGTH_LONG).show();
                 circleProgressBar.setVisibility(View.GONE);
             }

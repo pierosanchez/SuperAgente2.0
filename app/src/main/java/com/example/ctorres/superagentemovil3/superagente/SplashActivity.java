@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
                 Intent loginIntent = new Intent().setClass(SplashActivity.this, LoginActivity.class);
-                startActivity(loginIntent);
+                startActivityForResult(loginIntent, 0);
                 finish();
             }
         };

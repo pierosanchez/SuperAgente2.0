@@ -125,6 +125,23 @@ public class AgregarTarjetasUsuario extends Activity {
             }
         });
 
+        spinnerTipoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Débito")){
+                    spinnerValidacionTarjeta.setEnabled(false);
+                    spinnerValidacionTarjeta.setSelection(0);
+                } else if (parent.getAdapter().getItem(position).equals("Crédito")){
+                    spinnerValidacionTarjeta.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

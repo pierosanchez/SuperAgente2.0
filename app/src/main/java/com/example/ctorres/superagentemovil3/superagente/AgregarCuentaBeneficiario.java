@@ -23,7 +23,7 @@ public class AgregarCuentaBeneficiario extends Activity {
     private UsuarioEntity usuario;
     String dni_benef;
     EditText txt_cod_interbancario1, txt_cod_interbancario2, txt_cod_interbancario3, txt_cod_interbancario4;
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class AgregarCuentaBeneficiario extends Activity {
         dni_benef = bundle.getString("dni_benef");
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         numeroCodigoInterbancarioBeneficiario();
 
@@ -63,6 +64,7 @@ public class AgregarCuentaBeneficiario extends Activity {
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("dni_benef", dni_benef);
                     intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
                 } else {

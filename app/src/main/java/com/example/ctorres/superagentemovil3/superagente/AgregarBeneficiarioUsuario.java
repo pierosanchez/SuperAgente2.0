@@ -37,7 +37,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
     private int year, month, day;
     private Spinner sp_tipo_abono_beneficiario;
     String[] tipo_abono = {"Cuentas", "Tarjetas", "Cheques"};
-    String cliente;
+    String cliente, cli_dni;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
+        cli_dni = bundle.getString("cli_dni");
 
         cargarTipoAbono();
 
@@ -100,6 +101,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
                                 Intent intent = new Intent(AgregarBeneficiarioUsuario.this, ListadoBeneficiariosUsuario.class);
                                 intent.putExtra("usuario", usuario);
                                 intent.putExtra("cliente", cliente);
+                                intent.putExtra("cli_dni", cli_dni);
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -128,6 +130,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
                 Intent intent = new Intent(AgregarBeneficiarioUsuario.this, ListadoBeneficiariosUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
             }
@@ -183,6 +186,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
                                 intent.putExtra("usuario", usuario);
                                 intent.putExtra("dni_benef", dni);
                                 intent.putExtra("cliente", cliente);
+                                intent.putExtra("cli_dni", cli_dni);
                                 startActivity(intent);
                                 finish();
                             } else {
@@ -229,6 +233,7 @@ public class AgregarBeneficiarioUsuario extends Activity {
                                 intent.putExtra("usuario", usuario);
                                 intent.putExtra("dni_benef", dni);
                                 intent.putExtra("cliente", cliente);
+                                intent.putExtra("cli_dni", cli_dni);
                                 startActivity(intent);
                                 finish();
                             } else {

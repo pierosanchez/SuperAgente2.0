@@ -152,7 +152,7 @@ public class ActualizarBeneficiario extends Activity {
 
     public void setDate(View view) {
         showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
+        Toast.makeText(getApplicationContext(), "Seleccione la fecha de nacimiento", Toast.LENGTH_SHORT)
                 .show();
     }
 

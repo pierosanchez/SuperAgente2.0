@@ -28,6 +28,7 @@ public class VoucherPagoConsumoFirma extends Activity {
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     int tipo_tarjeta_pago;
     String parteDireccion, parteDistrito, parteRazon;
+    TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class VoucherPagoConsumoFirma extends Activity {
         txt_numero_tarjeta_voucher_consumo = (TextView) findViewById(R.id.txt_numero_tarjeta_voucher_consumo);
         tv_banco_voucher_consumo = (TextView) findViewById(R.id.tv_banco_voucher_consumo);
         txt_importe_voucher_consumo = (TextView) findViewById(R.id.txt_importe_voucher_consumo);
+        tv_distrito_comercio = (TextView) findViewById(R.id.tv_distrito_comercio);
+        tv_direccion_comercio = (TextView) findViewById(R.id.tv_direccion_comercio);
+        tv_nombre_comercio = (TextView) findViewById(R.id.tv_nombre_comercio);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -68,6 +72,9 @@ public class VoucherPagoConsumoFirma extends Activity {
         txt_importe_voucher_consumo.setText(importe);
         tv_banco_voucher_consumo.setText(banco);
         txt_numero_tarjeta_voucher_consumo.setText(tarjeta);
+        tv_nombre_comercio.setText(parteRazon);
+        tv_direccion_comercio.setText(parteDireccion);
+        tv_distrito_comercio.setText(parteDistrito);
 
         btn_fimar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +109,7 @@ public class VoucherPagoConsumoFirma extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(VoucherPagoConsumoFirma.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

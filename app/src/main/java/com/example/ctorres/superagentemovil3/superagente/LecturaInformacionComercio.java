@@ -118,7 +118,6 @@ public class LecturaInformacionComercio extends Activity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
             comercioAdapter.setNewListcomercio(comercioEntityArrayList);
             comercioAdapter.notifyDataSetChanged();
         }

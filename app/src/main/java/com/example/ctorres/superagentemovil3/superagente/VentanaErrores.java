@@ -39,9 +39,9 @@ public class VentanaErrores extends Activity {
         String callingActivity = this.getCallingActivity().getClassName();
 
         if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginActivity")){
-            Bundle bundle = getIntent().getExtras();
+            /*Bundle bundle = getIntent().getExtras();
             usuario = bundle.getParcelable("usuario");
-            numCliente = bundle.getString("movil");
+            numCliente = bundle.getString("movil");*/
 
 
             btn_opcion1.setText("Reintentar");
@@ -51,7 +51,7 @@ public class VentanaErrores extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent sanipesIntent = new Intent(VentanaErrores.this, LoginActivity.class);
-                    startActivity(sanipesIntent);
+                    startActivityForResult(sanipesIntent, 0);
                     finish();
                 }
             });
@@ -60,7 +60,7 @@ public class VentanaErrores extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
-                    sanipesIntent.putExtra("movil", numCliente);
+                    //sanipesIntent.putExtra("movil", numCliente);
                     startActivity(sanipesIntent);
                     finish();
                 }

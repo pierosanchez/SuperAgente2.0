@@ -44,6 +44,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     String parteDireccion="";
     String parteDistrito="";
     LinearLayout ll_cantidad_cuotas;
+    TextView tv_razonsoc_comercio,tv_direccion_comercio,tv_distrito_comercio, tv_pago_cuotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,10 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
         tv_tarjeta_cifrada_consumos = (TextView) findViewById(R.id.tv_tarjeta_cifrada_consumos);
         tv_nombre_cliente_consumo = (TextView) findViewById(R.id.tv_nombre_cliente_consumo);
+        tv_razonsoc_comercio = (TextView) findViewById(R.id.tv_razonsoc_comercio);
+        tv_direccion_comercio = (TextView) findViewById(R.id.tv_direccion_comercio);
+        tv_distrito_comercio = (TextView) findViewById(R.id.tv_distrito_comercio);
+        tv_pago_cuotas = (TextView) findViewById(R.id.tv_pago_cuotas);
 
         txt_monto_pago_consumo = (EditText) findViewById(R.id.txt_monto_pago_consumo);
         txt_pin_pago_consumo = (EditText) findViewById(R.id.txt_pin_pago_consumo);
@@ -89,11 +94,16 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         deseaCuotas();
 
         if (tipo_tarjeta_pago == 2){
-            sp_pago_cuotas.setEnabled(false);
+            sp_pago_cuotas.setVisibility(View.GONE);
+            tv_pago_cuotas.setVisibility(View.GONE);
         }
 
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
+
+        tv_razonsoc_comercio.setText(parteRazon);
+        tv_direccion_comercio.setText(parteDireccion);
+        tv_distrito_comercio.setText(parteDistrito);
 
         txt_pin_pago_consumo.requestFocus();
 

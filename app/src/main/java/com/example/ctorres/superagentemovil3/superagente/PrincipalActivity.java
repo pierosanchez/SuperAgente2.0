@@ -368,7 +368,7 @@ public class PrincipalActivity extends AppCompatActivity implements
 
                 Intent loginIntent = new Intent().setClass(PrincipalActivity.this, LoginActivity.class);
                 loginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(loginIntent);
+                startActivityForResult(loginIntent, 0);
                 finish();
             }
         });

@@ -26,7 +26,8 @@ public class MontoPagoPinPagoServicios extends Activity {
             servicio, num_servicio, cliente, tipo_servicio, cli_dni, nombre_recibo, validacion_tarjeta;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     ImageView imageView;
-    TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar, tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar;
+    TextView tv_tarjeta_cifrada_pago_servicios, tv_nombre_cliente_pago_servicios, txt_servicio_pagar,
+            tv_tipo_moneda_deuda, tv_tipo_servicio, tv_tipo_servicio_pagar, tv_pago_cuotas;
     EditText txt_monto_pagar, txt_pin;
     private UsuarioEntity usuario;
     LinearLayout ll_tipo_servicio_pagar, ll_cantidad_cuotas;
@@ -52,6 +53,7 @@ public class MontoPagoPinPagoServicios extends Activity {
         txt_servicio_pagar = (TextView) findViewById(R.id.txt_servicio_pagar);
         tv_tipo_moneda_deuda = (TextView) findViewById(R.id.tv_tipo_moneda_deuda);
         tv_tipo_servicio = (TextView) findViewById(R.id.tv_tipo_servicio);
+        tv_pago_cuotas = (TextView) findViewById(R.id.tv_pago_cuotas);
 
         txt_monto_pagar = (EditText) findViewById(R.id.txt_monto_pagar);
         txt_pin = (EditText) findViewById(R.id.txt_pin);
@@ -94,7 +96,8 @@ public class MontoPagoPinPagoServicios extends Activity {
         deseaCuotas();
 
         if (tipo_tarjeta_pago == 2){
-            sp_pago_cuotas.setEnabled(false);
+            sp_pago_cuotas.setVisibility(View.GONE);
+            tv_pago_cuotas.setVisibility(View.GONE);
         }
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {

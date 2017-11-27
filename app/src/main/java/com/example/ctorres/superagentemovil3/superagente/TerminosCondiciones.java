@@ -54,15 +54,15 @@ public class TerminosCondiciones extends Activity {
         //btn_aceptar = (Button) findViewById(R.id.btnAceptar) ;
         btnRegresar = (Button) findViewById(R.id.btnRegresar) ;
 
-        Bundle bundle = getIntent().getExtras();
-        numCliente = bundle.getString("movil");
+        /*Bundle bundle = getIntent().getExtras();
+        numCliente = bundle.getString("movil");*/
 
         rdbtn_acepta_condiciones.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //btn_aceptar.setEnabled(true);
                 Intent intent = new Intent(TerminosCondiciones.this, InformacionPersonalActivity.class);
-                intent.putExtra("movil", numCliente);
+                //intent.putExtra("movil", numCliente);
                 startActivity(intent);
                 finish();
             }
@@ -81,7 +81,7 @@ public class TerminosCondiciones extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TerminosCondiciones.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

@@ -139,7 +139,8 @@
                             android:id="@+id/txt_banco_tarjeta_pago"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BANCO: Scotiabank" />
+                            android:text="BANCO: Scotiabank"
+                            android:textAllCaps="true"/>
 
                     </LinearLayout>
 
@@ -186,7 +187,8 @@
                             android:id="@+id/txt_banco_tarjeta_cargo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BANCO: Scotiabank" />
+                            android:text="BANCO: Scotiabank"
+                            android:textAllCaps="true"/>
 
                         <TextView
                             android:id="@+id/txt_importe_pagar"

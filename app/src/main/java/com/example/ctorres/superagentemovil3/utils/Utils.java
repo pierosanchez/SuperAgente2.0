@@ -75,7 +75,7 @@ public class Utils {
         try {
             URL u = new URL(url);
             HttpURLConnection con = (HttpURLConnection) u.openConnection();
-            con.setRequestMethod("GET");
+            con.setRequestMethod("POST");
             InputStream in = new BufferedInputStream(con.getInputStream());
             request = convertStreamToString(in);
         } catch (MalformedURLException e) {

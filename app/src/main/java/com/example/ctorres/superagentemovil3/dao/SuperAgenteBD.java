@@ -14,7 +14,7 @@ public class SuperAgenteBD extends SQLiteOpenHelper {
     private static int version = 1;
     private static String name = Constante.BDSUPERAGENTE;
     private static SQLiteDatabase.CursorFactory factory = null;
-    String sql = "CREATE TABLE Cliente (movil TEXT)";
+    String sql = "CREATE TABLE Cliente (movil TEXT, firma TEXT)";
     String sqlOld = "CREATE TABLE USUARIO( " + "" +
             "IdCliente varchar(50) NULL," +
             "Nombres varchar(20) NULL," +

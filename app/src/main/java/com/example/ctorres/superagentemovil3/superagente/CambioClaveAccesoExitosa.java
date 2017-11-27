@@ -28,7 +28,7 @@ public class CambioClaveAccesoExitosa extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CambioClaveAccesoExitosa.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

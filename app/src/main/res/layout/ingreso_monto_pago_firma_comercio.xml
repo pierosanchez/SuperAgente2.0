@@ -146,7 +146,8 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/color_blanco"
                     android:gravity="center"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"/>
 
             </LinearLayout>
 

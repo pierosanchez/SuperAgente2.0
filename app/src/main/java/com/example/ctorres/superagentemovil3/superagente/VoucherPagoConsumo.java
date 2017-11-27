@@ -23,6 +23,7 @@ public class VoucherPagoConsumo extends Activity {
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
     String parteDireccion, parteDistrito, parteRazon;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class VoucherPagoConsumo extends Activity {
         txt_numero_tarjeta_voucher_consumo = (TextView) findViewById(R.id.txt_numero_tarjeta_voucher_consumo);
         tv_banco_voucher_consumo = (TextView) findViewById(R.id.tv_banco_voucher_consumo);
         txt_importe_voucher_consumo = (TextView) findViewById(R.id.txt_importe_voucher_consumo);
+        tv_distrito_comercio = (TextView) findViewById(R.id.tv_distrito_comercio);
+        tv_direccion_comercio = (TextView) findViewById(R.id.tv_direccion_comercio);
+        tv_nombre_comercio = (TextView) findViewById(R.id.tv_nombre_comercio);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -59,6 +63,9 @@ public class VoucherPagoConsumo extends Activity {
         txt_importe_voucher_consumo.setText(importe);
         tv_banco_voucher_consumo.setText(banco);
         txt_numero_tarjeta_voucher_consumo.setText(tarjeta);
+        tv_nombre_comercio.setText(parteRazon);
+        tv_direccion_comercio.setText(parteDireccion);
+        tv_distrito_comercio.setText(parteDistrito);
 
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +132,7 @@ public class VoucherPagoConsumo extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(VoucherPagoConsumo.this, LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });
