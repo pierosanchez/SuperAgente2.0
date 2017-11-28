@@ -694,6 +694,7 @@
     <string name="tv_total_confor_cliRecarga">TOTAL :</string>
     <string name="btn_confor_confirmaRecarga">CONFIRMAR OPERACIÓN</string>
     <string name="tv_resp_confor_cliRecarga">CRISTOPHER TORRES</string>
+    <string name="tv_dni_cliente_recarga">DNI DEL CLIENTE</string>
 
     <!-- pantalla de recargas - Monto Pago -->
     <string name="tv_titulo_recarga_voucherCli">VOUCHER DE RECARGA TELEFÓNICA</string>

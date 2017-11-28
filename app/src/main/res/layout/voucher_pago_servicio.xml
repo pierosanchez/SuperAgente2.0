@@ -100,32 +100,32 @@
 
                 </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TableLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/tv_fecha_pago"
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="" />
+                        android:layout_marginLeft="20dp">
 
-                    <TextView
-                        android:id="@+id/txt_hora_pago"
+                        <TextView
+                            android:id="@+id/tv_fecha_pago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="" />
+
+                        <TextView
+                            android:id="@+id/txt_hora_pago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="" />
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="74dp"
-                        android:text="" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_marginLeft="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -138,159 +138,152 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp" />
 
-                    </LinearLayout>
+                    </TableRow>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp">
-
-                    <TextView
-                        android:id="@+id/tv_nombre_recibo_usuario"
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_num_suministro_voucher" />
+                        android:layout_marginLeft="20dp">
 
-                    <TextView
-                        android:id="@+id/txt_suministro_pagar_voucher"
+                        <TextView
+                            android:id="@+id/tv_nombre_recibo_usuario"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_num_suministro_voucher" />
+
+                        <TextView
+                            android:id="@+id/txt_suministro_pagar_voucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="20dp">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_pagado_por_voucher" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/txt_pagado_por"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />
 
-                    <TextView
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_pagado_por_voucher" />
+                        android:layout_marginLeft="20dp">
 
-                    <TextView
-                        android:id="@+id/txt_pagado_por"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_numero_unico_voucher" />
+
+                        <TextView
+                            android:id="@+id/txt_numero_unico"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="AAA0024" />
+
+                    </TableRow>
+
+                    <TableRow
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginLeft="20dp">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_forma_pago_voucher" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_forma_pago"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_numero_unico_voucher" />
+                    </TableRow>
 
-                    <TextView
-                        android:id="@+id/txt_numero_unico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="AAA0024" />
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_importe_voucher" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                        <!--<TextView
+                            android:id="@+id/tv_tipo_moneda_importe_voucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_forma_pago_voucher" />
+                        <TextView
+                            android:id="@+id/tv_importe_servicio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="" />
 
-                    <TextView
-                        android:id="@+id/tv_forma_pago"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="" />
+                    </TableRow>
 
-                </LinearLayout>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_comision_operacion_voucher" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_importe_voucher" />
+                        <!--<TextView
+                            android:id="@+id/tv_tipo_moneda_comision_voucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />-->
 
-                    <TextView
-                        android:id="@+id/tv_tipo_moneda_importe_voucher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        <TextView
+                            android:id="@+id/tv_comision_oper_servicio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="" />
 
-                    <TextView
-                        android:id="@+id/tv_importe_servicio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="30dp"
-                        android:text="" />
+                    </TableRow>
 
-                </LinearLayout>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="20dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_total_servicio_pagar_voucher" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_comision_operacion_voucher" />
+                        <!--<TextView
+                            android:id="@+id/tv_tipo_moneda_total_voucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp" />-->
 
-                    <TextView
-                        android:id="@+id/tv_tipo_moneda_comision_voucher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        <TextView
+                            android:id="@+id/tv_total_servicio_pagar_voucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="" />
 
-                    <TextView
-                        android:id="@+id/tv_comision_oper_servicio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="30dp"
-                        android:text="" />
+                    </TableRow>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_total_servicio_pagar_voucher" />
-
-                    <TextView
-                        android:id="@+id/tv_tipo_moneda_total_voucher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
-
-                    <TextView
-                        android:id="@+id/tv_total_servicio_pagar_voucher"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="30dp"
-                        android:text="" />
-
-                </LinearLayout>
+                </TableLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

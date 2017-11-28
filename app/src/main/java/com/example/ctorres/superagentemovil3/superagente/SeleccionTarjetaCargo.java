@@ -616,6 +616,8 @@ public class SeleccionTarjetaCargo extends Activity {
                             //emisor_tarjeta = tarjetasUsuarioAdapter.getItem(position).getCod_emisor_tarjeta();
                             String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                             String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                            String validacion_tarjeta = tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta();
+                            int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                             Intent intent = new Intent(SeleccionTarjetaCargo.this, ConfirmacionTarjetaCargo.class);
                             intent.putExtra("monto", monto);
                             intent.putExtra("usuario", usuario);
@@ -628,6 +630,8 @@ public class SeleccionTarjetaCargo extends Activity {
                             intent.putExtra("cli_dni", cli_dni);
                             intent.putExtra("desc_corta_banco", desc_corta_banco);
                             intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                            intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                             startActivity(intent);
                             finish();
                         }
@@ -637,6 +641,8 @@ public class SeleccionTarjetaCargo extends Activity {
                         } else {
                             String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                             String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                            String validacion_tarjeta = tarjetasUsuarioAdapter.getItem(position).getValidacionTarjeta();
+                            int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                             Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPin.class);
                             intent.putExtra("monto", monto);
                             intent.putExtra("usuario", usuario);
@@ -649,6 +655,8 @@ public class SeleccionTarjetaCargo extends Activity {
                             intent.putExtra("cli_dni", cli_dni);
                             intent.putExtra("desc_corta_banco", desc_corta_banco);
                             intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                            intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                             startActivity(intent);
                             finish();
                         }
@@ -659,6 +667,7 @@ public class SeleccionTarjetaCargo extends Activity {
                     } else {
                         String tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getNumeroTarjeta();
                         String desc_corta_banco_tarjeta_cargo = tarjetasUsuarioAdapter.getItem(position).getDesc_cortaBanco();
+                        int tipo_tarjeta_pago = tarjetasUsuarioAdapter.getItem(position).getTipo_tarjeta();
                         Intent intent = new Intent(SeleccionTarjetaCargo.this, IngresoMontoPagoPin.class);
                         intent.putExtra("monto", monto);
                         intent.putExtra("usuario", usuario);
@@ -671,6 +680,7 @@ public class SeleccionTarjetaCargo extends Activity {
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("desc_corta_banco", desc_corta_banco);
                         intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                         startActivity(intent);
                         finish();
                     }

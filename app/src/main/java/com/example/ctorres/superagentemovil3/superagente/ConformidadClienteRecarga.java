@@ -17,7 +17,7 @@ public class  ConformidadClienteRecarga extends Activity {
     Button btn_confirmar_operacion;
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni, validacion_tarjeta;
-    TextView tv_nombrecli,tv_numerofono,tv_tarjetacli,tv_tipomone,tv_montoPagar,txt_comisionRecarga,txt_totalPagar;
+    TextView tv_nombrecli,tv_numerofono,tv_tarjetacli,tv_tipomone,tv_montoPagar,txt_comisionRecarga,txt_totalPagar, tv_dni_cliente_recarga;
     int tipo_tarjeta_pago;
     String tipo_moneda_recarga,tipo_operador,nro_telefono;
     Double monto_recarga,comisionRecarga,montoTotal;
@@ -37,6 +37,7 @@ public class  ConformidadClienteRecarga extends Activity {
         tv_montoPagar = (TextView) findViewById(R.id.txt_confor_Monto);
         txt_comisionRecarga = (TextView) findViewById(R.id.txt_confor_comisionRecarga);
         txt_totalPagar = (TextView) findViewById(R.id.txt_confor_totalPagar);
+        tv_dni_cliente_recarga = (TextView) findViewById(R.id.tv_dni_cliente_recarga);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -61,6 +62,7 @@ public class  ConformidadClienteRecarga extends Activity {
         txt_comisionRecarga.setText(transformarComisionRecarga());
         montoTotal = monto_recarga+comisionRecarga;
         txt_totalPagar.setText(transformarMontoTotal());
+        tv_dni_cliente_recarga.setText(cli_dni);
 
 
 

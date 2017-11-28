@@ -58,24 +58,24 @@ public class VoucherPagoServicio extends Activity {
         tv_total_servicio_pagar_voucher = (TextView) findViewById(R.id.tv_total_servicio_pagar_voucher);
         //tv_banco_tarjeta_usuario = (TextView) findViewById(R.id.tv_banco_tarjeta_usuario);
         txt_pagado_por = (TextView) findViewById(R.id.txt_pagado_por);
-        tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
-        tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
-        tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
+        //tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
+        //tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
+        //tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
         tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
-        tv_comision_oper_servicio.setText(comision);
-        tv_importe_servicio.setText(monto_servicio);
+        tv_comision_oper_servicio.setText(transformarComision());
+        tv_importe_servicio.setText(transformarImporteServicio());
         txt_servicio_pagar_voucher.setText(servicio);
         txt_suministro_pagar_voucher.setText(num_servicio);
         tv_total_servicio_pagar_voucher.setText(totalServicioPagar());
         tv_forma_pago.setText(tipoTarjeta());
         //tv_banco_tarjeta_usuario.setText(obtenerBancoTarjeta());
         txt_pagado_por.setText(cliente);
-        tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
-        tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
-        tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
         tv_nombre_recibo_usuario.setText(nombre_recibo);
 
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +156,7 @@ public class VoucherPagoServicio extends Activity {
 
         //total = String.valueOf(importe);
 
-        return decimal.format(importe);
+        return tipo_moneda_deuda + " " + decimal.format(importe);
     }
 
     public String tipoTarjeta(){
@@ -169,6 +169,16 @@ public class VoucherPagoServicio extends Activity {
         }
 
         return tipo;
+    }
+
+    public String transformarComision(){
+        double convert = Double.parseDouble(comision);
+        return tipo_moneda_deuda + " " + decimal.format(convert);
+    }
+
+    public String transformarImporteServicio(){
+        double convert = Double.parseDouble(monto_servicio);
+        return tipo_moneda_deuda + " " + decimal.format(convert);
     }
 
     public String obtenerBancoTarjeta(){

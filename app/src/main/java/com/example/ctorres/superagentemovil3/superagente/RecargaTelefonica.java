@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 public class RecargaTelefonica extends Activity {
 
     EditText txt_nroRecarga,txt_montoRecarga;
-    Spinner sp_operadorRecarga,sp_monedaRecarga;
+    Spinner sp_operadorRecarga;
     Button btn_regMenuRecarga,btn_salirRecarga, btn_siguiente;
     ArrayList<OperadorEntity> operadorEntityArrayList;
     ArrayList<MonedaEntity> monedaEntityArrayList;
@@ -37,6 +38,7 @@ public class RecargaTelefonica extends Activity {
     String tipo_operador,tipo_moneda,nro_telefono;
     private UsuarioEntity usuario;
     String cliente, cli_dni;
+    TextView sp_monedaRecarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class RecargaTelefonica extends Activity {
         txt_montoRecarga = (EditText) findViewById(R.id.tv_montoRecarga);
 
         sp_operadorRecarga = (Spinner) findViewById(R.id.spinner_operador);
-        sp_monedaRecarga = (Spinner) findViewById(R.id.spinner_tipoMoneda);
+        sp_monedaRecarga = (TextView) findViewById(R.id.spinner_tipoMoneda);
 
         btn_regMenuRecarga = (Button) findViewById(R.id.btn_regresarMenu);
         btn_salirRecarga = (Button) findViewById(R.id.btn_salirRecarga);
@@ -64,13 +66,6 @@ public class RecargaTelefonica extends Activity {
 
         ejecutarListaOperador();
 
-        monedaEntityArrayList = null;
-        monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());
-        sp_monedaRecarga.setAdapter(monedaAdapter);
-
-        ejecutarListaMoneda();
-        sp_monedaRecarga.setEnabled(false);
-
         btn_siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +77,7 @@ public class RecargaTelefonica extends Activity {
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("nro_telefono", nro_telefono);
-                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tipo_moneda", sp_monedaRecarga.getText().toString());
                     intent.putExtra("tipo_operador", tipo_operador);
                     intent.putExtra("monto_recarga", monto_recarga);
                     intent.putExtra("cli_dni", cli_dni);
@@ -117,18 +112,6 @@ public class RecargaTelefonica extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tipo_operador = operadorAdapter.getItem(position).getOpe_nomcomercial();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        sp_monedaRecarga.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                tipo_moneda = monedaAdapter.getItem(position).getSigno_moneda();
             }
 
             @Override

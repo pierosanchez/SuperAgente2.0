@@ -63,9 +63,9 @@ public class VoucherPagoServicioFirma extends Activity {
         tv_total_servicio_pagar_voucher = (TextView) findViewById(R.id.tv_total_servicio_pagar_voucher);
         //tv_banco_tarjeta_usuario = (TextView) findViewById(R.id.tv_banco_tarjeta_usuario);
         txt_pagado_por = (TextView) findViewById(R.id.txt_pagado_por);
-        tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
-        tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
-        tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
+        //tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
+        //tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
+        //tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
         txt_dni = (TextView) findViewById(R.id.txt_dni);
         tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
 
@@ -86,16 +86,16 @@ public class VoucherPagoServicioFirma extends Activity {
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
-        tv_comision_oper_servicio.setText(comision);
-        tv_importe_servicio.setText(monto_servicio);
+        tv_comision_oper_servicio.setText(transformarComision());
+        tv_importe_servicio.setText(transformarImporteServicio());
         txt_servicio_pagar_voucher.setText(servicio);
         txt_suministro_pagar_voucher.setText(num_servicio);
         tv_total_servicio_pagar_voucher.setText(totalServicioPagar());
         tv_forma_pago.setText(tipoTarjeta());
         txt_pagado_por.setText(cliente);
-        tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
-        tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
-        tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
+        //tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
         txt_dni.setText(cli_dni);
         tv_nombre_recibo_usuario.setText(nombre_recibo);
 
@@ -105,8 +105,8 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
-                    insertarFirma.execute();
+                    /*VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
+                    insertarFirma.execute();*/
                     /*SuperAgenteBD superAgenteBD = new SuperAgenteBD(VoucherPagoServicioFirma.this);
                     SQLiteDatabase db = superAgenteBD.getWritableDatabase();
                     db.execSQL("INSERT INTO Cliente(firma) VALUES('" + drawableToBitmapToString(signImage) + "')");*/
@@ -207,7 +207,7 @@ public class VoucherPagoServicioFirma extends Activity {
 
         //total = String.valueOf(importe);
 
-        return decimal.format(importe);
+        return tipo_moneda_deuda + " " + decimal.format(importe);
     }
 
     public String tipoTarjeta() {
@@ -220,6 +220,16 @@ public class VoucherPagoServicioFirma extends Activity {
         }
 
         return tipo;
+    }
+
+    public String transformarComision(){
+        double convert = Double.parseDouble(comision);
+        return tipo_moneda_deuda + " " + decimal.format(convert);
+    }
+
+    public String transformarImporteServicio(){
+        double convert = Double.parseDouble(monto_servicio);
+        return tipo_moneda_deuda + " " + decimal.format(convert);
     }
 
     public String drawableToBitmapToString(ImageView imageView) {

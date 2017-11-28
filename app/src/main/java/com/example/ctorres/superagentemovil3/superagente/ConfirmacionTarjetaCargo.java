@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,13 +38,17 @@ public class ConfirmacionTarjetaCargo extends Activity {
     String monto, num_tarjeta, usu, tipo_moneda_deuda, tarjeta_cargo;
     Bitmap bmp;
     EditText txt_monto_tarjeta_cargo_credito;
-    TextView tv_numero_clave_cifrada_cargo, tv_nombre_cliente_tarjeta_cargo, tv_tipo_moneda_deuda;
+    TextView tv_numero_clave_cifrada_cargo, tv_nombre_cliente_tarjeta_cargo, tv_tipo_moneda_deuda, tv_pago_cuotas;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
     private UsuarioEntity usuario;
-    int tipo_tarjeta, emisor_tarjeta;
+    int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
     UsuarioAdapter usuarioAdapter;
-    String cliente, cli_dni, desc_corta_banco, desc_corta_banco_tarjeta_cargo;
+    String cliente, cli_dni, desc_corta_banco, desc_corta_banco_tarjeta_cargo, validacion_tarjeta;
+    String[] cuotas = {"No", "Si"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    LinearLayout ll_cantidad_cuotas;
+    Spinner sp_pago_cuotas, sp_cantidad_cuotas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
         //spinnerMonedaCargo = (Spinner) findViewById(R.id.spinnerMonedaCargo);
         btn_continuar_tarjeta_cargo = (LinearLayout) findViewById(R.id.btn_continuar_tarjeta_cargo);
         btn_cancelar_tarjeta_cargo = (LinearLayout) findViewById(R.id.btn_cancelar_tarjeta_cargo);
+        ll_cantidad_cuotas = (LinearLayout) findViewById(R.id.ll_cantidad_cuotas);
 
         txt_monto_tarjeta_cargo_credito = (EditText) findViewById(R.id.txt_monto_tarjeta_cargo_credito);
         //btn_fimar = (Button) findViewById(R.id.btn_firmar);
@@ -60,10 +67,14 @@ public class ConfirmacionTarjetaCargo extends Activity {
         tv_numero_clave_cifrada_cargo = (TextView) findViewById(R.id.tv_numero_clave_cifrada_cargo);
         tv_nombre_cliente_tarjeta_cargo = (TextView) findViewById(R.id.tv_nombre_cliente_tarjeta_cargo);
         tv_tipo_moneda_deuda = (TextView) findViewById(R.id.tv_tipo_moneda_deuda);
+        tv_pago_cuotas = (TextView) findViewById(R.id.tv_pago_cuotas);
 
         /*rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
         rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
         rdbtn_mc_option = (RadioButton) findViewById(R.id.rdbtn_mc_option);*/
+
+        sp_pago_cuotas = (Spinner) findViewById(R.id.sp_pago_cuotas);
+        sp_cantidad_cuotas = (Spinner) findViewById(R.id.sp_cantidad_cuotas);
 
         //cargarTipoMoneda();
 
@@ -80,6 +91,8 @@ public class ConfirmacionTarjetaCargo extends Activity {
         cli_dni = extras.getString("cli_dni");
         desc_corta_banco = extras.getString("desc_corta_banco");
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
+        tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
@@ -87,6 +100,8 @@ public class ConfirmacionTarjetaCargo extends Activity {
         tv_nombre_cliente_tarjeta_cargo.setText(cliente);
 
         focTipoTarjeta();
+        cargarCuotas();
+        deseaCuotas();
 
         btn_continuar_tarjeta_cargo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +134,20 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Si")){
+                    ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -210,5 +239,15 @@ public class ConfirmacionTarjetaCargo extends Activity {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         double montoD = Double.parseDouble(monto);
         return decimalFormat.format(montoD);
+    }
+
+    public void cargarCuotas(){
+        ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(ConfirmacionTarjetaCargo.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
+        sp_cantidad_cuotas.setAdapter(cantidadCuota);
+    }
+
+    public void deseaCuotas(){
+        ArrayAdapter<String> cuota = new ArrayAdapter<String>(ConfirmacionTarjetaCargo.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
+        sp_pago_cuotas.setAdapter(cuota);
     }
 }
