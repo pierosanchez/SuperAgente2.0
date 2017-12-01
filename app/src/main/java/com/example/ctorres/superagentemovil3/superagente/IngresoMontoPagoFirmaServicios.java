@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +17,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
+import com.example.ctorres.superagentemovil3.adapter.CuotasAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.CuotasEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngresoMontoPagoFirmaServicios extends Activity {
 
@@ -29,6 +38,8 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
     ImageView imageView;
     LinearLayout ll_tipo_servicio_pagar;
     Spinner sp_pago_cuotas, sp_cantidad_cuotas;
+    ArrayList<CuotasEntity> cuotasEntityArrayList;
+    CuotasAdapter cuotasAdapter;
     String[] cuotas = {"No", "Si"};
     String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
     LinearLayout ll_cantidad_cuotas;
@@ -86,6 +97,12 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
             tv_tipo_servicio.setText(tipo_servicio);
             ll_tipo_servicio_pagar.setVisibility(View.VISIBLE);
         }
+
+        /*cuotasEntityArrayList = null;
+        cuotasAdapter = new CuotasAdapter(cuotasEntityArrayList, getApplication());
+        sp_cantidad_cuotas.setAdapter(cuotasAdapter);
+
+        ejecutarLista();*/
 
         focTipoTarjeta();
         cargarCuotas();
@@ -182,5 +199,37 @@ public class IngresoMontoPagoFirmaServicios extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaServicios.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    private void ejecutarLista() {
+
+        try {
+            IngresoMontoPagoFirmaServicios.ListadoCuotas listadoEmpresas = new IngresoMontoPagoFirmaServicios.ListadoCuotas();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoCuotas extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                cuotasEntityArrayList = dao.ListarCuota();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            cuotasAdapter.setNewListCuota(cuotasEntityArrayList);
+            cuotasAdapter.notifyDataSetChanged();
+        }
     }
 }

@@ -9,19 +9,25 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
 import com.example.ctorres.superagentemovil3.adapter.DetalleTarjetaAdapter;
+import com.example.ctorres.superagentemovil3.adapter.TipoTarjetaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
+import com.example.ctorres.superagentemovil3.entity.TipoTarjetaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
@@ -36,13 +42,20 @@ public class ActualizarTarjeta extends Activity {
     private UsuarioEntity usuario;
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
-    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
+    String tipoValidacion[] = {"Pin", "Firma"};
+    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
     private Calendar calendar;
     private int year, month, day;
+    int tipoTarjeta, bancoTarjeta;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
     String cliente, cli_dni;
     DetalleTarjetaAdapter detalleTarjetaAdapter;
     ArrayList<UsuarioEntity> tarjetaList;
+    ArrayList<TipoTarjetaEntity> tipoTarjetaEntitiesArrayList;
+    ArrayList<BancosEntity> bancosEntityArrayList;
+    BancosAdapter bancosAdapter;
+    TipoTarjetaAdapter tipoTarjetaAdapter;
+    LinearLayout ll_validacion_tarjeta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,7 @@ public class ActualizarTarjeta extends Activity {
 
         spinnerTipoTarjeta = (Spinner) findViewById(R.id.spinnerTipoTarjeta);
         spinnerBancoTarjeta = (Spinner) findViewById(R.id.spinnerBancoTarjeta);
+        spinnerValidacionTarjeta = (Spinner) findViewById(R.id.spinnerValidacionTarjeta);
 
         rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
         rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
@@ -65,6 +79,8 @@ public class ActualizarTarjeta extends Activity {
 
         btn_guardar_actualizacion_tarjeta = (Button) findViewById(R.id.btn_guardar_actualizacion_tarjeta);
         btn_regresar_actualizacion_tarjeta = (Button) findViewById(R.id.btn_regresar_actualizacion_tarjeta);
+
+        ll_validacion_tarjeta = (LinearLayout) findViewById(R.id.ll_validacion_tarjeta);
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -75,7 +91,8 @@ public class ActualizarTarjeta extends Activity {
 
         numeroTarjeta();
         //confirmarNumeroTarjeta();
-        cargarTipoTarjeta();
+        //cargarTipoTarjeta();
+        //cargarBancoTarjeta();
         cargarBancoTarjeta();
 
         Bundle bundle = getIntent().getExtras();
@@ -83,6 +100,18 @@ public class ActualizarTarjeta extends Activity {
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
+
+        tipoTarjetaEntitiesArrayList = null;
+        tipoTarjetaAdapter = new TipoTarjetaAdapter(tipoTarjetaEntitiesArrayList, getApplication());
+        spinnerTipoTarjeta.setAdapter(tipoTarjetaAdapter);
+
+        ejecutarListaTipoTarjeta();
+
+        bancosEntityArrayList = null;
+        bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
+        spinnerBancoTarjeta.setAdapter(bancosAdapter);
+
+        ejecutarListaBancos();
 
         tarjetaList = null;
         detalleTarjetaAdapter = new DetalleTarjetaAdapter(tarjetaList, getApplication());
@@ -110,6 +139,36 @@ public class ActualizarTarjeta extends Activity {
             public void onClick(View v) {
                 rdbtn_amex_option.setChecked(false);
                 rdbtn_mc_option.setChecked(false);
+            }
+        });
+
+        spinnerTipoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tipoTarjeta = tipoTarjetaAdapter.getItem(position).getCodTipoTarjeta();
+                if (tipoTarjetaAdapter.getItem(position).getCodTipoTarjeta() == 1){
+                    ll_validacion_tarjeta.setVisibility(View.VISIBLE);
+                } else {
+                    ll_validacion_tarjeta.setVisibility(View.GONE);
+                    spinnerValidacionTarjeta.setSelection(0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bancoTarjeta = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -227,7 +286,7 @@ public class ActualizarTarjeta extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.actualizarTarjeta(id_tarjeta, venimientoTarjeta, obtenerEmisorTarjeta(), obtenerTipoTarjeta(), numeroTarjeta,obtenerBancoTarjeta());
+                user = dao.actualizarTarjeta(id_tarjeta, venimientoTarjeta, obtenerEmisorTarjeta(), tipoTarjeta, numeroTarjeta, bancoTarjeta);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
 
             } catch (Exception e) {
@@ -288,9 +347,14 @@ public class ActualizarTarjeta extends Activity {
         spinnerTipoTarjeta.setAdapter(adaptadorBanco);
     }
 
+    public void cargarTipoValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorTipoTarjeta = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipoTarjeta);
+        spinnerTipoTarjeta.setAdapter(adaptadorTipoTarjeta);
+    }
+
     public void cargarBancoTarjeta() {
-        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayBancoTarjeta);
-        spinnerBancoTarjeta.setAdapter(adaptadorBanco);
+        ArrayAdapter<String> adaptadorTipoValidacionTarjeta = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorTipoValidacionTarjeta);
     }
 
     public void setDate(View view) {
@@ -382,6 +446,84 @@ public class ActualizarTarjeta extends Activity {
             nroTarjetaDigito2.setText(tarjetaList.get(0).getSegParteNumTarjeta());
             nroTarjetaDigito3.setText(tarjetaList.get(0).getTerParteNumTarjeta());
             nroTarjetaDigito4.setText(tarjetaList.get(0).getCuaParteNumTarjeta());
+            for (int i = bancosEntityArrayList.size() - 1; i >= 0; i--){
+                if (detalleTarjetaAdapter.getItem(0).getCodBanco() == bancosAdapter.getItem(i).getCod_banco()){
+                    spinnerBancoTarjeta.setSelection(i);
+                    break;
+                }
+            }
+            for (int i = tipoTarjetaEntitiesArrayList.size() - 1; i >= 0; i--){
+                if (detalleTarjetaAdapter.getItem(0).getCodTipoTarjeta() == tipoTarjetaAdapter.getItem(i).getCodTipoTarjeta()){
+                    spinnerTipoTarjeta.setSelection(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void ejecutarListaBancos() {
+
+        try {
+            ActualizarTarjeta.ListadoBancos listadoEmpresas = new ActualizarTarjeta.ListadoBancos();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoBancos extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                bancosEntityArrayList = dao.ListadoBancos();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            bancosAdapter.setNewListbancos(bancosEntityArrayList);
+            bancosAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void ejecutarListaTipoTarjeta() {
+
+        try {
+            ActualizarTarjeta.ListadoTipoTarjeta listadoEmpresas = new ActualizarTarjeta.ListadoTipoTarjeta();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoTipoTarjeta extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                tipoTarjetaEntitiesArrayList = dao.ListarTipoTarjeta();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            tipoTarjetaAdapter.setNewListTipoTarjeta(tipoTarjetaEntitiesArrayList);
+            tipoTarjetaAdapter.notifyDataSetChanged();
         }
     }
 }

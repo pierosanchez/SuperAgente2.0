@@ -5,15 +5,18 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
 import com.example.ctorres.superagentemovil3.adapter.DetalleCuentaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
@@ -30,6 +33,9 @@ public class ActualizarCuenta extends Activity {
     String cliente, cli_dni;
     DetalleCuentaAdapter detalleCuentaAdapter;
     ArrayList<CuentaEntity> cuentaEntityArrayList;
+    ArrayList<BancosEntity> bancosEntityArrayList;
+    BancosAdapter bancosAdapter;
+    int codBanco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +55,18 @@ public class ActualizarCuenta extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
+        bancosEntityArrayList = null;
+        bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
+        spinnerBanco.setAdapter(bancosAdapter);
+
+        ejecutarListaBanco();
+
         cuentaEntityArrayList = null;
         detalleCuentaAdapter = new DetalleCuentaAdapter(cuentaEntityArrayList, getApplication());
 
         ejecutarLista();
 
-        cargarBancos();
+        //cargarBancos();
 
         btn_guardar_actualizacion_cuenta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +94,18 @@ public class ActualizarCuenta extends Activity {
                 finish();
             }
         });
+
+        spinnerBanco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                codBanco = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private class actualizarCuenta extends AsyncTask<String, Void, CuentaEntity> {
@@ -93,7 +117,7 @@ public class ActualizarCuenta extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                cuenta = dao.actualizarCuenta(numCuenta, id_cuenta, obtenerBancoCuenta());
+                cuenta = dao.actualizarCuenta(numCuenta, id_cuenta, codBanco);
 
             } catch (Exception e) {
                 cuenta = null;
@@ -158,6 +182,45 @@ public class ActualizarCuenta extends Activity {
             detalleCuentaAdapter.setNewListTarjetaBin(cuentaEntityArrayList);
             detalleCuentaAdapter.notifyDataSetChanged();
             txt_nuevo_num_cuenta.setText(cuentaEntityArrayList.get(0).getNumCuenta());
+            for (int i=bancosEntityArrayList.size() - 1; i >= 0 ; i--){
+                if (detalleCuentaAdapter.getItem(0).getCod_banco() == bancosAdapter.getItem(i).getCod_banco()){
+                    spinnerBanco.setSelection(i);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void ejecutarListaBanco() {
+
+        try {
+            ActualizarCuenta.ListadoEmpresas listadoEmpresas = new ActualizarCuenta.ListadoEmpresas();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoEmpresas extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                bancosEntityArrayList = dao.ListadoBancos();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            bancosAdapter.setNewListbancos(bancosEntityArrayList);
+            bancosAdapter.notifyDataSetChanged();
         }
     }
 }

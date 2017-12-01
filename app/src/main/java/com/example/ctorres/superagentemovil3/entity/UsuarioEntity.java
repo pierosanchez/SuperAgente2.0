@@ -39,6 +39,8 @@ public class UsuarioEntity implements Parcelable {
     private double importe_comision;
     private String banco_tarjeta;
     private int banco_tarjeta_registro;
+    private int codBanco;
+    private int codTipoTarjeta;
     private String rpta_cambio_clave;
     private String NombreApellido;
     private String RespTarjeta;
@@ -58,6 +60,22 @@ public class UsuarioEntity implements Parcelable {
     private String firmaCliente;
     private String validacionTarjeta;
 
+
+    public int getCodBanco() {
+        return codBanco;
+    }
+
+    public void setCodBanco(int codBanco) {
+        this.codBanco = codBanco;
+    }
+
+    public int getCodTipoTarjeta() {
+        return codTipoTarjeta;
+    }
+
+    public void setCodTipoTarjeta(int codTipoTarjeta) {
+        this.codTipoTarjeta = codTipoTarjeta;
+    }
 
     public String getValidacionTarjeta() {
         return validacionTarjeta;

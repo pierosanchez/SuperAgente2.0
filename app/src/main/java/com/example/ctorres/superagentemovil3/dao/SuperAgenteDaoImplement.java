@@ -31,10 +31,72 @@ import retrofit.RestAdapter;
 public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
     private Utils utils;
-    BeneficiarioEntity benef;
 
     public SuperAgenteDaoImplement() {
         utils = new Utils();
+    }
+
+    @Override
+    public ArrayList<TipoTarjetaEntity> ListarTipoTarjeta() {
+
+        ArrayList<TipoTarjetaEntity> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoTipoTarjeta/?vac01=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        TipoTarjetaEntity tipoTarjetaEntity = new TipoTarjetaEntity();
+                        tipoTarjetaEntity.setCodTipoTarjeta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_tarjeta")));
+                        tipoTarjetaEntity.setDescTipoTarjeta(utils.getValueStringOrNull(jsonObject, "desc_tipo_tarjeta"));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return listaTipoTarjeta;
+    }
+
+    @Override
+    public ArrayList<CuotasEntity> ListarCuota() {
+
+        ArrayList<CuotasEntity> listaCuenta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarCuotas/?vacio1=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        CuotasEntity cuotasEntity = new CuotasEntity();
+                        cuotasEntity.setNumCuota(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "num_cuota")));
+                        listaCuenta.add(cuotasEntity);
+                    }
+                } else {
+                    listaCuenta = null;
+                }
+            } else {
+                listaCuenta = null;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaCuenta;
     }
 
     @Override
@@ -192,6 +254,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         beneficiarioEntity.setNumCuenta(utils.getValueStringOrNull(jsonObject, "numCuenta"));
                         beneficiarioEntity.setTipoMoneda(utils.getValueStringOrNull(jsonObject, "tipo_moneda"));
                         beneficiarioEntity.setBanco(utils.getValueStringOrNull(jsonObject, "desc_breve_banco"));
+                        beneficiarioEntity.setCod_banco(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_banco")));
                         listaTarjeta.add(beneficiarioEntity);
                     }
                 } else {
@@ -231,6 +294,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         beneficiarioEntity.setEmisor_tarjeta(utils.getValueStringOrNull(jsonObject, "desc_emisor_tarjeta"));
                         beneficiarioEntity.setDesc_tipo_tarjeta(utils.getValueStringOrNull(jsonObject, "desc_tipo_tarjeta"));
                         beneficiarioEntity.setFecha_venci(utils.getValueStringOrNull(jsonObject, "fecha_venc"));
+                        beneficiarioEntity.setCodBanco(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_banco")));
+                        beneficiarioEntity.setCodTipoTarjeta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_tarjeta")));
                         listaTarjeta.add(beneficiarioEntity);
                     }
                 } else {

@@ -139,6 +139,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
                     data.getByteArrayExtra("byteArray"), 0,
                     data.getByteArrayExtra("byteArray").length);
             signImage.setImageBitmap(b);
+            btn_fimar.setVisibility(View.GONE);
         }
     }
 

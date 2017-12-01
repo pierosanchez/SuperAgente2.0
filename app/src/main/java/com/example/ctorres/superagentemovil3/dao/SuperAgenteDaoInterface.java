@@ -11,11 +11,13 @@ import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
 import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
+import com.example.ctorres.superagentemovil3.entity.CuotasEntity;
 import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
 import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
+import com.example.ctorres.superagentemovil3.entity.TipoTarjetaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
@@ -69,4 +71,6 @@ public interface SuperAgenteDaoInterface {
     ArrayList<OperadorEntity> ListarOperador();
     ArrayList<ComercioEntity> ListarComercio();
     UsuarioEntity InsertarFirmaCliente(String img, String idcliente);
+    ArrayList<CuotasEntity> ListarCuota();
+    ArrayList<TipoTarjetaEntity> ListarTipoTarjeta();
 }
