@@ -143,18 +143,12 @@ public class VoucherPagoServicio extends Activity {
         return fecha;
     }
 
-    public String totalServicioPagar(){
-        String total;
+    public String totalServicioPagar() {
 
-        String monto = tv_importe_servicio.getText().toString();
-        String comision = tv_comision_oper_servicio.getText().toString();
-
-        double monto_p = Double.parseDouble(monto);
+        double monto_p = Double.parseDouble(monto_servicio);
         double comision_p = Double.parseDouble(comision);
 
         double importe = monto_p + comision_p;
-
-        //total = String.valueOf(importe);
 
         return tipo_moneda_deuda + " " + decimal.format(importe);
     }

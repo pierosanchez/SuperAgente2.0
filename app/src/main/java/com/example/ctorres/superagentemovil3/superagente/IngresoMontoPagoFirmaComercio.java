@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
@@ -111,6 +114,8 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getAdapter().getItem(position).equals("Si")){
                     ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                } else if (parent.getAdapter().getItem(position).equals("No")){
+                    ll_cantidad_cuotas.setVisibility(View.GONE);
                 }
             }
 
@@ -120,27 +125,39 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
             }
         });
 
+        btn_cancelar_pago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
+            }
+        });
+
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IngresoMontoPagoFirmaComercio.this, ConformidadComercioComercios.class);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                intent.putExtra("monto_pagar", txt_monto_pago_comercio.getText().toString());
-                intent.putExtra("tipo_moneda", tipo_moneda);
-                intent.putExtra("banco", banco);
-                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
-                intent.putExtra("parteRazon",parteRazon);
-                intent.putExtra("parteDireccion",parteDireccion);
-                intent.putExtra("parteDistrito",parteDistrito);
-                intent.putExtra("validacion_tarjeta", validacion_tarjeta);
-                startActivity(intent);
-                finish();
+                String montoPagar = txt_monto_pago_comercio.getText().toString();
+                if (montoPagar.length() == 0){
+                    Toast.makeText(IngresoMontoPagoFirmaComercio.this, "Por favor, ingrese el monto a pagar", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(IngresoMontoPagoFirmaComercio.this, ConformidadComercioComercios.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("monto_pagar", txt_monto_pago_comercio.getText().toString());
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                    intent.putExtra("parteRazon", parteRazon);
+                    intent.putExtra("parteDireccion", parteDireccion);
+                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -204,5 +221,32 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaComercio.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(IngresoMontoPagoFirmaComercio.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

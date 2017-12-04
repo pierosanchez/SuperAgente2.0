@@ -75,6 +75,7 @@ public class VoucherPagoConsumo extends Activity {
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
+                finish();
             }
         });
 

@@ -102,6 +102,8 @@ public class IngresoMontoPagoPin extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getAdapter().getItem(position).equals("Si")){
                     ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                } else if (parent.getAdapter().getItem(position).equals("No")){
+                    ll_cantidad_cuotas.setVisibility(View.GONE);
                 }
             }
 

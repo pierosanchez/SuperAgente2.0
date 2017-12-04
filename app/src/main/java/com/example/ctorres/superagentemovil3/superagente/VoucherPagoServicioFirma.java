@@ -26,7 +26,9 @@ import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 public class VoucherPagoServicioFirma extends Activity {
 
@@ -266,5 +268,10 @@ public class VoucherPagoServicioFirma extends Activity {
             }
 
         }*/
+    }
+
+    public void post(){
+        HashMap<String, String > postData = new HashMap<String, String>();
+        postData.put("", drawableToBitmapToString(signImage));
     }
 }

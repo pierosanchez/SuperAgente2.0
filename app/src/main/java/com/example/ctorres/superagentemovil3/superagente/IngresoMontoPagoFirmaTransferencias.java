@@ -98,12 +98,21 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (parent.getAdapter().getItem(position).equals("Si")){
                     ll_cantidad_cuotas.setVisibility(View.VISIBLE);
+                } else if (parent.getAdapter().getItem(position).equals("No")){
+                    ll_cantidad_cuotas.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        btn_cancelar_pago.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                cancelar();
             }
         });
 
@@ -149,33 +158,6 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
         String monto;
         monto = txt_moneda_pagar.getText().toString();
         return monto;
-    }
-
-    public void cancelar() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
-        alertDialog.setTitle("Cancelar");
-        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, MenuCliente.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog dialog = alertDialog.create();
-        dialog.show();
     }
 
     public void focTipoTarjeta(){
@@ -228,5 +210,32 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoFirmaTransferencias.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(IngresoMontoPagoFirmaTransferencias.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }
