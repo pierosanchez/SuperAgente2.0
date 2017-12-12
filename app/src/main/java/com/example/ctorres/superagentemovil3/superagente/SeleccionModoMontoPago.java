@@ -2,6 +2,7 @@ package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,7 +31,7 @@ import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 public class SeleccionModoMontoPago extends Activity {
 
     String tipoMoneda[] = {"S/.", "US$"};
-    Spinner spinnerTipoMonedaPago;
+    TextView spinnerTipoMonedaPago;
     LinearLayout btn_continuar, btn_cancelar;
     RadioGroup rdgp_montos;
     EditText txt_monto_minimo, txt_monto_mensual, txt_monto_total, txt_monto_cuenta;
@@ -50,7 +53,7 @@ public class SeleccionModoMontoPago extends Activity {
         btn_continuar = (LinearLayout) findViewById(R.id.btn_continuar);
         btn_cancelar = (LinearLayout) findViewById(R.id.btn_cancelar);
 
-        spinnerTipoMonedaPago = (Spinner) findViewById(R.id.spinnerTipoMonedaPago);
+        spinnerTipoMonedaPago = (TextView) findViewById(R.id.spinnerTipoMonedaPago);
 
         txt_monto_minimo = (EditText) findViewById(R.id.txt_monto_minimo);
         txt_monto_mensual = (EditText) findViewById(R.id.txt_monto_mensual);
@@ -87,7 +90,7 @@ public class SeleccionModoMontoPago extends Activity {
         spinnerTipoMonedaPago.setEnabled(false);
 
         focTipoTarjeta();
-        cargarTipoTarjetas();
+        //cargarTipoTarjetas();
 
         /*if (rdbtn_minimo.isChecked()){
             monto = txt_monto_minimo.getText().toString();
@@ -99,10 +102,10 @@ public class SeleccionModoMontoPago extends Activity {
             monto = txt_monto_cuenta.getText().toString();
         }*/
 
-        tv_tipo_moneda_modo_monto_1.setText(obtenerTipoMonedaDeuda());
-        tv_tipo_moneda_modo_monto_2.setText(obtenerTipoMonedaDeuda());
-        tv_tipo_moneda_modo_monto_3.setText(obtenerTipoMonedaDeuda());
-        tv_tipo_moneda_modo_monto_4.setText(obtenerTipoMonedaDeuda());
+        tv_tipo_moneda_modo_monto_1.setText(spinnerTipoMonedaPago.getText().toString());
+        tv_tipo_moneda_modo_monto_2.setText(spinnerTipoMonedaPago.getText().toString());
+        tv_tipo_moneda_modo_monto_3.setText(spinnerTipoMonedaPago.getText().toString());
+        tv_tipo_moneda_modo_monto_4.setText(spinnerTipoMonedaPago.getText().toString());
 
         rdgp_montos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -116,11 +119,13 @@ public class SeleccionModoMontoPago extends Activity {
                 }else{
                     txt_monto_cuenta.setEnabled(true);
                     txt_monto_cuenta.requestFocus();
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 }
             }
         });
 
-        spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (!spinnerTipoMonedaPago.getSelectedItem().toString().equals("S/.")){
@@ -154,7 +159,7 @@ public class SeleccionModoMontoPago extends Activity {
                 tv_tipo_moneda_modo_monto_3.setText(obtenerTipoMonedaDeuda());
                 tv_tipo_moneda_modo_monto_4.setText(obtenerTipoMonedaDeuda());
             }
-        });
+        });*/
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +172,9 @@ public class SeleccionModoMontoPago extends Activity {
                             if (montoCuenta <= 0) {
                                 Toast.makeText(SeleccionModoMontoPago.this, "el monto ingresado debe ser mayor a 0", Toast.LENGTH_LONG).show();
                             } else {
+                                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                                inputMethodManager.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
+
                                 Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
                                 intent.putExtra("monto", obtenerMonto());
                                 //intent.putExtra("imagebitmap", bmp);
@@ -175,7 +183,7 @@ public class SeleccionModoMontoPago extends Activity {
                                 intent.putExtra("tipo_tarjeta", tipo_tarjeta);
                                 intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                                 intent.putExtra("banco_tarjeta", banco_tarjeta);
-                                intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
+                                intent.putExtra("tipo_moneda_deuda", spinnerTipoMonedaPago.getText().toString());
                                 intent.putExtra("cliente", cliente);
                                 intent.putExtra("cli_dni", cli_dni);
                                 intent.putExtra("desc_corta_banco", desc_corta_banco);
@@ -194,7 +202,7 @@ public class SeleccionModoMontoPago extends Activity {
                         intent.putExtra("tipo_tarjeta", tipo_tarjeta);
                         intent.putExtra("emisor_tarjeta", emisor_tarjeta);
                         intent.putExtra("banco_tarjeta", banco_tarjeta);
-                        intent.putExtra("tipo_moneda_deuda", obtenerTipoMonedaDeuda());
+                        intent.putExtra("tipo_moneda_deuda", spinnerTipoMonedaPago.getText().toString());
                         intent.putExtra("cliente", cliente);
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("desc_corta_banco", desc_corta_banco);
@@ -226,10 +234,10 @@ public class SeleccionModoMontoPago extends Activity {
         });*/
     }
 
-    public void cargarTipoTarjetas(){
+    /*public void cargarTipoTarjetas(){
         ArrayAdapter<String> adapterTarjetas = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoMoneda);
         spinnerTipoMonedaPago.setAdapter(adapterTarjetas);
-    }
+    }*/
 
     public void cancelar() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -284,10 +292,10 @@ public class SeleccionModoMontoPago extends Activity {
         }
     }
 
-    public String obtenerTipoMonedaDeuda(){
+    /*public String obtenerTipoMonedaDeuda(){
         String tipo;
         tipo = spinnerTipoMonedaPago.getSelectedItem().toString();
         return tipo;
-    }
+    }*/
 
 }

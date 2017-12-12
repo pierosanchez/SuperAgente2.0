@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
@@ -105,6 +106,7 @@ public class SeleccionServicioPagar extends Activity {
                 } else if (tipo_servicio_publico == 1) {
 
                     txt_numero_servicio.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    txt_numero_servicio.setFilters(new InputFilter[] {new InputFilter.LengthFilter(9)});
 
                     tv_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
                     sp_seleccion_tipo_servicio.setVisibility(View.VISIBLE);

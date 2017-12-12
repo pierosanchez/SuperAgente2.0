@@ -12,6 +12,7 @@ import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
 import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.CuotasEntity;
+import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
@@ -73,4 +74,5 @@ public interface SuperAgenteDaoInterface {
     UsuarioEntity InsertarFirmaCliente(String img, String idcliente);
     ArrayList<CuotasEntity> ListarCuota();
     ArrayList<TipoTarjetaEntity> ListarTipoTarjeta();
+    ArrayList<DeudasTarjetas> ListadoDeudasTarjetas(String idCliente);
 }

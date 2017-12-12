@@ -48,7 +48,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Scannear"
+                android:text="ESCANEAR"
                 android:background="@color/color_blanco"
                 android:id="@+id/scan_btn"
                 android:layout_marginTop="20px"
@@ -75,21 +75,21 @@
                     android:background="@drawable/spinner_selector"
                     android:spinnerMode="dialog"/>-->
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/tv_seleccione_comercio"
                     android:textSize="18dp"
                     android:textColor="@color/color_amarillo"
-                    android:textStyle="bold" />
+                    android:textStyle="bold" />-->
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/color_blanco"
                     android:layout_marginTop="10dp"
-                    android:text="@string/btn_aceptar"
+                    android:text="@string/btn_regresar"
                     android:id="@+id/btn_aceptar_comercio"/>
 
             </LinearLayout>

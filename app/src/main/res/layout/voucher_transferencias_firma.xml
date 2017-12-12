@@ -241,13 +241,14 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/tv_importe_transferencia_voucher" />
 
-                                <!--<TextView
+                                <TextView
                                     android:id="@+id/tv_tipo_moneda_transferencia_voucher"
-                                    android:layout_width="10dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp" />-->
+                                    android:layout_marginLeft="5dp" />
 
                                 <TextView
+                                    android:layout_gravity="right"
                                     android:id="@+id/tv_monto_transferencia"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -265,6 +266,13 @@
                                     android:text="MONTO DE COMISIÓN:" />
 
                                 <TextView
+                                    android:id="@+id/tv_tipo_moneda_comision_voucher"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp" />
+
+                                <TextView
+                                    android:layout_gravity="right"
                                     android:id="@+id/tv_comision3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -284,6 +292,13 @@
                                     android:text="COMISIÓN DELIVERY:" />
 
                                 <TextView
+                                    android:id="@+id/tv_tipo_moneda_comision_delivery_voucher"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp" />
+
+                                <TextView
+                                    android:layout_gravity="right"
                                     android:id="@+id/tv_comision1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -303,6 +318,13 @@
                                     android:text="COMISIÓN POR CHEQUE:" />
 
                                 <TextView
+                                    android:id="@+id/tv_tipo_moneda_comision_cheque_voucher"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp" />
+
+                                <TextView
+                                    android:layout_gravity="right"
                                     android:id="@+id/tv_comision2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -314,23 +336,23 @@
                                 android:layout_width="match_parent"
                                 android:layout_marginLeft="20dp">
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="@string/tv_importe_total_voucher_transferencias" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tv_importe_total_voucher_transferencias" />
 
-                                    <!--<TextView
-                                        android:id="@+id/tv_tipo_moneda_importe_total_voucher"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="98dp"
-                                        android:text="" />-->
+                                <TextView
+                                    android:id="@+id/tv_tipo_moneda_importe_total_voucher"
+                                    android:layout_width="50dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp" />
 
-                                    <TextView
-                                        android:id="@+id/tv_monto_total_pagar"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp" />
+                                <TextView
+                                    android:layout_gravity="right"
+                                    android:id="@+id/tv_monto_total_pagar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp" />
 
                             </TableRow>
 
@@ -508,12 +530,12 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/tv_importe_transferencia_voucher" />
 
-                                <!--<TextView
+                                <TextView
                                     android:id="@+id/tv_tipo_moneda_importe_voucher"
-                                    android:layout_width="30dp"
+                                    android:layout_width="50dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="10dp"
-                                    android:text="" />-->
+                                    android:text="" />
 
                                 <TextView
 
@@ -545,9 +567,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
                         android:layout_marginTop="15dp"
-                        android:gravity="center"
-                        android:layout_marginBottom="20dp">
+                        android:gravity="center">
 
                         <ImageView
                             android:id="@+id/signImage"

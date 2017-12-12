@@ -72,17 +72,21 @@ public class RecargaTelefonica extends Activity {
                 nro_telefono = txt_nroRecarga.getText().toString();
                 String recarga = txt_montoRecarga.getText().toString();
                 if (nro_telefono.length() != 0 && recarga.length() != 0) {
-                    monto_recarga = Double.parseDouble(recarga);
-                    Intent intent = new Intent(RecargaTelefonica.this, SeleccionTarjetaCargo.class);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("nro_telefono", nro_telefono);
-                    intent.putExtra("tipo_moneda", sp_monedaRecarga.getText().toString());
-                    intent.putExtra("tipo_operador", tipo_operador);
-                    intent.putExtra("monto_recarga", monto_recarga);
-                    intent.putExtra("cli_dni", cli_dni);
-                    startActivityForResult(intent, 0);
-                    finish();
+                    if (nro_telefono.length() == 9) {
+                        monto_recarga = Double.parseDouble(recarga);
+                        Intent intent = new Intent(RecargaTelefonica.this, SeleccionTarjetaCargo.class);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("nro_telefono", nro_telefono);
+                        intent.putExtra("tipo_moneda", sp_monedaRecarga.getText().toString());
+                        intent.putExtra("tipo_operador", tipo_operador);
+                        intent.putExtra("monto_recarga", monto_recarga);
+                        intent.putExtra("cli_dni", cli_dni);
+                        startActivityForResult(intent, 0);
+                        finish();
+                    } else {
+                        Toast.makeText(RecargaTelefonica.this, "El número ingresado debe de tener 9 dígitos", Toast.LENGTH_LONG).show();
+                    }
                 } else if (nro_telefono.length() == 0 && recarga.length() == 0){
                     Toast.makeText(RecargaTelefonica.this, "Ingrese el número y el monto de recarga", Toast.LENGTH_LONG).show();
                 } else if (nro_telefono.length() == 0){

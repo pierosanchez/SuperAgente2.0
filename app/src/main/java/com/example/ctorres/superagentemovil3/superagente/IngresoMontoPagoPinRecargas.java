@@ -34,8 +34,7 @@ public class IngresoMontoPagoPinRecargas extends Activity {
     Button btn_continuar_pago, btn_cancelar_pagoRecarga;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     MonedaAdapter monedaAdapter;
-    Spinner spinnerMonedaPagarRecarga;
-    TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo;
+    TextView textViewNombreApellidoUsuario, tv_numero_clave_cifrada_cargo, spinnerMonedaPagarRecarga;
     EditText txt_moneda_pagar_recarga, txt_pin_recargas;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
@@ -53,7 +52,7 @@ public class IngresoMontoPagoPinRecargas extends Activity {
         txt_moneda_pagar_recarga = (EditText) findViewById(R.id.txt_moneda_pagar_recarga);
         txt_pin_recargas = (EditText) findViewById(R.id.txt_pin_recargas);
 
-        spinnerMonedaPagarRecarga = (Spinner) findViewById(R.id.spinnerMonedaPagarRecarga);
+        spinnerMonedaPagarRecarga = (TextView) findViewById(R.id.spinnerMonedaPagarRecarga);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -74,12 +73,14 @@ public class IngresoMontoPagoPinRecargas extends Activity {
         txt_moneda_pagar_recarga.setText(convertirDecimales());
         txt_pin_recargas.requestFocus();
         txt_moneda_pagar_recarga.setEnabled(false);
+        spinnerMonedaPagarRecarga.setEnabled(false);
+        spinnerMonedaPagarRecarga.setText(tipo_moneda_recarga);
 
-        monedaEntityArrayList = null;
+        /*monedaEntityArrayList = null;
         monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());
         spinnerMonedaPagarRecarga.setAdapter(monedaAdapter);
 
-        ejecutarListaMoneda();
+        ejecutarListaMoneda();*/
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override

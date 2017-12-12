@@ -17,8 +17,8 @@ import java.text.DecimalFormat;
 
 public class VoucherTransferencias extends Activity {
 
-    TextView tv_fecha_pago, txt_hora_pago, tv_tipo_moneda_importe_voucher, tv_importe_voucher, tv_datos_beneficiario_transaccion_voucher, tv_tipo_transaccion_voucher, tv_tipo_transaccion_voucher_descripcion,
-            tv_usuario_tarjeta_num_cifrado, tv_usuario_tarjeta_banco, tv_monto_comision_servicio_pagar, tv_monto_transferencia, tv_monto_total_pagar,
+    TextView tv_fecha_pago, txt_hora_pago, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_comision_delivery_voucher, tv_importe_voucher, tv_datos_beneficiario_transaccion_voucher, tv_tipo_transaccion_voucher, tv_tipo_transaccion_voucher_descripcion,
+            tv_tipo_moneda_comision_cheque_voucher, tv_usuario_tarjeta_num_cifrado, tv_usuario_tarjeta_banco, tv_monto_comision_servicio_pagar, tv_monto_transferencia, tv_monto_total_pagar,
             tv_tipo_moneda_importe_total_voucher, tv_tipo_moneda_transferencia_voucher, tv_comision1, tv_comision2, tv_comision3, tv_remitente_transferencia_voucher;
     LinearLayout btn_efectuar_otra_operacion, btn_salir_transferencias, ll_comision_delivery, ll_comision_cheque;
     UsuarioEntity usuario;
@@ -39,7 +39,10 @@ public class VoucherTransferencias extends Activity {
 
         tv_fecha_pago = (TextView) findViewById(R.id.tv_fecha_pago);
         txt_hora_pago = (TextView) findViewById(R.id.txt_hora_pago);
-        //tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
+        tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
+        tv_tipo_moneda_comision_delivery_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_delivery_voucher);
+        tv_tipo_moneda_comision_cheque_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_cheque_voucher);
+        tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
         tv_importe_voucher = (TextView) findViewById(R.id.tv_importe_voucher);
         tv_tipo_transaccion_voucher_descripcion = (TextView) findViewById(R.id.tv_tipo_transaccion_voucher_descripcion);
         tv_tipo_transaccion_voucher = (TextView) findViewById(R.id.tv_tipo_transaccion_voucher);
@@ -49,8 +52,8 @@ public class VoucherTransferencias extends Activity {
         tv_monto_comision_servicio_pagar = (TextView) findViewById(R.id.tv_monto_comision_servicio_pagar);
         tv_monto_transferencia = (TextView) findViewById(R.id.tv_monto_transferencia);
         tv_monto_total_pagar = (TextView) findViewById(R.id.tv_monto_total_pagar);
-        //tv_tipo_moneda_importe_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_total_voucher);
-        //tv_tipo_moneda_transferencia_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_transferencia_voucher);
+        tv_tipo_moneda_importe_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_total_voucher);
+        tv_tipo_moneda_transferencia_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_transferencia_voucher);
         tv_comision1 = (TextView) findViewById(R.id.tv_comision1);
         tv_comision2 = (TextView) findViewById(R.id.tv_comision2);
         tv_comision3 = (TextView) findViewById(R.id.tv_comision3);
@@ -84,9 +87,9 @@ public class VoucherTransferencias extends Activity {
         if (importe_comision2 != null && importe_comision1 != null && importe_comision3 != null){
             ll_comision_cheque.setVisibility(View.VISIBLE);
             ll_comision_delivery.setVisibility(View.VISIBLE);
-            tv_comision1.setText(comision1);
-            tv_comision2.setText(comision2);
-            tv_comision3.setText(comision3);
+            tv_comision1.setText(importe_comision1);
+            tv_comision2.setText(importe_comision2);
+            tv_comision3.setText(importe_comision3);
         } else if (importe_comision2 == null && importe_comision1 == null && importe_comision3 == null) {
             tv_comision1.setVisibility(View.GONE);
             tv_comision2.setVisibility(View.GONE);
@@ -101,19 +104,22 @@ public class VoucherTransferencias extends Activity {
 
         //CuentaBeneficiario = extra.getString("CuentaBeneficiario");
 
-        //tv_tipo_moneda_importe_voucher.setText(tipomoneda);
-        tv_importe_voucher.setText(comision0);
+        tv_tipo_moneda_importe_voucher.setText(tipomoneda);
+        tv_importe_voucher.setText(montoTransferencia());
         tv_tipo_transaccion_voucher.setText(TipoAbono);
         tv_tipo_transaccion_voucher_descripcion.setText(DetalleAbono);
         tv_datos_beneficiario_transaccion_voucher.setText(nombreBeneficiario);
         tv_usuario_tarjeta_num_cifrado.setText(num_tarjeta);
         tv_usuario_tarjeta_banco.setText(banco);
-        tv_monto_transferencia.setText(comision0);
-        tv_monto_total_pagar.setText(importeTotal);
-        //tv_tipo_moneda_importe_total_voucher.setText(tipomoneda);
-        //tv_tipo_moneda_transferencia_voucher.setText(tipomoneda);
-        tv_comision3.setText(comision3);
+        tv_monto_transferencia.setText(montoTransferencia());
+        tv_monto_total_pagar.setText(importe);
+        tv_tipo_moneda_importe_total_voucher.setText(tipomoneda);
+        tv_tipo_moneda_transferencia_voucher.setText(tipomoneda);
+        tv_comision3.setText(importe_comision3);
         tv_remitente_transferencia_voucher.setText(remitente);
+        tv_tipo_moneda_comision_voucher.setText(tipomoneda);
+        tv_tipo_moneda_comision_delivery_voucher.setText(tipomoneda);
+        tv_tipo_moneda_comision_cheque_voucher.setText(tipomoneda);
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());

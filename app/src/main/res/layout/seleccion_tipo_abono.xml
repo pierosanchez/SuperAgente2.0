@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:textStyle="bold"
                     android:textSize="16dp"/>
 
@@ -235,7 +235,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:background="@color/color_blanco"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:text="10.00"
                             android:textStyle="bold"
                             android:textSize="16dp"/>
@@ -267,7 +267,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:background="@color/color_blanco"
-                            android:gravity="center"
+                            android:gravity="right"
                             android:text="10.00"
                             android:textStyle="bold"
                             android:textSize="16dp"/>
@@ -411,7 +411,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:text="10.00"
                     android:textStyle="bold"
                     android:textSize="16dp"/>
@@ -454,7 +454,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center"
+                    android:gravity="right"
                     android:text="monto total"
                     android:textStyle="bold"
                     android:textSize="16dp"/>

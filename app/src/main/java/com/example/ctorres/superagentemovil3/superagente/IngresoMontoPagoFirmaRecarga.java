@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,10 +24,9 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
 
     Button btn_continuar_pago, btn_cancelar_pago;
     String cliente, tarjeta_cargo, banco, emisor_tarjeta, validacion_tarjeta;
-    TextView tv_nombre_cliente_comercio, tv_tarjeta_cifrada_comercio, txt_moneda_pagar_recarga;
+    TextView tv_nombre_cliente_comercio, tv_tarjeta_cifrada_comercio, txt_moneda_pagar_recarga, spinnerTipoMoneda;
     EditText txt_monto_pago;
     private UsuarioEntity usuario;
-    Spinner spinnerTipoMoneda;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     String tipo_moneda, cli_dni;
@@ -46,7 +47,7 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
         tv_tarjeta_cifrada_comercio = (TextView) findViewById(R.id.tv_numero_clave_cifrada_cargo);
         txt_moneda_pagar_recarga = (TextView) findViewById(R.id.txt_moneda_pagar_recarga);
 
-        spinnerTipoMoneda = (Spinner) findViewById(R.id.spinnerMonedaPagarRecarga);
+        spinnerTipoMoneda = (TextView) findViewById(R.id.spinnerMonedaPagarRecarga);
 
 
         Bundle extras = getIntent().getExtras();
@@ -69,9 +70,10 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
         tv_nombre_cliente_comercio.setText(cliente);
         tv_tarjeta_cifrada_comercio.setText(tarjeta_cargo);
         txt_moneda_pagar_recarga.setText(transformarMontoRecarga());
+        spinnerTipoMoneda.setText(tipo_moneda_recarga);
         String[] unicaOpcion = {tipo_moneda_recarga};
 
-        spinnerTipoMoneda.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,unicaOpcion));
+        //spinnerTipoMoneda.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,unicaOpcion));
 
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +95,43 @@ public class IngresoMontoPagoFirmaRecarga extends Activity {
                 finish();
             }
         });
+
+        btn_cancelar_pago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
+            }
+        });
     }
 
     public String transformarMontoRecarga(){
         return decimalFormat.format(monto_recarga);
+    }
+
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(IngresoMontoPagoFirmaRecarga.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

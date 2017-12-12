@@ -339,7 +339,7 @@
     <string name="htn_ingrese_un_monto">0.00</string>
     <string name="tv_seleccione_tipo_tarjeta">SELECCIONE LA CON LA QUE DESEA PAGAR</string>
     <string name="tv_tarjeta_pagar">TARJETA A PAGAR</string>
-    <string name="tv_tipo_moneda_modo_monto_pago">MONEDA</string>
+    <string name="tv_tipo_moneda_modo_monto_pago">TIPO MONEDA DE LA DEUDA</string>
 
     <!-- Voucher de pago con tarjeta -->
 
@@ -602,6 +602,7 @@
 
     <string name="titulo_voucher_pago_servicio">VOUCHER DE PAGO DEL SERVICIO</string>
     <string name="tv_servicio_voucher">SERVICIO:</string>
+    <string name="tv_tipo_servicio_voucher">TIPO DE SERVICIO:</string>
     <string name="tv_num_suministro_voucher">CÓDIGO DEL CLIENTE:</string>
     <string name="tv_pagado_por_voucher">PAGADO POR:</string>
     <string name="tv_dni_servicios">DNI:</string>

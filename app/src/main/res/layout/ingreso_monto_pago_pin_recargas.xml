@@ -116,13 +116,12 @@
                     android:gravity="center"
                     android:layout_marginTop="10dp">
 
-                    <Spinner
-                        android:background="@drawable/spinner_selector"
+                    <TextView
                         android:id="@+id/spinnerMonedaPagarRecarga"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
                         android:text="@string/tv_ingrese_ping"
-                        android:spinnerMode="dialog"/>
+                        android:textColor="@android:color/black"/>
 
                     <EditText
                         android:id="@+id/txt_moneda_pagar_recarga"

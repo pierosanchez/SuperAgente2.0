@@ -14,6 +14,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +25,27 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.kosalgeek.genasync12.AsyncResponse;
+import com.kosalgeek.genasync12.EachExceptionsHandler;
+import com.kosalgeek.genasync12.PostResponseAsyncTask;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class VoucherPagoServicioFirma extends Activity {
 
@@ -36,11 +53,13 @@ public class VoucherPagoServicioFirma extends Activity {
     Bitmap b;
     ImageView signImage;
     Button btn_fimar, btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
-    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente, cli_dni, nombre_recibo;
+    String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente,
+            cli_dni, nombre_recibo, tipo_servicio;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
-            txt_dni, tv_nombre_recibo_usuario;
+            txt_dni, tv_nombre_recibo_usuario, txt_tipo_servicio_pagar_voucher;
+    TableRow tr_tipo_servicio_pagar;
     DecimalFormat decimal = new DecimalFormat("0.00");
 
     @Override
@@ -52,6 +71,8 @@ public class VoucherPagoServicioFirma extends Activity {
         btn_pagar_otros_servicios = (Button) findViewById(R.id.btn_pagar_otros_servicios);
         btn_efectuar_otra_operacion = (Button) findViewById(R.id.btn_efectuar_otra_operacion);
         btn_fimar = (Button) findViewById(R.id.btn_firmar);
+
+        tr_tipo_servicio_pagar = (TableRow) findViewById(R.id.tr_tipo_servicio_pagar);
 
         signImage = (ImageView) findViewById(R.id.signImage);
 
@@ -65,11 +86,12 @@ public class VoucherPagoServicioFirma extends Activity {
         tv_total_servicio_pagar_voucher = (TextView) findViewById(R.id.tv_total_servicio_pagar_voucher);
         //tv_banco_tarjeta_usuario = (TextView) findViewById(R.id.tv_banco_tarjeta_usuario);
         txt_pagado_por = (TextView) findViewById(R.id.txt_pagado_por);
-        //tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
-        //tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
-        //tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
+        tv_tipo_moneda_importe_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_voucher);
+        tv_tipo_moneda_comision_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_comision_voucher);
+        tv_tipo_moneda_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_total_voucher);
         txt_dni = (TextView) findViewById(R.id.txt_dni);
         tv_nombre_recibo_usuario = (TextView) findViewById(R.id.tv_nombre_recibo_usuario);
+        txt_tipo_servicio_pagar_voucher = (TextView) findViewById(R.id.txt_tipo_servicio_pagar_voucher);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -85,6 +107,14 @@ public class VoucherPagoServicioFirma extends Activity {
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
+        tipo_servicio = extras.getString("tipo_servicio");
+
+        if (tipo_servicio != null){
+            tr_tipo_servicio_pagar.setVisibility(View.VISIBLE);
+            txt_tipo_servicio_pagar_voucher.setText(tipo_servicio);
+        } else {
+            tr_tipo_servicio_pagar.setVisibility(View.GONE);
+        }
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
@@ -95,9 +125,9 @@ public class VoucherPagoServicioFirma extends Activity {
         tv_total_servicio_pagar_voucher.setText(totalServicioPagar());
         tv_forma_pago.setText(tipoTarjeta());
         txt_pagado_por.setText(cliente);
-        //tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
-        //tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
-        //tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
+        tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
+        tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);
+        tv_tipo_moneda_total_voucher.setText(tipo_moneda_deuda);
         txt_dni.setText(cli_dni);
         tv_nombre_recibo_usuario.setText(nombre_recibo);
 
@@ -113,12 +143,22 @@ public class VoucherPagoServicioFirma extends Activity {
                     SQLiteDatabase db = superAgenteBD.getWritableDatabase();
                     db.execSQL("INSERT INTO Cliente(firma) VALUES('" + drawableToBitmapToString(signImage) + "')");*/
 
+                    post();
+
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
                     intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
+
+
+                    /*Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();*/
                 }
             }
         });
@@ -204,7 +244,7 @@ public class VoucherPagoServicioFirma extends Activity {
 
         double importe = monto_p + comision_p;
 
-        return tipo_moneda_deuda + " " + decimal.format(importe);
+        return decimal.format(importe);
     }
 
     public String tipoTarjeta() {
@@ -219,14 +259,14 @@ public class VoucherPagoServicioFirma extends Activity {
         return tipo;
     }
 
-    public String transformarComision(){
+    public String transformarComision() {
         double convert = Double.parseDouble(comision);
-        return tipo_moneda_deuda + " " + decimal.format(convert);
+        return decimal.format(convert);
     }
 
-    public String transformarImporteServicio(){
+    public String transformarImporteServicio() {
         double convert = Double.parseDouble(monto_servicio);
-        return tipo_moneda_deuda + " " + decimal.format(convert);
+        return decimal.format(convert);
     }
 
     public String drawableToBitmapToString(ImageView imageView) {
@@ -270,8 +310,66 @@ public class VoucherPagoServicioFirma extends Activity {
         }*/
     }
 
-    public void post(){
-        HashMap<String, String > postData = new HashMap<String, String>();
-        postData.put("", drawableToBitmapToString(signImage));
+    public void post() {
+        HashMap<String, String> postData = new HashMap<String, String>();
+        postData.put("image", drawableToBitmapToString(signImage));
+        //postData.put("keyCliente", usuario.getUsuarioId());
+
+        PostResponseAsyncTask task = new PostResponseAsyncTask(VoucherPagoServicioFirma.this, postData, new AsyncResponse() {
+            @Override
+            public void processFinish(String s) {
+                if (s.contains("uploaded_success")) {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "Imagen ingresada", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "Imagen no ingresada, hubo un error" + s, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        task.execute("http://10.0.2.2/news/index.php");
+        //task.execute("http://localhost:4532/apigeneral/ApiGeneral/InsertarFirmaCliente");
+        task.setEachExceptionsHandler(new EachExceptionsHandler() {
+            @Override
+            public void handleIOException(IOException e) {
+                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Servidor", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void handleMalformedURLException(MalformedURLException e) {
+                Toast.makeText(VoucherPagoServicioFirma.this, "Error de URL", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void handleProtocolException(ProtocolException e) {
+                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Protocolo", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void handleUnsupportedEncodingException(UnsupportedEncodingException e) {
+                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Codificación", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void GetText(){
+        try {
+            URL url = new URL("http://190.117.112.163/webApi_2/apigeneral/ApiGeneral/InsertarFirmaCliente");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            String urlParameters = "img=" + drawableToBitmapToString(signImage) + "&keyCliente=" + usuario.getUsuarioId();
+            connection.setRequestMethod("POST");
+
+            connection.setDoOutput(true);
+            DataOutputStream dstream = new DataOutputStream(connection.getOutputStream());
+            dstream.writeBytes(urlParameters);
+            dstream.flush();
+            dstream.close();
+
+            Toast.makeText(VoucherPagoServicioFirma.this, "Response Code " + connection.getResponseCode(), Toast.LENGTH_LONG).show();
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -23,7 +23,7 @@ public class LecturaInformacionComercio extends Activity {
 
     private UsuarioEntity usuario;
     String cliente, cli_dni;
-    private Button scan_btn,aceptar_btn;
+    private Button scan_btn, aceptar_btn;
     String cadena_scanneo = "";
     //Spinner sp_Comercio;
     ArrayList<ComercioEntity> comercioEntityArrayList;
@@ -68,16 +68,23 @@ public class LecturaInformacionComercio extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(LecturaInformacionComercio.this, SeleccionTarjetaCargo.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                intent.putExtra("cadena_scanneo", cadena_scanneo);
-                /*intent.putExtra("nom_comerciosp",nom_comerciosp);
-                intent.putExtra("direccion_comerciosp",direccion_comerciosp);
-                intent.putExtra("distrito_comerciosp",distrito_comerciosp);*/
-                startActivityForResult(intent, 0);
-                finish();
+                    /*Intent intent = new Intent(LecturaInformacionComercio.this, SeleccionTarjetaCargo.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("cadena_scanneo", cadena_scanneo);
+                    intent.putExtra("nom_comerciosp",nom_comerciosp);
+                    intent.putExtra("direccion_comerciosp",direccion_comerciosp);
+                    intent.putExtra("distrito_comerciosp",distrito_comerciosp);
+                    startActivityForResult(intent, 0);
+                    finish();*/
+                    Intent intent = new Intent(LecturaInformacionComercio.this, MenuCliente.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+
             }
         });
 
@@ -97,7 +104,6 @@ public class LecturaInformacionComercio extends Activity {
 
             }
         });*/
-
 
 
     }
@@ -127,18 +133,28 @@ public class LecturaInformacionComercio extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents()==null){
+        if (result != null) {
+            if (result.getContents() == null) {
 
-                Toast.makeText(this,"Scanneo Cancelado", Toast.LENGTH_LONG).show();
-            }
-            else {
+                Toast.makeText(this, "Scanneo Cancelado", Toast.LENGTH_LONG).show();
+            } else {
                 cadena_scanneo = result.getContents();
-                Toast.makeText(this,"Scanneo Realizado Satisfactoriamente", Toast.LENGTH_LONG).show();
-                /*Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();*/
+                //Toast.makeText(this, "Scanneo Realizado Satisfactoriamente", Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                if (cadena_scanneo.length() == 0) {
+                    Toast.makeText(LecturaInformacionComercio.this, "POR FAVOR, ESCANEE EL CÓDIGO QR", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(LecturaInformacionComercio.this, SeleccionTarjetaCargo.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("cadena_scanneo", cadena_scanneo);
+                    startActivityForResult(intent, 0);
+                    finish();
+                }
+
             }
-        }
-        else{
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
 
@@ -156,10 +172,6 @@ public class LecturaInformacionComercio extends Activity {
         }
 
     }
-
-
-
-
 
 
 }

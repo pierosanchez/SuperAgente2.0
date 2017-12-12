@@ -129,6 +129,25 @@ public class TarjetaPagoRemitente extends Activity {
             }
         });
 
+        btn_regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TarjetaPagoRemitente.this, RelacionBeneficiarios.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cli_dni", cli_dni);
+                intent.putExtra("cliente", cliente);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btn_cancelar_seleccion_tarjeta_cargo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
+            }
+        });
+
         /*total = tarjetaid.length;
 
         tv_tipo_tarjeta = (TextView) findViewById(R.id.tv_tipo_tarjeta);

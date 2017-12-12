@@ -37,6 +37,40 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public ArrayList<DeudasTarjetas> ListadoDeudasTarjetas(String idCliente) {
+        ArrayList<DeudasTarjetas> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoTipoTarjeta/?vac01=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
+                        tipoTarjetaEntity.setCodTipoMoneda(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_moneda")));
+                        tipoTarjetaEntity.setMontoMensual(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_mensual")));
+                        tipoTarjetaEntity.setMontoTotal(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_total")));
+                        tipoTarjetaEntity.setMontoMinimo(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_minimo")));
+                        tipoTarjetaEntity.setSignoMoneda(utils.getValueStringOrNull(jsonObject, "signo_moneda"));
+                        tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return listaTipoTarjeta;
+    }
+
+    @Override
     public ArrayList<TipoTarjetaEntity> ListarTipoTarjeta() {
 
         ArrayList<TipoTarjetaEntity> listaTipoTarjeta = new ArrayList<>();
@@ -106,7 +140,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarFirmaCliente/?img=" + URLEncoder.encode(img, "UTF-8") + "&keyCliente=" + URLEncoder.encode(idcliente, "UTF-8");
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarFirmaCliente/";
 
             Log.e("METHOD", "InsertarFirmaCliente");
             Log.e("URL", url);
