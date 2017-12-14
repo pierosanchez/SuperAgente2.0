@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
@@ -11,9 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class VoucherPagoConsumo extends Activity {
 
@@ -23,7 +29,9 @@ public class VoucherPagoConsumo extends Activity {
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
     String parteDireccion, parteDistrito, parteRazon;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio;
+    TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio, txt_numero_unico_voucher_consumos;
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,7 @@ public class VoucherPagoConsumo extends Activity {
         tv_distrito_comercio = (TextView) findViewById(R.id.tv_distrito_comercio);
         tv_direccion_comercio = (TextView) findViewById(R.id.tv_direccion_comercio);
         tv_nombre_comercio = (TextView) findViewById(R.id.tv_nombre_comercio);
+        txt_numero_unico_voucher_consumos = (TextView) findViewById(R.id.txt_numero_unico_voucher_consumos);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -57,6 +66,11 @@ public class VoucherPagoConsumo extends Activity {
         parteRazon = extras.getString("parteRazon");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
+
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarLista();
 
         tv_fecha_pago.setText(obtenerFecha());
         txt_hora_pago.setText(obtenerHora());
@@ -147,5 +161,38 @@ public class VoucherPagoConsumo extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void ejecutarLista(){
+
+        try {
+            VoucherPagoConsumo.getNumeroUnico listadoBeneficiario = new VoucherPagoConsumo.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            txt_numero_unico_voucher_consumos.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
     }
 }

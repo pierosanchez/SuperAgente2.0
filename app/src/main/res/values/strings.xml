@@ -688,10 +688,10 @@
 
     <!-- pantalla de recargas - Monto Pago -->
     <string name="tv_titulo_recarga_conforCli">CONFORMIDAD DEL CLIENTE</string>
-    <string name="tv_nom_cli_confor_Recarga">NOMBRE DEL CLIENTE :</string>
-    <string name="tv_nro_confor_cliRecarga">NÚMERO DE TELEFONO :</string>
-    <string name="tv_tarje_confor_cliRecarga">TARJETA DE PAGO :</string>
-    <string name="tv_comi_confor_cliRecarga">COMISIÓN DE RECARGA :</string>
+    <string name="tv_nom_cli_confor_Recarga">NOMBRE DEL CLIENTE:</string>
+    <string name="tv_nro_confor_cliRecarga">NÚMERO DE TELEFONO:</string>
+    <string name="tv_tarje_confor_cliRecarga">TARJETA DE PAGO:</string>
+    <string name="tv_comi_confor_cliRecarga">COMISIÓN DE RECARGA:</string>
     <string name="tv_total_confor_cliRecarga">TOTAL :</string>
     <string name="btn_confor_confirmaRecarga">CONFIRMAR OPERACIÓN</string>
     <string name="tv_resp_confor_cliRecarga">CRISTOPHER TORRES</string>

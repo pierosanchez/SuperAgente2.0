@@ -4,26 +4,17 @@ package com.example.ctorres.superagentemovil3.dao;
  * Created by CTORRES on 05/05/2017.
  */
 
-import android.content.Intent;
 import android.util.Log;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.net.URLEncoder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.example.ctorres.superagentemovil3.entity.*;
 import com.example.ctorres.superagentemovil3.utils.Constante;
 import com.example.ctorres.superagentemovil3.utils.Utils;
-import com.google.gson.JsonArray;
-
-import retrofit.RestAdapter;
 
 /**
  * Created by Jove on 22/03/2017.
@@ -37,10 +28,229 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public VoucherPagoTarjetaCreditoEntity ingresarVoucherPagoTarjetaCredito(String numero_unicoPT, String fechaPT, String horaPT, String tarjeta_pagadaPT, String bancoPT, String tarjeta_cargoPT, String banco_tarjeta_cargo, String importePT, String tipo_monedaPT, String idclientePT) {
+        VoucherPagoTarjetaCreditoEntity voucherPagoServicio ;
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoTarjetaCredito/?numero_unicoPT=" + numero_unicoPT + "&fechaPT=" + fechaPT + "&horaPT=" + horaPT + "&tarjeta_pagadaPT=" + tarjeta_pagadaPT + "&bancoPT=" + bancoPT + "&tarjeta_cargoPT=" + tarjeta_cargoPT + "&banco_tarjeta_cargo=" + banco_tarjeta_cargo + "&importePT=" + importePT + "&tipo_monedaPT=" + tipo_monedaPT + "&idclientePT=" + idclientePT;
+
+        try {
+            voucherPagoServicio = new VoucherPagoTarjetaCreditoEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherPagoTarjetaCreditoEntity voucherPagoServicioEntity = new VoucherPagoTarjetaCreditoEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoPT);
+                    voucherPagoServicioEntity.setFecha(fechaPT);
+                    voucherPagoServicioEntity.setHora(horaPT);
+                    voucherPagoServicioEntity.setTarjetaPagada(tarjeta_pagadaPT);
+                    voucherPagoServicioEntity.setBanco(bancoPT);
+                    voucherPagoServicioEntity.setTarjetaCargo(tarjeta_cargoPT);
+                    voucherPagoServicioEntity.setBancoTarjetaCargo(banco_tarjeta_cargo);
+                    voucherPagoServicioEntity.setImporte(importePT);
+                    voucherPagoServicioEntity.setTipoMoneda(tipo_monedaPT);
+                    voucherPagoServicioEntity.setIdCliente(idclientePT);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public VoucherTransferenciasEntity ingresarVoucherTransferencias(String numero_unicoT, String fechaT, String horaT, String remitente, String bancoT, String tarjeta_cargoT, String importe_transferencia, String monto_comision, String comision_delivery, String comision_cheque, String importe_total, String beneficiario, String tipo_transferencia, String idclienteT, String tipo_monedaT) {
+        VoucherTransferenciasEntity voucherPagoServicio ;
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherTransferencias/?numero_unicoT=" + numero_unicoT + "&fechaT=" + fechaT + "&horaT=" + horaT + "&remitente=" + remitente + "&bancoT=" + bancoT + "&tarjeta_cargoT=" + tarjeta_cargoT + "&importe_transferencia=" + importe_transferencia + "&monto_comision=" + monto_comision + "&comision_delivery=" + comision_delivery + "&comision_cheque=" + comision_cheque + "&importe_total=" + importe_total + "&beneficiario=" + beneficiario + "&tipo_transferencia=" + tipo_transferencia + "&idclienteT=" + idclienteT + "&tipo_monedaT=" + tipo_monedaT;
+
+        try {
+            voucherPagoServicio = new VoucherTransferenciasEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherTransferenciasEntity voucherPagoServicioEntity = new VoucherTransferenciasEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoT);
+                    voucherPagoServicioEntity.setFecha(fechaT);
+                    voucherPagoServicioEntity.setHora(horaT);
+                    voucherPagoServicioEntity.setRemitente(remitente);
+                    voucherPagoServicioEntity.setBanco(bancoT);
+                    voucherPagoServicioEntity.setTarjetaCargo(tarjeta_cargoT);
+                    voucherPagoServicioEntity.setImporteTransferencia(importe_transferencia);
+                    voucherPagoServicioEntity.setMontoComision(monto_comision);
+                    voucherPagoServicioEntity.setComisionDelivery(comision_delivery);
+                    voucherPagoServicioEntity.setComisionCheque(comision_cheque);
+                    voucherPagoServicioEntity.setImporteTotal(importe_total);
+                    voucherPagoServicioEntity.setBeneficiario(beneficiario);
+                    voucherPagoServicioEntity.setTipoTransferencia(tipo_transferencia);
+                    voucherPagoServicioEntity.setIdCliente(idclienteT);
+                    voucherPagoServicioEntity.setTipomoneda(tipo_monedaT);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC) {
+        VoucherPagoConsumoEntity voucherPagoServicio ;
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoConsumos/?numero_unicoPC=" + numero_unicoPC + "&fechaPC=" + fechaPC + "&horaPC=" + horaPC + "&importePC=" + importePC + "&nro_tarjetaPC=" + nro_tarjetaPC + "&marca_tarjetaPC=" + marca_tarjetaPC + "&banco_tarjetaPC=" + banco_tarjetaPC + "&nombre_comercioPC=" + nombre_comercioPC + "&direccion_comercioPC=" + direccion_comercioPC + "&distrito_comercioPC=" + distrito_comercioPC + "&idclientePC=" + idclientePC;
+
+        try {
+            voucherPagoServicio = new VoucherPagoConsumoEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherPagoConsumoEntity voucherPagoServicioEntity = new VoucherPagoConsumoEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoPC);
+                    voucherPagoServicioEntity.setFecha(fechaPC);
+                    voucherPagoServicioEntity.setHora(horaPC);
+                    voucherPagoServicioEntity.setImporte(importePC);
+                    voucherPagoServicioEntity.setNroTarjeta(nro_tarjetaPC);
+                    voucherPagoServicioEntity.setMarcaTarjeta(marca_tarjetaPC);
+                    voucherPagoServicioEntity.setBancoTarjeta(banco_tarjetaPC);
+                    voucherPagoServicioEntity.setNombreComercio(nombre_comercioPC);
+                    voucherPagoServicioEntity.setDireccionComercio(direccion_comercioPC);
+                    voucherPagoServicioEntity.setDistritoComercio(distrito_comercioPC);
+                    voucherPagoServicioEntity.setIdCliente(idclientePC);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS) {
+        VoucherPagoServicioEntity voucherPagoServicio ;
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarVoucherPagoServicio/?numero_unicoS=" + numero_unicoS + "&fechaS=" + fechaS + "&horaS=" + horaS + "&servicio=" + servicio + "&tipo_servicio=" + tipo_servicio + "&cod_clienteS=" + cod_clienteS + "&nombre_tipo_servicio=" + nombre_tipo_servicio + "&persona_paga=" + persona_paga + "&dni_persona=" + dni_persona + "&forma_pagoS=" + forma_pagoS + "&importeS=" + importeS + "&comisionS=" + comisionS + "&totalS=" + totalS;
+
+        try {
+            voucherPagoServicio = new VoucherPagoServicioEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherPagoServicioEntity voucherPagoServicioEntity = new VoucherPagoServicioEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoS);
+                    voucherPagoServicioEntity.setFecha(fechaS);
+                    voucherPagoServicioEntity.setHora(horaS);
+                    voucherPagoServicioEntity.setServicio(servicio);
+                    voucherPagoServicioEntity.setTipoServicio(tipo_servicio);
+                    voucherPagoServicioEntity.setCodCliente(cod_clienteS);
+                    voucherPagoServicioEntity.setNombreTipoServicio(nombre_tipo_servicio);
+                    voucherPagoServicioEntity.setPersonaPaga(persona_paga);
+                    voucherPagoServicioEntity.setDniPersona(dni_persona);
+                    voucherPagoServicioEntity.setFormaPago(forma_pagoS);
+                    voucherPagoServicioEntity.setImporte(importeS);
+                    voucherPagoServicioEntity.setComision(comisionS);
+                    voucherPagoServicioEntity.setTotal(totalS);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public VoucherPagoRecargaEntity ingresarVoucherRecargas(String numero_unicoR, String fechaR, String horaR, String recarga, String forma_pagoR, String importeR, String comision_recarga, String totalR, String bancoR, String nro_tarjetaR, String tipo_monedaR, String idclienteR) {
+        VoucherPagoRecargaEntity voucherPagoServicio ;
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherRecargas/?numero_unicoR=" + numero_unicoR + "&fechaR=" + fechaR + "&horaR=" + horaR + "&horaR=" + recarga + "&forma_pagoR=" + forma_pagoR + "&importeR=" + importeR + "&comision_recarga=" + comision_recarga + "&totalR=" + totalR + "&bancoR=" + bancoR + "&nro_tarjetaR=" + nro_tarjetaR + "&tipo_monedaR=" + tipo_monedaR + "&idclienteR=" + idclienteR;
+
+        try {
+            voucherPagoServicio = new VoucherPagoRecargaEntity();
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    VoucherPagoRecargaEntity voucherPagoServicioEntity = new VoucherPagoRecargaEntity();
+                    voucherPagoServicioEntity.setNumeroUnico(numero_unicoR);
+                    voucherPagoServicioEntity.setFecha(fechaR);
+                    voucherPagoServicioEntity.setHora(horaR);
+                    voucherPagoServicioEntity.setRecarga(recarga);
+                    voucherPagoServicioEntity.setFormaPago(forma_pagoR);
+                    voucherPagoServicioEntity.setImporte(importeR);
+                    voucherPagoServicioEntity.setComisionRecarga(comision_recarga);
+                    voucherPagoServicioEntity.setTotal(totalR);
+                    voucherPagoServicioEntity.setBanco(bancoR);
+                    voucherPagoServicioEntity.setNroTarjeta(nro_tarjetaR);
+                    voucherPagoServicioEntity.setTipoMoneda(tipo_monedaR);
+                    voucherPagoServicioEntity.setIdCliente(idclienteR);
+                } else {
+                    voucherPagoServicio = null;
+                }
+            } else {
+                voucherPagoServicio = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            voucherPagoServicio = null;
+        }
+        return voucherPagoServicio;
+    }
+
+    @Override
+    public ArrayList<NumeroUnico> getNumeroUnico() {
+        ArrayList<NumeroUnico> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/NumeroUnico/?vac02=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        NumeroUnico tipoTarjetaEntity = new NumeroUnico();
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return listaTipoTarjeta;
+    }
+
+    @Override
     public ArrayList<DeudasTarjetas> ListadoDeudasTarjetas(String idCliente) {
         ArrayList<DeudasTarjetas> listaTipoTarjeta = new ArrayList<>();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoTipoTarjeta/?vac01=";
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoDeudasTarjetas/?PKCliente=" + idCliente;
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);

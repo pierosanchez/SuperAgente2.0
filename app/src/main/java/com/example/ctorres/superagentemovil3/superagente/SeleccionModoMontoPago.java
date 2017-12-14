@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.view.Menu;
@@ -26,7 +27,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.DeudasTarjetasAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+
+import java.util.ArrayList;
 
 public class SeleccionModoMontoPago extends Activity {
 
@@ -44,6 +51,8 @@ public class SeleccionModoMontoPago extends Activity {
     ImageView imageView;
     TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_modo_monto_1, tv_tipo_moneda_modo_monto_2, tv_tipo_moneda_modo_monto_3, tv_tipo_moneda_modo_monto_4;
     String cliente, cli_dni, desc_corta_banco;
+    DeudasTarjetasAdapter deudasTarjetasAdapter;
+    ArrayList<DeudasTarjetas> deudasTarjetasArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +97,11 @@ public class SeleccionModoMontoPago extends Activity {
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         spinnerTipoMonedaPago.setEnabled(false);
+
+        deudasTarjetasArrayList = null;
+        deudasTarjetasAdapter = new DeudasTarjetasAdapter(deudasTarjetasArrayList, getApplication());
+
+        ejecutarLista();
 
         focTipoTarjeta();
         //cargarTipoTarjetas();
@@ -297,5 +311,45 @@ public class SeleccionModoMontoPago extends Activity {
         tipo = spinnerTipoMonedaPago.getSelectedItem().toString();
         return tipo;
     }*/
+
+    private void ejecutarLista(){
+
+        try {
+            SeleccionModoMontoPago.ListadoDeudasTarjetas listadoBeneficiario = new SeleccionModoMontoPago.ListadoDeudasTarjetas();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoDeudasTarjetas extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                deudasTarjetasArrayList = dao.ListadoDeudasTarjetas(usuario.getUsuarioId());
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            deudasTarjetasAdapter.setNewListDeudasTarjetas(deudasTarjetasArrayList);
+            deudasTarjetasAdapter.notifyDataSetChanged();
+            txt_monto_minimo.setText(String.valueOf(deudasTarjetasArrayList.get(0).getMontoMinimo()));
+            txt_monto_mensual.setText(String.valueOf(deudasTarjetasArrayList.get(0).getMontoMensual()));
+            txt_monto_total.setText(String.valueOf(deudasTarjetasArrayList.get(0).getMontoTotal()));
+            spinnerTipoMonedaPago.setText(deudasTarjetasArrayList.get(0).getSignoMoneda());
+            tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasArrayList.get(0).getSignoMoneda());
+            tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasArrayList.get(0).getSignoMoneda());
+            tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasArrayList.get(0).getSignoMoneda());
+            tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasArrayList.get(0).getSignoMoneda());
+        }
+    }
 
 }

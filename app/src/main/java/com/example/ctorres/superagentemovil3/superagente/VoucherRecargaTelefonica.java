@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
@@ -11,9 +12,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class VoucherRecargaTelefonica extends Activity {
 
@@ -21,10 +27,13 @@ public class VoucherRecargaTelefonica extends Activity {
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, banco, emisor_tarjeta, cli_dni;
     TextView tv_fecha, tv_hora, tv_numUnico, tv_operadora, tv_nrofono, tv_importe, tv_comision, tv_total, tv_banco, tv_nroTarjeta,tv_forpago;
+    TextView tv_tipo_moneda_importe, tv_tipo_moneda_comision_recarga, tv_tipo_moneda_total;
     int tipo_tarjeta_pago;
     String tipo_moneda_recarga,tipo_operador,nro_telefono;
     Double monto_recarga,comisionRecarga,montoTotal;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,9 @@ public class VoucherRecargaTelefonica extends Activity {
         tv_forpago = (TextView) findViewById(R.id.tv_recarga_forma_pago);
         tv_banco = (TextView) findViewById(R.id.tv_bancoRecarga);
         tv_nroTarjeta = (TextView) findViewById(R.id.tv_nroTarjetaRecarga);
+        tv_tipo_moneda_total = (TextView) findViewById(R.id.tv_tipo_moneda_total);
+        tv_tipo_moneda_comision_recarga = (TextView) findViewById(R.id.tv_tipo_moneda_comision_recarga);
+        tv_tipo_moneda_importe = (TextView) findViewById(R.id.tv_tipo_moneda_importe);
 
         btn_salir = (Button) findViewById(R.id.btn_salir);
         btn_efectuar_otra_recarga = (Button) findViewById(R.id.btn_efectuar_otra_recarga);
@@ -62,6 +74,11 @@ public class VoucherRecargaTelefonica extends Activity {
         comisionRecarga = extras.getDouble("comisionRecarga");
         montoTotal = extras.getDouble("montoTotal");
 
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarLista();
+
         tv_fecha.setText(obtenerFecha());
         tv_hora.setText(obtenerHora());
         tv_operadora.setText(tipo_operador);
@@ -72,6 +89,9 @@ public class VoucherRecargaTelefonica extends Activity {
         tv_forpago.setText(transformarTipoTarjetaPago());
         tv_banco.setText(banco);
         tv_nroTarjeta.setText(tarjeta_cargo);
+        tv_tipo_moneda_total.setText(tipo_moneda_recarga);
+        tv_tipo_moneda_comision_recarga.setText(tipo_moneda_recarga);
+        tv_tipo_moneda_importe.setText(tipo_moneda_recarga);
 
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +137,7 @@ public class VoucherRecargaTelefonica extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -133,21 +153,21 @@ public class VoucherRecargaTelefonica extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
     }
 
     public String transformarMontoRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(monto_recarga);
+        return decimalFormat.format(monto_recarga);
     }
 
     public String transformarComisionRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(comisionRecarga);
+        return decimalFormat.format(comisionRecarga);
     }
 
     public String transformarMontoTotalRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(montoTotal);
+        return decimalFormat.format(montoTotal);
     }
 
     public String transformarTipoTarjetaPago(){
@@ -182,5 +202,38 @@ public class VoucherRecargaTelefonica extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void ejecutarLista(){
+
+        try {
+            VoucherRecargaTelefonica.getNumeroUnico listadoBeneficiario = new VoucherRecargaTelefonica.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            tv_numUnico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
     }
 }

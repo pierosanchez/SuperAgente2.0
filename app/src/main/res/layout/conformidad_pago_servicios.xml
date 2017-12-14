@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="14dp"/>
 
                 </TableRow>
 
@@ -76,8 +76,7 @@
                         android:id="@+id/tv_nombre_titular_pago_servicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp" />
+                        android:layout_marginLeft="14dp"/>
 
                 </TableRow>
 
@@ -97,8 +96,7 @@
                         android:id="@+id/tv_dni_cliente_conformidad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="14dp"/>
 
                 </TableRow>
 
@@ -118,7 +116,7 @@
                         android:id="@+id/tv_numero_tarjeta_cifrada_pago_servicio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginLeft="14dp"/>
 
                 </TableRow>
 
@@ -138,17 +136,15 @@
                         android:id="@+id/txt_servicio_pagar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold"
+                        android:layout_marginLeft="14dp"
                         />
 
                 </TableRow>
 
                 <TableRow
                     android:id="@+id/ll_tipo_servicio_pagar_conforme"
-                    android:layout_height="30dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/servicio_pagar_layout"
+                    android:background="@color/color_blanco"
                     android:visibility="gone">
 
                     <TextView
@@ -162,8 +158,7 @@
                         android:id="@+id/txt_tipo_servicio_pagar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:textStyle="bold" />
+                        android:layout_marginLeft="14dp" />
 
                 </TableRow>
 

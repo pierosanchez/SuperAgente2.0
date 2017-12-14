@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
@@ -11,20 +12,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class VoucherPagoTarjeta extends Activity {
 
     LinearLayout btn_otra_operacion, btn_salir, btn_pagar_otra_tarjeta;
     String monto, num_tarjeta;
-    TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada, tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago, tv_banco_tarjeta_cargo;
+    TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada,
+            tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago, tv_banco_tarjeta_cargo, txt_numero_unico;
     String importe, tipo_moneda_deuda, tarjeta_cargo;
     private UsuarioEntity usuario;
     String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, banco_tarjeta_cargo, desc_corta_banco_tarjeta_cargo;
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,7 @@ public class VoucherPagoTarjeta extends Activity {
         tv_tarjeta_cifrada = (TextView) findViewById(R.id.tv_tarjeta_cifrada);
         tv_tarjeta_cifrada_cargo = (TextView) findViewById(R.id.tv_tarjeta_cifrada_cargo);
         tv_banco_tarjeta_cargo = (TextView) findViewById(R.id.tv_banco_tarjeta_cargo);
+        txt_numero_unico = (TextView) findViewById(R.id.txt_numero_unico);
         //tv_fecha_pago = (TextView) findViewById(R.id.tv_fecha_pago);
 
         Bundle extras = getIntent().getExtras();
@@ -66,6 +76,10 @@ public class VoucherPagoTarjeta extends Activity {
         txt_hora_pago.setText(obtenerHora());
         tv_banco_tarjeta_cargo.setText(banco_tarjeta_cargo);
 
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarLista();
 
         btn_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,5 +172,38 @@ public class VoucherPagoTarjeta extends Activity {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         double montoD = Double.parseDouble(monto);
         return decimalFormat.format(montoD);
+    }
+
+    private void ejecutarLista(){
+
+        try {
+            VoucherPagoTarjeta.getNumeroUnico listadoBeneficiario = new VoucherPagoTarjeta.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
     }
 }

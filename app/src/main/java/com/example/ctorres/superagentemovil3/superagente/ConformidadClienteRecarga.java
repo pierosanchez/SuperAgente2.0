@@ -18,6 +18,7 @@ public class  ConformidadClienteRecarga extends Activity {
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni, validacion_tarjeta;
     TextView tv_nombrecli,tv_numerofono,tv_tarjetacli,tv_tipomone,tv_montoPagar,txt_comisionRecarga,txt_totalPagar, tv_dni_cliente_recarga;
+    TextView tv_tipo_moneda_recarga, tv_tipo_moneda_comision, tv_tipo_moneda_total_recarga;
     int tipo_tarjeta_pago;
     String tipo_moneda_recarga,tipo_operador,nro_telefono;
     Double monto_recarga,comisionRecarga,montoTotal;
@@ -38,6 +39,9 @@ public class  ConformidadClienteRecarga extends Activity {
         txt_comisionRecarga = (TextView) findViewById(R.id.txt_confor_comisionRecarga);
         txt_totalPagar = (TextView) findViewById(R.id.txt_confor_totalPagar);
         tv_dni_cliente_recarga = (TextView) findViewById(R.id.tv_dni_cliente_recarga);
+        tv_tipo_moneda_recarga = (TextView) findViewById(R.id.tv_tipo_moneda_recarga);
+        tv_tipo_moneda_comision = (TextView) findViewById(R.id.tv_tipo_moneda_comision);
+        tv_tipo_moneda_total_recarga = (TextView) findViewById(R.id.tv_tipo_moneda_total_recarga);
 
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
@@ -63,6 +67,9 @@ public class  ConformidadClienteRecarga extends Activity {
         montoTotal = monto_recarga+comisionRecarga;
         txt_totalPagar.setText(transformarMontoTotal());
         tv_dni_cliente_recarga.setText(cli_dni);
+        tv_tipo_moneda_recarga.setText(tipo_moneda_recarga);
+        tv_tipo_moneda_comision.setText(tipo_moneda_recarga);
+        tv_tipo_moneda_total_recarga.setText(tipo_moneda_recarga);
 
 
 

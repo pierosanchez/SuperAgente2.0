@@ -128,7 +128,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="NÚMERO ÚNICO: AAA1234" />
+                        android:text="NÚMERO ÚNICO" />
+
+                    <TextView
+                        android:id="@+id/txt_numero_unico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="AAA0024" />
 
                 </LinearLayout>
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
@@ -11,21 +12,29 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class VoucherTransferencias extends Activity {
 
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_comision_delivery_voucher, tv_importe_voucher, tv_datos_beneficiario_transaccion_voucher, tv_tipo_transaccion_voucher, tv_tipo_transaccion_voucher_descripcion,
             tv_tipo_moneda_comision_cheque_voucher, tv_usuario_tarjeta_num_cifrado, tv_usuario_tarjeta_banco, tv_monto_comision_servicio_pagar, tv_monto_transferencia, tv_monto_total_pagar,
-            tv_tipo_moneda_importe_total_voucher, tv_tipo_moneda_transferencia_voucher, tv_comision1, tv_comision2, tv_comision3, tv_remitente_transferencia_voucher;
+            tv_tipo_moneda_importe_total_voucher, tv_tipo_moneda_transferencia_voucher,
+            tv_comision1, tv_comision2, tv_comision3, tv_remitente_transferencia_voucher, txt_numero_unico;
     LinearLayout btn_efectuar_otra_operacion, btn_salir_transferencias, ll_comision_delivery, ll_comision_cheque;
     UsuarioEntity usuario;
     String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario,
             num_tarjeta, banco, monto, transferencia, comision0, comision1, comision2, comision3, importe_comision1, importe_comision2, importe_comision3;
     String cliente, remitente, cli_dni, importeTotal;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +92,11 @@ public class VoucherTransferencias extends Activity {
         comision3 = tipomoneda + " " + importe_comision3;
         remitente = "REMITENTE: " + cliente;
         importeTotal = tipomoneda + " " + importe;
+
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarLista();
 
         if (importe_comision2 != null && importe_comision1 != null && importe_comision3 != null){
             ll_comision_cheque.setVisibility(View.VISIBLE);
@@ -201,5 +215,38 @@ public class VoucherTransferencias extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void ejecutarLista(){
+
+        try {
+            VoucherTransferencias.getNumeroUnico listadoBeneficiario = new VoucherTransferencias.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
     }
 }
