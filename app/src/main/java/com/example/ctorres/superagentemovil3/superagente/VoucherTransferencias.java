@@ -17,6 +17,8 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherTransferenciasEntity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 public class VoucherTransferencias extends Activity {
 
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_comision_delivery_voucher, tv_importe_voucher, tv_datos_beneficiario_transaccion_voucher, tv_tipo_transaccion_voucher, tv_tipo_transaccion_voucher_descripcion,
-            tv_tipo_moneda_comision_cheque_voucher, tv_usuario_tarjeta_num_cifrado, tv_usuario_tarjeta_banco, tv_monto_comision_servicio_pagar, tv_monto_transferencia, tv_monto_total_pagar,
+            tv_tipo_moneda_comision_cheque_voucher, tv_usuario_tarjeta_num_cifrado, tv_usuario_tarjeta_banco, tv_monto_transferencia, tv_monto_total_pagar,
             tv_tipo_moneda_importe_total_voucher, tv_tipo_moneda_transferencia_voucher,
             tv_comision1, tv_comision2, tv_comision3, tv_remitente_transferencia_voucher, txt_numero_unico;
     LinearLayout btn_efectuar_otra_operacion, btn_salir_transferencias, ll_comision_delivery, ll_comision_cheque;
@@ -58,7 +60,6 @@ public class VoucherTransferencias extends Activity {
         tv_datos_beneficiario_transaccion_voucher = (TextView) findViewById(R.id.tv_datos_beneficiario_transaccion_voucher);
         tv_usuario_tarjeta_num_cifrado = (TextView) findViewById(R.id.tv_usuario_tarjeta_num_cifrado);
         tv_usuario_tarjeta_banco = (TextView) findViewById(R.id.tv_usuario_tarjeta_banco);
-        tv_monto_comision_servicio_pagar = (TextView) findViewById(R.id.tv_monto_comision_servicio_pagar);
         tv_monto_transferencia = (TextView) findViewById(R.id.tv_monto_transferencia);
         tv_monto_total_pagar = (TextView) findViewById(R.id.tv_monto_total_pagar);
         tv_tipo_moneda_importe_total_voucher = (TextView) findViewById(R.id.tv_tipo_moneda_importe_total_voucher);
@@ -67,6 +68,7 @@ public class VoucherTransferencias extends Activity {
         tv_comision2 = (TextView) findViewById(R.id.tv_comision2);
         tv_comision3 = (TextView) findViewById(R.id.tv_comision3);
         tv_remitente_transferencia_voucher = (TextView) findViewById(R.id.tv_remitente_transferencia_voucher);
+        txt_numero_unico = (TextView) findViewById(R.id.txt_numero_unico);
 
         Bundle extra = getIntent().getExtras();
         //usuario = extra.getParcelable("usuario");
@@ -141,6 +143,9 @@ public class VoucherTransferencias extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                VoucherTransferencias.ingresarVoucher ingreso = new VoucherTransferencias.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherTransferencias.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
@@ -202,6 +207,10 @@ public class VoucherTransferencias extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                VoucherTransferencias.ingresarVoucher ingreso = new VoucherTransferencias.ingresarVoucher();
+                ingreso.execute();
+
                 finish();
             }
         });
@@ -247,6 +256,38 @@ public class VoucherTransferencias extends Activity {
             numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
             numeroUnicoAdapter.notifyDataSetChanged();
             txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
+        String _fecha = tv_fecha_pago.getText().toString();
+        String _hora = txt_hora_pago.getText().toString();
+        String _importe = tv_importe_voucher.getText().toString();
+        String _tipoTransaccionDescripcion = tv_tipo_transaccion_voucher_descripcion.getText().toString();
+        String _tipoTransaccion = tv_tipo_transaccion_voucher.getText().toString();
+        String _beneficiario = tv_datos_beneficiario_transaccion_voucher.getText().toString();
+        String _usTarjeta = tv_usuario_tarjeta_num_cifrado.getText().toString();
+        String _banco = tv_usuario_tarjeta_banco.getText().toString();
+        String _montoTransferencia = tv_monto_transferencia.getText().toString();
+        String _total = tv_monto_total_pagar.getText().toString();
+        String _comision1 = tv_comision1.getText().toString();
+        String _comision2 = tv_comision2.getText().toString();
+        String _comision3 = tv_comision3.getText().toString();
+        String _remitente = tv_remitente_transferencia_voucher.getText().toString();
+        String _numeroUnico = txt_numero_unico.getText().toString();
+
+        @Override
+        protected VoucherTransferenciasEntity doInBackground(String... params) {
+            VoucherTransferenciasEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherTransferencias(_numeroUnico, _fecha, _hora, cliente, _banco, _usTarjeta, _importe, _comision3, _comision1, _comision2, _total, _beneficiario, _tipoTransaccion, usuario.getUsuarioId(), tipomoneda);
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
         }
     }
 }

@@ -82,4 +82,6 @@ public interface SuperAgenteDaoInterface {
     VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC);
     VoucherTransferenciasEntity ingresarVoucherTransferencias(String numero_unicoT, String fechaT, String horaT, String remitente, String bancoT, String tarjeta_cargoT, String importe_transferencia, String monto_comision, String comision_delivery, String comision_cheque, String importe_total, String beneficiario, String tipo_transferencia, String idclienteT, String tipo_monedaT);
     VoucherPagoTarjetaCreditoEntity ingresarVoucherPagoTarjetaCredito(String numero_unicoPT, String fechaPT, String horaPT, String tarjeta_pagadaPT, String bancoPT, String tarjeta_cargoPT, String banco_tarjeta_cargo, String importePT, String tipo_monedaPT, String idclientePT);
+    ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaSoles(String idcliente);
+    ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaCredito(String idcliente);
 }

@@ -27,6 +27,7 @@ import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.CuentaEntity;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoServicioEntity;
 import com.kosalgeek.genasync12.AsyncResponse;
 import com.kosalgeek.genasync12.EachExceptionsHandler;
 import com.kosalgeek.genasync12.PostResponseAsyncTask;
@@ -154,7 +155,10 @@ public class VoucherPagoServicioFirma extends Activity {
                     SQLiteDatabase db = superAgenteBD.getWritableDatabase();
                     db.execSQL("INSERT INTO Cliente(firma) VALUES('" + drawableToBitmapToString(signImage) + "')");*/
 
-                    post();
+                    //post();
+
+                    VoucherPagoServicioFirma.ingresarVoucher ingreso = new VoucherPagoServicioFirma.ingresarVoucher();
+                    ingreso.execute();
 
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
@@ -180,6 +184,9 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
+                    VoucherPagoServicioFirma.ingresarVoucher ingreso = new VoucherPagoServicioFirma.ingresarVoucher();
+                    ingreso.execute();
+
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, SeleccionServicioPagar.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -414,6 +421,35 @@ public class VoucherPagoServicioFirma extends Activity {
             numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
             numeroUnicoAdapter.notifyDataSetChanged();
             txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoServicioEntity> {
+        String _fecha = tv_fecha_pago.getText().toString();
+        String _hora = txt_hora_pago.getText().toString();
+        String _comision = tv_comision_oper_servicio.getText().toString();
+        String _importe = tv_importe_servicio.getText().toString();
+        String _formaPago = tv_forma_pago.getText().toString();
+        String _suministro = txt_suministro_pagar_voucher.getText().toString();
+        String _servicioPagar = txt_servicio_pagar_voucher.getText().toString();
+        String _total = tv_total_servicio_pagar_voucher.getText().toString();
+        String _pagaPor = txt_pagado_por.getText().toString();
+        String _nombreRecibo = tv_nombre_recibo_usuario.getText().toString();
+        String _tipoServicio = txt_tipo_servicio_pagar_voucher.getText().toString();
+        String _numeroUnico = txt_numero_unico.getText().toString();
+
+        @Override
+        protected VoucherPagoServicioEntity doInBackground(String... params) {
+            VoucherPagoServicioEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherServicio(_numeroUnico, _fecha, _hora, servicio, tipo_servicio, usuario.getUsuarioId(), _nombreRecibo, _pagaPor, cli_dni, _formaPago, _importe, _comision, _total);
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
         }
     }
 }

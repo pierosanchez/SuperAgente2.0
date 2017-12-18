@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
-import com.example.ctorres.superagentemovil3.entity.BancosEntity;
+import com.example.ctorres.superagentemovil3.entity.ClubsEntity;
 import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
  * Created by CTORRES on 18/05/2017.
  */
 
-public class DeudasTarjetasAdapter extends BaseAdapter {
+public class DeudasTarjetasDolaresAdapter extends BaseAdapter {
 
     ArrayList<DeudasTarjetas> items;
     Context context;
     LayoutInflater layoutInflater = null;
 
-    public DeudasTarjetasAdapter(ArrayList<DeudasTarjetas> items, Context context) {
+    public DeudasTarjetasDolaresAdapter(ArrayList<DeudasTarjetas> items, Context context) {
         this.items = items;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,22 +54,7 @@ public class DeudasTarjetasAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        DeudasTarjetasAdapter.ViewHolder viewHolder= new DeudasTarjetasAdapter.ViewHolder();
-        View view = layoutInflater.inflate(R.layout.row_deudas_tarjetas,null);
-
-        viewHolder.tv_moneda_deuda = (TextView) view.findViewById(R.id.tv_moneda_deuda);
-
-        viewHolder.tv_moneda_deuda.setText(String.valueOf(getItem(position).getSignoMoneda()));
-
-        DeudasTarjetas data = getItem(position);
-
-        if(data!=null){
-            viewHolder.tv_moneda_deuda.setText(data.getSignoMoneda());
-        } else {
-            viewHolder.tv_moneda_deuda.setText("");
-        }
-
-        return view;
+        return null;
     }
 
     public static final class ViewHolder{

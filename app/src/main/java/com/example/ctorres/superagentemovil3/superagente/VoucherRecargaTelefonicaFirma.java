@@ -20,6 +20,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoRecargaEntity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -111,6 +112,9 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                VoucherRecargaTelefonicaFirma.ingresarVoucher ingreso = new VoucherRecargaTelefonicaFirma.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
@@ -123,6 +127,9 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
         btn_efectuar_otra_recarga.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                VoucherRecargaTelefonicaFirma.ingresarVoucher ingreso = new VoucherRecargaTelefonicaFirma.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, RecargaTelefonica.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
@@ -217,6 +224,9 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                VoucherRecargaTelefonicaFirma.ingresarVoucher ingreso = new VoucherRecargaTelefonicaFirma.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, LoginActivity.class);
                 startActivityForResult(intent, 0);
                 finish();
@@ -264,6 +274,33 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
             numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
             numeroUnicoAdapter.notifyDataSetChanged();
             tv_numUnico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoRecargaEntity> {
+        String _fecha = tv_fecha.getText().toString();
+        String _hora = tv_hora.getText().toString();
+        String _numUnico = tv_numUnico.getText().toString();
+        String _operadora = tv_operadora.getText().toString();
+        String _telefono = tv_nrofono.getText().toString();
+        String _importe = tv_importe.getText().toString();
+        String _comision = tv_comision.getText().toString();
+        String _total = tv_total.getText().toString();
+        String _formaPago = tv_forpago.getText().toString();
+        String _banco = tv_banco.getText().toString();
+        String _nroTarjeta = tv_nroTarjeta.getText().toString();
+        @Override
+        protected VoucherPagoRecargaEntity doInBackground(String... params) {
+            VoucherPagoRecargaEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherRecargas(_numUnico, _fecha, _hora, _operadora, _formaPago, _importe, _comision, _total, _banco, _nroTarjeta, tipo_moneda_recarga, usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
         }
     }
 }

@@ -99,13 +99,14 @@
                     android:text="@string/tv_tipo_moneda_modo_monto_pago"
                     android:textSize="16dp" />
 
-                <TextView
+                <Spinner
                     android:gravity="center"
                     android:id="@+id/spinnerTipoMonedaPago"
-                    android:layout_width="70dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:text="S/."
                     android:layout_marginLeft="45dp"
+                    android:background="@drawable/btn_dropdown_normal"
                     android:textColor="@android:color/black"/>
 
             </LinearLayout>

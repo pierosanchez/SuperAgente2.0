@@ -17,6 +17,8 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
 
 
 import java.text.DecimalFormat;
@@ -84,6 +86,9 @@ public class VoucherPagoTarjeta extends Activity {
         btn_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherPagoTarjeta.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
@@ -103,6 +108,9 @@ public class VoucherPagoTarjeta extends Activity {
         btn_pagar_otra_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
+                ingreso.execute();
+
                 Intent intent = new Intent(VoucherPagoTarjeta.this, SeleccionTarjetaPago.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
@@ -121,6 +129,9 @@ public class VoucherPagoTarjeta extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
+                ingreso.execute();
+
                 finish();
             }
         });
@@ -204,6 +215,30 @@ public class VoucherPagoTarjeta extends Activity {
             numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
             numeroUnicoAdapter.notifyDataSetChanged();
             txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
+        }
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
+        String _banco = tv_banco_tarjeta_pago.getText().toString();
+        String _importe = tv_monto_importe.getText().toString();
+        String _fecha = tv_fecha_pago.getText().toString();
+        String _hora = txt_hora_pago.getText().toString();
+        String _tarjeta = tv_tarjeta_cifrada.getText().toString();
+        String _tarjetaCargo = tv_tarjeta_cifrada_cargo.getText().toString();
+        String _bancoTarjetaCargo = tv_banco_tarjeta_cargo.getText().toString();
+        String _numeroUnico = txt_numero_unico.getText().toString();
+        @Override
+        protected VoucherPagoTarjetaCreditoEntity doInBackground(String... params) {
+            VoucherPagoTarjetaCreditoEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, _fecha, _hora, _tarjeta, _banco, _tarjetaCargo, _bancoTarjetaCargo, _importe, tipo_moneda_deuda, usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
         }
     }
 }

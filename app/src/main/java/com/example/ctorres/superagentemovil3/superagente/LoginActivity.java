@@ -264,6 +264,10 @@ public class LoginActivity extends Activity {
                     Toast.makeText(LoginActivity.this, "Lo sentimos, este usuario se encuentra bloqueado. Contáctese a la central.", Toast.LENGTH_LONG).show();
                     clave_acceso.setText("");
                     circleProgressBar.setVisibility(View.GONE);
+                } else if (userEntity.getUsuarioId().equals("04")) {
+                    Toast.makeText(LoginActivity.this, "Lo sentimos, la cuenta ingresada aún no esta activa. Contáctese a la central.", Toast.LENGTH_LONG).show();
+                    clave_acceso.setText("");
+                    circleProgressBar.setVisibility(View.GONE);
                 } else {
                     try {
                         circleProgressBar.setVisibility(View.GONE);

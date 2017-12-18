@@ -28,12 +28,89 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public VoucherPagoTarjetaCreditoEntity ingresarVoucherPagoTarjetaCredito(String numero_unicoPT, String fechaPT, String horaPT, String tarjeta_pagadaPT, String bancoPT, String tarjeta_cargoPT, String banco_tarjeta_cargo, String importePT, String tipo_monedaPT, String idclientePT) {
-        VoucherPagoTarjetaCreditoEntity voucherPagoServicio ;
+    public ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaSoles(String idcliente) {
+        ArrayList<DeudasTarjetas> listaTipoTarjeta = new ArrayList<>();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoTarjetaCredito/?numero_unicoPT=" + numero_unicoPT + "&fechaPT=" + fechaPT + "&horaPT=" + horaPT + "&tarjeta_pagadaPT=" + tarjeta_pagadaPT + "&bancoPT=" + bancoPT + "&tarjeta_cargoPT=" + tarjeta_cargoPT + "&banco_tarjeta_cargo=" + banco_tarjeta_cargo + "&importePT=" + importePT + "&tipo_monedaPT=" + tipo_monedaPT + "&idclientePT=" + idclientePT;
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoDeudasTarjetasSoles/?PrKCliente=" + idcliente;
 
         try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
+                        tipoTarjetaEntity.setCodTipoMoneda(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_moneda")));
+                        tipoTarjetaEntity.setMontoMensual(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_mensual")));
+                        tipoTarjetaEntity.setMontoTotal(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_total")));
+                        tipoTarjetaEntity.setMontoMinimo(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_minimo")));
+                        tipoTarjetaEntity.setSignoMoneda(utils.getValueStringOrNull(jsonObject, "signo_moneda"));
+                        tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return listaTipoTarjeta;
+    }
+
+    @Override
+    public ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaCredito(String idcliente) {
+        ArrayList<DeudasTarjetas> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListadoDeudasTarjetasDolares/?PriKCliente=" + idcliente;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
+                        tipoTarjetaEntity.setCodTipoMoneda(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_moneda")));
+                        tipoTarjetaEntity.setMontoMensual(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_mensual")));
+                        tipoTarjetaEntity.setMontoTotal(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_total")));
+                        tipoTarjetaEntity.setMontoMinimo(Double.parseDouble(utils.getValueStringOrNull(jsonObject, "monto_minimo")));
+                        tipoTarjetaEntity.setSignoMoneda(utils.getValueStringOrNull(jsonObject, "signo_moneda"));
+                        tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return listaTipoTarjeta;
+    }
+
+    @Override
+    public VoucherPagoTarjetaCreditoEntity ingresarVoucherPagoTarjetaCredito(String numero_unicoPT, String fechaPT, String horaPT, String tarjeta_pagadaPT, String bancoPT, String tarjeta_cargoPT, String banco_tarjeta_cargo, String importePT, String tipo_monedaPT, String idclientePT) {
+        VoucherPagoTarjetaCreditoEntity voucherPagoServicio;
+
+        try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoTarjetaCredito/?numero_unicoPT=" + URLEncoder.encode(numero_unicoPT, "UTF-8") +
+                    "&fechaPT=" + URLEncoder.encode(fechaPT, "UTF-8") +
+                    "&horaPT=" + URLEncoder.encode(horaPT, "UTF-8") +
+                    "&tarjeta_pagadaPT=" + URLEncoder.encode(tarjeta_pagadaPT, "UTF-8") +
+                    "&bancoPT=" + URLEncoder.encode(bancoPT, "UTF-8") +
+                    "&tarjeta_cargoPT=" + URLEncoder.encode(tarjeta_cargoPT, "UTF-8") +
+                    "&banco_tarjeta_cargo=" + URLEncoder.encode(banco_tarjeta_cargo, "UTF-8") +
+                    "&importePT=" + URLEncoder.encode(importePT, "UTF-8") +
+                    "&tipo_monedaPT=" + URLEncoder.encode(tipo_monedaPT, "UTF-8") +
+                    "&idclientePT=" + URLEncoder.encode(idclientePT, "UTF-8");
+
             voucherPagoServicio = new VoucherPagoTarjetaCreditoEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
@@ -67,9 +144,23 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     public VoucherTransferenciasEntity ingresarVoucherTransferencias(String numero_unicoT, String fechaT, String horaT, String remitente, String bancoT, String tarjeta_cargoT, String importe_transferencia, String monto_comision, String comision_delivery, String comision_cheque, String importe_total, String beneficiario, String tipo_transferencia, String idclienteT, String tipo_monedaT) {
         VoucherTransferenciasEntity voucherPagoServicio ;
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherTransferencias/?numero_unicoT=" + numero_unicoT + "&fechaT=" + fechaT + "&horaT=" + horaT + "&remitente=" + remitente + "&bancoT=" + bancoT + "&tarjeta_cargoT=" + tarjeta_cargoT + "&importe_transferencia=" + importe_transferencia + "&monto_comision=" + monto_comision + "&comision_delivery=" + comision_delivery + "&comision_cheque=" + comision_cheque + "&importe_total=" + importe_total + "&beneficiario=" + beneficiario + "&tipo_transferencia=" + tipo_transferencia + "&idclienteT=" + idclienteT + "&tipo_monedaT=" + tipo_monedaT;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherTransferencias/?numero_unicoT=" + URLEncoder.encode(numero_unicoT, "UTF-8") +
+                    "&fechaT=" + URLEncoder.encode(fechaT, "UTF-8") +
+                    "&horaT=" + URLEncoder.encode(horaT, "UTF-8") +
+                    "&remitente=" + URLEncoder.encode(remitente, "UTF-8") +
+                    "&bancoT=" + URLEncoder.encode(bancoT, "UTF-8") +
+                    "&tarjeta_cargoT=" + URLEncoder.encode(tarjeta_cargoT, "UTF-8") +
+                    "&importe_transferencia=" + URLEncoder.encode(importe_transferencia, "UTF-8") +
+                    "&monto_comision=" + URLEncoder.encode(monto_comision, "UTF-8") +
+                    "&comision_delivery=" + URLEncoder.encode(comision_delivery, "UTF-8") +
+                    "&comision_cheque=" + URLEncoder.encode(comision_cheque, "UTF-8") +
+                    "&importe_total=" + URLEncoder.encode(importe_total, "UTF-8") +
+                    "&beneficiario=" + URLEncoder.encode(beneficiario, "UTF-8") +
+                    "&tipo_transferencia=" + URLEncoder.encode(tipo_transferencia, "UTF-8") +
+                    "&idclienteT=" + URLEncoder.encode(idclienteT, "UTF-8") +
+                    "&tipo_monedaT=" + URLEncoder.encode(tipo_monedaT, "UTF-8");
+
             voucherPagoServicio = new VoucherTransferenciasEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
@@ -108,9 +199,19 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     public VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC) {
         VoucherPagoConsumoEntity voucherPagoServicio ;
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoConsumos/?numero_unicoPC=" + numero_unicoPC + "&fechaPC=" + fechaPC + "&horaPC=" + horaPC + "&importePC=" + importePC + "&nro_tarjetaPC=" + nro_tarjetaPC + "&marca_tarjetaPC=" + marca_tarjetaPC + "&banco_tarjetaPC=" + banco_tarjetaPC + "&nombre_comercioPC=" + nombre_comercioPC + "&direccion_comercioPC=" + direccion_comercioPC + "&distrito_comercioPC=" + distrito_comercioPC + "&idclientePC=" + idclientePC;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoConsumos/?numero_unicoPC=" + URLEncoder.encode(numero_unicoPC, "UTF-8") +
+                    "&fechaPC=" + URLEncoder.encode(fechaPC, "UTF-8") +
+                    "&horaPC=" + URLEncoder.encode(horaPC, "UTF-8") +
+                    "&importePC=" + URLEncoder.encode(importePC, "UTF-8") +
+                    "&nro_tarjetaPC=" + URLEncoder.encode(nro_tarjetaPC, "UTF-8") +
+                    "&marca_tarjetaPC=" + URLEncoder.encode(marca_tarjetaPC, "UTF-8") +
+                    "&banco_tarjetaPC=" + URLEncoder.encode(banco_tarjetaPC, "UTF-8") +
+                    "&nombre_comercioPC=" + URLEncoder.encode(nombre_comercioPC, "UTF-8") +
+                    "&direccion_comercioPC=" + URLEncoder.encode(direccion_comercioPC, "UTF-8") +
+                    "&distrito_comercioPC=" + URLEncoder.encode(distrito_comercioPC, "UTF-8") +
+                    "&idclientePC=" + URLEncoder.encode(idclientePC, "UTF-8");
+
             voucherPagoServicio = new VoucherPagoConsumoEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
@@ -145,9 +246,21 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     public VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS) {
         VoucherPagoServicioEntity voucherPagoServicio ;
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarVoucherPagoServicio/?numero_unicoS=" + numero_unicoS + "&fechaS=" + fechaS + "&horaS=" + horaS + "&servicio=" + servicio + "&tipo_servicio=" + tipo_servicio + "&cod_clienteS=" + cod_clienteS + "&nombre_tipo_servicio=" + nombre_tipo_servicio + "&persona_paga=" + persona_paga + "&dni_persona=" + dni_persona + "&forma_pagoS=" + forma_pagoS + "&importeS=" + importeS + "&comisionS=" + comisionS + "&totalS=" + totalS;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarVoucherPagoServicio/?numero_unicoS=" + URLEncoder.encode(numero_unicoS, "UTF-8") +
+                    "&fechaS=" + URLEncoder.encode(fechaS, "UTF-8") +
+                    "&horaS=" + URLEncoder.encode(horaS, "UTF-8") +
+                    "&servicio=" + URLEncoder.encode(servicio, "UTF-8") +
+                    "&tipo_servicio=" + URLEncoder.encode(tipo_servicio, "UTF-8") +
+                    "&cod_clienteS=" + URLEncoder.encode(cod_clienteS, "UTF-8") +
+                    "&nombre_tipo_servicio=" + URLEncoder.encode(nombre_tipo_servicio, "UTF-8") +
+                    "&persona_paga=" + URLEncoder.encode(persona_paga, "UTF-8") +
+                    "&dni_persona=" + URLEncoder.encode(dni_persona, "UTF-8") +
+                    "&forma_pagoS=" + URLEncoder.encode(forma_pagoS, "UTF-8") +
+                    "&importeS=" + URLEncoder.encode(importeS, "UTF-8") +
+                    "&comisionS=" + URLEncoder.encode(comisionS, "UTF-8") +
+                    "&totalS=" + URLEncoder.encode(totalS, "UTF-8");
+
             voucherPagoServicio = new VoucherPagoServicioEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
@@ -184,9 +297,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     public VoucherPagoRecargaEntity ingresarVoucherRecargas(String numero_unicoR, String fechaR, String horaR, String recarga, String forma_pagoR, String importeR, String comision_recarga, String totalR, String bancoR, String nro_tarjetaR, String tipo_monedaR, String idclienteR) {
         VoucherPagoRecargaEntity voucherPagoServicio ;
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherRecargas/?numero_unicoR=" + numero_unicoR + "&fechaR=" + fechaR + "&horaR=" + horaR + "&horaR=" + recarga + "&forma_pagoR=" + forma_pagoR + "&importeR=" + importeR + "&comision_recarga=" + comision_recarga + "&totalR=" + totalR + "&bancoR=" + bancoR + "&nro_tarjetaR=" + nro_tarjetaR + "&tipo_monedaR=" + tipo_monedaR + "&idclienteR=" + idclienteR;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherRecargas/?numero_unicoR=" + URLEncoder.encode(numero_unicoR, "UTF-8") +
+                    "&fechaR=" + URLEncoder.encode(fechaR, "UTF-8") +
+                    "&horaR=" + URLEncoder.encode(horaR, "UTF-8") +
+                    "&recarga=" + URLEncoder.encode(recarga, "UTF-8") +
+                    "&forma_pagoR=" + URLEncoder.encode(forma_pagoR, "UTF-8") +
+                    "&importeR=" + URLEncoder.encode(importeR, "UTF-8") +
+                    "&comision_recarga=" + URLEncoder.encode(comision_recarga, "UTF-8") +
+                    "&totalR=" + URLEncoder.encode(totalR, "UTF-8") +
+                    "&bancoR=" + URLEncoder.encode(bancoR, "UTF-8") +
+                    "&nro_tarjetaR=" + URLEncoder.encode(nro_tarjetaR, "UTF-8") +
+                    "&tipo_monedaR=" + URLEncoder.encode(tipo_monedaR, "UTF-8") +
+                    "&idclienteR=" + URLEncoder.encode(idclienteR, "UTF-8");
+
             voucherPagoServicio = new VoucherPagoRecargaEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
