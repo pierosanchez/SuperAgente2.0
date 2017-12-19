@@ -58,7 +58,7 @@ public class VoucherPagoServicioFirma extends Activity {
     ImageView signImage;
     Button btn_fimar, btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente,
-            cli_dni, nombre_recibo, tipo_servicio;
+            cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
@@ -115,6 +115,8 @@ public class VoucherPagoServicioFirma extends Activity {
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
         tipo_servicio = extras.getString("tipo_servicio");
+        fechaV = "FECHA: " + obtenerFecha();
+        horaV = "HORA: " + obtenerHora();
 
         numeroUnicoArrayList = null;
         numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
@@ -128,8 +130,8 @@ public class VoucherPagoServicioFirma extends Activity {
             tr_tipo_servicio_pagar.setVisibility(View.GONE);
         }
 
-        tv_fecha_pago.setText(obtenerFecha());
-        txt_hora_pago.setText(obtenerHora());
+        tv_fecha_pago.setText(fechaV);
+        txt_hora_pago.setText(horaV);
         tv_comision_oper_servicio.setText(transformarComision());
         tv_importe_servicio.setText(transformarImporteServicio());
         txt_servicio_pagar_voucher.setText(servicio);
@@ -234,7 +236,7 @@ public class VoucherPagoServicioFirma extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -250,7 +252,7 @@ public class VoucherPagoServicioFirma extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
     }
@@ -443,7 +445,7 @@ public class VoucherPagoServicioFirma extends Activity {
             VoucherPagoServicioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherServicio(_numeroUnico, _fecha, _hora, servicio, tipo_servicio, usuario.getUsuarioId(), _nombreRecibo, _pagaPor, cli_dni, _formaPago, _importe, _comision, _total);
+                user = dao.ingresarVoucherServicio(_numeroUnico, obtenerHora(), obtenerHora(), servicio, tipo_servicio, usuario.getUsuarioId(), _nombreRecibo, _pagaPor, cli_dni, _formaPago, transformarImporteServicio(), transformarComision(), totalServicioPagar());
 
             } catch (Exception e) {
                 user = null;

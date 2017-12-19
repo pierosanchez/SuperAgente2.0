@@ -24,6 +24,7 @@ import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class VoucherPagoTarjetaConCredito extends Activity {
@@ -35,8 +36,9 @@ public class VoucherPagoTarjetaConCredito extends Activity {
     TextView tv_fecha_pago, txt_hora_pago, txt_importe_pagar, tv_tarjeta_cifrada_credito,
             tv_tarjeta_cifrada_cargo_credito, txt_banco_tarjeta_pago, txt_banco_tarjeta_cargo, txt_numero_unico;
     private UsuarioEntity usuario;
-    String monto, importe, tipo_moneda_deuda, num_tarjeta, tarjeta_cargo;
-    String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, desc_corta_banco_tarjeta_cargo, banco_tarjeta_cargo;
+    String monto, importe, tipo_moneda_deuda, num_tarjeta, tarjeta_cargo, numTarjetaCargo, numTarjetaPago;
+    String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, desc_corta_banco_tarjeta_cargo,
+            banco_tarjeta_cargo, fechaV, horaV;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
 
@@ -64,17 +66,21 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         Bundle extras = getIntent().getExtras();
         usuario = extras.getParcelable("usuario");
         monto = extras.getString("monto");
-        importe = "IMPORTE: " + extras.getString("tipo_moneda_deuda") + " " +extras.getString("monto");
+        importe = "IMPORTE: " + extras.getString("tipo_moneda_deuda") + " " + transformarMonto();
         txt_importe_pagar.setText(importe);
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
-        num_tarjeta = "TARJETA CIFRADA: " + extras.getString("num_tarjeta");
-        tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
+        numTarjetaPago = extras.getString("num_tarjeta");
+        numTarjetaCargo = extras.getString("tarjeta_cargo");
+        num_tarjeta = "TARJETA CIFRADA: " + numTarjetaPago;
+        tarjeta_cargo = "TARJETA DE CARGO: " + numTarjetaCargo;
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
         desc_corta_banco = extras.getString("desc_corta_banco");
         banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
         banco_tarjeta_cargo = "BANCO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
+        fechaV = "FECHA: " + obtenerFecha();
+        horaV = "HORA: " + obtenerHora();
 
         numeroUnicoArrayList = null;
         numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
@@ -200,7 +206,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -216,9 +222,15 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
+    }
+
+    public String transformarMonto(){
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        double montoD = Double.parseDouble(monto);
+        return decimalFormat.format(montoD);
     }
 
     private void ejecutarLista(){
@@ -268,7 +280,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
             VoucherPagoTarjetaCreditoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, _fecha, _hora, _tarjeta, _bancoPago, _tarjetaCargo, _bancoCargo, _importe, tipo_moneda_deuda, usuario.getUsuarioId());
+                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, obtenerFecha(), obtenerHora(), numTarjetaPago, desc_corta_banco, numTarjetaCargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
 
             } catch (Exception e) {
                 user = null;

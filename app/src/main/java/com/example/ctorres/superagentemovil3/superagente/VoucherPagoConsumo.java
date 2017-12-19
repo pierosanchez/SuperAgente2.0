@@ -29,7 +29,7 @@ public class VoucherPagoConsumo extends Activity {
     private UsuarioEntity usuario;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, importe, banco, emisor_tarjeta, tarjeta, cli_dni;
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
-    String parteDireccion, parteDistrito, parteRazon;
+    String parteDireccion, parteDistrito, parteRazon, id_com, horaV, fechaV;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio, txt_numero_unico_voucher_consumos;
     NumeroUnicoAdapter numeroUnicoAdapter;
@@ -66,16 +66,19 @@ public class VoucherPagoConsumo extends Activity {
         parteDireccion = extras.getString("parteDireccion");
         parteDistrito = extras.getString("parteDistrito");
         parteRazon = extras.getString("parteRazon");
+        id_com = extras.getString("id_com");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
+        fechaV = "FECHA: " + obtenerFecha();
+        horaV = "HORA: " + obtenerHora();
 
         numeroUnicoArrayList = null;
         numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
 
         ejecutarLista();
 
-        tv_fecha_pago.setText(obtenerFecha());
-        txt_hora_pago.setText(obtenerHora());
+        tv_fecha_pago.setText(fechaV);
+        txt_hora_pago.setText(horaV);
         txt_importe_voucher_consumo.setText(importe);
         tv_banco_voucher_consumo.setText(banco);
         txt_numero_tarjeta_voucher_consumo.setText(tarjeta);
@@ -117,7 +120,7 @@ public class VoucherPagoConsumo extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -133,7 +136,7 @@ public class VoucherPagoConsumo extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
     }
@@ -220,7 +223,7 @@ public class VoucherPagoConsumo extends Activity {
             VoucherPagoConsumoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoConsumo(_nroUnico, _fecha, _hora, _importe, _nroTarjeta, _tipoTarjeta, _banco, _comercio, _direccion, _distrito, usuario.getUsuarioId());
+                user = dao.ingresarVoucherPagoConsumo(_nroUnico, obtenerFecha(), obtenerHora(), _importe, tarjeta_cargo, emisor_tarjeta, _banco, _comercio, _direccion, _distrito, usuario.getUsuarioId(), id_com);
 
             } catch (Exception e) {
                 user = null;

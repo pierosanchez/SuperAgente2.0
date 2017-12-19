@@ -41,7 +41,7 @@ public class VoucherTransferenciasFirma extends Activity {
     LinearLayout ll_comision_delivery, ll_comision_cheque;
     String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario,
             num_tarjeta, banco, monto, transferencia, comision0, comision1, comision2, comision3, importe_comision1, importe_comision2, importe_comision3;
-    String cliente, remitente, cli_dni, importeTotal;
+    String cliente, remitente, cli_dni, importeTotal, fechaV, horaV;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
@@ -98,6 +98,8 @@ public class VoucherTransferenciasFirma extends Activity {
         importe_comision2 = extras.getString("comision_cheque");
         importe_comision3 = extras.getString("comision_monto");
         cli_dni = extras.getString("cli_dni");
+        fechaV = "FECHA: " + obtenerFecha();
+        horaV = "HORA: " + obtenerHora();
         comision0 = tipomoneda + " " + montoTransferencia();
         comision1 = tipomoneda + " " + importe_comision1;
         comision2 = tipomoneda + " " + importe_comision2;
@@ -147,8 +149,8 @@ public class VoucherTransferenciasFirma extends Activity {
         tv_tipo_moneda_comision_delivery_voucher.setText(tipomoneda);
         tv_tipo_moneda_comision_cheque_voucher.setText(tipomoneda);
 
-        tv_fecha_pago.setText(obtenerFecha());
-        txt_hora_pago.setText(obtenerHora());
+        tv_fecha_pago.setText(fechaV);
+        txt_hora_pago.setText(horaV);
 
         btn_fimar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,7 +216,7 @@ public class VoucherTransferenciasFirma extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -230,7 +232,7 @@ public class VoucherTransferenciasFirma extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
     }
@@ -320,7 +322,7 @@ public class VoucherTransferenciasFirma extends Activity {
             VoucherTransferenciasEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherTransferencias(_numeroUnico, _fecha, _hora, cliente, _banco, _usTarjeta, _importe, _comision3, _comision1, _comision2, _total, _beneficiario, _tipoTransaccion, usuario.getUsuarioId(), tipomoneda);
+                user = dao.ingresarVoucherTransferencias(_numeroUnico, obtenerFecha(), obtenerHora(), cliente, _banco, _usTarjeta, _importe, _comision3, _comision1, _comision2, _total, _beneficiario, _tipoTransaccion, usuario.getUsuarioId(), tipomoneda);
 
             } catch (Exception e) {
                 user = null;

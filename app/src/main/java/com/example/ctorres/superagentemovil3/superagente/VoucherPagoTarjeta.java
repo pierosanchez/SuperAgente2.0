@@ -31,7 +31,7 @@ public class VoucherPagoTarjeta extends Activity {
     String monto, num_tarjeta;
     TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada,
             tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago, tv_banco_tarjeta_cargo, txt_numero_unico;
-    String importe, tipo_moneda_deuda, tarjeta_cargo;
+    String importe, tipo_moneda_deuda, tarjeta_cargo, fechaV, horaV, numTarjetaCargo, numTarjetaPago;
     private UsuarioEntity usuario;
     String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, banco_tarjeta_cargo, desc_corta_banco_tarjeta_cargo;
     NumeroUnicoAdapter numeroUnicoAdapter;
@@ -63,19 +63,23 @@ public class VoucherPagoTarjeta extends Activity {
         tipo_moneda_deuda = extras.getString("tipo_moneda_deuda");
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
-        num_tarjeta = "TARJETA PAGADA: " + extras.getString("num_tarjeta");
-        tarjeta_cargo = "TARJETA DE CARGO: " + extras.getString("tarjeta_cargo");
+        numTarjetaPago = extras.getString("num_tarjeta");
+        numTarjetaCargo = extras.getString("tarjeta_cargo");
+        num_tarjeta = "TARJETA CIFRADA: " + numTarjetaPago;
+        tarjeta_cargo = "TARJETA DE CARGO: " + numTarjetaCargo;
         desc_corta_banco = extras.getString("desc_corta_banco");
         banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
         banco_tarjeta_cargo = "BANCO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
+        fechaV = "FECHA: " + obtenerFecha();
+        horaV = "HORA: " + obtenerHora();
 
         tv_monto_importe.setText(importe);
         tv_tarjeta_cifrada.setText(num_tarjeta);
         tv_tarjeta_cifrada_cargo.setText(tarjeta_cargo);
         tv_banco_tarjeta_pago.setText(banco_tarjeta_pago);
-        tv_fecha_pago.setText(obtenerFecha());
-        txt_hora_pago.setText(obtenerHora());
+        tv_fecha_pago.setText(fechaV);
+        txt_hora_pago.setText(horaV);
         tv_banco_tarjeta_cargo.setText(banco_tarjeta_cargo);
 
         numeroUnicoArrayList = null;
@@ -158,7 +162,7 @@ public class VoucherPagoTarjeta extends Activity {
         //para probar en celulares se comenta y cuando es con emuladores se descomenta
         //horaS = horaS - 5;
 
-        hora = "HORA: " + horaS + ":" + min + ":" + seg;
+        hora = horaS + ":" + min + ":" + seg;
 
         return hora;
     }
@@ -174,7 +178,7 @@ public class VoucherPagoTarjeta extends Activity {
         int año = today.year;
         mes = mes + 1;
 
-        fecha = "FECHA: " + dia + "/" + mes + "/" + año;
+        fecha = dia + "/" + mes + "/" + año;
 
         return fecha;
     }
@@ -232,7 +236,7 @@ public class VoucherPagoTarjeta extends Activity {
             VoucherPagoTarjetaCreditoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, _fecha, _hora, _tarjeta, _banco, _tarjetaCargo, _bancoTarjetaCargo, _importe, tipo_moneda_deuda, usuario.getUsuarioId());
+                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, obtenerFecha(), obtenerHora(), numTarjetaPago, desc_corta_banco, numTarjetaCargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
 
             } catch (Exception e) {
                 user = null;

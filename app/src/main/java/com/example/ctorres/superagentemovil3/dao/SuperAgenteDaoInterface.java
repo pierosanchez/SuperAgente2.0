@@ -79,9 +79,10 @@ public interface SuperAgenteDaoInterface {
     ArrayList<NumeroUnico> getNumeroUnico();
     VoucherPagoRecargaEntity ingresarVoucherRecargas(String numero_unicoR, String fechaR, String horaR, String recarga, String forma_pagoR, String importeR, String comision_recarga, String totalR, String bancoR, String nro_tarjetaR, String tipo_monedaR, String idclienteR);
     VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS);
-    VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC);
+    VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC, String idcomercioPC);
     VoucherTransferenciasEntity ingresarVoucherTransferencias(String numero_unicoT, String fechaT, String horaT, String remitente, String bancoT, String tarjeta_cargoT, String importe_transferencia, String monto_comision, String comision_delivery, String comision_cheque, String importe_total, String beneficiario, String tipo_transferencia, String idclienteT, String tipo_monedaT);
     VoucherPagoTarjetaCreditoEntity ingresarVoucherPagoTarjetaCredito(String numero_unicoPT, String fechaPT, String horaPT, String tarjeta_pagadaPT, String bancoPT, String tarjeta_cargoPT, String banco_tarjeta_cargo, String importePT, String tipo_monedaPT, String idclientePT);
     ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaSoles(String idcliente);
     ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaCredito(String idcliente);
+    ArrayList<ComercioEntity> detalleComercio(String idComercio);
 }

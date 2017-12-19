@@ -28,6 +28,38 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public ArrayList<ComercioEntity> detalleComercio(String idComercio) {
+        ArrayList<ComercioEntity> listaTipoTarjeta = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/DetalleComercioQR/?PKcomercio=" + idComercio;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        ComercioEntity tipoTarjetaEntity = new ComercioEntity();
+                        tipoTarjetaEntity.setDesc_distrito(utils.getValueStringOrNull(jsonObject, "desc_distrito"));
+                        tipoTarjetaEntity.setDireccion_comercio(utils.getValueStringOrNull(jsonObject, "direccion_comercio"));
+                        tipoTarjetaEntity.setId_comercio(utils.getValueStringOrNull(jsonObject, "id_comercio"));
+                        tipoTarjetaEntity.setRaz_social_comercio(utils.getValueStringOrNull(jsonObject, "raz_social_comercio"));
+                        listaTipoTarjeta.add(tipoTarjetaEntity);
+                    }
+                }else {
+                    listaTipoTarjeta = null;
+                }
+            } else {
+                listaTipoTarjeta = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return listaTipoTarjeta;
+    }
+
+    @Override
     public ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaSoles(String idcliente) {
         ArrayList<DeudasTarjetas> listaTipoTarjeta = new ArrayList<>();
 
@@ -196,7 +228,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC) {
+    public VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC, String idcomercioPC) {
         VoucherPagoConsumoEntity voucherPagoServicio ;
 
         try {
@@ -210,7 +242,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     "&nombre_comercioPC=" + URLEncoder.encode(nombre_comercioPC, "UTF-8") +
                     "&direccion_comercioPC=" + URLEncoder.encode(direccion_comercioPC, "UTF-8") +
                     "&distrito_comercioPC=" + URLEncoder.encode(distrito_comercioPC, "UTF-8") +
-                    "&idclientePC=" + URLEncoder.encode(idclientePC, "UTF-8");
+                    "&idclientePC=" + URLEncoder.encode(idclientePC, "UTF-8") +
+                    "&idcomercioPC=" + URLEncoder.encode(idcomercioPC, "UTF-8");
 
             voucherPagoServicio = new VoucherPagoConsumoEntity();
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
@@ -764,7 +797,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarClave/?clave=" + clave + "&idcliente=" + idcliente + "&clave_nueva=" + clave_nueva + "&resp_pregunta=" + resp_pregunta;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarClave/?clave=" + URLEncoder.encode(clave, "UTF-8") + "&idcliente=" + idcliente + "&clave_nueva=" + URLEncoder.encode(clave_nueva, "UTF-8") + "&resp_pregunta=" + URLEncoder.encode(resp_pregunta, "UTF-8");
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -1338,7 +1371,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             Log.e("URL", url);
 
 
-            String arrayJason = utils.getJsonarrayFromUrl(url);
+            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {

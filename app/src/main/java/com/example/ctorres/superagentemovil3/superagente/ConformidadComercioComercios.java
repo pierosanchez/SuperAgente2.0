@@ -21,7 +21,7 @@ public class ConformidadComercioComercios extends Activity {
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, banco, emisor_tarjeta, cli_dni;
     TextView tv_nombre_cliente_comercio, tv_numero_tarjeta_comercio, tv_tipo_moneda_comercio, tv_monto_importe_comercio, tv_dni_cliente_comercio;
     int tipo_tarjeta_pago;
-    String parteRazon,parteDireccion,parteDistrito, validacion_tarjeta;
+    String parteRazon,parteDireccion,parteDistrito, validacion_tarjeta, id_com;
     TextView tv_razonsoc_comercioConfor,tv_direccion_comercioConfor,tv_distrito_comercioConfor;
     EditText txt_clave_comercio;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
@@ -58,6 +58,7 @@ public class ConformidadComercioComercios extends Activity {
         parteDireccion = extras.getString("parteDireccion");
         parteDistrito = extras.getString("parteDistrito");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
+        id_com = extras.getString("id_com");
 
         if (!parteRazon.isEmpty() && !parteDireccion.isEmpty() && !parteDistrito.isEmpty()){
             tv_razonsoc_comercioConfor.setText(parteRazon);
@@ -94,6 +95,7 @@ public class ConformidadComercioComercios extends Activity {
                         intent.putExtra("parteDireccion", parteDireccion);
                         intent.putExtra("parteDistrito", parteDistrito);
                         intent.putExtra("parteRazon", parteRazon);
+                        intent.putExtra("id_com", id_com);
                         startActivity(intent);
                         finish();
                     }
@@ -115,6 +117,7 @@ public class ConformidadComercioComercios extends Activity {
                             intent.putExtra("parteDireccion", parteDireccion);
                             intent.putExtra("parteDistrito", parteDistrito);
                             intent.putExtra("parteRazon", parteRazon);
+                            intent.putExtra("id_com", id_com);
                             startActivity(intent);
                             finish();
                         } else if (validacion_tarjeta.equals("Pin")){
@@ -131,6 +134,7 @@ public class ConformidadComercioComercios extends Activity {
                             intent.putExtra("parteDireccion", parteDireccion);
                             intent.putExtra("parteDistrito", parteDistrito);
                             intent.putExtra("parteRazon", parteRazon);
+                            intent.putExtra("id_com", id_com);
                             startActivity(intent);
                             finish();
                         }

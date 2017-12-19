@@ -17,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.ComercioQRAdapter;
 import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
@@ -35,6 +37,8 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
     private UsuarioEntity usuario;
     Spinner spinnerTipoMoneda, sp_pago_cuotas, sp_cantidad_cuotas;
     MonedaAdapter monedaAdapter;
+    ComercioQRAdapter comercioQRAdapter;
+    ArrayList<ComercioEntity> comercioEntityArrayList;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     String tipo_moneda, cli_dni;
     int tipo_tarjeta_pago;
@@ -50,7 +54,7 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
     String parteDistrito="";
 
     //Variables Proceso ComboBox
-    String nom_comerciosp,direccion_comerciosp,distrito_comerciosp;
+    String nom_comerciosp,direccion_comerciosp,distrito_comerciosp, id_com;
 
 
     @Override
@@ -88,23 +92,28 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
 
         cadena_scanneo = extras.getString("cadena_scanneo");
 
-        nom_comerciosp = extras.getString("nom_comerciosp");
+        /*nom_comerciosp = extras.getString("nom_comerciosp");
         direccion_comerciosp = extras.getString("direccion_comerciosp");
-        distrito_comerciosp = extras.getString("distrito_comerciosp");
+        distrito_comerciosp = extras.getString("distrito_comerciosp");*/
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
 
-        String[] parts = cadena_scanneo.split("-");
+        /*String[] parts = cadena_scanneo.split("-");
         parteRazon = parts[0];
         parteDireccion = parts[1];
-        parteDistrito = parts[2];
+        parteDistrito = parts[2];*/
 
         tv_nombre_cliente_comercio.setText(cliente);
         tv_tarjeta_cifrada_comercio.setText(tarjeta_cargo);
 
-        tv_razonsoc_comercio.setText(parteRazon);
+        /*tv_razonsoc_comercio.setText(parteRazon);
         tv_direccion_comercio.setText(parteDireccion);
-        tv_distrito_comercio.setText(parteDistrito);
+        tv_distrito_comercio.setText(parteDistrito);*/
+
+        comercioEntityArrayList = null;
+        comercioQRAdapter = new ComercioQRAdapter(comercioEntityArrayList, getApplication());
+
+        ejecutarListaDetalleComercio();
 
         cargarCuotas();
         deseaCuotas();
@@ -151,10 +160,11 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("validacion_tarjeta", validacion_tarjeta);
-                    intent.putExtra("parteRazon", parteRazon);
-                    intent.putExtra("parteDireccion", parteDireccion);
-                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("parteRazon", nom_comerciosp);
+                    intent.putExtra("parteDireccion", direccion_comerciosp);
+                    intent.putExtra("parteDistrito", distrito_comerciosp);
                     intent.putExtra("validacion_tarjeta", validacion_tarjeta);
+                    intent.putExtra("id_com", id_com);
                     startActivity(intent);
                     finish();
                 }
@@ -248,5 +258,44 @@ public class IngresoMontoPagoFirmaComercio extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void ejecutarListaDetalleComercio() {
+
+        try {
+            IngresoMontoPagoFirmaComercio.DetalleComercio listadoBeneficiario = new IngresoMontoPagoFirmaComercio.DetalleComercio();
+            listadoBeneficiario.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class DetalleComercio extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                comercioEntityArrayList = dao.detalleComercio(cadena_scanneo);
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            comercioQRAdapter.setNewListDetalleComercio(comercioEntityArrayList);
+            comercioQRAdapter.notifyDataSetChanged();
+            tv_razonsoc_comercio.setText(comercioEntityArrayList.get(0).getRaz_social_comercio());
+            tv_direccion_comercio.setText(comercioEntityArrayList.get(0).getDireccion_comercio());
+            tv_distrito_comercio.setText(comercioEntityArrayList.get(0).getDesc_distrito());
+            nom_comerciosp = comercioEntityArrayList.get(0).getRaz_social_comercio();
+            direccion_comerciosp = comercioEntityArrayList.get(0).getDireccion_comercio();
+            distrito_comerciosp = comercioEntityArrayList.get(0).getDesc_distrito();
+            id_com = comercioEntityArrayList.get(0).getId_comercio();
+        }
     }
 }

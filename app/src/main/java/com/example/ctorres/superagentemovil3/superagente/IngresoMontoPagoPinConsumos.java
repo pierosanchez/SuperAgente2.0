@@ -17,9 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.ComercioQRAdapter;
 import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
@@ -32,6 +34,8 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     private UsuarioEntity usuario;
     TextView tv_nombre_cliente_consumo, tv_tarjeta_cifrada_consumos;
     MonedaAdapter monedaAdapter;
+    ComercioQRAdapter comercioQRAdapter;
+    ArrayList<ComercioEntity> comercioEntityArrayList;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     Spinner spinnerTipoMoneda, sp_pago_cuotas, sp_cantidad_cuotas;
     String tipo_moneda, cli_dni, validacion_tarjeta;
@@ -43,6 +47,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     String parteRazon="";
     String parteDireccion="";
     String parteDistrito="";
+    String id_com;
     LinearLayout ll_cantidad_cuotas;
     TextView tv_razonsoc_comercio,tv_direccion_comercio,tv_distrito_comercio, tv_pago_cuotas;
 
@@ -85,10 +90,10 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         distrito_comerciosp = extras.getString("distrito_comerciosp");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
-        String[] parts = cadena_scanneo.split("-");
+        /*String[] parts = cadena_scanneo.split("-");
         parteRazon = parts[0];
         parteDireccion = parts[1];
-        parteDistrito = parts[2];
+        parteDistrito = parts[2];*/
 
         cargarCuotas();
         deseaCuotas();
@@ -101,9 +106,9 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         tv_nombre_cliente_consumo.setText(cliente);
         tv_tarjeta_cifrada_consumos.setText(tarjeta_cargo);
 
-        tv_razonsoc_comercio.setText(parteRazon);
+        /*tv_razonsoc_comercio.setText(parteRazon);
         tv_direccion_comercio.setText(parteDireccion);
-        tv_distrito_comercio.setText(parteDistrito);
+        tv_distrito_comercio.setText(parteDistrito);*/
 
         txt_pin_pago_consumo.requestFocus();
 
@@ -112,6 +117,11 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         spinnerTipoMoneda.setAdapter(monedaAdapter);
 
         ejecutarLista();
+
+        comercioEntityArrayList = null;
+        comercioQRAdapter = new ComercioQRAdapter(comercioEntityArrayList, getApplication());
+
+        ejecutarListaDetalleComercio();
 
         spinnerTipoMoneda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -163,9 +173,10 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                     intent.putExtra("banco", banco);
                     intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
                     intent.putExtra("cli_dni", cli_dni);
-                    intent.putExtra("parteRazon",parteRazon);
-                    intent.putExtra("parteDireccion",parteDireccion);
-                    intent.putExtra("parteDistrito",parteDistrito);
+                    intent.putExtra("parteRazon", nom_comerciosp);
+                    intent.putExtra("parteDireccion", direccion_comerciosp);
+                    intent.putExtra("parteDistrito", distrito_comerciosp);
+                    intent.putExtra("id_com", id_com);
                     intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                 }
@@ -247,5 +258,44 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoPinConsumos.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    private void ejecutarListaDetalleComercio() {
+
+        try {
+            IngresoMontoPagoPinConsumos.DetalleComercio listadoBeneficiario = new IngresoMontoPagoPinConsumos.DetalleComercio();
+            listadoBeneficiario.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class DetalleComercio extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                comercioEntityArrayList = dao.detalleComercio(cadena_scanneo);
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            comercioQRAdapter.setNewListDetalleComercio(comercioEntityArrayList);
+            comercioQRAdapter.notifyDataSetChanged();
+            tv_razonsoc_comercio.setText(comercioEntityArrayList.get(0).getRaz_social_comercio());
+            tv_direccion_comercio.setText(comercioEntityArrayList.get(0).getDireccion_comercio());
+            tv_distrito_comercio.setText(comercioEntityArrayList.get(0).getDesc_distrito());
+            nom_comerciosp = comercioEntityArrayList.get(0).getRaz_social_comercio();
+            direccion_comerciosp = comercioEntityArrayList.get(0).getDireccion_comercio();
+            distrito_comerciosp = comercioEntityArrayList.get(0).getDesc_distrito();
+            id_com = comercioEntityArrayList.get(0).getId_comercio();
+        }
     }
 }
