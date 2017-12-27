@@ -14,6 +14,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.ComercioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.Constante;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -144,13 +145,17 @@ public class LecturaInformacionComercio extends Activity {
                 if (cadena_scanneo.length() == 0) {
                     Toast.makeText(LecturaInformacionComercio.this, "POR FAVOR, ESCANEE EL CÓDIGO QR", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent intent = new Intent(LecturaInformacionComercio.this, SeleccionTarjetaCargo.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("cli_dni", cli_dni);
-                    intent.putExtra("cadena_scanneo", cadena_scanneo);
-                    startActivityForResult(intent, 0);
-                    finish();
+                    if (cadena_scanneo.matches(Constante.QRPATTERN)) {
+                        Intent intent = new Intent(LecturaInformacionComercio.this, SeleccionTarjetaCargo.class);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("cadena_scanneo", cadena_scanneo);
+                        startActivityForResult(intent, 0);
+                        finish();
+                    } else {
+                        Toast.makeText(LecturaInformacionComercio.this, "EL CÓDIGO ESCANEADO NO ES VÁLIDO", Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }

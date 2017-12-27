@@ -54,11 +54,12 @@ import javax.net.ssl.HttpsURLConnection;
 public class VoucherPagoServicioFirma extends Activity {
 
     private UsuarioEntity usuario;
+    private VoucherPagoServicioEntity voucherServicio;
     Bitmap b;
     ImageView signImage;
     Button btn_fimar, btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente,
-            cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV;
+            cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV, nro_unico;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
@@ -118,10 +119,8 @@ public class VoucherPagoServicioFirma extends Activity {
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherPagoServicioFirma.getNumUnico numUnico = new VoucherPagoServicioFirma.getNumUnico();
+        numUnico.execute();
 
         if (tipo_servicio != null){
             tr_tipo_servicio_pagar.setVisibility(View.VISIBLE);
@@ -151,16 +150,8 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    /*VoucherPagoServicioFirma.insertarFirmaCliente insertarFirma = new VoucherPagoServicioFirma.insertarFirmaCliente();
-                    insertarFirma.execute();*/
-                    /*SuperAgenteBD superAgenteBD = new SuperAgenteBD(VoucherPagoServicioFirma.this);
-                    SQLiteDatabase db = superAgenteBD.getWritableDatabase();
-                    db.execSQL("INSERT INTO Cliente(firma) VALUES('" + drawableToBitmapToString(signImage) + "')");*/
 
                     //post();
-
-                    VoucherPagoServicioFirma.ingresarVoucher ingreso = new VoucherPagoServicioFirma.ingresarVoucher();
-                    ingreso.execute();
 
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
@@ -168,14 +159,6 @@ public class VoucherPagoServicioFirma extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
-
-
-                    /*Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("cli_dni", cli_dni);
-                    startActivity(intent);
-                    finish();*/
                 }
             }
         });
@@ -186,8 +169,6 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    VoucherPagoServicioFirma.ingresarVoucher ingreso = new VoucherPagoServicioFirma.ingresarVoucher();
-                    ingreso.execute();
 
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, SeleccionServicioPagar.class);
                     intent.putExtra("usuario", usuario);
@@ -301,35 +282,6 @@ public class VoucherPagoServicioFirma extends Activity {
         return temp;
     }
 
-    private class insertarFirmaCliente extends AsyncTask<String, Void, UsuarioEntity> {
-
-        @Override
-        protected UsuarioEntity doInBackground(String... params) {
-            UsuarioEntity user;
-            try {
-
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.InsertarFirmaCliente(drawableToBitmapToString(signImage), usuario.getUsuarioId());
-
-            } catch (Exception e) {
-                user = null;
-                //fldag_clic_ingreso = 0;;
-            }
-            return user;
-        }
-
-        /*@Override
-        protected void onPostExecute(UsuarioEntity usuarioEntity) {
-            usuario = usuarioEntity;
-            if (usuarioEntity.getUsuarioId().equals("00")) {
-                Toast.makeText(VoucherPagoServicioFirma.this, "ok", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(VoucherPagoServicioFirma.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-
-        }*/
-    }
-
     public void post() {
         HashMap<String, String> postData = new HashMap<String, String>();
         postData.put("image", drawableToBitmapToString(signImage));
@@ -393,65 +345,34 @@ public class VoucherPagoServicioFirma extends Activity {
 
     }
 
-    private void ejecutarLista(){
-
-        try {
-            VoucherPagoServicioFirma.getNumeroUnico listadoBeneficiario = new VoucherPagoServicioFirma.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoServicioEntity> {
-        String _fecha = tv_fecha_pago.getText().toString();
-        String _hora = txt_hora_pago.getText().toString();
-        String _comision = tv_comision_oper_servicio.getText().toString();
-        String _importe = tv_importe_servicio.getText().toString();
-        String _formaPago = tv_forma_pago.getText().toString();
-        String _suministro = txt_suministro_pagar_voucher.getText().toString();
-        String _servicioPagar = txt_servicio_pagar_voucher.getText().toString();
-        String _total = tv_total_servicio_pagar_voucher.getText().toString();
-        String _pagaPor = txt_pagado_por.getText().toString();
-        String _nombreRecibo = tv_nombre_recibo_usuario.getText().toString();
-        String _tipoServicio = txt_tipo_servicio_pagar_voucher.getText().toString();
-        String _numeroUnico = txt_numero_unico.getText().toString();
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoServicioEntity> {
 
         @Override
         protected VoucherPagoServicioEntity doInBackground(String... params) {
             VoucherPagoServicioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherServicio(_numeroUnico, obtenerHora(), obtenerHora(), servicio, tipo_servicio, usuario.getUsuarioId(), _nombreRecibo, _pagaPor, cli_dni, _formaPago, transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                user = dao.getNumeroUnicoServicios(nro_unico);
 
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoServicioEntity voucherPagoServicioEntity){
+            voucherServicio = voucherPagoServicioEntity;
+            if (voucherServicio != null){
+                if (voucherServicio.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherServicio.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherPagoServicioFirma.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherPagoServicioFirma.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="70dp"
                         android:background="@color/color_blanco"
-                        android:inputType="numberPassword"
+                        android:inputType="textPassword"
                         android:editable="false"
                         android:gravity="center"/>
 

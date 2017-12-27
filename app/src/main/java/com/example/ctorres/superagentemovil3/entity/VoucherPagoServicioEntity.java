@@ -1,10 +1,13 @@
 package com.example.ctorres.superagentemovil3.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrador on 14/12/2017.
  */
 
-public class VoucherPagoServicioEntity {
+public class VoucherPagoServicioEntity implements Parcelable{
     private String numeroUnico;
     private String fecha;
     private String hora;
@@ -37,6 +40,13 @@ public class VoucherPagoServicioEntity {
         this.importe = importe;
         this.comision = comision;
         this.total = total;
+    }
+
+    protected VoucherPagoServicioEntity(Parcel in) {
+        String[] data= new String[2];
+        in.readStringArray(data);
+        numeroUnico = data[0];
+        codCliente = data[1];
     }
 
     public String getNumeroUnico() {
@@ -142,4 +152,26 @@ public class VoucherPagoServicioEntity {
     public void setTotal(String total) {
         this.total = total;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[]{this.numeroUnico,this.codCliente});
+    }
+
+    public static final Parcelable.Creator<VoucherPagoServicioEntity> CREATOR = new Creator<VoucherPagoServicioEntity>() {
+        @Override
+        public VoucherPagoServicioEntity createFromParcel(Parcel source) {
+            return new VoucherPagoServicioEntity(source);
+        }
+
+        @Override
+        public VoucherPagoServicioEntity[] newArray(int size) {
+            return new VoucherPagoServicioEntity[size];
+        }
+    };
 }

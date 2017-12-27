@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +16,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+
+import java.util.ArrayList;
 
 public class AgregarTarjetaBeneficiario extends Activity {
 
@@ -30,6 +35,9 @@ public class AgregarTarjetaBeneficiario extends Activity {
     private UsuarioEntity usuario;
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     Button btn_agregar_tarjeta_beneficiario;
+    ArrayList<BancosEntity> bancosEntityArrayList;
+    BancosAdapter bancosAdapter;
+    int bancos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +58,14 @@ public class AgregarTarjetaBeneficiario extends Activity {
 
         btn_agregar_tarjeta_beneficiario = (Button) findViewById(R.id.btn_agregar_tarjeta_beneficiario);
 
+        bancosEntityArrayList = null;
+        bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
+        spinnerBancoTarjeta.setAdapter(bancosAdapter);
+
+        ejecutarLista();
+
         cargarTipoTarjeta();
-        cargarBancoTarjeta();
+        //cargarBancoTarjeta();
         numeroTarjetaBeneficiario();
 
         Bundle bundle = getIntent().getExtras();
@@ -116,6 +130,18 @@ public class AgregarTarjetaBeneficiario extends Activity {
                 }
             }
         });
+
+        spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bancos = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private class insertarTarjetaBeneficiario extends AsyncTask<String, Void, BeneficiarioEntity> {
@@ -134,13 +160,46 @@ public class AgregarTarjetaBeneficiario extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.IngresarTarjetaBeneficiario(dni_benef, tarjeta, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
+                user = dao.IngresarTarjetaBeneficiario(dni_benef, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta());
 
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+    }
+
+    private void ejecutarLista() {
+
+        try {
+            AgregarTarjetaBeneficiario.ListadoEmpresas listadoEmpresas = new AgregarTarjetaBeneficiario.ListadoEmpresas();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoEmpresas extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                bancosEntityArrayList = dao.ListadoBancos();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            bancosAdapter.setNewListbancos(bancosEntityArrayList);
+            bancosAdapter.notifyDataSetChanged();
         }
     }
 

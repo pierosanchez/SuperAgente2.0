@@ -76,9 +76,9 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
         desc_corta_banco = extras.getString("desc_corta_banco");
-        banco_tarjeta_pago = "BANCO TARJETA A PAGAR: " + desc_corta_banco;
+        banco_tarjeta_pago = "BANCO DE LA TARJETA A PAGAR: " + desc_corta_banco;
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
-        banco_tarjeta_cargo = "BANCO TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
+        banco_tarjeta_cargo = "BANCO DE LA TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 

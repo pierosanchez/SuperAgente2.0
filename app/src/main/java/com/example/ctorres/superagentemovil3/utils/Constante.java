@@ -17,5 +17,6 @@ public class Constante {
     public static final String EMAILPATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public static final String ACTIVITYROOT = "com.example.ctorres.superagentemovil3.superagente.";
     public static final String PASSWORDPATTERN = "[a-z^A-Z^0-9]";
+    public static final String QRPATTERN = "[0-9]";
     public static String IDACCOUNT = null;
 }

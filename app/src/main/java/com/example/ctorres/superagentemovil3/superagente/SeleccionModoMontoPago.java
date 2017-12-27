@@ -37,6 +37,7 @@ import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SeleccionModoMontoPago extends Activity {
@@ -61,6 +62,7 @@ public class SeleccionModoMontoPago extends Activity {
     ArrayList<DeudasTarjetas> deudasTarjetasDolaresArrayList;
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
+    DecimalFormat decimal = new DecimalFormat("0.00");
 
 
     @Override
@@ -152,6 +154,7 @@ public class SeleccionModoMontoPago extends Activity {
         spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tipo_moneda_deuda = monedaAdapter.getItem(position).getSigno_moneda();
                 /*if (!spinnerTipoMonedaPago.getSelectedItem().toString().equals("S/.")){
                     txt_monto_minimo.setText("15.10");
                     txt_monto_mensual.setText("25.12");
@@ -386,13 +389,20 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasSolesAdapter.setNewListDeudasTarjetas(deudasTarjetasSolesArrayList);
             deudasTarjetasSolesAdapter.notifyDataSetChanged();
-            txt_monto_minimo.setText(String.valueOf(deudasTarjetasSolesArrayList.get(0).getMontoMinimo()));
-            txt_monto_mensual.setText(String.valueOf(deudasTarjetasSolesArrayList.get(0).getMontoMensual()));
-            txt_monto_total.setText(String.valueOf(deudasTarjetasSolesArrayList.get(0).getMontoTotal()));
-            tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+            if (deudasTarjetasSolesArrayList.size() == 0){
+                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas", Toast.LENGTH_LONG).show();
+                txt_monto_minimo.setText("0.00");
+                txt_monto_mensual.setText("0.00");
+                txt_monto_total.setText("0.00");
+            } else {
+                txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMinimo())));
+                txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMensual())));
+                txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoTotal())));
+                tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+            }
         }
     }
 
@@ -425,13 +435,20 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasDolaresAdapter.setNewListDeudasTarjetas(deudasTarjetasDolaresArrayList);
             deudasTarjetasDolaresAdapter.notifyDataSetChanged();
-            txt_monto_minimo.setText(String.valueOf(deudasTarjetasDolaresArrayList.get(0).getMontoMinimo()));
-            txt_monto_mensual.setText(String.valueOf(deudasTarjetasDolaresArrayList.get(0).getMontoMensual()));
-            txt_monto_total.setText(String.valueOf(deudasTarjetasDolaresArrayList.get(0).getMontoTotal()));
-            tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
-            tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+            if (deudasTarjetasDolaresArrayList.size() == 0){
+                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas", Toast.LENGTH_LONG).show();
+                txt_monto_minimo.setText("0.00");
+                txt_monto_mensual.setText("0.00");
+                txt_monto_total.setText("0.00");
+            } else {
+                txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMinimo())));
+                txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMensual())));
+                txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoTotal())));
+                tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+            }
         }
     }
 }

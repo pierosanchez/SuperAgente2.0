@@ -10,6 +10,7 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
@@ -19,6 +20,7 @@ import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoRecargaEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoServicioEntity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,9 +29,10 @@ public class VoucherPagoConsumo extends Activity {
 
     Button btn_efectuar_otra_operacion, btn_salir;
     private UsuarioEntity usuario;
+    private VoucherPagoConsumoEntity voucherConsumo;
     String cliente, tipo_moneda, tarjeta_cargo, monto_pagar, importe, banco, emisor_tarjeta, tarjeta, cli_dni;
     TextView tv_fecha_pago, txt_hora_pago, tv_tipo_tarjeta_voucher_consumo, txt_numero_tarjeta_voucher_consumo, tv_banco_voucher_consumo, txt_importe_voucher_consumo;
-    String parteDireccion, parteDistrito, parteRazon, id_com, horaV, fechaV;
+    String parteDireccion, parteDistrito, parteRazon, id_com, horaV, fechaV, nro_unico;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio, txt_numero_unico_voucher_consumos;
     NumeroUnicoAdapter numeroUnicoAdapter;
@@ -67,15 +70,14 @@ public class VoucherPagoConsumo extends Activity {
         parteDistrito = extras.getString("parteDistrito");
         parteRazon = extras.getString("parteRazon");
         id_com = extras.getString("id_com");
+        nro_unico = extras.getString("nro_unico");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherPagoConsumo.getNumUnico numUnico = new VoucherPagoConsumo.getNumUnico();
+        numUnico.execute();
 
         tv_fecha_pago.setText(fechaV);
         txt_hora_pago.setText(horaV);
@@ -89,8 +91,6 @@ public class VoucherPagoConsumo extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherPagoConsumo.ingresarVoucher ingreso = new VoucherPagoConsumo.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoConsumo.this, MenuCliente.class);
                 intent.putExtra("cliente", cliente);
@@ -154,8 +154,6 @@ public class VoucherPagoConsumo extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VoucherPagoConsumo.ingresarVoucher ingreso = new VoucherPagoConsumo.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoConsumo.this, LoginActivity.class);
                 startActivityForResult(intent, 0);
@@ -174,62 +172,34 @@ public class VoucherPagoConsumo extends Activity {
         dialog.show();
     }
 
-    private void ejecutarLista(){
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoConsumoEntity> {
 
-        try {
-            VoucherPagoConsumo.getNumeroUnico listadoBeneficiario = new VoucherPagoConsumo.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico_voucher_consumos.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoConsumoEntity> {
-        String _fecha = tv_fecha_pago.getText().toString();
-        String _hora = txt_hora_pago.getText().toString();
-        String _tipoTarjeta = tv_tipo_tarjeta_voucher_consumo.getText().toString();
-        String _nroTarjeta = txt_numero_tarjeta_voucher_consumo.getText().toString();
-        String _banco = tv_banco_voucher_consumo.getText().toString();
-        String _importe = txt_importe_voucher_consumo.getText().toString();
-        String _distrito = tv_distrito_comercio.getText().toString();
-        String _direccion = tv_direccion_comercio.getText().toString();
-        String _comercio = tv_nombre_comercio.getText().toString();
-        String _nroUnico = txt_numero_unico_voucher_consumos.getText().toString();
         @Override
         protected VoucherPagoConsumoEntity doInBackground(String... params) {
             VoucherPagoConsumoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoConsumo(_nroUnico, obtenerFecha(), obtenerHora(), _importe, tarjeta_cargo, emisor_tarjeta, _banco, _comercio, _direccion, _distrito, usuario.getUsuarioId(), id_com);
+                user = dao.getNumeroUnicoConsumos(nro_unico);
 
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoConsumoEntity voucherPagoServicioEntity){
+            voucherConsumo = voucherPagoServicioEntity;
+            if (voucherConsumo != null){
+                if (voucherConsumo.getNumeroUnico() != null){
+                    txt_numero_unico_voucher_consumos.setText(voucherConsumo.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherPagoConsumo.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherPagoConsumo.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

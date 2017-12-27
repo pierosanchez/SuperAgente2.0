@@ -1,10 +1,13 @@
 package com.example.ctorres.superagentemovil3.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrador on 14/12/2017.
  */
 
-public class VoucherPagoRecargaEntity {
+public class VoucherPagoRecargaEntity implements Parcelable{
     private String numeroUnico;
     private String fecha;
     private String hora;
@@ -35,6 +38,13 @@ public class VoucherPagoRecargaEntity {
         this.tipoMoneda = tipoMoneda;
         this.idCliente = idCliente;
         this.total = total;
+    }
+
+    protected VoucherPagoRecargaEntity(Parcel in) {
+        String[] data= new String[2];
+        in.readStringArray(data);
+        numeroUnico = data[0];
+        idCliente = data[1];
     }
 
     public String getTotal() {
@@ -132,4 +142,27 @@ public class VoucherPagoRecargaEntity {
     public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringArray(new String[]{this.numeroUnico,this.idCliente});
+    }
+
+    public static final Parcelable.Creator<VoucherPagoRecargaEntity> CREATOR = new Creator<VoucherPagoRecargaEntity>() {
+        @Override
+        public VoucherPagoRecargaEntity createFromParcel(Parcel source) {
+            return new VoucherPagoRecargaEntity(source);
+        }
+
+        @Override
+        public VoucherPagoRecargaEntity[] newArray(int size) {
+            return new VoucherPagoRecargaEntity[size];
+        }
+    };
 }

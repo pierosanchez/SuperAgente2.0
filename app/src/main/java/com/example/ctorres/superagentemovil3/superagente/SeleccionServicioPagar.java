@@ -106,7 +106,7 @@ public class SeleccionServicioPagar extends Activity {
                 } else if (tipo_servicio_publico == 1) {
 
                     txt_numero_servicio.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    txt_numero_servicio.setFilters(new InputFilter[] {new InputFilter.LengthFilter(9)});
+                    //txt_numero_servicio.setFilters(new InputFilter[] {new InputFilter.LengthFilter(9)});
 
                     tv_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
                     sp_seleccion_tipo_servicio.setVisibility(View.VISIBLE);
@@ -156,16 +156,50 @@ public class SeleccionServicioPagar extends Activity {
                 String numero_servicio = txt_numero_servicio.getText().toString();
                 String nombre_recibo = tv_nombre_recibo_usuario.getText().toString();
                 if (!numero_servicio.equals("")) {
-                    Intent intent = new Intent(SeleccionServicioPagar.this, SeleccionRecibosPagar.class);
-                    intent.putExtra("servicio", servicio);
-                    intent.putExtra("num_servicio", numero_servicio);
-                    intent.putExtra("usuario", usuario);
-                    intent.putExtra("cliente", cliente);
-                    intent.putExtra("tipo_servicio", tipo_servicio);
-                    intent.putExtra("cli_dni", cli_dni);
-                    intent.putExtra("nombre_recibo", nombre_recibo);
-                    startActivity(intent);
-                    finish();
+                    if (tipo_servicio_publico == 1){
+                        if (sp_seleccion_tipo_servicio.getSelectedItem().equals("Móvil")){
+                            if (numero_servicio.length() != 9) {
+                                Toast.makeText(SeleccionServicioPagar.this, "El número debe de tener 9 dígitos", Toast.LENGTH_LONG).show();
+                            } else if (numero_servicio.length() == 9){
+                                Intent intent = new Intent(SeleccionServicioPagar.this, SeleccionRecibosPagar.class);
+                                intent.putExtra("servicio", servicio);
+                                intent.putExtra("num_servicio", numero_servicio);
+                                intent.putExtra("usuario", usuario);
+                                intent.putExtra("cliente", cliente);
+                                intent.putExtra("tipo_servicio", tipo_servicio);
+                                intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nombre_recibo", nombre_recibo);
+                                startActivity(intent);
+                                finish();
+                            }
+                        } else if (sp_seleccion_tipo_servicio.getSelectedItem().equals("Fijo")){
+                            if (numero_servicio.length() != 9){
+                                Toast.makeText(SeleccionServicioPagar.this, "El número debe de tener 9 dígitos", Toast.LENGTH_LONG).show();
+                            } else if (numero_servicio.length() == 9){
+                                Intent intent = new Intent(SeleccionServicioPagar.this, SeleccionRecibosPagar.class);
+                                intent.putExtra("servicio", servicio);
+                                intent.putExtra("num_servicio", numero_servicio);
+                                intent.putExtra("usuario", usuario);
+                                intent.putExtra("cliente", cliente);
+                                intent.putExtra("tipo_servicio", tipo_servicio);
+                                intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nombre_recibo", nombre_recibo);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    } else {
+                        Intent intent = new Intent(SeleccionServicioPagar.this, SeleccionRecibosPagar.class);
+                        intent.putExtra("servicio", servicio);
+                        intent.putExtra("num_servicio", numero_servicio);
+                        intent.putExtra("usuario", usuario);
+                        intent.putExtra("cliente", cliente);
+                        intent.putExtra("tipo_servicio", tipo_servicio);
+                        intent.putExtra("cli_dni", cli_dni);
+                        intent.putExtra("nombre_recibo", nombre_recibo);
+                        startActivity(intent);
+                        finish();
+                    }
                 } else {
                     Toast.makeText(SeleccionServicioPagar.this, "Ingrese el codigo de cliente", Toast.LENGTH_SHORT).show();
                 }

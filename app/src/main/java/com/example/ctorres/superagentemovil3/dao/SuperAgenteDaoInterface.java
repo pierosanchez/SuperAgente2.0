@@ -85,4 +85,10 @@ public interface SuperAgenteDaoInterface {
     ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaSoles(String idcliente);
     ArrayList<DeudasTarjetas> ingresarVoucherPagoTarjetaCredito(String idcliente);
     ArrayList<ComercioEntity> detalleComercio(String idComercio);
+    VoucherPagoServicioEntity InsertarNumeroUnicoServicio(String numeroUni, String id_client);
+    VoucherTransferenciasEntity getNumeroUnicoTransferencias(String numeroUni);
+    VoucherPagoTarjetaCreditoEntity getNumeroUnicoTarjeta(String numeroUni);
+    VoucherPagoConsumoEntity getNumeroUnicoConsumos(String numeroUni);
+    VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni);
+    VoucherPagoRecargaEntity getNumeroUnicoRecargas(String numeroUni);
 }

@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -94,6 +96,26 @@ public class RecargaTelefonica extends Activity {
                 } else if (recarga.length() == 0){
                     Toast.makeText(RecargaTelefonica.this, "Ingrese el monto de recarga", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        txt_nroRecarga.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String _nroRecarga = txt_nroRecarga.getText().toString();
+                if (_nroRecarga.length() == 9){
+                    txt_montoRecarga.requestFocus();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
@@ -17,6 +18,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoRecargaEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoServicioEntity;
 
 import java.text.DecimalFormat;
@@ -25,9 +27,10 @@ import java.util.ArrayList;
 public class VoucherPagoServicio extends Activity {
 
     private UsuarioEntity usuario;
+    private VoucherPagoServicioEntity voucherServicio;
     Button btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision,
-            cliente, cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV;
+            cliente, cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV, nro_unico;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por,
@@ -58,13 +61,12 @@ public class VoucherPagoServicio extends Activity {
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
         tipo_servicio = extras.getString("tipo_servicio");
+        nro_unico = extras.getString("nro_unico");
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherPagoServicio.getNumUnico numUnico = new VoucherPagoServicio.getNumUnico();
+        numUnico.execute();
 
         btn_salir = (Button) findViewById(R.id.btn_salir);
         btn_pagar_otros_servicios = (Button) findViewById(R.id.btn_pagar_otros_servicios);
@@ -114,8 +116,6 @@ public class VoucherPagoServicio extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherPagoServicio.ingresarVoucher ingreso = new VoucherPagoServicio.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoServicio.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
@@ -136,8 +136,6 @@ public class VoucherPagoServicio extends Activity {
         btn_pagar_otros_servicios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherPagoServicio.ingresarVoucher ingreso = new VoucherPagoServicio.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoServicio.this, SeleccionServicioPagar.class);
                 intent.putExtra("usuario", usuario);
@@ -232,57 +230,34 @@ public class VoucherPagoServicio extends Activity {
         return banco;
     }
 
-    private void ejecutarLista(){
-
-        try {
-            VoucherPagoServicio.getNumeroUnico listadoBeneficiario = new VoucherPagoServicio.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoServicioEntity> {
-        String _formaPago = tv_forma_pago.getText().toString();
-        String _pagaPor = txt_pagado_por.getText().toString();
-        String _nombreRecibo = tv_nombre_recibo_usuario.getText().toString();
-        String _numeroUnico = txt_numero_unico.getText().toString();
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoServicioEntity> {
 
         @Override
         protected VoucherPagoServicioEntity doInBackground(String... params) {
             VoucherPagoServicioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherServicio(_numeroUnico, obtenerHora(), obtenerHora(), servicio, tipo_servicio, usuario.getUsuarioId(), _nombreRecibo, _pagaPor, cli_dni, _formaPago, transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                user = dao.getNumeroUnicoServicios(nro_unico);
 
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoServicioEntity voucherPagoServicioEntity){
+            voucherServicio = voucherPagoServicioEntity;
+            if (voucherServicio != null){
+                if (voucherServicio.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherServicio.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherPagoServicio.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherPagoServicio.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

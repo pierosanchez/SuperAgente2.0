@@ -511,36 +511,69 @@ public class AgregarTarjetasUsuario extends Activity {
             super.onPostExecute(aVoid);
             getTarjetaBinAdapter.setNewListTarjetaBin(tarjetaBinEntityArrayList);
             getTarjetaBinAdapter.notifyDataSetChanged();
-            if (getTarjetaBinAdapter.getItem(0).getMarca().equals("Mastercard ")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_mc_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_mc_option.setChecked(true);
-                } else {
-                    rdbtn_mc_option.setChecked(true);
+            if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("00")) {
+                if (getTarjetaBinAdapter.getItem(0).getMarca().equals("Mastercard ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_mc_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_mc_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_mc_option.setChecked(true);
+                        rdbtn_mc_option.setEnabled(false);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("AMEX ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_amex_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_amex_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_amex_option.setChecked(true);
+                        rdbtn_amex_option.setEnabled(false);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("VISA")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_visa_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_visa_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_visa_option.setChecked(true);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    }
                 }
-            } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("AMEX ")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_amex_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_amex_option.setChecked(true);
-                } else {
-                    rdbtn_amex_option.setChecked(true);
-                }
-            } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("VISA")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_visa_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_visa_option.setChecked(true);
-                } else {
-                    rdbtn_visa_option.setChecked(true);
-                }
+            } else if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("01")){
+                Toast.makeText(AgregarTarjetasUsuario.this, "El numero de BIN no existe", Toast.LENGTH_LONG).show();
             }
         }
     }

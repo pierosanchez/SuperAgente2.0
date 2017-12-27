@@ -144,7 +144,7 @@
                     android:layout_marginRight="20dp"
                     android:background="@color/color_blanco"
                     android:gravity="center"
-                    android:inputType="numberPassword"/>
+                    android:inputType="textPassword"/>
 
             </LinearLayout>
 

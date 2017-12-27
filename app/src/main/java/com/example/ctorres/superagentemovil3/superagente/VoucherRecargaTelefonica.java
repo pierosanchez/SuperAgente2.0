@@ -29,11 +29,12 @@ public class VoucherRecargaTelefonica extends Activity {
 
     Button btn_efectuar_otra_operacion, btn_efectuar_otra_recarga, btn_salir;
     private UsuarioEntity usuario;
+    private VoucherPagoRecargaEntity voucherRecarga;
     String cliente, tipo_moneda, tarjeta_cargo, banco, emisor_tarjeta, cli_dni;
     TextView tv_fecha, tv_hora, tv_numUnico, tv_operadora, tv_nrofono, tv_importe, tv_comision, tv_total, tv_banco, tv_nroTarjeta,tv_forpago;
     TextView tv_tipo_moneda_importe, tv_tipo_moneda_comision_recarga, tv_tipo_moneda_total;
     int tipo_tarjeta_pago;
-    String tipo_moneda_recarga,tipo_operador,nro_telefono;
+    String tipo_moneda_recarga,tipo_operador,nro_telefono, nro_unico;
     Double monto_recarga,comisionRecarga,montoTotal;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     NumeroUnicoAdapter numeroUnicoAdapter;
@@ -77,11 +78,10 @@ public class VoucherRecargaTelefonica extends Activity {
         monto_recarga = extras.getDouble("monto_recarga");
         comisionRecarga = extras.getDouble("comisionRecarga");
         montoTotal = extras.getDouble("montoTotal");
+        nro_unico = extras.getString("nro_unico");
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherRecargaTelefonica.getNumUnico numUnico = new VoucherRecargaTelefonica.getNumUnico();
+        numUnico.execute();
 
         tv_fecha.setText(obtenerFecha());
         tv_hora.setText(obtenerHora());
@@ -107,8 +107,8 @@ public class VoucherRecargaTelefonica extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
-                ingreso.execute();
+                /*VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
+                ingreso.execute();*/
 
                 Intent intent = new Intent(VoucherRecargaTelefonica.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
@@ -122,8 +122,8 @@ public class VoucherRecargaTelefonica extends Activity {
         btn_efectuar_otra_recarga.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
-                ingreso.execute();
+                /*VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
+                ingreso.execute();*/
 
                 Intent intent = new Intent(VoucherRecargaTelefonica.this, RecargaTelefonica.class);
                 intent.putExtra("usuario", usuario);
@@ -197,8 +197,8 @@ public class VoucherRecargaTelefonica extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
-                ingreso.execute();
+                /*VoucherRecargaTelefonica.ingresarVoucher ingreso = new VoucherRecargaTelefonica.ingresarVoucher();
+                ingreso.execute();*/
 
                 Intent intent = new Intent(VoucherRecargaTelefonica.this, LoginActivity.class);
                 startActivityForResult(intent, 0);
@@ -217,7 +217,7 @@ public class VoucherRecargaTelefonica extends Activity {
         dialog.show();
     }
 
-    private void ejecutarLista(){
+    /*private void ejecutarLista(){
 
         try {
             VoucherRecargaTelefonica.getNumeroUnico listadoBeneficiario = new VoucherRecargaTelefonica.getNumeroUnico();
@@ -226,9 +226,9 @@ public class VoucherRecargaTelefonica extends Activity {
             //listadoBeneficiario = null;
         }
 
-    }
+    }*/
 
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+    /*private class getNumeroUnico extends AsyncTask<String,Void,Void> {
         @Override
         protected Void doInBackground(String... params) {
 
@@ -248,9 +248,9 @@ public class VoucherRecargaTelefonica extends Activity {
             numeroUnicoAdapter.notifyDataSetChanged();
             tv_numUnico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
         }
-    }
+    }*/
 
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoRecargaEntity> {
+    /*private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoRecargaEntity> {
         String _fecha = tv_fecha.getText().toString();
         String _hora = tv_hora.getText().toString();
         String _numUnico = tv_numUnico.getText().toString();
@@ -274,6 +274,37 @@ public class VoucherRecargaTelefonica extends Activity {
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+    }*/
+
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoRecargaEntity> {
+
+        @Override
+        protected VoucherPagoRecargaEntity doInBackground(String... params) {
+            VoucherPagoRecargaEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.getNumeroUnicoRecargas(nro_unico);
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoRecargaEntity voucherPagoRecargaEntity){
+            voucherRecarga = voucherPagoRecargaEntity;
+            if (voucherRecarga != null){
+                if (voucherRecarga.getNumeroUnico() != null){
+                    tv_numUnico.setText(voucherRecarga.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherRecargaTelefonica.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherRecargaTelefonica.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

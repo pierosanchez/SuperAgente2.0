@@ -28,6 +28,174 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public VoucherTransferenciasEntity getNumeroUnicoTransferencias(String numeroUni) {
+        VoucherTransferenciasEntity tipoTarjetaEntity = new VoucherTransferenciasEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoTransferencias/?numeroUniTra=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoTarjetaCreditoEntity getNumeroUnicoTarjeta(String numeroUni) {
+        VoucherPagoTarjetaCreditoEntity tipoTarjetaEntity = new VoucherPagoTarjetaCreditoEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoTarjetas/?numeroUniT=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoConsumoEntity getNumeroUnicoConsumos(String numeroUni) {
+        VoucherPagoConsumoEntity tipoTarjetaEntity = new VoucherPagoConsumoEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoConsumos/?numeroUniC=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni) {
+        VoucherPagoServicioEntity tipoTarjetaEntity = new VoucherPagoServicioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoServicios/?numeroUniS=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoRecargaEntity getNumeroUnicoRecargas(String numeroUni) {
+        VoucherPagoRecargaEntity tipoTarjetaEntity = new VoucherPagoRecargaEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getNumeroUnicoRecargas/?numeroUniR=" + numeroUni;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
+    public VoucherPagoServicioEntity InsertarNumeroUnicoServicio(String numeroUni, String id_client) {
+        VoucherPagoServicioEntity tipoTarjetaEntity = new VoucherPagoServicioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarNumeroUnicoServicio/?numeroUni=" + numeroUni + "&id_client=" + id_client;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null){
+                if (jsonArray.length() > 0){
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "error"));
+                    }
+                }else {
+                    tipoTarjetaEntity = null;
+                }
+            } else {
+                tipoTarjetaEntity = null;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tipoTarjetaEntity;
+    }
+
+    @Override
     public ArrayList<ComercioEntity> detalleComercio(String idComercio) {
         ArrayList<ComercioEntity> listaTipoTarjeta = new ArrayList<>();
 
@@ -1411,7 +1579,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             Log.e("URL", url);
 
 
-            String arrayJason = utils.getJsonarrayFromUrl(url);
+            JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             //Log.e("Json", arrayJason.toString());
             if (arrayJason != null) {
                 if (arrayJason.length() > 0) {
@@ -1608,7 +1776,16 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             benef = new BeneficiarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarBeneficiario/?nombre=" + nombre + "&apellido=" + apellido + "&celular1=" + celular1 + "&celular2=" + celular2 + "&email=" + email + "&fechaNac=" + fechaNac + "&pass=" + pass + "&dni=" + dni + "&idcliente=" + idcliente + "&tip_abono=" + tip_abono; //+ "&cod_interbancario=" + cod_interbancario + "&num_tarjeta_beneficiario=" + num_tarjeta_beneficiario + "&emisor_tarjeta=" + emisor_tarjeta + "&cod_banco=" + cod_banco + "&cod_tipo_cuenta=" + cod_tipo_cuenta;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarBeneficiario/?nombre=" + URLEncoder.encode(nombre, "UTF-8")
+                    + "&apellido=" + URLEncoder.encode(apellido, "UTF-8")
+                    + "&celular1=" + URLEncoder.encode(celular1, "UTF-8")
+                    + "&celular2=" + URLEncoder.encode(celular2, "UTF-8")
+                    + "&email=" + URLEncoder.encode(email, "UTF-8")
+                    + "&fechaNac=" + URLEncoder.encode(fechaNac, "UTF-8")
+                    + "&pass=" + URLEncoder.encode(pass, "UTF-8")
+                    + "&dni=" + URLEncoder.encode(dni, "UTF-8")
+                    + "&idcliente=" + URLEncoder.encode(idcliente, "UTF-8")
+                    + "&tip_abono=" + URLEncoder.encode(String.valueOf(tip_abono), "UTF-8"); //+ "&cod_interbancario=" + cod_interbancario + "&num_tarjeta_beneficiario=" + num_tarjeta_beneficiario + "&emisor_tarjeta=" + emisor_tarjeta + "&cod_banco=" + cod_banco + "&cod_tipo_cuenta=" + cod_tipo_cuenta;
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -1751,7 +1928,10 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             cuenta = new CuentaEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarCuenta/?numCuenta=" + numCuenta + "&idcliente=" + idcliente + "&cod_banco=" + cod_banco + "&tipo_moneda=" + tipo_moneda;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarCuenta/?numCuenta=" + URLEncoder.encode(numCuenta, "UTF-8")
+                    + "&idcliente=" + URLEncoder.encode(idcliente, "UTF-8")
+                    + "&cod_banco=" + URLEncoder.encode(String.valueOf(cod_banco), "UTF-8")
+                    + "&tipo_moneda=" + URLEncoder.encode(String.valueOf(tipo_moneda), "UTF-8");
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -1760,7 +1940,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
                     JSONObject jsonObject = arrayJason.getJSONObject(0);
 
-                    cuenta.setNumCuenta(utils.getValueStringOrNull(jsonObject, "cuentcliente"));
+                    cuenta.setNumCuenta(numCuenta);
                     cuenta.setIdcliente(idcliente);
                     cuenta.setCod_banco(cod_banco);
                     cuenta.setTipo_moneda(tipo_moneda);

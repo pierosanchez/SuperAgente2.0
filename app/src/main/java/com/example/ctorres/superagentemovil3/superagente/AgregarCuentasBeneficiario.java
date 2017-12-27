@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,10 +17,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+
+import java.util.ArrayList;
 
 public class AgregarCuentasBeneficiario extends Activity {
 
@@ -36,6 +41,9 @@ public class AgregarCuentasBeneficiario extends Activity {
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     EditText txt_cod_interbancario1, txt_cod_interbancario2, txt_cod_interbancario3, txt_cod_interbancario4;
     String cliente, cli_dni;
+    ArrayList<BancosEntity> bancosEntityArrayList;
+    BancosAdapter bancosAdapter;
+    int bancos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,12 @@ public class AgregarCuentasBeneficiario extends Activity {
         usuario = bundle.getParcelable("usuario");
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
+
+        bancosEntityArrayList = null;
+        bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
+        spinnerBancoTarjeta.setAdapter(bancosAdapter);
+
+        ejecutarLista();
 
         rdbtn_mc_option.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +174,51 @@ public class AgregarCuentasBeneficiario extends Activity {
                 finish();
             }
         });
+
+        spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bancos = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void ejecutarLista() {
+
+        try {
+            AgregarCuentasBeneficiario.ListadoEmpresas listadoEmpresas = new AgregarCuentasBeneficiario.ListadoEmpresas();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoEmpresas extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                bancosEntityArrayList = dao.ListadoBancos();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            bancosAdapter.setNewListbancos(bancosEntityArrayList);
+            bancosAdapter.notifyDataSetChanged();
+        }
     }
 
     public void cargarTipoTarjeta(){
@@ -244,11 +303,11 @@ public class AgregarCuentasBeneficiario extends Activity {
                 }
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
+                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta());//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
 
             } catch (Exception e) {
                 user = null;
-                //fldag_clic_ingreso = 0;;
+                //fldag_clic_ingreso = 0;
             }
             return user;
         }
@@ -259,6 +318,8 @@ public class AgregarCuentasBeneficiario extends Activity {
             if (beneficiarioEntity.getError() != null) {
                 if (beneficiarioEntity.getError().equals("000")) {
                     Toast.makeText(AgregarCuentasBeneficiario.this, "Solo se puede ingresar una tarjeta o cuenta para el beneficiario", Toast.LENGTH_LONG).show();
+                } else if (beneficiarioEntity.getError().equals("00")) {
+                    Toast.makeText(AgregarCuentasBeneficiario.this, "Ingresado correctamente", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_LONG).show();
