@@ -39,12 +39,13 @@ public class VoucherTransferenciasFirma extends Activity {
             tv_tipo_moneda_importe_total_voucher, tv_tipo_moneda_transferencia_voucher,
             tv_comision1, tv_comision2, tv_comision3, tv_remitente_transferencia_voucher, txt_numero_unico;
     LinearLayout ll_comision_delivery, ll_comision_cheque;
-    String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario,
+    String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario, nro_unico,
             num_tarjeta, banco, monto, transferencia, comision0, comision1, comision2, comision3, importe_comision1, importe_comision2, importe_comision3;
     String cliente, remitente, cli_dni, importeTotal, fechaV, horaV;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    private VoucherTransferenciasEntity voucherTransferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +99,7 @@ public class VoucherTransferenciasFirma extends Activity {
         importe_comision2 = extras.getString("comision_cheque");
         importe_comision3 = extras.getString("comision_monto");
         cli_dni = extras.getString("cli_dni");
+        nro_unico = extras.getString("nro_unico");
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
         comision0 = tipomoneda + " " + montoTransferencia();
@@ -107,10 +109,8 @@ public class VoucherTransferenciasFirma extends Activity {
         remitente = "REMITENTE: " + cliente;
         importeTotal = tipomoneda + " " + importe;
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherTransferenciasFirma.getNumUnico numUnico = new VoucherTransferenciasFirma.getNumUnico();
+        numUnico.execute();
 
         if (importe_comision2 != null && importe_comision1 != null && importe_comision3 != null){
             ll_comision_cheque.setVisibility(View.VISIBLE);
@@ -170,8 +170,6 @@ public class VoucherTransferenciasFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherTransferenciasFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    VoucherTransferenciasFirma.ingresarVoucher ingreso = new VoucherTransferenciasFirma.ingresarVoucher();
-                    ingreso.execute();
                     Intent intent = new Intent(VoucherTransferenciasFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -249,8 +247,6 @@ public class VoucherTransferenciasFirma extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VoucherTransferenciasFirma.ingresarVoucher ingreso = new VoucherTransferenciasFirma.ingresarVoucher();
-                ingreso.execute();
 
                 finish();
             }
@@ -267,68 +263,34 @@ public class VoucherTransferenciasFirma extends Activity {
         dialog.show();
     }
 
-    private void ejecutarLista(){
-
-        try {
-            VoucherTransferenciasFirma.getNumeroUnico listadoBeneficiario = new VoucherTransferenciasFirma.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
-        String _fecha = tv_fecha_pago.getText().toString();
-        String _hora = txt_hora_pago.getText().toString();
-        String _importe = tv_importe_voucher.getText().toString();
-        String _tipoTransaccionDescripcion = tv_tipo_transaccion_voucher_descripcion.getText().toString();
-        String _tipoTransaccion = tv_tipo_transaccion_voucher.getText().toString();
-        String _beneficiario = tv_datos_beneficiario_transaccion_voucher.getText().toString();
-        String _usTarjeta = tv_usuario_tarjeta_num_cifrado.getText().toString();
-        String _banco = tv_usuario_tarjeta_banco.getText().toString();
-        String _montoTransferencia = tv_monto_transferencia.getText().toString();
-        String _total = tv_monto_total_pagar.getText().toString();
-        String _comision1 = tv_comision1.getText().toString();
-        String _comision2 = tv_comision2.getText().toString();
-        String _comision3 = tv_comision3.getText().toString();
-        String _remitente = tv_remitente_transferencia_voucher.getText().toString();
-        String _numeroUnico = txt_numero_unico.getText().toString();
+    private class getNumUnico extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
 
         @Override
         protected VoucherTransferenciasEntity doInBackground(String... params) {
             VoucherTransferenciasEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherTransferencias(_numeroUnico, obtenerFecha(), obtenerHora(), cliente, _banco, _usTarjeta, _importe, _comision3, _comision1, _comision2, _total, _beneficiario, _tipoTransaccion, usuario.getUsuarioId(), tipomoneda);
+                user = dao.getNumeroUnicoTransferencias(nro_unico);
 
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherTransferenciasEntity voucherTransferenciasEntity){
+            voucherTransferencias = voucherTransferenciasEntity;
+            if (voucherTransferencias != null){
+                if (voucherTransferencias.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherTransferencias.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherTransferenciasFirma.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherTransferenciasFirma.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

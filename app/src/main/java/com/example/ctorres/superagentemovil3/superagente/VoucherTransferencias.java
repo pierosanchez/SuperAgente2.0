@@ -10,6 +10,7 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
@@ -17,6 +18,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoRecargaEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherTransferenciasEntity;
 
@@ -32,11 +34,12 @@ public class VoucherTransferencias extends Activity {
     LinearLayout btn_efectuar_otra_operacion, btn_salir_transferencias, ll_comision_delivery, ll_comision_cheque;
     UsuarioEntity usuario;
     String tipomoneda, importe, cheque, tarjeta, TipoAbono, DetalleAbono, CuentaBeneficiario, nombreBeneficiario,
-            num_tarjeta, banco, monto, transferencia,  importe_comision1, importe_comision2, importe_comision3;
+            num_tarjeta, banco, monto, transferencia,  importe_comision1, importe_comision2, importe_comision3, nro_unico;
     String cliente, remitente, cli_dni, importeTotal, fechaV, horaV;
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    private VoucherTransferenciasEntity voucherTransferencias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +91,14 @@ public class VoucherTransferencias extends Activity {
         importe_comision3 = extra.getString("comision_monto");
         cliente = extra.getString("cliente");
         cli_dni = extra.getString("cli_dni");
+        nro_unico = extra.getString("nro_unico");
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
         remitente = "REMITENTE: " + cliente;
         importeTotal = tipomoneda + " " + importe;
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherTransferencias.getNumUnico numUnico = new VoucherTransferencias.getNumUnico();
+        numUnico.execute();
 
         if (importe_comision2 != null && importe_comision1 != null && importe_comision3 != null){
             ll_comision_cheque.setVisibility(View.VISIBLE);
@@ -141,8 +143,6 @@ public class VoucherTransferencias extends Activity {
         btn_efectuar_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherTransferencias.ingresarVoucher ingreso = new VoucherTransferencias.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherTransferencias.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
@@ -206,9 +206,6 @@ public class VoucherTransferencias extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                VoucherTransferencias.ingresarVoucher ingreso = new VoucherTransferencias.ingresarVoucher();
-                ingreso.execute();
-
                 finish();
             }
         });
@@ -224,7 +221,7 @@ public class VoucherTransferencias extends Activity {
         dialog.show();
     }
 
-    private void ejecutarLista(){
+    /*private void ejecutarLista(){
 
         try {
             VoucherTransferencias.getNumeroUnico listadoBeneficiario = new VoucherTransferencias.getNumeroUnico();
@@ -255,9 +252,9 @@ public class VoucherTransferencias extends Activity {
             numeroUnicoAdapter.notifyDataSetChanged();
             txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
         }
-    }
+    }*/
 
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
+    /*private class ingresarVoucher extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
         String _fecha = tv_fecha_pago.getText().toString();
         String _hora = txt_hora_pago.getText().toString();
         String _importe = tv_importe_voucher.getText().toString();
@@ -286,6 +283,37 @@ public class VoucherTransferencias extends Activity {
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+    }*/
+
+    private class getNumUnico extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
+
+        @Override
+        protected VoucherTransferenciasEntity doInBackground(String... params) {
+            VoucherTransferenciasEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.getNumeroUnicoTransferencias(nro_unico);
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherTransferenciasEntity voucherTransferenciasEntity){
+            voucherTransferencias = voucherTransferenciasEntity;
+            if (voucherTransferencias != null){
+                if (voucherTransferencias.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherTransferencias.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherTransferencias.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherTransferencias.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -327,8 +327,11 @@ public class ConformidadPagoServicios extends Activity {
             VoucherPagoServicioEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, tipo_servicio, usuario.getUsuarioId(), nombre_recibo, cliente, cli_dni, tipoTarjeta(), transformarImporteServicio(), transformarComision(), totalServicioPagar());
-
+                if(tipo_servicio == null){
+                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, "-", usuario.getUsuarioId(), nombre_recibo, cliente, cli_dni, tipoTarjeta(), transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                } else {
+                    user = dao.ingresarVoucherServicio(numeroUnicoArrayList.get(0).getNumeroUnico(), obtenerFecha(), obtenerHora(), servicio, tipo_servicio, usuario.getUsuarioId(), nombre_recibo, cliente, cli_dni, tipoTarjeta(), transformarImporteServicio(), transformarComision(), totalServicioPagar());
+                }
             } catch (Exception e) {
                 user = null;
                 //fldag_clic_ingreso = 0;;

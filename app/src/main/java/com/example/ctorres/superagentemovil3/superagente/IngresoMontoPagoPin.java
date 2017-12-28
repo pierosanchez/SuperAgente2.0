@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,9 +20,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class IngresoMontoPagoPin extends Activity {
@@ -31,7 +39,7 @@ public class IngresoMontoPagoPin extends Activity {
     EditText txt_moneda_pagar, txt_pin;
     ImageView imageView;
     Bitmap bmp;
-    String monto, tipo_moneda_deuda, cli_dni, desc_corta_banco_tarjeta_cargo, cliente, validacion_tarjeta;
+    String monto, tipo_moneda_deuda, cli_dni, desc_corta_banco_tarjeta_cargo, cliente, validacion_tarjeta, nro_unico;
     String num_tarjeta, tarjeta_cargo, desc_corta_banco;
     TextView tv_numero_clave_cifrada_cargo, tv_tipo_moneda_deuda, textViewNombreApellidoUsuario, tv_pago_cuotas;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago;
@@ -39,6 +47,8 @@ public class IngresoMontoPagoPin extends Activity {
     String[] cuotas = {"No", "Si"};
     String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
     LinearLayout ll_cantidad_cuotas;
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +91,11 @@ public class IngresoMontoPagoPin extends Activity {
         validacion_tarjeta = extras.getString("validacion_tarjeta");
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
 
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarGetNumeroUnico();
+
         focTipoTarjeta();
         cargarCuotas();
         deseaCuotas();
@@ -120,6 +135,9 @@ public class IngresoMontoPagoPin extends Activity {
                 if (pin.length() == 0) {
                     Toast.makeText(IngresoMontoPagoPin.this, "INGRESE EL PIN", Toast.LENGTH_LONG).show();
                 } else {
+                    IngresoMontoPagoPin.ingresarVoucher ingresar = new IngresoMontoPagoPin.ingresarVoucher();
+                    ingresar.execute();
+
                     Intent intent = new Intent(IngresoMontoPagoPin.this, VoucherPagoTarjeta.class);
                     intent.putExtra("monto", monto);
                     intent.putExtra("cliente", cliente);
@@ -130,6 +148,7 @@ public class IngresoMontoPagoPin extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("desc_corta_banco", desc_corta_banco);
                     intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                    intent.putExtra("nro_unico", nro_unico);
                     startActivity(intent);
                     finish();
                 }
@@ -157,6 +176,8 @@ public class IngresoMontoPagoPin extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                IngresoMontoPagoPin.ingresarVoucher ingresar = new IngresoMontoPagoPin.ingresarVoucher();
+                ingresar.execute();
                 Intent intent = new Intent(IngresoMontoPagoPin.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cli_dni", cli_dni);
@@ -201,5 +222,86 @@ public class IngresoMontoPagoPin extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoPin.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    public String obtenerHora() {
+        String hora;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int horaS = today.hour;
+        int min = today.minute;
+        int seg = today.second;
+        //para probar en celulares se comenta y cuando es con emuladores se descomenta
+        //horaS = horaS - 5;
+
+        hora = horaS + ":" + min + ":" + seg;
+
+        return hora;
+    }
+
+    public String obtenerFecha() {
+
+        String fecha;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int dia = today.monthDay;
+        int mes = today.month;
+        int año = today.year;
+        mes = mes + 1;
+
+        fecha = dia + "/" + mes + "/" + año;
+
+        return fecha;
+    }
+
+    private void ejecutarGetNumeroUnico(){
+
+        try {
+            IngresoMontoPagoPin.getNumeroUnico listadoBeneficiario = new IngresoMontoPagoPin.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            nro_unico = numeroUnicoArrayList.get(0).getNumeroUnico();
+        }
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
+        @Override
+        protected VoucherPagoTarjetaCreditoEntity doInBackground(String... params) {
+            VoucherPagoTarjetaCreditoEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherPagoTarjetaCredito(nro_unico, obtenerFecha(), obtenerHora(), num_tarjeta, desc_corta_banco, tarjeta_cargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
+        }
     }
 }

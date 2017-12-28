@@ -10,6 +10,7 @@ import android.text.format.Time;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
@@ -19,6 +20,7 @@ import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherTransferenciasEntity;
 
 
 import java.text.DecimalFormat;
@@ -31,11 +33,12 @@ public class VoucherPagoTarjeta extends Activity {
     String monto, num_tarjeta;
     TextView tv_monto_importe, tv_fecha_pago, txt_hora_pago, tv_importe_pagar, tv_tarjeta_cifrada,
             tv_tarjeta_cifrada_cargo, tv_banco_tarjeta_pago, tv_banco_tarjeta_cargo, txt_numero_unico;
-    String importe, tipo_moneda_deuda, tarjeta_cargo, fechaV, horaV, numTarjetaCargo, numTarjetaPago;
+    String importe, tipo_moneda_deuda, tarjeta_cargo, fechaV, horaV, numTarjetaCargo, numTarjetaPago, nro_unico;
     private UsuarioEntity usuario;
     String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, banco_tarjeta_cargo, desc_corta_banco_tarjeta_cargo;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    private VoucherPagoTarjetaCreditoEntity voucherTarjetas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class VoucherPagoTarjeta extends Activity {
         cli_dni = extras.getString("cli_dni");
         numTarjetaPago = extras.getString("num_tarjeta");
         numTarjetaCargo = extras.getString("tarjeta_cargo");
+        nro_unico = extras.getString("nro_unico");
         num_tarjeta = "TARJETA CIFRADA: " + numTarjetaPago;
         tarjeta_cargo = "TARJETA DE CARGO: " + numTarjetaCargo;
         desc_corta_banco = extras.getString("desc_corta_banco");
@@ -74,6 +78,9 @@ public class VoucherPagoTarjeta extends Activity {
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
+        VoucherPagoTarjeta.getNumUnico numUnico = new VoucherPagoTarjeta.getNumUnico();
+        numUnico.execute();
+
         tv_monto_importe.setText(importe);
         tv_tarjeta_cifrada.setText(num_tarjeta);
         tv_tarjeta_cifrada_cargo.setText(tarjeta_cargo);
@@ -82,16 +89,9 @@ public class VoucherPagoTarjeta extends Activity {
         txt_hora_pago.setText(horaV);
         tv_banco_tarjeta_cargo.setText(banco_tarjeta_cargo);
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
-
         btn_otra_operacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoTarjeta.this, MenuCliente.class);
                 intent.putExtra("usuario", usuario);
@@ -112,8 +112,6 @@ public class VoucherPagoTarjeta extends Activity {
         btn_pagar_otra_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
-                ingreso.execute();
 
                 Intent intent = new Intent(VoucherPagoTarjeta.this, SeleccionTarjetaPago.class);
                 intent.putExtra("usuario", usuario);
@@ -133,8 +131,6 @@ public class VoucherPagoTarjeta extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VoucherPagoTarjeta.ingresarVoucher ingreso = new VoucherPagoTarjeta.ingresarVoucher();
-                ingreso.execute();
 
                 finish();
             }
@@ -189,60 +185,34 @@ public class VoucherPagoTarjeta extends Activity {
         return decimalFormat.format(montoD);
     }
 
-    private void ejecutarLista(){
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
 
-        try {
-            VoucherPagoTarjeta.getNumeroUnico listadoBeneficiario = new VoucherPagoTarjeta.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
-        String _banco = tv_banco_tarjeta_pago.getText().toString();
-        String _importe = tv_monto_importe.getText().toString();
-        String _fecha = tv_fecha_pago.getText().toString();
-        String _hora = txt_hora_pago.getText().toString();
-        String _tarjeta = tv_tarjeta_cifrada.getText().toString();
-        String _tarjetaCargo = tv_tarjeta_cifrada_cargo.getText().toString();
-        String _bancoTarjetaCargo = tv_banco_tarjeta_cargo.getText().toString();
-        String _numeroUnico = txt_numero_unico.getText().toString();
         @Override
         protected VoucherPagoTarjetaCreditoEntity doInBackground(String... params) {
             VoucherPagoTarjetaCreditoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, obtenerFecha(), obtenerHora(), numTarjetaPago, desc_corta_banco, numTarjetaCargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
+                user = dao.getNumeroUnicoTarjeta(nro_unico);
 
             } catch (Exception e) {
                 user = null;
-                //fldag_clic_ingreso = 0;;
+                //fldag_clic_ingreso = 0;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoTarjetaCreditoEntity voucherTransferenciasEntity){
+            voucherTarjetas = voucherTransferenciasEntity;
+            if (voucherTarjetas != null){
+                if (voucherTarjetas.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherTarjetas.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherPagoTarjeta.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherPagoTarjeta.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

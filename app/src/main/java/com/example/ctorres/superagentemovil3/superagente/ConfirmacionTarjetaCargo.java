@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,10 +20,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.adapter.UsuarioAdapter;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -35,7 +39,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
     Button btn_fimar;
     ImageView imageView;
     Bitmap b;
-    String monto, num_tarjeta, usu, tipo_moneda_deuda, tarjeta_cargo;
+    String monto, num_tarjeta, usu, tipo_moneda_deuda, tarjeta_cargo, nro_unico;
     Bitmap bmp;
     EditText txt_monto_tarjeta_cargo_credito;
     TextView tv_numero_clave_cifrada_cargo, tv_nombre_cliente_tarjeta_cargo, tv_tipo_moneda_deuda, tv_pago_cuotas;
@@ -49,6 +53,8 @@ public class ConfirmacionTarjetaCargo extends Activity {
     String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
     LinearLayout ll_cantidad_cuotas;
     Spinner sp_pago_cuotas, sp_cantidad_cuotas;
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +100,11 @@ public class ConfirmacionTarjetaCargo extends Activity {
         validacion_tarjeta = extras.getString("validacion_tarjeta");
         tipo_tarjeta_pago = extras.getInt("tipo_tarjeta_pago");
 
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarGetNumeroUnico();
+
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         tv_tipo_moneda_deuda.setText(tipo_moneda_deuda);
         txt_monto_tarjeta_cargo_credito.setText(transformarMonto());
@@ -108,6 +119,8 @@ public class ConfirmacionTarjetaCargo extends Activity {
             public void onClick(View v) {
                 if (tipo_tarjeta==1) {
                     //Bitmap bitmap = ((BitmapDrawable)firma.getDrawable()).getBitmap();
+                    ConfirmacionTarjetaCargo.ingresarVoucher ingresar = new ConfirmacionTarjetaCargo.ingresarVoucher();
+                    ingresar.execute();
                     Intent intent = new Intent(ConfirmacionTarjetaCargo.this, VoucherPagoTarjetaConCredito.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("monto", monto);
@@ -118,9 +131,12 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("desc_corta_banco", desc_corta_banco);
                     intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                    intent.putExtra("nro_unico", nro_unico);
                     startActivity(intent);
                     finish();
                 } else if (tipo_tarjeta==2) {
+                    ConfirmacionTarjetaCargo.ingresarVoucher ingresar = new ConfirmacionTarjetaCargo.ingresarVoucher();
+                    ingresar.execute();
                     Intent intent = new Intent(ConfirmacionTarjetaCargo.this, VoucherPagoTarjeta.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("monto", monto);
@@ -131,6 +147,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("desc_corta_banco", desc_corta_banco);
                     intent.putExtra("desc_corta_banco_tarjeta_cargo", desc_corta_banco_tarjeta_cargo);
+                    intent.putExtra("nro_unico", nro_unico);
                     startActivity(intent);
                     finish();
                 }
@@ -175,6 +192,39 @@ public class ConfirmacionTarjetaCargo extends Activity {
         }
     }
 
+    private void ejecutarGetNumeroUnico(){
+
+        try {
+            ConfirmacionTarjetaCargo.getNumeroUnico listadoBeneficiario = new ConfirmacionTarjetaCargo.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            nro_unico = numeroUnicoArrayList.get(0).getNumeroUnico();
+        }
+    }
+
     private void ejecutarLista(){
         usu = usuario.getUsuarioId();
 
@@ -206,6 +256,38 @@ public class ConfirmacionTarjetaCargo extends Activity {
             usuarioAdapter.setNewListBeneficiario(usuarioEntityArrayList);
             usuarioAdapter.notifyDataSetChanged();
         }
+    }
+
+    public String obtenerHora() {
+        String hora;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int horaS = today.hour;
+        int min = today.minute;
+        int seg = today.second;
+        //para probar en celulares se comenta y cuando es con emuladores se descomenta
+        //horaS = horaS - 5;
+
+        hora = horaS + ":" + min + ":" + seg;
+
+        return hora;
+    }
+
+    public String obtenerFecha() {
+
+        String fecha;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int dia = today.monthDay;
+        int mes = today.month;
+        int año = today.year;
+        mes = mes + 1;
+
+        fecha = dia + "/" + mes + "/" + año;
+
+        return fecha;
     }
 
     public void cancelar() {
@@ -249,5 +331,21 @@ public class ConfirmacionTarjetaCargo extends Activity {
     public void deseaCuotas(){
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(ConfirmacionTarjetaCargo.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
+        @Override
+        protected VoucherPagoTarjetaCreditoEntity doInBackground(String... params) {
+            VoucherPagoTarjetaCreditoEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherPagoTarjetaCredito(nro_unico, obtenerFecha(), obtenerHora(), num_tarjeta, desc_corta_banco, tarjeta_cargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
+        }
     }
 }

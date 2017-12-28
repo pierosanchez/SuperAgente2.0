@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,11 +23,14 @@ import android.widget.Toast;
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.ComisionDeliverySolesAdapter;
 import com.example.ctorres.superagentemovil3.adapter.CuentasBeneficiarioAdapter;
+import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.adapter.TarjetasBeneficiarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.entity.VoucherTransferenciasEntity;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -39,7 +43,7 @@ public class IngresoCuentaTarjetaAbono extends Activity {
     String tipoCheque[] = {"Con Delivery", "Con Recojo"};
     Spinner spinnerBancoPagar, spinnerTipoMoneda, spinnerTipoCuenta, spinnerTipoCheque;
     LinearLayout btn_aceptar_cuenta_tarjeta_abono, btn_cancelar_cuenta_tarjeta_abono, linearLayoutGastosEnvio, linearLayoutCuentaTarjetasBeneficiario, linearLayoutChequeBeneficiario;
-    String monto, tipomoneda, transferencia;
+    String monto, tipomoneda, transferencia, nro_unico;
     EditText txt_codigo_interbancario;
     TextView tv_comision_monto, tv_total_pagar_transferencia, tv_tipo_moneda_importe, tv_tipo_moneda_comision, tv_total_pagar_transferencia_simbolo, tv_tipo_transferencia, txt_importe_cuenta_tarjeta, tv_tipo_moneda_comision_cheque, tv_comision_cheque, tv_tipo_moneda_comision_cheque_delivery, tv_comision_cheque_delivery, tv_tipo_abono_transferencia, tv_fr_tipo_cheque;
     UsuarioEntity usuario;
@@ -49,12 +53,14 @@ public class IngresoCuentaTarjetaAbono extends Activity {
     TarjetasBeneficiarioAdapter adapterTarjetasBeneficiario;
     ComisionDeliverySolesAdapter comisionDeliverySolesAdapter;
     ListView lv_cuentas_beneficiario;
-    String benef, benefT, dni_benef, nombreBeneficiario, banco, num_tarjeta;
+    String benef, benefT, dni_benef, nombreBeneficiario, banco, num_tarjeta, tipoAbono;
     RadioGroup rdgp_tipo_pago;
     RadioButton rdbtn_cuenta_transferencia, rdbtn_tarjeta_transferencia, rdbtn_cheque_transferencia;
     DecimalFormat decimal = new DecimalFormat("0.00");
     String cliente, cli_dni, validacion_tarjeta;
     int tipo_tarjeta;
+    NumeroUnicoAdapter numeroUnicoAdapter;
+    ArrayList<NumeroUnico> numeroUnicoArrayList;
 
 
     @Override
@@ -110,6 +116,11 @@ public class IngresoCuentaTarjetaAbono extends Activity {
         cli_dni = extras.getString("cli_dni");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
 
+        numeroUnicoArrayList = null;
+        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
+
+        ejecutarListaGetNumeroUnico();
+
         cargarCombos();
 
         txt_importe_cuenta_tarjeta.setText(transformarMonto());
@@ -135,55 +146,64 @@ public class IngresoCuentaTarjetaAbono extends Activity {
                             Toast.makeText(IngresoCuentaTarjetaAbono.this, "El beneficiario no tiene cuentas registradas", Toast.LENGTH_SHORT).show();
                         } else if (arrayBenefeciarioEntity != null){
                             if (tipo_tarjeta == 2) {
-                                String cuenta = rdbtn_cuenta_transferencia.getText().toString();
+                                tipoAbono = rdbtn_cuenta_transferencia.getText().toString();
+                                IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                ingreso.execute();
                                 Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                                 intent.putExtra("importe", obtenerImporte());
                                 intent.putExtra("tipomoneda", tipomoneda);
                                 intent.putExtra("usuario", usuario);
-                                intent.putExtra("tipoAbono", cuenta);
+                                intent.putExtra("tipoAbono", tipoAbono);
                                 intent.putExtra("detalleAbono", obtenerCuentaUsuario());
                                 intent.putExtra("nombrebenef", nombreBeneficiario);
                                 intent.putExtra("num_tarjeta", num_tarjeta);
                                 intent.putExtra("banco", banco);
                                 intent.putExtra("transferencia", obtenerTransferencia());
-                                intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                intent.putExtra("comision_monto", obtenerMontoComision());
                                 intent.putExtra("cliente", cliente);
                                 intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nro_unico", nro_unico);
                                 startActivity(intent);
                                 finish();
                             } else if (tipo_tarjeta == 1) {
                                 if (validacion_tarjeta.equals("Firma")) {
-                                    String cuenta = rdbtn_cuenta_transferencia.getText().toString();
+                                    tipoAbono = rdbtn_cuenta_transferencia.getText().toString();
+                                    IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                    ingreso.execute();
                                     Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferenciasFirma.class);
                                     intent.putExtra("importe", obtenerImporte());
                                     intent.putExtra("tipomoneda", tipomoneda);
                                     intent.putExtra("usuario", usuario);
-                                    intent.putExtra("tipoAbono", cuenta);
+                                    intent.putExtra("tipoAbono", tipoAbono);
                                     intent.putExtra("detalleAbono", obtenerCuentaUsuario());
                                     intent.putExtra("nombrebenef", nombreBeneficiario);
                                     intent.putExtra("num_tarjeta", num_tarjeta);
                                     intent.putExtra("banco", banco);
                                     intent.putExtra("transferencia", obtenerTransferencia());
-                                    intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                    intent.putExtra("comision_monto", obtenerMontoComision());
                                     intent.putExtra("cliente", cliente);
                                     intent.putExtra("cli_dni", cli_dni);
+                                    intent.putExtra("nro_unico", nro_unico);
                                     startActivity(intent);
                                     finish();
                                 } else if (validacion_tarjeta.equals("Pin")){
-                                    String cuenta = rdbtn_cuenta_transferencia.getText().toString();
+                                    tipoAbono = rdbtn_cuenta_transferencia.getText().toString();
+                                    IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                    ingreso.execute();
                                     Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                                     intent.putExtra("importe", obtenerImporte());
                                     intent.putExtra("tipomoneda", tipomoneda);
                                     intent.putExtra("usuario", usuario);
-                                    intent.putExtra("tipoAbono", cuenta);
+                                    intent.putExtra("tipoAbono", tipoAbono);
                                     intent.putExtra("detalleAbono", obtenerCuentaUsuario());
                                     intent.putExtra("nombrebenef", nombreBeneficiario);
                                     intent.putExtra("num_tarjeta", num_tarjeta);
                                     intent.putExtra("banco", banco);
                                     intent.putExtra("transferencia", obtenerTransferencia());
-                                    intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                    intent.putExtra("comision_monto", obtenerMontoComision());
                                     intent.putExtra("cliente", cliente);
                                     intent.putExtra("cli_dni", cli_dni);
+                                    intent.putExtra("nro_unico", nro_unico);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -194,55 +214,64 @@ public class IngresoCuentaTarjetaAbono extends Activity {
                             Toast.makeText(IngresoCuentaTarjetaAbono.this, "El beneficiario no tiene tarjetas registradas", Toast.LENGTH_SHORT).show();
                         } else if (arrayBeneficiarioTarjetas != null) {
                             if (tipo_tarjeta == 2) {
-                                String tarjeta = rdbtn_tarjeta_transferencia.getText().toString();
+                                tipoAbono = rdbtn_tarjeta_transferencia.getText().toString();
+                                IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                ingreso.execute();
                                 Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                                 intent.putExtra("importe", obtenerImporte());
                                 intent.putExtra("tipomoneda", tipomoneda);
                                 intent.putExtra("usuario", usuario);
-                                intent.putExtra("tipoAbono", tarjeta);
+                                intent.putExtra("tipoAbono", tipoAbono);
                                 intent.putExtra("detalleAbono", obtenerTarjetaUsuario());
                                 intent.putExtra("nombrebenef", nombreBeneficiario);
                                 intent.putExtra("num_tarjeta", num_tarjeta);
                                 intent.putExtra("banco", banco);
                                 intent.putExtra("transferencia", obtenerTransferencia());
-                                intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                intent.putExtra("comision_monto", obtenerMontoComision());
                                 intent.putExtra("cliente", cliente);
                                 intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nro_unico", nro_unico);
                                 startActivity(intent);
                                 finish();
                             } else if (tipo_tarjeta == 1) {
                                 if (validacion_tarjeta.equals("Firma")) {
-                                    String tarjeta = rdbtn_tarjeta_transferencia.getText().toString();
+                                    tipoAbono = rdbtn_tarjeta_transferencia.getText().toString();
+                                    IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                    ingreso.execute();
                                     Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferenciasFirma.class);
                                     intent.putExtra("importe", obtenerImporte());
                                     intent.putExtra("tipomoneda", tipomoneda);
                                     intent.putExtra("usuario", usuario);
-                                    intent.putExtra("tipoAbono", tarjeta);
+                                    intent.putExtra("tipoAbono", tipoAbono);
                                     intent.putExtra("detalleAbono", obtenerTarjetaUsuario());
                                     intent.putExtra("nombrebenef", nombreBeneficiario);
                                     intent.putExtra("num_tarjeta", num_tarjeta);
                                     intent.putExtra("banco", banco);
                                     intent.putExtra("transferencia", obtenerTransferencia());
-                                    intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                    intent.putExtra("comision_monto", obtenerMontoComision());
                                     intent.putExtra("cliente", cliente);
                                     intent.putExtra("cli_dni", cli_dni);
+                                    intent.putExtra("nro_unico", nro_unico);
                                     startActivity(intent);
                                     finish();
                                 } else if (validacion_tarjeta.equals("Pin")){
-                                    String tarjeta = rdbtn_tarjeta_transferencia.getText().toString();
+                                    tipoAbono = rdbtn_tarjeta_transferencia.getText().toString();
+                                    IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                    ingreso.execute();
                                     Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                                     intent.putExtra("importe", obtenerImporte());
                                     intent.putExtra("tipomoneda", tipomoneda);
                                     intent.putExtra("usuario", usuario);
-                                    intent.putExtra("tipoAbono", tarjeta);
+                                    intent.putExtra("tipoAbono", tipoAbono);
                                     intent.putExtra("detalleAbono", obtenerTarjetaUsuario());
                                     intent.putExtra("nombrebenef", nombreBeneficiario);
                                     intent.putExtra("num_tarjeta", num_tarjeta);
                                     intent.putExtra("banco", banco);
                                     intent.putExtra("transferencia", obtenerTransferencia());
-                                    intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                    intent.putExtra("comision_monto", obtenerMontoComision());
                                     intent.putExtra("cliente", cliente);
                                     intent.putExtra("cli_dni", cli_dni);
+                                    intent.putExtra("nro_unico", nro_unico);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -250,61 +279,70 @@ public class IngresoCuentaTarjetaAbono extends Activity {
                         }
                     } else {
                         if (tipo_tarjeta == 2) {
-                            String cheque = rdbtn_cheque_transferencia.getText().toString();
+                            tipoAbono = rdbtn_cheque_transferencia.getText().toString();
+                            IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                            ingreso.execute();
                             Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                             intent.putExtra("importe", obtenerImporte());
                             intent.putExtra("tipomoneda", tipomoneda);
                             intent.putExtra("usuario", usuario);
-                            intent.putExtra("tipoAbono", cheque);
+                            intent.putExtra("tipoAbono", tipoAbono);
                             intent.putExtra("detalleAbono", obtenerChequeTransferencia());
                             intent.putExtra("nombrebenef", nombreBeneficiario);
                             intent.putExtra("num_tarjeta", num_tarjeta);
                             intent.putExtra("banco", banco);
                             intent.putExtra("transferencia", obtenerTransferencia());
-                            intent.putExtra("comision_cheque_delivery", tv_comision_cheque_delivery.getText().toString());
-                            intent.putExtra("comision_cheque", tv_comision_cheque.getText().toString());
-                            intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                            intent.putExtra("comision_cheque_delivery", obtenerComisionChequeDelivery());
+                            intent.putExtra("comision_cheque", obtenerComisionCheque());
+                            intent.putExtra("comision_monto", obtenerMontoComision());
                             intent.putExtra("cliente", cliente);
                             intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("nro_unico", nro_unico);
                             startActivity(intent);
                             finish();
                         } else if (tipo_tarjeta == 1) {
                             if (validacion_tarjeta.equals("Firma")) {
-                                String cheque = rdbtn_cheque_transferencia.getText().toString();
+                                tipoAbono = rdbtn_cheque_transferencia.getText().toString();
+                                IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                ingreso.execute();
                                 Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferenciasFirma.class);
                                 intent.putExtra("importe", obtenerImporte());
                                 intent.putExtra("tipomoneda", tipomoneda);
                                 intent.putExtra("usuario", usuario);
-                                intent.putExtra("tipoAbono", cheque);
+                                intent.putExtra("tipoAbono", tipoAbono);
                                 intent.putExtra("detalleAbono", obtenerChequeTransferencia());
                                 intent.putExtra("nombrebenef", nombreBeneficiario);
                                 intent.putExtra("num_tarjeta", num_tarjeta);
                                 intent.putExtra("banco", banco);
                                 intent.putExtra("transferencia", obtenerTransferencia());
-                                intent.putExtra("comision_cheque_delivery", tv_comision_cheque_delivery.getText().toString());
-                                intent.putExtra("comision_cheque", tv_comision_cheque.getText().toString());
-                                intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                intent.putExtra("comision_cheque_delivery", obtenerComisionChequeDelivery());
+                                intent.putExtra("comision_cheque", obtenerComisionCheque());
+                                intent.putExtra("comision_monto", obtenerMontoComision());
                                 intent.putExtra("cliente", cliente);
                                 intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nro_unico", nro_unico);
                                 startActivity(intent);
                                 finish();
                             } else if (validacion_tarjeta.equals("Pin")){
-                                String cheque = rdbtn_cheque_transferencia.getText().toString();
+                                tipoAbono = rdbtn_cheque_transferencia.getText().toString();
+                                IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
+                                ingreso.execute();
                                 Intent intent = new Intent(IngresoCuentaTarjetaAbono.this, VoucherTransferencias.class);
                                 intent.putExtra("importe", obtenerImporte());
                                 intent.putExtra("tipomoneda", tipomoneda);
                                 intent.putExtra("usuario", usuario);
-                                intent.putExtra("tipoAbono", cheque);
+                                intent.putExtra("tipoAbono", tipoAbono);
                                 intent.putExtra("detalleAbono", obtenerChequeTransferencia());
                                 intent.putExtra("nombrebenef", nombreBeneficiario);
                                 intent.putExtra("num_tarjeta", num_tarjeta);
                                 intent.putExtra("banco", banco);
                                 intent.putExtra("transferencia", obtenerTransferencia());
-                                intent.putExtra("comision_cheque_delivery", tv_comision_cheque_delivery.getText().toString());
-                                intent.putExtra("comision_cheque", tv_comision_cheque.getText().toString());
-                                intent.putExtra("comision_monto", tv_comision_monto.getText().toString());
+                                intent.putExtra("comision_cheque_delivery", obtenerComisionChequeDelivery());
+                                intent.putExtra("comision_cheque", obtenerComisionCheque());
+                                intent.putExtra("comision_monto", obtenerMontoComision());
                                 intent.putExtra("cliente", cliente);
                                 intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("nro_unico", nro_unico);
                                 startActivity(intent);
                                 finish();
                             }
@@ -438,6 +476,39 @@ public class IngresoCuentaTarjetaAbono extends Activity {
 
     }
 
+    private void ejecutarListaGetNumeroUnico(){
+
+        try {
+            IngresoCuentaTarjetaAbono.getNumeroUnico listadoBeneficiario = new IngresoCuentaTarjetaAbono.getNumeroUnico();
+            listadoBeneficiario.execute();
+        } catch (Exception e){
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                numeroUnicoArrayList = dao.getNumeroUnico();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
+            numeroUnicoAdapter.notifyDataSetChanged();
+            nro_unico = numeroUnicoArrayList.get(0).getNumeroUnico();
+        }
+    }
+
     private void ejecutarLista() {
         //benef = usuario.getUsuarioId();
 
@@ -536,16 +607,34 @@ public class IngresoCuentaTarjetaAbono extends Activity {
         }
     }
 
+    public String obtenerMontoComision(){
+        String monto;
+        monto = tv_comision_monto.getText().toString();
+        return decimal.format(Double.parseDouble(monto));
+    }
+
+    public String obtenerComisionChequeDelivery(){
+        String cheque;
+        cheque = tv_comision_cheque_delivery.getText().toString();
+        return decimal.format(Double.parseDouble(cheque));
+    }
+
+    public String obtenerComisionCheque(){
+        String cheque;
+        cheque = tv_comision_cheque.getText().toString();
+        return decimal.format(Double.parseDouble(cheque));
+    }
+
     public String obtenerImporte() {
         String total;
         total = tv_total_pagar_transferencia.getText().toString();
-        return total;
+        return decimal.format(Double.parseDouble(total));
     }
 
     public String obtenerTransferencia() {
         String total;
         total = txt_importe_cuenta_tarjeta.getText().toString();
-        return total;
+        return decimal.format(Double.parseDouble(total));
     }
 
     public String tipocheque(){
@@ -637,4 +726,52 @@ public class IngresoCuentaTarjetaAbono extends Activity {
         return decimalFormat.format(montoD);
     }
 
+    public String obtenerHora() {
+        String hora;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int horaS = today.hour;
+        int min = today.minute;
+        int seg = today.second;
+        //para probar en celulares se comenta y cuando es con emuladores se descomenta
+        //horaS = horaS - 5;
+
+        hora = horaS + ":" + min + ":" + seg;
+
+        return hora;
+    }
+
+    public String obtenerFecha() {
+
+        String fecha;
+
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        int dia = today.monthDay;
+        int mes = today.month;
+        int año = today.year;
+        mes = mes + 1;
+
+        fecha = dia + "/" + mes + "/" + año;
+
+        return fecha;
+    }
+
+    private class ingresarVoucher extends AsyncTask<String, Void, VoucherTransferenciasEntity> {
+
+        @Override
+        protected VoucherTransferenciasEntity doInBackground(String... params) {
+            VoucherTransferenciasEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ingresarVoucherTransferencias(nro_unico, obtenerFecha(), obtenerHora(), cliente, banco, num_tarjeta, obtenerTransferencia(), obtenerMontoComision(), obtenerComisionChequeDelivery(), obtenerComisionCheque(), obtenerImporte(), nombreBeneficiario, tipoAbono, usuario.getUsuarioId(), tipomoneda);
+
+            } catch (Exception e) {
+                user = null;
+                //fldag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+    }
 }

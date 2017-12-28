@@ -38,9 +38,10 @@ public class VoucherPagoTarjetaConCredito extends Activity {
     private UsuarioEntity usuario;
     String monto, importe, tipo_moneda_deuda, num_tarjeta, tarjeta_cargo, numTarjetaCargo, numTarjetaPago;
     String cliente, cli_dni, desc_corta_banco, banco_tarjeta_pago, desc_corta_banco_tarjeta_cargo,
-            banco_tarjeta_cargo, fechaV, horaV;
+            banco_tarjeta_cargo, fechaV, horaV, nro_unico;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    private VoucherPagoTarjetaCreditoEntity voucherTarjetas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,16 +77,15 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         cliente = extras.getString("cliente");
         cli_dni = extras.getString("cli_dni");
         desc_corta_banco = extras.getString("desc_corta_banco");
+        nro_unico = extras.getString("nro_unico");
         banco_tarjeta_pago = "BANCO DE LA TARJETA A PAGAR: " + desc_corta_banco;
         desc_corta_banco_tarjeta_cargo = extras.getString("desc_corta_banco_tarjeta_cargo");
         banco_tarjeta_cargo = "BANCO DE LA TARJETA DE CARGO: " + desc_corta_banco_tarjeta_cargo;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
-        numeroUnicoArrayList = null;
-        numeroUnicoAdapter = new NumeroUnicoAdapter(numeroUnicoArrayList, getApplication());
-
-        ejecutarLista();
+        VoucherPagoTarjetaConCredito.getNumUnico numUnico = new VoucherPagoTarjetaConCredito.getNumUnico();
+        numUnico.execute();
 
         /*bmp = (Bitmap) extras.getParcelable("firmabitmap");
         if (bmp != null) {
@@ -117,8 +117,6 @@ public class VoucherPagoTarjetaConCredito extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoTarjetaConCredito.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    VoucherPagoTarjetaConCredito.ingresarVoucher ingreso = new VoucherPagoTarjetaConCredito.ingresarVoucher();
-                    ingreso.execute();
                     Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -146,8 +144,6 @@ public class VoucherPagoTarjetaConCredito extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoTarjetaConCredito.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-                    VoucherPagoTarjetaConCredito.ingresarVoucher ingreso = new VoucherPagoTarjetaConCredito.ingresarVoucher();
-                    ingreso.execute();
                     Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, SeleccionTarjetaPago.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -177,8 +173,6 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                VoucherPagoTarjetaConCredito.ingresarVoucher ingreso = new VoucherPagoTarjetaConCredito.ingresarVoucher();
-                ingreso.execute();
 
                 finish();
             }
@@ -233,60 +227,34 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         return decimalFormat.format(montoD);
     }
 
-    private void ejecutarLista(){
+    private class getNumUnico extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
 
-        try {
-            VoucherPagoTarjetaConCredito.getNumeroUnico listadoBeneficiario = new VoucherPagoTarjetaConCredito.getNumeroUnico();
-            listadoBeneficiario.execute();
-        } catch (Exception e){
-            //listadoBeneficiario = null;
-        }
-
-    }
-
-    private class getNumeroUnico extends AsyncTask<String,Void,Void> {
-        @Override
-        protected Void doInBackground(String... params) {
-
-            try {
-                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                numeroUnicoArrayList = dao.getNumeroUnico();
-            } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            numeroUnicoAdapter.setNewListNumeroUnico(numeroUnicoArrayList);
-            numeroUnicoAdapter.notifyDataSetChanged();
-            txt_numero_unico.setText(numeroUnicoArrayList.get(0).getNumeroUnico());
-        }
-    }
-
-    private class ingresarVoucher extends AsyncTask<String, Void, VoucherPagoTarjetaCreditoEntity> {
-        String _bancoPago = txt_banco_tarjeta_pago.getText().toString();
-        String _fecha = tv_fecha_pago.getText().toString();
-        String _hora = txt_hora_pago.getText().toString();
-        String _importe = txt_importe_pagar.getText().toString();
-        String _tarjeta = tv_tarjeta_cifrada_credito.getText().toString();
-        String _tarjetaCargo = tv_tarjeta_cifrada_cargo_credito.getText().toString();
-        String _bancoCargo = txt_banco_tarjeta_cargo.getText().toString();
-        String _numeroUnico = txt_numero_unico.getText().toString();
         @Override
         protected VoucherPagoTarjetaCreditoEntity doInBackground(String... params) {
             VoucherPagoTarjetaCreditoEntity user;
             try {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.ingresarVoucherPagoTarjetaCredito(_numeroUnico, obtenerFecha(), obtenerHora(), numTarjetaPago, desc_corta_banco, numTarjetaCargo, desc_corta_banco_tarjeta_cargo, transformarMonto(), tipo_moneda_deuda, usuario.getUsuarioId());
+                user = dao.getNumeroUnicoTarjeta(nro_unico);
 
             } catch (Exception e) {
                 user = null;
-                //fldag_clic_ingreso = 0;;
+                //fldag_clic_ingreso = 0;
             }
             return user;
+        }
+
+        @Override
+        protected void onPostExecute(VoucherPagoTarjetaCreditoEntity voucherTransferenciasEntity){
+            voucherTarjetas = voucherTransferenciasEntity;
+            if (voucherTarjetas != null){
+                if (voucherTarjetas.getNumeroUnico() != null){
+                    txt_numero_unico.setText(voucherTarjetas.getNumeroUnico());
+                } else {
+                    Toast.makeText(VoucherPagoTarjetaConCredito.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(VoucherPagoTarjetaConCredito.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }
