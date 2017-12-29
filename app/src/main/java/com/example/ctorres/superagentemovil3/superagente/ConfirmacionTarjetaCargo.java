@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +28,7 @@ import com.example.ctorres.superagentemovil3.adapter.UsuarioAdapter;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoTarjetaCreditoEntity;
+import com.example.ctorres.superagentemovil3.utils.MoneyValueFilter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
     Spinner sp_pago_cuotas, sp_cantidad_cuotas;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    MoneyValueFilter money= new MoneyValueFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

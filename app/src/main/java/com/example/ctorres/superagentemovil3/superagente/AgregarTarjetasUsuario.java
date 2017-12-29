@@ -72,7 +72,7 @@ public class AgregarTarjetasUsuario extends Activity {
 
         terminar = (Button) findViewById(R.id.terminar);
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
-        btn_validar_tarjeta = (Button) findViewById(R.id.btn_validar_tarjeta);
+        //btn_validar_tarjeta = (Button) findViewById(R.id.btn_validar_tarjeta);
 
         rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
         rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
@@ -194,7 +194,7 @@ public class AgregarTarjetasUsuario extends Activity {
             }
         });
 
-        btn_validar_tarjeta.setOnClickListener(new View.OnClickListener() {
+        /*btn_validar_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tarjetaBinEntityArrayList = null;
@@ -202,7 +202,7 @@ public class AgregarTarjetasUsuario extends Activity {
 
                 ejecutarListaTarjetasBin();
             }
-        });
+        });*/
     }
 
     private void numeroTarjeta() {
@@ -272,6 +272,29 @@ public class AgregarTarjetasUsuario extends Activity {
                 // TODO Auto-generated method stub
             }
 
+        });
+
+        nroTarjetaDigito4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (nroTarjetaDigito4.getText().toString().length() == 4)     //size as per your requirement
+                {
+                    tarjetaBinEntityArrayList = null;
+                    getTarjetaBinAdapter = new GetTarjetaBinAdapter(tarjetaBinEntityArrayList, getApplication());
+
+                    ejecutarListaTarjetasBin();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
 

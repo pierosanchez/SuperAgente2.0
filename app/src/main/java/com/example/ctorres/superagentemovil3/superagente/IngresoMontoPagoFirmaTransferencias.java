@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.MoneyValueFilter;
 
 import java.util.ArrayList;
 
@@ -81,6 +83,7 @@ public class IngresoMontoPagoFirmaTransferencias extends Activity {
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
+        txt_moneda_pagar.setFilters(new InputFilter[] {new MoneyValueFilter()});
 
         focTipoTarjeta();
 

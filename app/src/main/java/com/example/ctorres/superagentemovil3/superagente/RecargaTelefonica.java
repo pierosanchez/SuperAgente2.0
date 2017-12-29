@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.MoneyValueFilter;
 
 import java.util.ArrayList;
 
@@ -67,6 +69,8 @@ public class RecargaTelefonica extends Activity {
         sp_operadorRecarga.setAdapter(operadorAdapter);
 
         ejecutarListaOperador();
+
+        txt_montoRecarga.setFilters(new InputFilter[] {new MoneyValueFilter()});
 
         btn_siguiente.setOnClickListener(new View.OnClickListener() {
             @Override

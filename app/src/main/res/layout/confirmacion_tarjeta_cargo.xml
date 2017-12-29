@@ -238,7 +238,7 @@
                     android:textColor="@android:color/black"
                     android:background="@color/color_blanco"
                     android:enabled="false"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center" />
 
             </LinearLayout>
 

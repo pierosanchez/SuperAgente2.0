@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.text.InputFilter;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
@@ -36,6 +37,7 @@ import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.MoneyValueFilter;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -107,6 +109,7 @@ public class SeleccionModoMontoPago extends Activity {
         desc_corta_banco = extras.getString("desc_corta_banco");
 
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
+        txt_monto_cuenta.setFilters(new InputFilter[] {new MoneyValueFilter()});
 
         monedaEntityArrayList = null;
         monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());

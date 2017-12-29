@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
+import com.example.ctorres.superagentemovil3.utils.MoneyValueFilter;
 
 public class IngresoMontoPagoPinTransferencias extends Activity {
 
@@ -80,6 +82,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
+        txt_moneda_pagar.setFilters(new InputFilter[] {new MoneyValueFilter()});
         txt_pin.requestFocus();
 
         focTipoTarjeta();
