@@ -99,7 +99,7 @@
                     android:text="@string/tv_tipo_moneda_modo_monto_pago"
                     android:textSize="16dp" />
 
-                <Spinner
+                <!--<Spinner
                     android:gravity="center"
                     android:id="@+id/spinnerTipoMonedaPago"
                     android:layout_width="150dp"
@@ -107,7 +107,28 @@
                     android:text="S/."
                     android:layout_marginLeft="45dp"
                     android:background="@drawable/btn_dropdown_normal"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black"/>-->
+
+                <RadioGroup
+                    android:id="@+id/rdgrp_tipo_moneda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_soles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rdbtn_soles"/>
+
+                    <RadioButton
+                        android:id="@+id/rdbtn_dolares"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rdbtn_dolares"/>
+
+                </RadioGroup>
 
             </LinearLayout>
 

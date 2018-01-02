@@ -57,6 +57,8 @@
     <string name="btn_otraOpe_voucher_Recarga">EFECTUAR OTRA OPERACIÓN</string>
     <string name="btn_otraReca_voucher_Recarga">EFECTUAR OTRA RECARGA</string>
     <string name="btn_ha_olvidado_clave_acceso">¿HA OLVIDADO SU CLAVE?</string>
+    <string name="rdbtn_soles">S/.</string>
+    <string name="rdbtn_dolares">US$</string>
 
     <!-- Fragmentos -->
 

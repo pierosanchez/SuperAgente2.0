@@ -45,12 +45,12 @@ import java.util.ArrayList;
 public class SeleccionModoMontoPago extends Activity {
 
     String tipoMoneda[] = {"S/.", "US$"};
-    Spinner spinnerTipoMonedaPago;
+    //Spinner spinnerTipoMonedaPago;
     LinearLayout btn_continuar, btn_cancelar;
-    RadioGroup rdgp_montos;
+    RadioGroup rdgp_montos, rdgrp_tipo_moneda;
     EditText txt_monto_minimo, txt_monto_mensual, txt_monto_total, txt_monto_cuenta;
     String monto;
-    RadioButton rdbtn_minimo, rdbtn_mensual, rdbtn_total, rdbtn_cuenta;
+    RadioButton rdbtn_minimo, rdbtn_mensual, rdbtn_total, rdbtn_cuenta, rdbtn_soles, rdbtn_dolares;
     Bitmap bmp;
     private UsuarioEntity usuario;
     String num_tarjeta, banco_tarjeta;
@@ -75,7 +75,7 @@ public class SeleccionModoMontoPago extends Activity {
         btn_continuar = (LinearLayout) findViewById(R.id.btn_continuar);
         btn_cancelar = (LinearLayout) findViewById(R.id.btn_cancelar);
 
-        spinnerTipoMonedaPago = (Spinner) findViewById(R.id.spinnerTipoMonedaPago);
+        //spinnerTipoMonedaPago = (Spinner) findViewById(R.id.spinnerTipoMonedaPago);
 
         txt_monto_minimo = (EditText) findViewById(R.id.txt_monto_minimo);
         txt_monto_mensual = (EditText) findViewById(R.id.txt_monto_mensual);
@@ -83,10 +83,14 @@ public class SeleccionModoMontoPago extends Activity {
         txt_monto_cuenta = (EditText) findViewById(R.id.txt_monto_cuenta);
 
         rdgp_montos = (RadioGroup) findViewById(R.id.rdgp_montos_pagar);
+        rdgrp_tipo_moneda = (RadioGroup) findViewById(R.id.rdgrp_tipo_moneda);
+
         rdbtn_minimo = (RadioButton) findViewById(R.id.rdbtn_minimo);
         rdbtn_mensual = (RadioButton) findViewById(R.id.rdbtn_mensual);
         rdbtn_total = (RadioButton) findViewById(R.id.rdbtn_total);
         rdbtn_cuenta = (RadioButton) findViewById(R.id.rdbtn_cuenta);
+        rdbtn_soles = (RadioButton) findViewById(R.id.rdbtn_soles);
+        rdbtn_dolares = (RadioButton) findViewById(R.id.rdbtn_dolares);
 
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -111,12 +115,6 @@ public class SeleccionModoMontoPago extends Activity {
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
         txt_monto_cuenta.setFilters(new InputFilter[] {new MoneyValueFilter()});
 
-        monedaEntityArrayList = null;
-        monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());
-        spinnerTipoMonedaPago.setAdapter(monedaAdapter);
-
-        ejecutarLista();
-
         focTipoTarjeta();
         //cargarTipoTarjetas();
 
@@ -136,6 +134,27 @@ public class SeleccionModoMontoPago extends Activity {
         tv_tipo_moneda_modo_monto_4.setText(spinnerTipoMonedaPago.getText().toString());*/
 
 
+        rdgrp_tipo_moneda.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                if (checkedId == R.id.rdbtn_soles){
+                    tipo_moneda_deuda = rdbtn_soles.getText().toString();
+                    deudasTarjetasSolesArrayList = null;
+                    deudasTarjetasSolesAdapter = new DeudasTarjetasSolesAdapter(deudasTarjetasSolesArrayList, getApplication());
+
+                    ejecutarListaSoles();
+                } else if (checkedId == R.id.rdbtn_dolares){
+                    tipo_moneda_deuda = rdbtn_dolares.getText().toString();
+                    deudasTarjetasDolaresArrayList = null;
+                    deudasTarjetasDolaresAdapter = new DeudasTarjetasDolaresAdapter(deudasTarjetasDolaresArrayList, getApplication());
+
+                    ejecutarListaDolares();
+                }
+            }
+        });
+
+        rdbtn_soles.setChecked(true);
+
         rdgp_montos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
@@ -154,23 +173,10 @@ public class SeleccionModoMontoPago extends Activity {
             }
         });
 
-        spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinnerTipoMonedaPago.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tipo_moneda_deuda = monedaAdapter.getItem(position).getSigno_moneda();
-                /*if (!spinnerTipoMonedaPago.getSelectedItem().toString().equals("S/.")){
-                    txt_monto_minimo.setText("15.10");
-                    txt_monto_mensual.setText("25.12");
-                    txt_monto_total.setText("100.75");
-                } else {
-                    txt_monto_minimo.setText("50.78");
-                    txt_monto_mensual.setText("120.44");
-                    txt_monto_total.setText("236.11");
-                }
-                tv_tipo_moneda_modo_monto_1.setText(obtenerTipoMonedaDeuda());
-                tv_tipo_moneda_modo_monto_2.setText(obtenerTipoMonedaDeuda());
-                tv_tipo_moneda_modo_monto_3.setText(obtenerTipoMonedaDeuda());
-                tv_tipo_moneda_modo_monto_4.setText(obtenerTipoMonedaDeuda());*/
 
                 if (monedaAdapter.getItem(position).getCod_tipo_moneda() == 2){
                     deudasTarjetasSolesArrayList = null;
@@ -192,7 +198,7 @@ public class SeleccionModoMontoPago extends Activity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
         btn_continuar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -392,11 +398,13 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasSolesAdapter.setNewListDeudasTarjetas(deudasTarjetasSolesArrayList);
             deudasTarjetasSolesAdapter.notifyDataSetChanged();
-            if (deudasTarjetasSolesArrayList.size() == 0){
-                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas", Toast.LENGTH_LONG).show();
+            if (deudasTarjetasSolesArrayList == null){
+                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas en soles", Toast.LENGTH_LONG).show();
                 txt_monto_minimo.setText("0.00");
                 txt_monto_mensual.setText("0.00");
                 txt_monto_total.setText("0.00");
+                rdbtn_soles.setChecked(false);
+                rdbtn_dolares.setChecked(true);
             } else {
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMensual())));
@@ -438,11 +446,18 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasDolaresAdapter.setNewListDeudasTarjetas(deudasTarjetasDolaresArrayList);
             deudasTarjetasDolaresAdapter.notifyDataSetChanged();
-            if (deudasTarjetasDolaresArrayList.size() == 0){
-                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas", Toast.LENGTH_LONG).show();
+            if (deudasTarjetasDolaresArrayList == null){
+                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas en dolares", Toast.LENGTH_LONG).show();
                 txt_monto_minimo.setText("0.00");
                 txt_monto_mensual.setText("0.00");
                 txt_monto_total.setText("0.00");
+
+                Intent intent = new Intent(SeleccionModoMontoPago.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
             } else {
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMensual())));

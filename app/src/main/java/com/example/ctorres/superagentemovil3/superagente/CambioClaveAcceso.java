@@ -64,7 +64,7 @@ public class CambioClaveAcceso extends Activity {
                     CambioClaveAcceso.actualizarClaveAcceso validador = new CambioClaveAcceso.actualizarClaveAcceso();
                     validador.execute();
                 } else if (!nueva_clave.equals(nueva_clave_confirmacion)) {
-                    Toast.makeText(CambioClaveAcceso.this, "No coinciden las contraseñas ingresadas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CambioClaveAcceso.this, "No coinciden las nuevas contraseñas ingresadas", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -104,15 +104,14 @@ public class CambioClaveAcceso extends Activity {
 
         @Override
         protected void onPostExecute(UsuarioEntity usuarioEntity) {
-            usuario = usuarioEntity;
-            if (usuario.getRpta_cambio_clave() != null) {
-                if (usuario.getRpta_cambio_clave().equals("1")) {
+            if (usuarioEntity.getRpta_cambio_clave() != null) {
+                if (usuarioEntity.getRpta_cambio_clave().equals("1")) {
                     Toast.makeText(CambioClaveAcceso.this, "La Contraseña ingresada, no es correcta", Toast.LENGTH_SHORT).show();
-                } else if (usuario.getRpta_cambio_clave().equals("2")) {
+                } else if (usuarioEntity.getRpta_cambio_clave().equals("2")) {
                     Toast.makeText(CambioClaveAcceso.this, "La respuesta ingresada, no es correcta", Toast.LENGTH_SHORT).show();
-                } else if (usuario.getRpta_cambio_clave().equals("3")) {
-                    Toast.makeText(CambioClaveAcceso.this, "La contraseña ingresada, ya existe para este usuario", Toast.LENGTH_SHORT).show();
-                } else if (usuario.getRpta_cambio_clave().equals("0")) {
+                } else if (usuarioEntity.getRpta_cambio_clave().equals("3")) {
+                    Toast.makeText(CambioClaveAcceso.this, "La contraseña ingresada no puede ser iual a la anterior", Toast.LENGTH_SHORT).show();
+                } else if (usuarioEntity.getRpta_cambio_clave().equals("0")) {
                     Intent intent = new Intent(CambioClaveAcceso.this, CambioClaveAccesoExitosa.class);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);

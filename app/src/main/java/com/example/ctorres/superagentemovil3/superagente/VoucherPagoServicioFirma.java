@@ -59,7 +59,7 @@ public class VoucherPagoServicioFirma extends Activity {
     ImageView signImage;
     Button btn_fimar, btn_salir, btn_pagar_otros_servicios, btn_efectuar_otra_operacion;
     String num_tarjeta, monto_servicio, servicio, num_servicio, tipo_moneda_deuda, comision, cliente,
-            cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV, nro_unico;
+            cli_dni, nombre_recibo, tipo_servicio, fechaV, horaV, nro_unico, validacion_tarjeta, tipoPago;
     int tipo_tarjeta, emisor_tarjeta, tipo_tarjeta_pago, cod_banco;
     TextView tv_fecha_pago, txt_hora_pago, tv_comision_oper_servicio, tv_importe_servicio, tv_forma_pago, txt_suministro_pagar_voucher, txt_servicio_pagar_voucher,
             tv_total_servicio_pagar_voucher, tv_banco_tarjeta_usuario, txt_pagado_por, tv_tipo_moneda_importe_voucher, tv_tipo_moneda_comision_voucher, tv_tipo_moneda_total_voucher,
@@ -116,6 +116,8 @@ public class VoucherPagoServicioFirma extends Activity {
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
         tipo_servicio = extras.getString("tipo_servicio");
+        validacion_tarjeta = extras.getString("validacion_tarjeta");
+        tipoPago = tipoTarjeta() + " con " + validacion_tarjeta;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
 
@@ -136,7 +138,7 @@ public class VoucherPagoServicioFirma extends Activity {
         txt_servicio_pagar_voucher.setText(servicio);
         txt_suministro_pagar_voucher.setText(num_servicio);
         tv_total_servicio_pagar_voucher.setText(totalServicioPagar());
-        tv_forma_pago.setText(tipoTarjeta());
+        tv_forma_pago.setText(tipoPago);
         txt_pagado_por.setText(cliente);
         tv_tipo_moneda_importe_voucher.setText(tipo_moneda_deuda);
         tv_tipo_moneda_comision_voucher.setText(tipo_moneda_deuda);

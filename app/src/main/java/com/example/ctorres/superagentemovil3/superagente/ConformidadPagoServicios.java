@@ -128,6 +128,7 @@ public class ConformidadPagoServicios extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     intent.putExtra("nombre_recibo", nombre_recibo);
                     intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
                 } else if (tipo_tarjeta_pago == 1) {
@@ -151,6 +152,7 @@ public class ConformidadPagoServicios extends Activity {
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("nombre_recibo", nombre_recibo);
                         intent.putExtra("nro_unico", nro_unico);
+                        intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                         startActivity(intent);
                         finish();
                     } else if (validacion_tarjeta.equals("Pin")){
@@ -173,6 +175,7 @@ public class ConformidadPagoServicios extends Activity {
                         intent.putExtra("cli_dni", cli_dni);
                         intent.putExtra("nombre_recibo", nombre_recibo);
                         intent.putExtra("nro_unico", nro_unico);
+                        intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                         startActivity(intent);
                         finish();
                     }
