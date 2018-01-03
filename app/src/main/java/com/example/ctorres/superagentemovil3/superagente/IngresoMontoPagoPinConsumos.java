@@ -130,6 +130,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tipo_moneda = monedaAdapter.getItem(position).getSigno_moneda();
+                txt_monto_pago_consumo.requestFocus();
             }
 
             @Override
@@ -228,7 +229,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
     public void cancelar() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
         alertDialog.setTitle("Cancelar");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

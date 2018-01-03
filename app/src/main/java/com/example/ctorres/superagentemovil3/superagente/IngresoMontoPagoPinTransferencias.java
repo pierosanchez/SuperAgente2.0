@@ -110,6 +110,18 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
             }
         });
 
+        spinnerMonedaPagar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                txt_moneda_pagar.requestFocus();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btn_continuar_pago.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +177,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
     public void cancelar() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
         alertDialog.setTitle("Cancelar");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

@@ -110,7 +110,7 @@ public class CambioClaveAcceso extends Activity {
                 } else if (usuarioEntity.getRpta_cambio_clave().equals("2")) {
                     Toast.makeText(CambioClaveAcceso.this, "La respuesta ingresada, no es correcta", Toast.LENGTH_SHORT).show();
                 } else if (usuarioEntity.getRpta_cambio_clave().equals("3")) {
-                    Toast.makeText(CambioClaveAcceso.this, "La contraseña ingresada no puede ser iual a la anterior", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CambioClaveAcceso.this, "La contraseña ingresada no puede ser igual a la anterior", Toast.LENGTH_SHORT).show();
                 } else if (usuarioEntity.getRpta_cambio_clave().equals("0")) {
                     Intent intent = new Intent(CambioClaveAcceso.this, CambioClaveAccesoExitosa.class);
                     intent.putExtra("usuario", usuario);

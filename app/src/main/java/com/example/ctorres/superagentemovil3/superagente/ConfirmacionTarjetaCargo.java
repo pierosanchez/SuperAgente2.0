@@ -295,7 +295,7 @@ public class ConfirmacionTarjetaCargo extends Activity {
 
     public void cancelar() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea cacelar la transacción?");
+        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
         alertDialog.setTitle("Cancelar");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
