@@ -5,7 +5,8 @@ package com.example.ctorres.superagentemovil3.entity;
  */
 
 public class BeneficiarioEntity {
-    private String nombre, apellido, celular1, celular2, email, fechaNac, pass, dni, idcliente, cod_interbancario, num_tarjeta_beneficiario, errror_ingreso_cuenta, error;
+    private String nombre, apellido, celular1, celular2, email, fechaNac, pass, dni, idcliente,
+            cod_interbancario, num_tarjeta_beneficiario, errror_ingreso_cuenta, error, rpta_tarjetas_beneficiario;
     private int cod_emisor_tarjeta, cod_banco, cod_tipo_tarjeta, cod_tipo_cuenta, id_cuenta_benef;
 
     public BeneficiarioEntity() {
@@ -37,6 +38,14 @@ public class BeneficiarioEntity {
 
     public BeneficiarioEntity(String cod_interbancario) {
         this.cod_interbancario = cod_interbancario;
+    }
+
+    public String getRpta_tarjetas_beneficiario() {
+        return rpta_tarjetas_beneficiario;
+    }
+
+    public void setRpta_tarjetas_beneficiario(String rpta_tarjetas_beneficiario) {
+        this.rpta_tarjetas_beneficiario = rpta_tarjetas_beneficiario;
     }
 
     public String getError() {

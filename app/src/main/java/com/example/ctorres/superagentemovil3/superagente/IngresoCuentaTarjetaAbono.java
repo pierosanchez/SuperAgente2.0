@@ -61,6 +61,7 @@ public class IngresoCuentaTarjetaAbono extends Activity {
     int tipo_tarjeta;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    String valida;
 
 
     @Override
@@ -212,7 +213,9 @@ public class IngresoCuentaTarjetaAbono extends Activity {
                     } else if (rdbtn_tarjeta_transferencia.isChecked()) {
                         if (arrayBeneficiarioTarjetas == null){
                             Toast.makeText(IngresoCuentaTarjetaAbono.this, "El beneficiario no tiene tarjetas registradas", Toast.LENGTH_SHORT).show();
-                        } else if (arrayBeneficiarioTarjetas != null) {
+                        } else if (valida.equals("01")){
+                            Toast.makeText(IngresoCuentaTarjetaAbono.this, "No se puede usar una tarjeta de abono igual a de cargo", Toast.LENGTH_LONG).show();
+                        } else if (arrayBeneficiarioTarjetas != null && valida.equals("00")) {
                             if (tipo_tarjeta == 2) {
                                 tipoAbono = rdbtn_tarjeta_transferencia.getText().toString();
                                 IngresoCuentaTarjetaAbono.ingresarVoucher ingreso = new IngresoCuentaTarjetaAbono.ingresarVoucher();
@@ -572,6 +575,11 @@ public class IngresoCuentaTarjetaAbono extends Activity {
             super.onPostExecute(aVoid);
             adapterTarjetasBeneficiario.setNewListBeneficiario(arrayBeneficiarioTarjetas);
             adapterTarjetasBeneficiario.notifyDataSetChanged();
+            if (adapterTarjetasBeneficiario.getItem(0).getRpta_tarjetas_beneficiario().equals("01")){
+                valida = "01";
+            } else {
+                valida = "00";
+            }
         }
     }
 

@@ -28,6 +28,108 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public ArrayList<UbigeoEntity> ListarProvinciaUbigeo(String ubigeo1) {
+        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarProvincia/?ubigeo1=" + ubigeo1;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
+                        usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
+                        usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
+                        usuarioEntity.setDepartamento(utils.getValueStringOrNull(jsonObject, "departamento"));
+                        usuarioEntity.setDistrito(utils.getValueStringOrNull(jsonObject, "distrito"));
+                        usuarioEntity.setProvincia(utils.getValueStringOrNull(jsonObject, "provincia"));
+                        listaUsuario.add(usuarioEntity);
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
+    public ArrayList<UbigeoEntity> ListarDistritoUbigeo(String ubigeo1, String ubigeo2) {
+        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarDistrito/?ubigeo1=" + ubigeo1 + "&ubigeo2=" + ubigeo2;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
+                        usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
+                        usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
+                        usuarioEntity.setDepartamento(utils.getValueStringOrNull(jsonObject, "departamento"));
+                        usuarioEntity.setDistrito(utils.getValueStringOrNull(jsonObject, "distrito"));
+                        usuarioEntity.setProvincia(utils.getValueStringOrNull(jsonObject, "provincia"));
+                        listaUsuario.add(usuarioEntity);
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
+    public ArrayList<UbigeoEntity> ListarDepartamento() {
+        ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ListarDepartamento/?vac03=";
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        UbigeoEntity usuarioEntity = new UbigeoEntity();
+                        usuarioEntity.setUbigeo1(utils.getValueStringOrNull(jsonObject, "ubigeo1"));
+                        usuarioEntity.setUbigeo2(utils.getValueStringOrNull(jsonObject, "ubigeo2"));
+                        usuarioEntity.setUbigeo3(utils.getValueStringOrNull(jsonObject, "ubigeo3"));
+                        usuarioEntity.setDepartamento(utils.getValueStringOrNull(jsonObject, "departamento"));
+                        usuarioEntity.setDistrito(utils.getValueStringOrNull(jsonObject, "distrito"));
+                        usuarioEntity.setProvincia(utils.getValueStringOrNull(jsonObject, "provincia"));
+                        listaUsuario.add(usuarioEntity);
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
     public VoucherTransferenciasEntity getNumeroUnicoTransferencias(String numeroUni) {
         VoucherTransferenciasEntity tipoTarjetaEntity = new VoucherTransferenciasEntity();
 
@@ -208,7 +310,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         ComercioEntity tipoTarjetaEntity = new ComercioEntity();
-                        tipoTarjetaEntity.setDesc_distrito(utils.getValueStringOrNull(jsonObject, "desc_distrito"));
+                        tipoTarjetaEntity.setDesc_distrito(utils.getValueStringOrNull(jsonObject, "distrito"));
                         tipoTarjetaEntity.setDireccion_comercio(utils.getValueStringOrNull(jsonObject, "direccion_comercio"));
                         tipoTarjetaEntity.setId_comercio(utils.getValueStringOrNull(jsonObject, "id_comercio"));
                         tipoTarjetaEntity.setRaz_social_comercio(utils.getValueStringOrNull(jsonObject, "raz_social_comercio"));
@@ -1466,6 +1568,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         beneficiarioEntity.setNum_tarjeta_beneficiario(utils.getValueStringOrNull(jsonObject, "num_tarjeta_benef"));
                         beneficiarioEntity.setCod_emisor_tarjeta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_emisor_tarjeta")));
                         beneficiarioEntity.setId_cuenta_benef(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_cuenta_benef")));
+                        beneficiarioEntity.setRpta_tarjetas_beneficiario(utils.getValueStringOrNull(jsonObject, "rpta_tarjetas_beneficiario"));
                         listaBeneficiario.add(beneficiarioEntity);
                     }
                 } else {

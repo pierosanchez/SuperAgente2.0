@@ -18,6 +18,7 @@ import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
 import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.TipoTarjetaEntity;
+import com.example.ctorres.superagentemovil3.entity.UbigeoEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoRecargaEntity;
@@ -91,4 +92,7 @@ public interface SuperAgenteDaoInterface {
     VoucherPagoConsumoEntity getNumeroUnicoConsumos(String numeroUni);
     VoucherPagoServicioEntity getNumeroUnicoServicios(String numeroUni);
     VoucherPagoRecargaEntity getNumeroUnicoRecargas(String numeroUni);
+    ArrayList<UbigeoEntity> ListarDepartamento();
+    ArrayList<UbigeoEntity> ListarDistritoUbigeo(String ubigeo1, String ubigeo2);
+    ArrayList<UbigeoEntity> ListarProvinciaUbigeo(String ubigeo1);
 }
