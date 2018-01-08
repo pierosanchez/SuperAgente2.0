@@ -95,4 +95,5 @@ public interface SuperAgenteDaoInterface {
     ArrayList<UbigeoEntity> ListarDepartamento();
     ArrayList<UbigeoEntity> ListarDistritoUbigeo(String ubigeo1, String ubigeo2);
     ArrayList<UbigeoEntity> ListarProvinciaUbigeo(String ubigeo1);
+    BeneficiarioEntity DetalleTarjetaBeneficiario(int idcuentabenef);
 }

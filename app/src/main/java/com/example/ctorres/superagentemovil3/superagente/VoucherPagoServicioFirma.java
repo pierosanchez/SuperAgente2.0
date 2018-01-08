@@ -116,6 +116,7 @@ public class VoucherPagoServicioFirma extends Activity {
         cli_dni = extras.getString("cli_dni");
         nombre_recibo = extras.getString("nombre_recibo");
         tipo_servicio = extras.getString("tipo_servicio");
+        nro_unico = extras.getString("nro_unico");
         validacion_tarjeta = extras.getString("validacion_tarjeta");
         tipoPago = tipoTarjeta() + " con " + validacion_tarjeta;
         fechaV = "FECHA: " + obtenerFecha();

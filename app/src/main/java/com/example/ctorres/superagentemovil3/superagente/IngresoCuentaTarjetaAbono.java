@@ -575,10 +575,12 @@ public class IngresoCuentaTarjetaAbono extends Activity {
             super.onPostExecute(aVoid);
             adapterTarjetasBeneficiario.setNewListBeneficiario(arrayBeneficiarioTarjetas);
             adapterTarjetasBeneficiario.notifyDataSetChanged();
-            if (adapterTarjetasBeneficiario.getItem(0).getRpta_tarjetas_beneficiario().equals("01")){
-                valida = "01";
-            } else {
-                valida = "00";
+            if (arrayBeneficiarioTarjetas != null) {
+                if (adapterTarjetasBeneficiario.getItem(0).getRpta_tarjetas_beneficiario().equals("01")) {
+                    valida = "01";
+                } else if (adapterTarjetasBeneficiario.getItem(0).getRpta_tarjetas_beneficiario().equals("00")) {
+                    valida = "00";
+                }
             }
         }
     }

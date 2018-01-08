@@ -42,6 +42,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
     String dni_benef;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
     String cliente, cli_dni;
+    String valida_modi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,9 @@ public class ActualizarTarjetaBeneficiario extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
+        ActualizarTarjetaBeneficiario.detalleTarjeta detalle = new ActualizarTarjetaBeneficiario.detalleTarjeta();
+        detalle.execute();
+
         rdbtn_mc_option.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,15 +115,20 @@ public class ActualizarTarjetaBeneficiario extends Activity {
         btn_guardar_actualizacion_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ingresarTarjetas();
 
-                Intent intent = new Intent(ActualizarTarjetaBeneficiario.this, ListadoCuentasTarjetasBeneficiario.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("dni_benef", dni_benef);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                /*if (valida_modi.equals("01")){
+                    Toast.makeText(ActualizarTarjetaBeneficiario.this, "Esta tarjeta no puede ser modificada debido a que ya pertene a un banco", Toast.LENGTH_LONG).show();
+                } else {*/
+                    ingresarTarjetas();
+
+                    Intent intent = new Intent(ActualizarTarjetaBeneficiario.this, ListadoCuentasTarjetasBeneficiario.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("dni_benef", dni_benef);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                //}
             }
         });
 
@@ -344,5 +353,103 @@ public class ActualizarTarjetaBeneficiario extends Activity {
         }
 
         return tipo;
+    }
+
+    private class detalleTarjeta extends AsyncTask<String, Void, BeneficiarioEntity> {
+
+        String tarjeta1 = nroTarjetaDigito1.getText().toString();
+        String tarjeta2 = nroTarjetaDigito2.getText().toString();
+        String tarjeta3 = nroTarjetaDigito3.getText().toString();
+        String tarjeta4 = nroTarjetaDigito4.getText().toString();
+        String numeroTarjeta = tarjeta1 + tarjeta2 + tarjeta3 + tarjeta4;
+        //String cvv = txt_cvv_tarjeta.getText().toString();
+        String venimientoTarjeta = txt_fecha_vcto_tarjeta.getText().toString();
+        //String bancoTarjeta = spinnerBancoTarjeta.getSelectedItem().toString();
+
+        @Override
+        protected BeneficiarioEntity doInBackground(String... params) {
+            BeneficiarioEntity user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.DetalleTarjetaBeneficiario(id_cuenta_benef);
+
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(BeneficiarioEntity entity){
+            if (entity != null){
+                if (entity.getValidaModi().equals("01")){
+                    valida_modi = "01";
+                    nroTarjetaDigito1.setText(entity.getPrimParte());
+                    nroTarjetaDigito2.setText(entity.getSegParte());
+                    nroTarjetaDigito3.setText(entity.getTerParte());
+                    nroTarjetaDigito4.setText(entity.getCuaParte());
+                    rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
+                    rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
+                    rdbtn_mc_option = (RadioButton) findViewById(R.id.rdbtn_mc_option);
+                    if (entity.getCod_emisor_tarjeta() == 1){
+                        rdbtn_visa_option.setChecked(true);
+                        rdbtn_amex_option.setChecked(false);
+                        rdbtn_mc_option.setChecked(false);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    } else if (entity.getCod_emisor_tarjeta() == 2){
+                        rdbtn_visa_option.setChecked(false);
+                        rdbtn_amex_option.setChecked(false);
+                        rdbtn_mc_option.setChecked(true);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    } else if (entity.getCod_emisor_tarjeta() == 3){
+                        rdbtn_visa_option.setChecked(false);
+                        rdbtn_amex_option.setChecked(true);
+                        rdbtn_mc_option.setChecked(false);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    }
+                } else if (entity.getValidaModi().equals("00")) {
+                    nroTarjetaDigito1.setText(entity.getPrimParte());
+                    nroTarjetaDigito2.setText(entity.getSegParte());
+                    nroTarjetaDigito3.setText(entity.getTerParte());
+                    nroTarjetaDigito4.setText(entity.getCuaParte());
+                    rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
+                    rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
+                    rdbtn_mc_option = (RadioButton) findViewById(R.id.rdbtn_mc_option);
+                    if (entity.getCod_emisor_tarjeta() == 1) {
+                        rdbtn_visa_option.setChecked(true);
+                        rdbtn_amex_option.setChecked(false);
+                        rdbtn_mc_option.setChecked(false);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    } else if (entity.getCod_emisor_tarjeta() == 2) {
+                        rdbtn_visa_option.setChecked(false);
+                        rdbtn_amex_option.setChecked(false);
+                        rdbtn_mc_option.setChecked(true);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    } else if (entity.getCod_emisor_tarjeta() == 3) {
+                        rdbtn_visa_option.setChecked(false);
+                        rdbtn_amex_option.setChecked(true);
+                        rdbtn_mc_option.setChecked(false);
+                        rdbtn_visa_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                    }
+                }
+            } else {
+                Toast.makeText(ActualizarTarjetaBeneficiario.this, "Hubo un error en traer los datos", Toast.LENGTH_LONG).show();
+            }
+        }
+
     }
 }

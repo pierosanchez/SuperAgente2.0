@@ -56,6 +56,7 @@ public class ActualizarTarjeta extends Activity {
     BancosAdapter bancosAdapter;
     TipoTarjetaAdapter tipoTarjetaAdapter;
     LinearLayout ll_validacion_tarjeta;
+    String validaModi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,14 +176,17 @@ public class ActualizarTarjeta extends Activity {
         btn_guardar_actualizacion_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ingresarTarjetas();
-
-                Intent intent = new Intent(ActualizarTarjeta.this, ListadoTarjetasUsuario.class);
-                intent.putExtra("usuario", usuario);
-                intent.putExtra("cliente", cliente);
-                intent.putExtra("cli_dni", cli_dni);
-                startActivity(intent);
-                finish();
+                if (validaModi.equals("01")){
+                    Toast.makeText(ActualizarTarjeta.this, "No se puede modificar esta tarjeta, ya que es perteneciente a un banco", Toast.LENGTH_LONG).show();
+                } else if (validaModi.equals("00")) {
+                    ingresarTarjetas();
+                    Intent intent = new Intent(ActualizarTarjeta.this, ListadoTarjetasUsuario.class);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("cli_dni", cli_dni);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
 
@@ -446,16 +450,33 @@ public class ActualizarTarjeta extends Activity {
             nroTarjetaDigito2.setText(tarjetaList.get(0).getSegParteNumTarjeta());
             nroTarjetaDigito3.setText(tarjetaList.get(0).getTerParteNumTarjeta());
             nroTarjetaDigito4.setText(tarjetaList.get(0).getCuaParteNumTarjeta());
-            for (int i = bancosEntityArrayList.size() - 1; i >= 0; i--){
-                if (detalleTarjetaAdapter.getItem(0).getCodBanco() == bancosAdapter.getItem(i).getCod_banco()){
-                    spinnerBancoTarjeta.setSelection(i);
-                    break;
+            if (detalleTarjetaAdapter.getItem(0).getValidaModi().equals("01")){
+                validaModi = "01";
+                for (int i = bancosEntityArrayList.size() - 1; i >= 0; i--) {
+                    if (detalleTarjetaAdapter.getItem(0).getCodBanco() == bancosAdapter.getItem(i).getCod_banco()) {
+                        spinnerBancoTarjeta.setSelection(i);
+                        break;
+                    }
                 }
-            }
-            for (int i = tipoTarjetaEntitiesArrayList.size() - 1; i >= 0; i--){
-                if (detalleTarjetaAdapter.getItem(0).getCodTipoTarjeta() == tipoTarjetaAdapter.getItem(i).getCodTipoTarjeta()){
-                    spinnerTipoTarjeta.setSelection(i);
-                    break;
+                for (int i = tipoTarjetaEntitiesArrayList.size() - 1; i >= 0; i--) {
+                    if (detalleTarjetaAdapter.getItem(0).getCodTipoTarjeta() == tipoTarjetaAdapter.getItem(i).getCodTipoTarjeta()) {
+                        spinnerTipoTarjeta.setSelection(i);
+                        break;
+                    }
+                }
+            } else if (detalleTarjetaAdapter.getItem(0).getValidaModi().equals("00")) {
+                validaModi = "00";
+                for (int i = bancosEntityArrayList.size() - 1; i >= 0; i--) {
+                    if (detalleTarjetaAdapter.getItem(0).getCodBanco() == bancosAdapter.getItem(i).getCod_banco()) {
+                        spinnerBancoTarjeta.setSelection(i);
+                        break;
+                    }
+                }
+                for (int i = tipoTarjetaEntitiesArrayList.size() - 1; i >= 0; i--) {
+                    if (detalleTarjetaAdapter.getItem(0).getCodTipoTarjeta() == tipoTarjetaAdapter.getItem(i).getCodTipoTarjeta()) {
+                        spinnerTipoTarjeta.setSelection(i);
+                        break;
+                    }
                 }
             }
         }

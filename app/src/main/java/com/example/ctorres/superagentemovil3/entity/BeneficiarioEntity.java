@@ -8,6 +8,7 @@ public class BeneficiarioEntity {
     private String nombre, apellido, celular1, celular2, email, fechaNac, pass, dni, idcliente,
             cod_interbancario, num_tarjeta_beneficiario, errror_ingreso_cuenta, error, rpta_tarjetas_beneficiario;
     private int cod_emisor_tarjeta, cod_banco, cod_tipo_tarjeta, cod_tipo_cuenta, id_cuenta_benef;
+    private String primParte, segParte, terParte, cuaParte, validaModi;
 
     public BeneficiarioEntity() {
     }
@@ -34,6 +35,46 @@ public class BeneficiarioEntity {
     public BeneficiarioEntity(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+    public String getValidaModi() {
+        return validaModi;
+    }
+
+    public void setValidaModi(String validaModi) {
+        this.validaModi = validaModi;
+    }
+
+    public String getPrimParte() {
+        return primParte;
+    }
+
+    public void setPrimParte(String primParte) {
+        this.primParte = primParte;
+    }
+
+    public String getSegParte() {
+        return segParte;
+    }
+
+    public void setSegParte(String segParte) {
+        this.segParte = segParte;
+    }
+
+    public String getTerParte() {
+        return terParte;
+    }
+
+    public void setTerParte(String terParte) {
+        this.terParte = terParte;
+    }
+
+    public String getCuaParte() {
+        return cuaParte;
+    }
+
+    public void setCuaParte(String cuaParte) {
+        this.cuaParte = cuaParte;
     }
 
     public BeneficiarioEntity(String cod_interbancario) {

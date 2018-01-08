@@ -28,6 +28,40 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public BeneficiarioEntity DetalleTarjetaBeneficiario(int idcuentabenef) {
+        BeneficiarioEntity listaUsuario = new BeneficiarioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/DetalleTarjetaBeneficario/?idcuentabenef=" + idcuentabenef;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        listaUsuario.setPrimParte(utils.getValueStringOrNull(jsonObject, "primParte"));
+                        listaUsuario.setSegParte(utils.getValueStringOrNull(jsonObject, "segParte"));
+                        listaUsuario.setTerParte(utils.getValueStringOrNull(jsonObject, "terParte"));
+                        listaUsuario.setCuaParte(utils.getValueStringOrNull(jsonObject, "cuaParte"));
+                        listaUsuario.setCod_emisor_tarjeta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_emisor_tarjeta")));
+                        listaUsuario.setCod_tipo_cuenta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_cuenta")));
+                        listaUsuario.setCod_banco(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_banco")));
+                        listaUsuario.setValidaModi(utils.getValueStringOrNull(jsonObject, "valida_modi"));
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
     public ArrayList<UbigeoEntity> ListarProvinciaUbigeo(String ubigeo1) {
         ArrayList<UbigeoEntity> listaUsuario = new ArrayList<>();
 
@@ -967,6 +1001,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         beneficiarioEntity.setFecha_venci(utils.getValueStringOrNull(jsonObject, "fecha_venc"));
                         beneficiarioEntity.setCodBanco(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_banco")));
                         beneficiarioEntity.setCodTipoTarjeta(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_tarjeta")));
+                        beneficiarioEntity.setValidaModi(utils.getValueStringOrNull(jsonObject, "valida_modi"));
                         listaTarjeta.add(beneficiarioEntity);
                     }
                 } else {
@@ -1927,7 +1962,15 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             benef = new BeneficiarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarBeneficiario/?name=" + name + "&lastname=" + lastname + "&cel1=" + cel1 + "&cel2=" + cel2 + "&e_mail=" + e_mail + "&birth=" + birth + "&password=" + password + "&DNI=" + DNI + "&abonos=" + abonos;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ActualizarBeneficiario/?name=" + URLEncoder.encode(name, "UTF-8")
+                    + "&lastname=" + URLEncoder.encode(lastname, "UTF-8")
+                    + "&cel1=" + URLEncoder.encode(cel1, "UTF-8")
+                    + "&cel2=" + URLEncoder.encode(cel2, "UTF-8")
+                    + "&e_mail=" + URLEncoder.encode(e_mail, "UTF-8")
+                    + "&birth=" + URLEncoder.encode(birth, "UTF-8")
+                    + "&password=" + URLEncoder.encode(password, "UTF-8")
+                    + "&DNI=" + URLEncoder.encode(DNI, "UTF-8")
+                    + "&abonos=" + URLEncoder.encode(String.valueOf(abonos), "UTF-8") ;
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
