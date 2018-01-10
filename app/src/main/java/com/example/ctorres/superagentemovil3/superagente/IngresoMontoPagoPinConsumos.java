@@ -52,6 +52,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
     String id_com;
     LinearLayout ll_cantidad_cuotas;
     TextView tv_razonsoc_comercio,tv_direccion_comercio,tv_distrito_comercio, tv_pago_cuotas;
+    int estado = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
         cargarCuotas();
         deseaCuotas();
+        getSelectedItem();
 
         if (tipo_tarjeta_pago == 2){
             sp_pago_cuotas.setVisibility(View.GONE);
@@ -113,8 +115,6 @@ public class IngresoMontoPagoPinConsumos extends Activity {
         tv_direccion_comercio.setText(parteDireccion);
         tv_distrito_comercio.setText(parteDistrito);*/
 
-        txt_pin_pago_consumo.requestFocus();
-
         monedaEntityArrayList = null;
         monedaAdapter = new MonedaAdapter(monedaEntityArrayList, getApplication());
         spinnerTipoMoneda.setAdapter(monedaAdapter);
@@ -126,11 +126,14 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
         ejecutarListaDetalleComercio();
 
+        txt_pin_pago_consumo.requestFocus();
+        spinnerTipoMoneda.setFocusable(false);
+
         spinnerTipoMoneda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tipo_moneda = monedaAdapter.getItem(position).getSigno_moneda();
-                txt_monto_pago_consumo.requestFocus();
+                //txt_monto_pago_consumo.requestFocus();
             }
 
             @Override
@@ -193,6 +196,8 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                 cancelar();
             }
         });
+
+
     }
 
     private void ejecutarLista() {
@@ -214,7 +219,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
                 monedaEntityArrayList = dao.ListarMoneda();
             } catch (Exception e) {
-                //fldag_clic_ingreso = 0;;
+                //fldag_clic_ingreso = 0;
             }
             return null;
         }
@@ -301,5 +306,24 @@ public class IngresoMontoPagoPinConsumos extends Activity {
             distrito_comerciosp = comercioEntityArrayList.get(0).getDesc_distrito();
             id_com = comercioEntityArrayList.get(0).getId_comercio();
         }
+    }
+
+    private void getSelectedItem() {
+        spinnerTipoMoneda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                estado ++;
+                if (estado == 1) {
+                    txt_pin_pago_consumo.requestFocus();
+                } else if (estado > 1){
+                    txt_monto_pago_consumo.requestFocus();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                estado ++;
+            }
+        });
     }
 }

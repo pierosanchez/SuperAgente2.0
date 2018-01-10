@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorfondoactivity"
+    android:orientation="vertical"
+    tools:context="com.example.ctorres.superagentemovil3.superagente.LoginNumeroCliente">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textViewInfoElectronica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorFondo"
+            android:gravity="center"
+            android:text="@string/titulo_acceso_sistema"
+            android:textColor="@color/color_blanco"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/rounded_rectangle"
+                    android:orientation="vertical">
+
+                    <LinearLayout style="@style/linearLayoutStyle">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center"
+                            android:text="@string/tv_ingrese_numero_celular"
+                            android:textColor="@color/color_blanco"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/linearLayoutStyle"
+                        android:layout_gravity="center">
+
+                        <EditText
+                            android:id="@+id/usuario"
+                            style="@style/editTextStyle"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginTop="5dp"
+                            android:inputType="phone"
+                            android:maxLength="9"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center">
+
+                        <ProgressBar
+                            android:id="@+id/circleProgressBar"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:id="@+id/btn_aceptar"
+                            android:layout_width="258dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_aceptar" />
+
+                        <Button
+                            android:id="@+id/btn_salir"
+                            android:layout_width="258dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/btn_salir"
+                            android:textSize="20dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/linearLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginRight="0dp">
+
+                        <TextView
+                            android:id="@+id/tv_olvido_contraseña"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/btn_ha_olvidado_clave_acceso"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/color_blanco"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

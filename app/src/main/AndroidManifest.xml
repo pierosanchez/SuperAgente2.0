@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!--
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
@@ -99,7 +99,9 @@
         <activity android:name=".superagente.ConformidadComercioComercios" />
         <activity android:name=".superagente.IngresoMontoPagoFirmaRecarga" />
         <activity android:name=".superagente.IngresoMontoPagoPinRecargas" />
-        <activity android:name=".superagente.VoucherRecargaTelefonicaFirma"></activity>
+        <activity android:name=".superagente.VoucherRecargaTelefonicaFirma" />
+        <activity android:name=".superagente.LoginNumeroCliente" />
+        <activity android:name=".superagente.LoginPasswordCliente"></activity>
     </application>
 
 </manifest>

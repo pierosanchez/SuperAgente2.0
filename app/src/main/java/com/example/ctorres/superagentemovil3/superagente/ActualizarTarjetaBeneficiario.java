@@ -116,9 +116,9 @@ public class ActualizarTarjetaBeneficiario extends Activity {
             @Override
             public void onClick(View v) {
 
-                /*if (valida_modi.equals("01")){
+                if (valida_modi.equals("01")){
                     Toast.makeText(ActualizarTarjetaBeneficiario.this, "Esta tarjeta no puede ser modificada debido a que ya pertene a un banco", Toast.LENGTH_LONG).show();
-                } else {*/
+                } else if (valida_modi.equals("00")) {
                     ingresarTarjetas();
 
                     Intent intent = new Intent(ActualizarTarjetaBeneficiario.this, ListadoCuentasTarjetasBeneficiario.class);
@@ -128,7 +128,7 @@ public class ActualizarTarjetaBeneficiario extends Activity {
                     intent.putExtra("cli_dni", cli_dni);
                     startActivity(intent);
                     finish();
-                //}
+                }
             }
         });
 
@@ -397,25 +397,26 @@ public class ActualizarTarjetaBeneficiario extends Activity {
                         rdbtn_visa_option.setChecked(true);
                         rdbtn_amex_option.setChecked(false);
                         rdbtn_mc_option.setChecked(false);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     } else if (entity.getCod_emisor_tarjeta() == 2){
                         rdbtn_visa_option.setChecked(false);
                         rdbtn_amex_option.setChecked(false);
                         rdbtn_mc_option.setChecked(true);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     } else if (entity.getCod_emisor_tarjeta() == 3){
                         rdbtn_visa_option.setChecked(false);
                         rdbtn_amex_option.setChecked(true);
                         rdbtn_mc_option.setChecked(false);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     }
                 } else if (entity.getValidaModi().equals("00")) {
+                    valida_modi = "00";
                     nroTarjetaDigito1.setText(entity.getPrimParte());
                     nroTarjetaDigito2.setText(entity.getSegParte());
                     nroTarjetaDigito3.setText(entity.getTerParte());
@@ -427,23 +428,23 @@ public class ActualizarTarjetaBeneficiario extends Activity {
                         rdbtn_visa_option.setChecked(true);
                         rdbtn_amex_option.setChecked(false);
                         rdbtn_mc_option.setChecked(false);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     } else if (entity.getCod_emisor_tarjeta() == 2) {
                         rdbtn_visa_option.setChecked(false);
                         rdbtn_amex_option.setChecked(false);
                         rdbtn_mc_option.setChecked(true);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     } else if (entity.getCod_emisor_tarjeta() == 3) {
                         rdbtn_visa_option.setChecked(false);
                         rdbtn_amex_option.setChecked(true);
                         rdbtn_mc_option.setChecked(false);
-                        rdbtn_visa_option.setEnabled(false);
+                        /*rdbtn_visa_option.setEnabled(false);
                         rdbtn_amex_option.setEnabled(false);
-                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);*/
                     }
                 }
             } else {

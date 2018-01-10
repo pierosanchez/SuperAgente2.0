@@ -34,6 +34,7 @@ import com.example.ctorres.superagentemovil3.adapter.DeudasTarjetasSolesAdapter;
 import com.example.ctorres.superagentemovil3.adapter.MonedaAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
 import com.example.ctorres.superagentemovil3.entity.DeudasTarjetas;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
@@ -65,7 +66,6 @@ public class SeleccionModoMontoPago extends Activity {
     MonedaAdapter monedaAdapter;
     ArrayList<MonedaEntity> monedaEntityArrayList;
     DecimalFormat decimal = new DecimalFormat("0.00");
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +100,6 @@ public class SeleccionModoMontoPago extends Activity {
         tv_tipo_moneda_modo_monto_3 = (TextView) findViewById(R.id.tv_tipo_moneda_modo_monto_3);
         tv_tipo_moneda_modo_monto_4 = (TextView) findViewById(R.id.tv_tipo_moneda_modo_monto_4);
 
-
         Bundle extras = getIntent().getExtras();
         //bmp = (Bitmap) extras.getParcelable("imagebitmap");
         usuario = extras.getParcelable("usuario");
@@ -133,6 +132,8 @@ public class SeleccionModoMontoPago extends Activity {
         tv_tipo_moneda_modo_monto_3.setText(spinnerTipoMonedaPago.getText().toString());
         tv_tipo_moneda_modo_monto_4.setText(spinnerTipoMonedaPago.getText().toString());*/
 
+        SeleccionModoMontoPago.DetalleDeudatarjeta detalle = new SeleccionModoMontoPago.DetalleDeudatarjeta();
+        detalle.execute();
 
         rdgrp_tipo_moneda.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -152,8 +153,6 @@ public class SeleccionModoMontoPago extends Activity {
                 }
             }
         });
-
-        rdbtn_soles.setChecked(true);
 
         rdgp_montos.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -398,14 +397,14 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasSolesAdapter.setNewListDeudasTarjetas(deudasTarjetasSolesArrayList);
             deudasTarjetasSolesAdapter.notifyDataSetChanged();
-            if (deudasTarjetasSolesArrayList == null){
-                Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas en soles", Toast.LENGTH_LONG).show();
+            if (deudasTarjetasSolesArrayList != null)/*{
+                //Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas en soles", Toast.LENGTH_LONG).show();
                 txt_monto_minimo.setText("0.00");
                 txt_monto_mensual.setText("0.00");
                 txt_monto_total.setText("0.00");
                 rdbtn_soles.setChecked(false);
                 rdbtn_dolares.setChecked(true);
-            } else {
+            } else */{
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMensual())));
                 txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoTotal())));
@@ -413,6 +412,7 @@ public class SeleccionModoMontoPago extends Activity {
                 tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                //rdbtn_dolares.setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -446,7 +446,7 @@ public class SeleccionModoMontoPago extends Activity {
             super.onPostExecute(aVoid);
             deudasTarjetasDolaresAdapter.setNewListDeudasTarjetas(deudasTarjetasDolaresArrayList);
             deudasTarjetasDolaresAdapter.notifyDataSetChanged();
-            if (deudasTarjetasDolaresArrayList == null){
+            if (deudasTarjetasDolaresArrayList != null)/*{
                 Toast.makeText(SeleccionModoMontoPago.this, "Usted no tiene deudas en dolares", Toast.LENGTH_LONG).show();
                 txt_monto_minimo.setText("0.00");
                 txt_monto_mensual.setText("0.00");
@@ -458,7 +458,7 @@ public class SeleccionModoMontoPago extends Activity {
                 intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
-            } else {
+            } else */{
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMensual())));
                 txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoTotal())));
@@ -466,7 +466,68 @@ public class SeleccionModoMontoPago extends Activity {
                 tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                //rdbtn_soles.setVisibility(View.INVISIBLE);
             }
         }
+    }
+
+    private class DetalleDeudatarjeta extends AsyncTask<String, Void, DeudasTarjetas> {
+
+        @Override
+        protected DeudasTarjetas doInBackground(String... params) {
+            DeudasTarjetas user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ValidaDeudaTarjetaCliente(usuario.getUsuarioId());
+
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(DeudasTarjetas entity){
+            if (entity != null){
+                rdbtn_soles = (RadioButton) findViewById(R.id.rdbtn_soles);
+                rdbtn_dolares = (RadioButton) findViewById(R.id.rdbtn_dolares);
+                if (entity.getRptaDeudaTarjeta().equals("00")) {
+                    Toast.makeText(SeleccionModoMontoPago.this, "La tarjeta tiene deuda en soles y dólares", Toast.LENGTH_LONG).show();
+                    rdbtn_soles.setChecked(true);
+                } else if (entity.getRptaDeudaTarjeta().equals("01")) {
+                    rdbtn_soles.setEnabled(false);
+                    rdbtn_dolares.setChecked(true);
+                } else if (entity.getRptaDeudaTarjeta().equals("02")) {
+                    rdbtn_dolares.setEnabled(false);
+                    rdbtn_soles.setChecked(true);
+                } else if (entity.getRptaDeudaTarjeta().equals("03")) {
+                    NoDeudas();
+                }
+            } else {
+                Toast.makeText(SeleccionModoMontoPago.this, "Hubo un error en traer los datos", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public void NoDeudas() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(SeleccionModoMontoPago.this);
+        alertDialog.setMessage("Usted, no cuenta con deudas pendientes");
+        alertDialog.setTitle("No existen deudas");
+        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(SeleccionModoMontoPago.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

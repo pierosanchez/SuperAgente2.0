@@ -65,6 +65,33 @@ public class VentanaErrores extends Activity {
                     finish();
                 }
             });
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroCliente")){
+            /*Bundle bundle = getIntent().getExtras();
+            usuario = bundle.getParcelable("usuario");
+            numCliente = bundle.getString("movil");*/
+
+
+            btn_opcion1.setText("Reintentar");
+            btn_opcion2.setText("Registrarse");
+
+            btn_opcion1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(VentanaErrores.this, LoginActivity.class);
+                    startActivityForResult(sanipesIntent, 0);
+                    finish();
+                }
+            });
+
+            btn_opcion2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
+                    //sanipesIntent.putExtra("movil", numCliente);
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
         } else if (callingActivity.equals(Constante.ACTIVITYROOT + "InformacionTarjeta")) {
             Bundle bundle = getIntent().getExtras();
             usuario = bundle.getParcelable("usuario");

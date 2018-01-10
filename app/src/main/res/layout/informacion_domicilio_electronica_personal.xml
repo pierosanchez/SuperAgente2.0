@@ -52,12 +52,19 @@
                         android:textStyle="bold"
                         android:textSize="16dp"/>
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/sp_departamento"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:background="@drawable/spinner_selector"/>
+
+                    <!--<EditText
                         android:id="@+id/txt_departamento"
                         android:layout_width="190dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="20dp"
-                        android:background="@color/color_blanco" />
+                        android:background="@color/color_blanco" />-->
 
                 </LinearLayout>
 
@@ -74,12 +81,19 @@
                         android:textStyle="bold"
                         android:textSize="16dp"/>
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/sp_provincia"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="53dp"
+                        android:background="@drawable/spinner_selector"/>
+
+                    <!--<EditText
                         android:id="@+id/txt_provincia"
                         android:layout_width="190dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="54dp"
-                        android:background="@color/color_blanco" />
+                        android:background="@color/color_blanco" />-->
 
                 </LinearLayout>
 
@@ -96,12 +110,19 @@
                         android:textStyle="bold"
                         android:textSize="16dp"/>
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/sp_distrito"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="63dp"
+                        android:background="@drawable/spinner_selector"/>
+
+                    <!--<EditText
                         android:id="@+id/txt_distrito"
                         android:layout_width="190dp"
                         android:layout_height="30dp"
                         android:layout_marginLeft="65dp"
-                        android:background="@color/color_blanco" />
+                        android:background="@color/color_blanco" />-->
 
                 </LinearLayout>
 

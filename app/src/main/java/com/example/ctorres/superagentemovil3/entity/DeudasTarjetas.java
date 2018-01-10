@@ -11,6 +11,7 @@ public class DeudasTarjetas {
     private double montoTotal;
     private int codTipoMoneda;
     private String signoMoneda;
+    private String rptaDeudaTarjeta;
 
     public DeudasTarjetas(){
 
@@ -23,6 +24,14 @@ public class DeudasTarjetas {
         this.montoTotal = montoTotal;
         this.codTipoMoneda = codTipoMoneda;
         this.signoMoneda = signoMoneda;
+    }
+
+    public String getRptaDeudaTarjeta() {
+        return rptaDeudaTarjeta;
+    }
+
+    public void setRptaDeudaTarjeta(String rptaDeudaTarjeta) {
+        this.rptaDeudaTarjeta = rptaDeudaTarjeta;
     }
 
     public int getIdDeudaTarjetaCliente() {

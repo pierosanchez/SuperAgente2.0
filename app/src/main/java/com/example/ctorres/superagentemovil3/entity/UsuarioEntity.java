@@ -60,7 +60,16 @@ public class UsuarioEntity implements Parcelable {
     private String firmaCliente;
     private String validacionTarjeta;
     private String validaModi;
+    private String validaLoginCelular;
 
+
+    public String getValidaLoginCelular() {
+        return validaLoginCelular;
+    }
+
+    public void setValidaLoginCelular(String validaLoginCelular) {
+        this.validaLoginCelular = validaLoginCelular;
+    }
 
     public String getValidaModi() {
         return validaModi;

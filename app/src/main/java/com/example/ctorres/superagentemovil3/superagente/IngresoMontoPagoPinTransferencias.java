@@ -5,8 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,13 +37,15 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
     String nombreBeneficiario, dni_benef, num_tarjeta, banco;
     String cliente, cli_dni, validacion_tarjeta;
     String[] cuotas = {"No", "Si"};
-    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" ,"21" ,"22" ,"23" ,"24" ,"25" ,"26" ,"27" ,"28" ,"29" ,"30" ,"31" ,"32", "33", "34", "35" ,"36"};
+    String[] cantidadCuotas = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36"};
     LinearLayout ll_cantidad_cuotas;
+    int estado = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ingreso_monto_pago_pin_transferencias);
+
 
         btn_continuar_pago = (Button) findViewById(R.id.btn_continuar_pago);
         btn_cancelar_pago = (Button) findViewById(R.id.btn_cancelar_pago);
@@ -82,14 +84,17 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
 
         textViewNombreApellidoUsuario.setText(cliente);
         tv_numero_clave_cifrada_cargo.setText(num_tarjeta);
-        txt_moneda_pagar.setFilters(new InputFilter[] {new MoneyValueFilter()});
-        txt_pin.requestFocus();
+        txt_moneda_pagar.setFilters(new InputFilter[]{new MoneyValueFilter()});
 
         focTipoTarjeta();
         cargarCuotas();
         deseaCuotas();
 
-        if (tipo_tarjeta == 2){
+        getSelectedItem();
+        txt_pin.requestFocus();
+        spinnerMonedaPagar.setFocusable(false);
+
+        if (tipo_tarjeta == 2) {
             sp_pago_cuotas.setVisibility(View.GONE);
             tv_pago_cuotas.setVisibility(View.GONE);
         }
@@ -97,23 +102,11 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         sp_pago_cuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getAdapter().getItem(position).equals("Si")){
+                if (parent.getAdapter().getItem(position).equals("Si")) {
                     ll_cantidad_cuotas.setVisibility(View.VISIBLE);
-                } else if (parent.getAdapter().getItem(position).equals("No")){
+                } else if (parent.getAdapter().getItem(position).equals("No")) {
                     ll_cantidad_cuotas.setVisibility(View.GONE);
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        spinnerMonedaPagar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                txt_moneda_pagar.requestFocus();
             }
 
             @Override
@@ -127,7 +120,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
             public void onClick(View v) {
                 String pin = txt_pin.getText().toString();
                 String monto = txt_moneda_pagar.getText().toString();
-                if (pin.length()!=0 && monto.length()!= 0) {
+                if (pin.length() != 0 && monto.length() != 0) {
                     Intent intent = new Intent(IngresoMontoPagoPinTransferencias.this, IngresoCuentaTarjetaAbono.class);
                     intent.putExtra("monto", ObtenerMonto());
                     intent.putExtra("usuario", usuario);
@@ -142,9 +135,9 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
                     intent.putExtra("validacion_tarjeta", validacion_tarjeta);
                     startActivity(intent);
                     finish();
-                } else if (pin.length()==0){
+                } else if (pin.length() == 0) {
                     Toast.makeText(IngresoMontoPagoPinTransferencias.this, "INGRESE EL PIN", Toast.LENGTH_LONG).show();
-                } else if (monto.length()==0){
+                } else if (monto.length() == 0) {
                     Toast.makeText(IngresoMontoPagoPinTransferencias.this, "INGRESE EL MONTO A PAGAR", Toast.LENGTH_LONG).show();
                 }
             }
@@ -163,13 +156,13 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         spinnerMonedaPagar.setAdapter(adapterTipoMoneda);
     }
 
-    public String ObtenerMonto(){
+    public String ObtenerMonto() {
         String monto;
         monto = txt_moneda_pagar.getText().toString();
         return monto;
     }
 
-    public String ObtenerTipoMoneda(){
+    public String ObtenerTipoMoneda() {
         String tipomoneda;
         tipomoneda = spinnerMonedaPagar.getSelectedItem().toString();
         return tipomoneda;
@@ -202,7 +195,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         dialog.show();
     }
 
-    public void focTipoTarjeta(){
+    public void focTipoTarjeta() {
         if (emisor_tarjeta == 1) {
             imageView.setImageResource(R.drawable.visaicon);
         } else if (emisor_tarjeta == 2) {
@@ -212,13 +205,33 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         }
     }
 
-    public void cargarCuotas(){
+    public void cargarCuotas() {
         ArrayAdapter<String> cantidadCuota = new ArrayAdapter<String>(IngresoMontoPagoPinTransferencias.this, android.R.layout.simple_spinner_dropdown_item, cantidadCuotas);
         sp_cantidad_cuotas.setAdapter(cantidadCuota);
     }
 
-    public void deseaCuotas(){
+    public void deseaCuotas() {
         ArrayAdapter<String> cuota = new ArrayAdapter<String>(IngresoMontoPagoPinTransferencias.this, android.R.layout.simple_spinner_dropdown_item, cuotas);
         sp_pago_cuotas.setAdapter(cuota);
     }
+
+    private void getSelectedItem() {
+        spinnerMonedaPagar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                estado ++;
+                if (estado == 1) {
+                    txt_pin.requestFocus();
+                } else if (estado > 1){
+                    txt_moneda_pagar.requestFocus();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                estado ++;
+            }
+        });
+    }
+
 }

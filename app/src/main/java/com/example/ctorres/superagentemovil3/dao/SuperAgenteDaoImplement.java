@@ -28,6 +28,60 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public UsuarioEntity LoginValidaCelularCliente(String numero) {
+        UsuarioEntity listaUsuario = new UsuarioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidaLoginNumeroCliente/?numeroClienteValidar=" + numero;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        listaUsuario.setValidaLoginCelular(utils.getValueStringOrNull(jsonObject, "rpta_login"));
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
+    public DeudasTarjetas ValidaDeudaTarjetaCliente(String idCliente) {
+        DeudasTarjetas listaUsuario = new DeudasTarjetas();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidaTipoMonedaDeudaTarjeta/?idclientedeudor=" + idCliente;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        listaUsuario.setRptaDeudaTarjeta(utils.getValueStringOrNull(jsonObject, "rpta_deuda"));
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
     public BeneficiarioEntity DetalleTarjetaBeneficiario(int idcuentabenef) {
         BeneficiarioEntity listaUsuario = new BeneficiarioEntity();
 
