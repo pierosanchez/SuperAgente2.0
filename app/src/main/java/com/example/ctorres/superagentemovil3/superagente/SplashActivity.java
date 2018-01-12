@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent loginIntent = new Intent().setClass(SplashActivity.this, LoginActivity.class);
+                Intent loginIntent = new Intent().setClass(SplashActivity.this, LoginNumeroCliente.class);
                 startActivityForResult(loginIntent, 0);
                 finish();
             }

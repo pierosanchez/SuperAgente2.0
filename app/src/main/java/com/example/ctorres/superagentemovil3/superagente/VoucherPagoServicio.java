@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -132,7 +134,7 @@ public class VoucherPagoServicio extends Activity {
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                salir();
             }
         });
 
@@ -262,5 +264,30 @@ public class VoucherPagoServicio extends Activity {
                 Toast.makeText(VoucherPagoServicio.this, "la entidad no tiene data", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Esta seguro que desea salir");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(VoucherPagoServicio.this, LoginNumeroCliente.class);
+                startActivityForResult(intent, 0);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

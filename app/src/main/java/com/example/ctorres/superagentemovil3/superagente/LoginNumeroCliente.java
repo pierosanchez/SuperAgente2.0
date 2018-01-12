@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
@@ -21,6 +22,7 @@ public class LoginNumeroCliente extends Activity {
     private EditText usuario;
     private Button btn_aceptar, btn_salir;
     private String _numero;
+    private ProgressBar circleProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,9 @@ public class LoginNumeroCliente extends Activity {
         usuario = (EditText) findViewById(R.id.usuario);
 
         btn_aceptar = (Button) findViewById(R.id.btn_aceptar);
-        btn_salir = (Button) findViewById(R.id.btn_salir);
+        //btn_salir = (Button) findViewById(R.id.btn_salir);
+
+        circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
 
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +45,7 @@ public class LoginNumeroCliente extends Activity {
                 } else if (_numero.length() != 9){
                     Toast.makeText(LoginNumeroCliente.this, "Número de celular incorrecto", Toast.LENGTH_LONG).show();
                 } else {
+                    circleProgressBar.setVisibility(View.VISIBLE);
                     LoginNumeroCliente.ValidaNumeroCliente validaNumero = new LoginNumeroCliente.ValidaNumeroCliente();
                     validaNumero.execute();
                 }
@@ -70,10 +75,12 @@ public class LoginNumeroCliente extends Activity {
         protected void onPostExecute(UsuarioEntity usuarioEntity) {
             if (usuarioEntity != null) {
                 if (usuarioEntity.getValidaLoginCelular().equals("01")) {
+                    circleProgressBar.setVisibility(View.GONE);
                     Intent sanipesIntent = new Intent(LoginNumeroCliente.this, VentanaErrores.class);
                     startActivityForResult(sanipesIntent, 0);
                     finish();
                 } else if (usuarioEntity.getValidaLoginCelular().equals("00")) {
+                    circleProgressBar.setVisibility(View.GONE);
                     Intent sanipesIntent = new Intent(LoginNumeroCliente.this, LoginPasswordCliente.class);
                     sanipesIntent.putExtra("numero", _celular);
                     startActivity(sanipesIntent);

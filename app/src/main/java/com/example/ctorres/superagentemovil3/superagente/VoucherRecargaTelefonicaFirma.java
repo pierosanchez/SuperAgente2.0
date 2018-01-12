@@ -228,7 +228,7 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
                 /*VoucherRecargaTelefonicaFirma.ingresarVoucher ingreso = new VoucherRecargaTelefonicaFirma.ingresarVoucher();
                 ingreso.execute();*/
 
-                Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, LoginActivity.class);
+                Intent intent = new Intent(VoucherRecargaTelefonicaFirma.this, LoginNumeroCliente.class);
                 startActivityForResult(intent, 0);
                 finish();
             }

@@ -24,9 +24,9 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center">
 
                 <TextView
@@ -71,7 +71,7 @@
                 <ListView
                     android:id="@+id/lv_relacion_beneficiario"
                     android:layout_width="320dp"
-                    android:layout_height="250dp">
+                    android:layout_height="210dp">
 
 
                 </ListView>
@@ -80,14 +80,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:gravity="center">
 
                 <LinearLayout
                     android:layout_width="310dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/rectangle"
                     android:gravity="center">
 
@@ -99,6 +98,32 @@
                         android:textColor="@color/color_rojo" />
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_regresar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_regresar"
+                    android:textSize="20dp"
+                    android:background="@color/color_blanco" />
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/btn_cancelar_transferencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_cancelar"
+                    android:textSize="20dp"
+                    android:background="@color/color_blanco" />
 
             </LinearLayout>
 
@@ -129,6 +154,6 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    <!--</ScrollView>-->
 
 </LinearLayout>

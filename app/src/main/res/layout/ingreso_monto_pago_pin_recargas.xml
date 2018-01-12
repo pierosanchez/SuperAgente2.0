@@ -93,30 +93,6 @@
                     android:gravity="center">
 
                     <TextView
-                        android:layout_width="90dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_ingrese_ping"
-                        android:spinnerMode="dialog"/>
-
-                    <EditText
-                        android:id="@+id/txt_pin_recargas"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="70dp"
-                        android:background="@color/color_blanco"
-                        android:inputType="textPassword"
-                        android:editable="false"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="10dp">
-
-                    <TextView
                         android:id="@+id/spinnerMonedaPagarRecarga"
                         android:layout_width="90dp"
                         android:layout_height="wrap_content"
@@ -132,6 +108,30 @@
                         android:inputType="numberDecimal"
                         android:gravity="center"
                         android:textColor="@android:color/black"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_ingrese_ping"
+                        android:spinnerMode="dialog"/>
+
+                    <EditText
+                        android:id="@+id/txt_pin_recargas"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="70dp"
+                        android:background="@color/color_blanco"
+                        android:inputType="textPassword"
+                        android:editable="false"
+                        android:gravity="center"/>
 
                 </LinearLayout>
 

@@ -77,8 +77,8 @@ public class VentanaErrores extends Activity {
             btn_opcion1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent sanipesIntent = new Intent(VentanaErrores.this, LoginActivity.class);
-                    startActivityForResult(sanipesIntent, 0);
+                    Intent intent = new Intent(VentanaErrores.this, LoginNumeroCliente.class);
+                    startActivityForResult(intent, 0);
                     finish();
                 }
             });

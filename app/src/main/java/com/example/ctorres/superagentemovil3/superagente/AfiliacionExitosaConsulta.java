@@ -23,7 +23,7 @@ public class AfiliacionExitosaConsulta extends Activity {
         btn_aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AfiliacionExitosaConsulta.this, LoginActivity.class);
+                Intent intent = new Intent(AfiliacionExitosaConsulta.this, LoginNumeroCliente.class);
                 startActivityForResult(intent, 0);
                 finish();
             }

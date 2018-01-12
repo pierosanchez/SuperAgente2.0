@@ -155,7 +155,7 @@ public class VoucherPagoConsumo extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                Intent intent = new Intent(VoucherPagoConsumo.this, LoginActivity.class);
+                Intent intent = new Intent(VoucherPagoConsumo.this, LoginNumeroCliente.class);
                 startActivityForResult(intent, 0);
                 finish();
             }

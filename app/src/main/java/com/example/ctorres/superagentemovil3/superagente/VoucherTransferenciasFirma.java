@@ -248,6 +248,8 @@ public class VoucherTransferenciasFirma extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                Intent intent = new Intent(VoucherTransferenciasFirma.this, LoginNumeroCliente.class);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });

@@ -166,7 +166,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         }
     }
 
-    public void salir(){
+    public void salir() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
         alertDialog.setTitle("Salir");
@@ -174,6 +174,8 @@ public class VoucherPagoTarjetaConCredito extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
+                Intent intent = new Intent(VoucherPagoTarjetaConCredito.this, LoginNumeroCliente.class);
+                startActivityForResult(intent, 0);
                 finish();
             }
         });
@@ -221,7 +223,7 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         return fecha;
     }
 
-    public String transformarMonto(){
+    public String transformarMonto() {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         double montoD = Double.parseDouble(monto);
         return decimalFormat.format(montoD);
@@ -244,10 +246,10 @@ public class VoucherPagoTarjetaConCredito extends Activity {
         }
 
         @Override
-        protected void onPostExecute(VoucherPagoTarjetaCreditoEntity voucherTransferenciasEntity){
+        protected void onPostExecute(VoucherPagoTarjetaCreditoEntity voucherTransferenciasEntity) {
             voucherTarjetas = voucherTransferenciasEntity;
-            if (voucherTarjetas != null){
-                if (voucherTarjetas.getNumeroUnico() != null){
+            if (voucherTarjetas != null) {
+                if (voucherTarjetas.getNumeroUnico() != null) {
                     txt_numero_unico.setText(voucherTarjetas.getNumeroUnico());
                 } else {
                     Toast.makeText(VoucherPagoTarjetaConCredito.this, "no se trajo el numero unico", Toast.LENGTH_LONG).show();

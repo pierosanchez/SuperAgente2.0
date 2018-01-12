@@ -70,10 +70,10 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 view.setSelected(true);
 
-                iv_editar_cuenta_beneficiario = (ImageView) view.findViewById(R.id.iv_editar_cuenta_beneficiario);
+                //iv_editar_cuenta_beneficiario = (ImageView) view.findViewById(R.id.iv_editar_cuenta_beneficiario);
                 iv_eliminar_cuenta_beneficiario = (ImageView) view.findViewById(R.id.iv_eliminar_cuenta_beneficiario);
 
-                iv_editar_cuenta_beneficiario.setOnClickListener(new View.OnClickListener() {
+                /*iv_editar_cuenta_beneficiario.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         id_cuenta_benef = adapterCuentasBeneficiario.getItem(position).getId_cuenta_benef();
@@ -89,7 +89,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                         startActivity(intent);
                         finish();
                     }
-                });
+                });*/
 
                 iv_eliminar_cuenta_beneficiario.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -111,10 +111,10 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 view.setSelected(true);
 
-                iv_editar_tarjeta_beneficiario = (ImageView) view.findViewById(R.id.iv_editar_tarjeta_beneficiario);
+                //iv_editar_tarjeta_beneficiario = (ImageView) view.findViewById(R.id.iv_editar_tarjeta_beneficiario);
                 iv_eliminar_tarjeta_beneficiario = (ImageView) view.findViewById(R.id.iv_eliminar_tarjeta_beneficiario);
 
-                iv_editar_tarjeta_beneficiario.setOnClickListener(new View.OnClickListener() {
+                /*iv_editar_tarjeta_beneficiario.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         id_tarjeta_benef = adapterTarjetasBeneficiario.getItem(position).getId_cuenta_benef();
@@ -130,7 +130,7 @@ public class ListadoCuentasTarjetasBeneficiario extends Activity {
                         startActivity(intent);
                         finish();
                     }
-                });
+                });*/
 
                 iv_eliminar_tarjeta_beneficiario.setOnClickListener(new View.OnClickListener() {
                     @Override

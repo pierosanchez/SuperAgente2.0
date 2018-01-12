@@ -126,7 +126,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
         ejecutarListaDetalleComercio();
 
-        txt_pin_pago_consumo.requestFocus();
+        txt_monto_pago_consumo.requestFocus();
         spinnerTipoMoneda.setFocusable(false);
 
         spinnerTipoMoneda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -314,7 +314,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 estado ++;
                 if (estado == 1) {
-                    txt_pin_pago_consumo.requestFocus();
+                    txt_monto_pago_consumo.requestFocus();
                 } else if (estado > 1){
                     txt_monto_pago_consumo.requestFocus();
                 }

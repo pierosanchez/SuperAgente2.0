@@ -1,11 +1,14 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -29,6 +32,7 @@ public class RelacionBeneficiarios extends Activity {
     ListView listView;
     String cliente, cli_dni;
     private ProgressBar circleProgressBar;
+    Button btn_regresar, btn_cancelar_transferencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,9 @@ public class RelacionBeneficiarios extends Activity {
         listView = (ListView) findViewById(R.id.lv_relacion_beneficiario);
 
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
+
+        btn_regresar = (Button) findViewById(R.id.btn_regresar);
+        btn_cancelar_transferencia = (Button) findViewById(R.id.btn_cancelar_transferencia);
 
         Bundle bundle = getIntent().getExtras();
         usuario = bundle.getParcelable("usuario");
@@ -78,6 +85,25 @@ public class RelacionBeneficiarios extends Activity {
                 intent.putExtra("cli_dni", cli_dni);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        btn_regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RelacionBeneficiarios.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btn_cancelar_transferencia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelar();
             }
         });
 
@@ -128,5 +154,31 @@ public class RelacionBeneficiarios extends Activity {
         }
     }
 
+    public void cancelar() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
+        alertDialog.setTitle("Cancelar");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(RelacionBeneficiarios.this, MenuCliente.class);
+                intent.putExtra("usuario", usuario);
+                intent.putExtra("cliente", cliente);
+                intent.putExtra("cli_dni", cli_dni);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
 
 }

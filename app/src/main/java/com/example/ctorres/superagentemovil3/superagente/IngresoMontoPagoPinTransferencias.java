@@ -91,7 +91,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
         deseaCuotas();
 
         getSelectedItem();
-        txt_pin.requestFocus();
+        txt_moneda_pagar.requestFocus();
         spinnerMonedaPagar.setFocusable(false);
 
         if (tipo_tarjeta == 2) {
@@ -221,7 +221,7 @@ public class IngresoMontoPagoPinTransferencias extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 estado ++;
                 if (estado == 1) {
-                    txt_pin.requestFocus();
+                    txt_moneda_pagar.requestFocus();
                 } else if (estado > 1){
                     txt_moneda_pagar.requestFocus();
                 }

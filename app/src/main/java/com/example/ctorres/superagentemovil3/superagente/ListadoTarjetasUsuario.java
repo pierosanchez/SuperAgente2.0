@@ -69,10 +69,10 @@ public class ListadoTarjetasUsuario extends Activity {
 
                 view.setSelected(true);
 
-                img1 = (ImageView) view.findViewById(R.id.iv_editar_beneficiario);
+                //img1 = (ImageView) view.findViewById(R.id.iv_editar_beneficiario);
                 img2 = (ImageView) view.findViewById(R.id.iv_eliminar_beneficiario);
 
-                img1.setOnClickListener(new View.OnClickListener() {
+                /*img1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         view.setSelected(false);
@@ -85,7 +85,7 @@ public class ListadoTarjetasUsuario extends Activity {
                         startActivity(intent);
                         finish();
                     }
-                });
+                });*/
 
                 img2.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -27,7 +27,7 @@ public class CambioClaveAccesoExitosa extends Activity {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CambioClaveAccesoExitosa.this, LoginActivity.class);
+                Intent intent = new Intent(CambioClaveAccesoExitosa.this, LoginNumeroCliente.class);
                 startActivityForResult(intent, 0);
                 finish();
             }

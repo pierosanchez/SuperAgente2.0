@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
@@ -23,6 +24,8 @@ public class LoginPasswordCliente extends Activity {
     private EditText clave_acceso;
     private Button btn_aceptar, btn_salir;
     private String _clase;
+    private int validaContra = 0;
+    private ProgressBar circleProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class LoginPasswordCliente extends Activity {
         btn_aceptar = (Button) findViewById(R.id.btn_aceptar);
         btn_salir = (Button) findViewById(R.id.btn_salir);
 
+        circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
+
         Bundle bundle = getIntent().getExtras();
         numero = bundle.getString("numero");
 
@@ -44,6 +49,7 @@ public class LoginPasswordCliente extends Activity {
                 if (_clase.length() == 0) {
                     Toast.makeText(LoginPasswordCliente.this, "Ingrese su clave de acceso por favor", Toast.LENGTH_LONG).show();
                 } else {
+                    circleProgressBar.setVisibility(View.VISIBLE);
                     LoginPasswordCliente.ValidarLogin validaNumero = new LoginPasswordCliente.ValidarLogin();
                     validaNumero.execute();
                 }
@@ -76,8 +82,20 @@ public class LoginPasswordCliente extends Activity {
                 if (usuarioEntity.getUsuarioId().equals("02")) {
                     Toast.makeText(LoginPasswordCliente.this, "La Contraseña ingresada, no es correcta", Toast.LENGTH_LONG).show();
                     clave_acceso.setText("");
+                    circleProgressBar.setVisibility(View.GONE);
+                    /*if (validaContra <=3) {
+                        validaContra++;
+                    } else if (validaContra > 3){
+                        Intent sanipesIntent = new Intent(LoginPasswordCliente.this, VentanaErrores.class);
+                        //sanipesIntent.putExtra("usuario", userEntity);
+                        //sanipesIntent.putExtra("movil", movil);
+                        //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                        startActivityForResult(sanipesIntent, 0);
+                        finish();
+                    }*/
                 } else if (usuarioEntity.getUsuarioId().equals("01")) {
                     //queDeseaHacer();
+                    circleProgressBar.setVisibility(View.GONE);
                     Intent sanipesIntent = new Intent(LoginPasswordCliente.this, VentanaErrores.class);
                     //sanipesIntent.putExtra("usuario", userEntity);
                     //sanipesIntent.putExtra("movil", movil);
@@ -87,9 +105,11 @@ public class LoginPasswordCliente extends Activity {
                 } else if (usuarioEntity.getUsuarioId().equals("03")) {
                     Toast.makeText(LoginPasswordCliente.this, "Lo sentimos, este usuario se encuentra bloqueado. Contáctese a la central.", Toast.LENGTH_LONG).show();
                     clave_acceso.setText("");
+                    circleProgressBar.setVisibility(View.GONE);
                 } else if (usuarioEntity.getUsuarioId().equals("04")) {
                     Toast.makeText(LoginPasswordCliente.this, "Lo sentimos, la cuenta ingresada aún no esta activa. Contáctese a la central.", Toast.LENGTH_LONG).show();
                     clave_acceso.setText("");
+                    circleProgressBar.setVisibility(View.GONE);
                 } else {
                     try {
                         SuperAgenteBD superAgenteBD = new SuperAgenteBD(LoginPasswordCliente.this);
@@ -98,6 +118,7 @@ public class LoginPasswordCliente extends Activity {
                             db.execSQL("INSERT INTO Cliente(movil) VALUES('" + numero + "')");
                             db.close();
 
+                            circleProgressBar.setVisibility(View.GONE);
                             Intent sanipesIntent = new Intent(LoginPasswordCliente.this, MenuCliente.class);
                             sanipesIntent.putExtra("usuario", usuarioEntity);
                             sanipesIntent.putExtra("cliente", usuarioEntity.getNombreApellido());
@@ -105,6 +126,7 @@ public class LoginPasswordCliente extends Activity {
                             startActivity(sanipesIntent);
                             finish();
                         } else {
+                            circleProgressBar.setVisibility(View.GONE);
                             Intent sanipesIntent = new Intent(LoginPasswordCliente.this, MenuCliente.class);
                             sanipesIntent.putExtra("usuario", usuarioEntity);
                             sanipesIntent.putExtra("cliente", usuarioEntity.getNombreApellido());
