@@ -63,16 +63,16 @@ public class ActualizarDomicilio extends Activity {
         cliente = bundle.getString("cliente");
         cli_dni = bundle.getString("cli_dni");
 
-        usuarioEntityList = null;
-        domicilioUsuarioAdapter = new DomicilioUsuarioAdapter(usuarioEntityList, getApplication());
-
-        ejecutarLista();
-
         ubigeoArrayListDepartamento = null;
         departamentosUbigeoAdapter = new DepartamentosUbigeoAdapter(ubigeoArrayListDepartamento, getApplication());
         sp_departamento.setAdapter(departamentosUbigeoAdapter);
 
         ejecutarListaDepartamentos();
+
+        usuarioEntityList = null;
+        domicilioUsuarioAdapter = new DomicilioUsuarioAdapter(usuarioEntityList, getApplication());
+
+        ejecutarLista();
 
         sp_departamento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -211,9 +211,14 @@ public class ActualizarDomicilio extends Activity {
             domicilioUsuarioAdapter.notifyDataSetChanged();
             /*txt_departamento.setText(usuarioEntityList.get(0).getDepartamento());
             txt_provincia.setText(usuarioEntityList.get(0).getProvincia());
-            txt_distrito.setText(usuarioEntityList.get(0).getDistrito());
+            txt_distrito.setText(usuarioEntityList.get(0).getDistrito());*/
             txt_direccion.setText(usuarioEntityList.get(0).getDireccion());
-            txt_tel_fijo.setText(usuarioEntityList.get(0).getTel_fijo());*/
+            txt_tel_fijo.setText(usuarioEntityList.get(0).getTel_fijo());
+            for (int i = ubigeoArrayListDepartamento.size() - 1; i >= 0; i--){
+                if (domicilioUsuarioAdapter.getItem(0).getDepartamento().equalsIgnoreCase(departamentosUbigeoAdapter.getItem(i).getDepartamento())){
+                    sp_departamento.setSelection(i);
+                }
+            }
         }
     }
 
@@ -280,6 +285,11 @@ public class ActualizarDomicilio extends Activity {
             //usuarioEntityArrayList.remove(banco = banco_tarjeta);
             distritoUbigeoAdapter.setNewListDistritoUbigeo(ubigeoArrayListDistrito);
             distritoUbigeoAdapter.notifyDataSetChanged();
+            for (int i = ubigeoArrayListDistrito.size() - 1; i >= 0; i--){
+                if (domicilioUsuarioAdapter.getItem(0).getDistrito().equalsIgnoreCase(distritoUbigeoAdapter.getItem(i).getDistrito())){
+                    sp_distrito.setSelection(i);
+                }
+            }
         }
     }
 
@@ -313,6 +323,11 @@ public class ActualizarDomicilio extends Activity {
             //usuarioEntityArrayList.remove(banco = banco_tarjeta);
             provinciaUbigeoAdapter.setNewListProvinciaUbigeo(ubigeoArrayListProvincia);
             provinciaUbigeoAdapter.notifyDataSetChanged();
+            for (int i = ubigeoArrayListProvincia.size() - 1; i >= 0; i--){
+                if (domicilioUsuarioAdapter.getItem(0).getProvincia().equalsIgnoreCase(provinciaUbigeoAdapter.getItem(i).getProvincia())){
+                    sp_provincia.setSelection(i);
+                }
+            }
         }
     }
 }

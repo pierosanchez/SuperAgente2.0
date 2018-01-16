@@ -18,7 +18,7 @@ public class VentanaErrores extends Activity {
 
     Button btn_opcion1, btn_opcion2, btn_opcion3;
     UsuarioEntity usuario;
-    TextView tv_titulo, tv_mensaje;
+    TextView tv_titulo, tv_mensaje, mensaje_ayuda;
     LinearLayout ll_boton_opcion3;
     String numCliente, cliente, cli_dni;
 
@@ -33,6 +33,7 @@ public class VentanaErrores extends Activity {
 
         tv_titulo = (TextView) findViewById(R.id.tv_titulo);
         tv_mensaje = (TextView) findViewById(R.id.tv_mensaje);
+        mensaje_ayuda = (TextView) findViewById(R.id.mensaje_ayuda);
 
         ll_boton_opcion3 = (LinearLayout) findViewById(R.id.ll_boton_opcion3);
 
@@ -73,6 +74,7 @@ public class VentanaErrores extends Activity {
 
             btn_opcion1.setText("Reintentar");
             btn_opcion2.setText("Registrarse");
+            tv_mensaje.setText(R.string.mensaje_celular_no_registrado);
 
             btn_opcion1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -193,7 +195,25 @@ public class VentanaErrores extends Activity {
                     salir();
                 }
             });
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginPasswordCliente")) {
+
+            tv_titulo.setText(R.string.mensaje_clave_errada_exceso_intentos);
+            mensaje_ayuda.setVisibility(View.GONE);
+
+            btn_opcion1.setVisibility(View.GONE);
+            btn_opcion2.setVisibility(View.GONE);
+            ll_boton_opcion3.setVisibility(View.VISIBLE);
+            btn_opcion3.setText(R.string.btn_salir);
+            tv_mensaje.setText(R.string.intentos_mas_limite);
+
+            btn_opcion3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    salir();
+                }
+            });
         }
+
     }
 
     public void salir() {

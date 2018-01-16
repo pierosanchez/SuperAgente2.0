@@ -32,7 +32,7 @@ public class LoginNumeroCliente extends Activity {
         usuario = (EditText) findViewById(R.id.usuario);
 
         btn_aceptar = (Button) findViewById(R.id.btn_aceptar);
-        //btn_salir = (Button) findViewById(R.id.btn_salir);
+        btn_salir = (Button) findViewById(R.id.btn_salir);
 
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
 
@@ -49,6 +49,18 @@ public class LoginNumeroCliente extends Activity {
                     LoginNumeroCliente.ValidaNumeroCliente validaNumero = new LoginNumeroCliente.ValidaNumeroCliente();
                     validaNumero.execute();
                 }
+            }
+        });
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                startActivity(intent);
             }
         });
     }

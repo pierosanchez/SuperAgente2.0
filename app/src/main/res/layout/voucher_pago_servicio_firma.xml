@@ -103,7 +103,7 @@
                         android:layout_marginLeft="20dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="165dp"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_servicio_voucher" />
 
@@ -233,15 +233,14 @@
                         android:layout_marginLeft="20dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_importe_voucher" />
 
                         <TextView
                             android:id="@+id/tv_tipo_moneda_importe_voucher"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="71dp" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:gravity="right"
@@ -258,15 +257,14 @@
                         android:layout_marginLeft="20dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_comision_operacion_voucher" />
 
                         <TextView
                             android:id="@+id/tv_tipo_moneda_comision_voucher"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="71dp" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:gravity="right"
@@ -283,15 +281,14 @@
                         android:layout_marginLeft="20dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
                             android:text="@string/tv_total_servicio_pagar_voucher" />
 
                         <TextView
                             android:id="@+id/tv_tipo_moneda_total_voucher"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="71dp" />
+                            android:layout_height="wrap_content" />
 
                         <TextView
                             android:gravity="right"

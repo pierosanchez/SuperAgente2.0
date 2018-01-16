@@ -197,15 +197,15 @@ public class VoucherRecargaTelefonicaFirma extends Activity {
     }
 
     public String transformarMontoRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(monto_recarga);
+        return decimalFormat.format(monto_recarga);
     }
 
     public String transformarComisionRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(comisionRecarga);
+        return decimalFormat.format(comisionRecarga);
     }
 
     public String transformarMontoTotalRecarga(){
-        return tipo_moneda_recarga + " " + decimalFormat.format(montoTotal);
+        return decimalFormat.format(montoTotal);
     }
 
     public String transformarTipoTarjetaPago(){

@@ -17,6 +17,9 @@
     <string name="password">Password</string>
     <string name="description">Ingrese Password</string>
     <string name="termCond">Acepto términos y condiciones</string>
+    <string name="mensaje_celular_no_registrado">ELIJA "REINTENTAR" SI EL NÚMERO DE CELULAR INGRESADO NO ES CORRECTO O "REGISTRARSE" SI AÚN NO ES CLIENTE</string>
+    <string name="mensaje_clave_errada_exceso_intentos">CLAVE ERRADA - EXCESO DE INTENTOS</string>
+    <string name="intentos_mas_limite">HA INTENTADO INGRESAR SU CLAVE MÁS VECES QUE EL LÍMITE PERMITIDO, POR SU SEGURIDAD COMUNÍQUESE CON LA CENTRAL DE SERVICIO AL CLIENTE</string>
 
     <!-- Botones -->
 

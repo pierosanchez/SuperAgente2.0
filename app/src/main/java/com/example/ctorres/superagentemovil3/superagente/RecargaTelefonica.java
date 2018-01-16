@@ -200,7 +200,7 @@ public class RecargaTelefonica extends Activity {
 
     public void irMenu() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
+        alertDialog.setMessage("¿Está seguro que desea cancelar la transacción?");
         alertDialog.setTitle("Regresar al Menú");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

@@ -18,10 +18,12 @@ import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
+import com.example.ctorres.superagentemovil3.adapter.GetTarjetaBinAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.BeneficiarioEntity;
+import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
 import java.util.ArrayList;
@@ -42,6 +44,8 @@ public class AgregarCuentasBeneficiario extends Activity {
     EditText txt_cod_interbancario1, txt_cod_interbancario2, txt_cod_interbancario3, txt_cod_interbancario4;
     String cliente, cli_dni;
     ArrayList<BancosEntity> bancosEntityArrayList;
+    ArrayList<TarjetaBinEntity> tarjetaBinEntityArrayList;
+    GetTarjetaBinAdapter getTarjetaBinAdapter;
     BancosAdapter bancosAdapter;
     int bancos;
 
@@ -394,8 +398,12 @@ public class AgregarCuentasBeneficiario extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (txt_cod_interbancario4.getText().toString().length() == 4) {
-                    txt_cod_interbancario1.requestFocus();
+                if (txt_numero_tarjeta_beneficiario4.getText().toString().length() == 4) {
+                    ll_datos_tarjeta_beneficiario.setVisibility(View.VISIBLE);
+                    tarjetaBinEntityArrayList = null;
+                    getTarjetaBinAdapter = new GetTarjetaBinAdapter(tarjetaBinEntityArrayList, getApplication());
+
+                    ejecutarListaTarjetasBin();
                 }
             }
 
@@ -463,5 +471,106 @@ public class AgregarCuentasBeneficiario extends Activity {
 
             }
         });
+    }
+
+    private void ejecutarListaTarjetasBin() {
+
+        try {
+            AgregarCuentasBeneficiario.ListadoTarjetaBin listadoEmpresas = new AgregarCuentasBeneficiario.ListadoTarjetaBin();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoTarjetaBin extends AsyncTask<String, Void, Void> {
+        String tarjeta1 = txt_numero_tarjeta_beneficiario1.getText().toString();
+        String tarjeta2 = txt_numero_tarjeta_beneficiario2.getText().toString();
+        String tarjeta3 = txt_numero_tarjeta_beneficiario3.getText().toString();
+        String tarjeta4 = txt_numero_tarjeta_beneficiario4.getText().toString();
+        String numeroTarjeta = tarjeta1 + tarjeta2 + tarjeta3 + tarjeta4;
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                tarjetaBinEntityArrayList = dao.getDatosBinTarjeta(numeroTarjeta);
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            getTarjetaBinAdapter.setNewListTarjetaBin(tarjetaBinEntityArrayList);
+            getTarjetaBinAdapter.notifyDataSetChanged();
+            if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("00")) {
+                if (getTarjetaBinAdapter.getItem(0).getMarca().equals("Mastercard ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_mc_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_mc_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_mc_option.setChecked(true);
+                        rdbtn_mc_option.setEnabled(false);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("AMEX ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_amex_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_amex_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_amex_option.setChecked(true);
+                        rdbtn_amex_option.setEnabled(false);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("VISA")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_visa_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_visa_option.setChecked(true);
+                        spinnerTipoTarjeta.setEnabled(false);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    } else {
+                        rdbtn_visa_option.setChecked(true);
+                        rdbtn_mc_option.setEnabled(false);
+                        rdbtn_amex_option.setEnabled(false);
+                        rdbtn_visa_option.setEnabled(false);
+                    }
+                }
+            } else if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("01")){
+                Toast.makeText(AgregarCuentasBeneficiario.this, "El numero de BIN no existe", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

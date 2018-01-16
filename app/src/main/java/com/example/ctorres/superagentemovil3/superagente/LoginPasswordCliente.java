@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
@@ -22,10 +23,12 @@ public class LoginPasswordCliente extends Activity {
 
     private String numero;
     private EditText clave_acceso;
+    private TextView tv_olvido_contraseña;
     private Button btn_aceptar, btn_salir;
     private String _clase;
     private int validaContra = 0;
     private ProgressBar circleProgressBar;
+    private int validar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,8 @@ public class LoginPasswordCliente extends Activity {
         btn_salir = (Button) findViewById(R.id.btn_salir);
 
         circleProgressBar = (ProgressBar) findViewById(R.id.circleProgressBar);
+
+        tv_olvido_contraseña = (TextView) findViewById(R.id.tv_olvido_contraseña);
 
         Bundle bundle = getIntent().getExtras();
         numero = bundle.getString("numero");
@@ -53,6 +58,25 @@ public class LoginPasswordCliente extends Activity {
                     LoginPasswordCliente.ValidarLogin validaNumero = new LoginPasswordCliente.ValidarLogin();
                     validaNumero.execute();
                 }
+            }
+        });
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPasswordCliente.this, LoginNumeroCliente.class);
+                startActivityForResult(intent, 0);
+                finish();
+            }
+        });
+
+        tv_olvido_contraseña.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sanipesIntent = new Intent(LoginPasswordCliente.this, ContrasenaOlvidada.class);
+                //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                startActivity(sanipesIntent);
+                finish();
             }
         });
     }
@@ -80,19 +104,16 @@ public class LoginPasswordCliente extends Activity {
                 Toast.makeText(LoginPasswordCliente.this, "Error de red, por favor conectese a una red Wi-Fi o actives sus datos moviles", Toast.LENGTH_LONG).show();
             } else if (usuarioEntity.getUsuarioId() != null) {
                 if (usuarioEntity.getUsuarioId().equals("02")) {
-                    Toast.makeText(LoginPasswordCliente.this, "La Contraseña ingresada, no es correcta", Toast.LENGTH_LONG).show();
-                    clave_acceso.setText("");
-                    circleProgressBar.setVisibility(View.GONE);
-                    /*if (validaContra <=3) {
-                        validaContra++;
-                    } else if (validaContra > 3){
+                    validar++;
+                    if (validar < 4) {
+                        Toast.makeText(LoginPasswordCliente.this, "La Contraseña ingresada, no es correcta.", Toast.LENGTH_LONG).show();
+                        clave_acceso.setText("");
+                        circleProgressBar.setVisibility(View.GONE);
+                    } else if (validar == 4) {
                         Intent sanipesIntent = new Intent(LoginPasswordCliente.this, VentanaErrores.class);
-                        //sanipesIntent.putExtra("usuario", userEntity);
-                        //sanipesIntent.putExtra("movil", movil);
-                        //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
                         startActivityForResult(sanipesIntent, 0);
                         finish();
-                    }*/
+                    }
                 } else if (usuarioEntity.getUsuarioId().equals("01")) {
                     //queDeseaHacer();
                     circleProgressBar.setVisibility(View.GONE);

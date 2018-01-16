@@ -234,7 +234,7 @@ public class IngresoMontoPagoPinConsumos extends Activity {
 
     public void cancelar() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Está seguro que desea cacelar la transacción?");
+        alertDialog.setMessage("¿Está seguro que desea cancelar la transacción?");
         alertDialog.setTitle("Cancelar");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

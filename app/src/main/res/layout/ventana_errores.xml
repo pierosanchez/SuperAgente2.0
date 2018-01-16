@@ -54,7 +54,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/mensaje_ayuda"
                     android:layout_width="290dp"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_duda_queja"

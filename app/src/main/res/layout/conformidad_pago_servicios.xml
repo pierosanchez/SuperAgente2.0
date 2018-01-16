@@ -211,7 +211,7 @@
                         android:id="@+id/txt_tipo_moneda_comision_pagar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="15dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -239,7 +239,7 @@
                         android:id="@+id/txt_tipo_moneda_total_pagar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="15dp"
                         android:textStyle="bold" />
 
                     <TextView
