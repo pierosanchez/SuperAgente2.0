@@ -147,7 +147,7 @@ public class ActualizarDomicilio extends Activity {
         btn_regresar_mantenimiento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(ActualizarDomicilio.this, MantenimientoUsuario.class);
+                Intent intent = new Intent(ActualizarDomicilio.this, MantenimientoUsuario.class);
                 intent.putExtra("usuario", usuario);
                 intent.putExtra("cliente", cliente);
                 intent.putExtra("cli_dni", cli_dni);
@@ -180,18 +180,18 @@ public class ActualizarDomicilio extends Activity {
         }
     }
 
-    private void ejecutarLista(){
+    private void ejecutarLista() {
 
         try {
             ActualizarDomicilio.ListadoDomicilio listadoDomicilio = new ActualizarDomicilio.ListadoDomicilio();
             listadoDomicilio.execute();
-        } catch (Exception e){
+        } catch (Exception e) {
             //listadoBeneficiario = null;
         }
 
     }
 
-    private class ListadoDomicilio extends AsyncTask<String,Void,Void> {
+    private class ListadoDomicilio extends AsyncTask<String, Void, Void> {
 
         @Override
         protected Void doInBackground(String... params) {
@@ -214,11 +214,13 @@ public class ActualizarDomicilio extends Activity {
             txt_distrito.setText(usuarioEntityList.get(0).getDistrito());*/
             txt_direccion.setText(usuarioEntityList.get(0).getDireccion());
             txt_tel_fijo.setText(usuarioEntityList.get(0).getTel_fijo());
-            for (int i = ubigeoArrayListDepartamento.size() - 1; i >= 0; i--){
-                if (domicilioUsuarioAdapter.getItem(0).getDepartamento().equalsIgnoreCase(departamentosUbigeoAdapter.getItem(i).getDepartamento())){
-                    sp_departamento.setSelection(i);
+            /*if (ubigeoArrayListDepartamento != null) {
+                for (int i = ubigeoArrayListDepartamento.size() - 1; i >= 0; i--) {
+                    if (domicilioUsuarioAdapter.getItem(0).getDepartamento().equalsIgnoreCase(departamentosUbigeoAdapter.getItem(i).getDepartamento())) {
+                        sp_departamento.setSelection(i);
+                    }
                 }
-            }
+            }*/
         }
     }
 
@@ -285,11 +287,13 @@ public class ActualizarDomicilio extends Activity {
             //usuarioEntityArrayList.remove(banco = banco_tarjeta);
             distritoUbigeoAdapter.setNewListDistritoUbigeo(ubigeoArrayListDistrito);
             distritoUbigeoAdapter.notifyDataSetChanged();
-            for (int i = ubigeoArrayListDistrito.size() - 1; i >= 0; i--){
-                if (domicilioUsuarioAdapter.getItem(0).getDistrito().equalsIgnoreCase(distritoUbigeoAdapter.getItem(i).getDistrito())){
-                    sp_distrito.setSelection(i);
+            /*if (ubigeoArrayListDistrito != null) {
+                for (int i = ubigeoArrayListDistrito.size() - 1; i >= 0; i--) {
+                    if (domicilioUsuarioAdapter.getItem(0).getDistrito().equalsIgnoreCase(distritoUbigeoAdapter.getItem(i).getDistrito())) {
+                        sp_distrito.setSelection(i);
+                    }
                 }
-            }
+            }*/
         }
     }
 
@@ -323,11 +327,13 @@ public class ActualizarDomicilio extends Activity {
             //usuarioEntityArrayList.remove(banco = banco_tarjeta);
             provinciaUbigeoAdapter.setNewListProvinciaUbigeo(ubigeoArrayListProvincia);
             provinciaUbigeoAdapter.notifyDataSetChanged();
-            for (int i = ubigeoArrayListProvincia.size() - 1; i >= 0; i--){
-                if (domicilioUsuarioAdapter.getItem(0).getProvincia().equalsIgnoreCase(provinciaUbigeoAdapter.getItem(i).getProvincia())){
-                    sp_provincia.setSelection(i);
+            /*if (ubigeoArrayListProvincia != null) {
+                for (int i = ubigeoArrayListProvincia.size() - 1; i >= 0; i--) {
+                    if (domicilioUsuarioAdapter.getItem(0).getProvincia().equalsIgnoreCase(provinciaUbigeoAdapter.getItem(i).getProvincia())) {
+                        sp_provincia.setSelection(i);
+                    }
                 }
-            }
+            }*/
         }
     }
 }

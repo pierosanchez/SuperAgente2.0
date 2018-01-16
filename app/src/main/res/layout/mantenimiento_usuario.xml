@@ -104,21 +104,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/color_blanco"/>
+                android:background="@color/color_blanco"
+                android:visibility="gone"/>
 
             <Button
                 android:text="@string/btn_salir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/color_blanco"/>
+                android:background="@color/color_blanco"
+                android:visibility="gone"/>
 
             <Button
                 android:text="@string/btn_continuar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/color_blanco"/>
+                android:background="@color/color_blanco"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
