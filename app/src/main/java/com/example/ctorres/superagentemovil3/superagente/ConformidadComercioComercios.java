@@ -1,6 +1,7 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
+import com.example.ctorres.superagentemovil3.entity.OperarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
 
@@ -98,52 +100,7 @@ public class ConformidadComercioComercios extends Activity {
                     if (claveComercio.length() == 0){
                         Toast.makeText(ConformidadComercioComercios.this, "Ingrese la clave del comercio", Toast.LENGTH_LONG).show();
                     } else if (claveComercio.length() != 0) {
-                        ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
-                        validador.execute();
-                        Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
-                        intent.putExtra("cliente", cliente);
-                        intent.putExtra("usuario", usuario);
-                        intent.putExtra("banco", banco);
-                        intent.putExtra("tipo_moneda", tipo_moneda);
-                        intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                        intent.putExtra("monto_pagar", monto_pagar);
-                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                        intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                        intent.putExtra("cli_dni", cli_dni);
-                        intent.putExtra("parteDireccion", parteDireccion);
-                        intent.putExtra("parteDistrito", parteDistrito);
-                        intent.putExtra("parteRazon", parteRazon);
-                        intent.putExtra("id_com", id_com);
-                        intent.putExtra("nro_unico", nro_unico);
-                        startActivity(intent);
-                        finish();
-                    }
-                } else if (tipo_tarjeta_pago == 1){
-                    if (claveComercio.length() == 0){
-                        Toast.makeText(ConformidadComercioComercios.this, "Ingrese la clave del comercio", Toast.LENGTH_LONG).show();
-                    } else if (claveComercio.length() != 0) {
-                        if (validacion_tarjeta.equals("Firma")) {
-                            ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
-                            validador.execute();
-                            Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumoFirma.class);
-                            intent.putExtra("cliente", cliente);
-                            intent.putExtra("usuario", usuario);
-                            intent.putExtra("banco", banco);
-                            intent.putExtra("tipo_moneda", tipo_moneda);
-                            intent.putExtra("tarjeta_cargo", tarjeta_cargo);
-                            intent.putExtra("monto_pagar", monto_pagar);
-                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                            intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
-                            intent.putExtra("cli_dni", cli_dni);
-                            intent.putExtra("parteDireccion", parteDireccion);
-                            intent.putExtra("parteDistrito", parteDistrito);
-                            intent.putExtra("parteRazon", parteRazon);
-                            intent.putExtra("id_com", id_com);
-                            intent.putExtra("nro_unico", nro_unico);
-                            startActivity(intent);
-                            finish();
-                        } else if (validacion_tarjeta.equals("Pin")){
-                            ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                            /*ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
                             validador.execute();
                             Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
                             intent.putExtra("cliente", cliente);
@@ -160,8 +117,62 @@ public class ConformidadComercioComercios extends Activity {
                             intent.putExtra("parteRazon", parteRazon);
                             intent.putExtra("id_com", id_com);
                             intent.putExtra("nro_unico", nro_unico);
+                            intent.putExtra("validaClaveOperario", validaClaveOperario);
                             startActivity(intent);
-                            finish();
+                            finish();*/
+                            ConformidadComercioComercios.validaClaveOperarioPin validaClave = new ConformidadComercioComercios.validaClaveOperarioPin();
+                            validaClave.execute();
+                    }
+                } else if (tipo_tarjeta_pago == 1){
+                    if (claveComercio.length() == 0){
+                        Toast.makeText(ConformidadComercioComercios.this, "Ingrese la clave del comercio", Toast.LENGTH_LONG).show();
+                    } else if (claveComercio.length() != 0) {
+                        if (validacion_tarjeta.equals("Firma")) {
+                                /*ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                                validador.execute();
+                                Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumoFirma.class);
+                                intent.putExtra("cliente", cliente);
+                                intent.putExtra("usuario", usuario);
+                                intent.putExtra("banco", banco);
+                                intent.putExtra("tipo_moneda", tipo_moneda);
+                                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                                intent.putExtra("monto_pagar", monto_pagar);
+                                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                                intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("parteDireccion", parteDireccion);
+                                intent.putExtra("parteDistrito", parteDistrito);
+                                intent.putExtra("parteRazon", parteRazon);
+                                intent.putExtra("id_com", id_com);
+                                intent.putExtra("nro_unico", nro_unico);
+                                intent.putExtra("validaClaveOperario", validaClaveOperario);
+                                startActivity(intent);
+                                finish();*/
+                                ConformidadComercioComercios.validaClaveOperarioFirma validaClave = new ConformidadComercioComercios.validaClaveOperarioFirma();
+                                validaClave.execute();
+                        } else if (validacion_tarjeta.equals("Pin")){
+                                /*ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                                validador.execute();
+                                Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
+                                intent.putExtra("cliente", cliente);
+                                intent.putExtra("usuario", usuario);
+                                intent.putExtra("banco", banco);
+                                intent.putExtra("tipo_moneda", tipo_moneda);
+                                intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                                intent.putExtra("monto_pagar", monto_pagar);
+                                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                                intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                                intent.putExtra("cli_dni", cli_dni);
+                                intent.putExtra("parteDireccion", parteDireccion);
+                                intent.putExtra("parteDistrito", parteDistrito);
+                                intent.putExtra("parteRazon", parteRazon);
+                                intent.putExtra("id_com", id_com);
+                                intent.putExtra("nro_unico", nro_unico);
+                                intent.putExtra("validaClaveOperario", validaClaveOperario);
+                                startActivity(intent);
+                                finish();*/
+                                ConformidadComercioComercios.validaClaveOperarioPin validaClave = new ConformidadComercioComercios.validaClaveOperarioPin();
+                                validaClave.execute();
                         }
                     }
                 }
@@ -258,6 +269,150 @@ public class ConformidadComercioComercios extends Activity {
                 //fldag_clic_ingreso = 0;;
             }
             return user;
+        }
+    }
+
+    private class validaClaveOperarioPin extends AsyncTask<String, Void, OperarioEntity> {
+
+        String _claveComercio = txt_clave_comercio.getText().toString();
+
+        @Override
+        protected OperarioEntity doInBackground(String... params) {
+            OperarioEntity user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ValidarClaveOperario(id_com, _claveComercio);
+
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+
+        }
+
+        @Override
+        protected void onPostExecute(OperarioEntity operarioEntity) {
+            if (operarioEntity != null) {
+                if (operarioEntity.getRptaCambioClaveOperario().equals("01")) {
+                    Toast.makeText(ConformidadComercioComercios.this, "La clave ingresada es incorrecta", Toast.LENGTH_LONG).show();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("00")) {
+                    ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                    validador.execute();
+                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("parteDireccion", parteDireccion);
+                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("parteRazon", parteRazon);
+                    intent.putExtra("id_com", id_com);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("validaClaveOperario", "00");
+                    startActivity(intent);
+                    finish();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("02")) {
+                    ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                    validador.execute();
+                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumo.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("parteDireccion", parteDireccion);
+                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("parteRazon", parteRazon);
+                    intent.putExtra("id_com", id_com);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("validaClaveOperario", "02");
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        }
+    }
+
+    private class validaClaveOperarioFirma extends AsyncTask<String, Void, OperarioEntity> {
+
+        String _claveComercio = txt_clave_comercio.getText().toString();
+
+        @Override
+        protected OperarioEntity doInBackground(String... params) {
+            OperarioEntity user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.ValidarClaveOperario(id_com, _claveComercio);
+
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+
+        }
+
+        @Override
+        protected void onPostExecute(OperarioEntity operarioEntity) {
+            if (operarioEntity != null) {
+                if (operarioEntity.getRptaCambioClaveOperario().equals("01")) {
+                    Toast.makeText(ConformidadComercioComercios.this, "La clave ingresada es incorrecta", Toast.LENGTH_LONG).show();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("00")) {
+                    ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                    validador.execute();
+                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumoFirma.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("parteDireccion", parteDireccion);
+                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("parteRazon", parteRazon);
+                    intent.putExtra("id_com", id_com);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("validaClaveOperario", "00");
+                    startActivity(intent);
+                    finish();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("02")) {
+                    ConformidadComercioComercios.ingresarVoucher validador = new ConformidadComercioComercios.ingresarVoucher();
+                    validador.execute();
+                    Intent intent = new Intent(ConformidadComercioComercios.this, VoucherPagoConsumoFirma.class);
+                    intent.putExtra("cliente", cliente);
+                    intent.putExtra("usuario", usuario);
+                    intent.putExtra("banco", banco);
+                    intent.putExtra("tipo_moneda", tipo_moneda);
+                    intent.putExtra("tarjeta_cargo", tarjeta_cargo);
+                    intent.putExtra("monto_pagar", monto_pagar);
+                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                    intent.putExtra("tipo_tarjeta_pago", tipo_tarjeta_pago);
+                    intent.putExtra("cli_dni", cli_dni);
+                    intent.putExtra("parteDireccion", parteDireccion);
+                    intent.putExtra("parteDistrito", parteDistrito);
+                    intent.putExtra("parteRazon", parteRazon);
+                    intent.putExtra("id_com", id_com);
+                    intent.putExtra("nro_unico", nro_unico);
+                    intent.putExtra("validaClaveOperario", "02");
+                    startActivity(intent);
+                    finish();
+                }
+            }
         }
     }
 }

@@ -20,6 +20,7 @@
     <string name="mensaje_celular_no_registrado">ELIJA "REINTENTAR" SI EL NÚMERO DE CELULAR INGRESADO NO ES CORRECTO O "REGISTRARSE" SI AÚN NO ES CLIENTE</string>
     <string name="mensaje_clave_errada_exceso_intentos">CLAVE ERRADA - EXCESO DE INTENTOS</string>
     <string name="intentos_mas_limite">HA INTENTADO INGRESAR SU CLAVE MÁS VECES QUE EL LÍMITE PERMITIDO, POR SU SEGURIDAD COMUNÍQUESE CON LA CENTRAL DE SERVICIO AL CLIENTE</string>
+    <string name="mensaje_poder_hacer_pago">PARA PODER HACER UN PAGO DE TARJETAS NECESITA COMO MÍNIMO UNA TARJETA DE CRÉDITO Y UNA DE DÉBITO O</string>
 
     <!-- Botones -->
 
@@ -577,7 +578,7 @@
 
     <string name="tv_numero_celular_no_registrado">NÚMERO DE CELULAR NO REGISTRADO</string>
     <string name="tv_ingrese_num_celular">INGRESE SU NÚMERO DE CELULAR</string>
-    <string name="tv_duda_queja">SI TIENES ALGUNA DUDA O INCONVENIENTE PUEDES LLAMARNOS AL:</string>
+    <string name="tv_duda_queja">SI TIENE ALGUNA DUDA O INCONVENIENTE PUEDES LLAMARNOS AL:</string>
     <string name="tv_telefono_central_atencion_cliente">(511) 601-1360</string>
     <string name="tv_email_atencion_cliente">E-Mail</string>
     <string name="tv_correo_cliente_base_peru">correocliente@baseperu.com</string>
@@ -737,7 +738,11 @@
 
     <string name="titulo_ingreso_monto_pago_pin_recargas">INGRESO DE MONTO DE PAGO CON PIN - RECARGAS</string>
 
-    <!-- Pantalla de acceso al sistema logeo de numero telefonico -->
+    <!-- Ventana emergente para el cambio de contraseña del nuevo operario -->
 
+    <string name="titulo_cambio_contra_operario">CAMBIO DE CONTRASEÑA - OPERARIO</string>
+    <string name="tv_contra_actual_operario">CONTRASEÑA ACTUAL</string>
+    <string name="tv_nueva_contra_operario">NUEVA CONTRASEÑA</string>
+    <string name="tv_confirma_contra_operario">CONFIRMAR CONTRASEÑA</string>
 
 </resources>

@@ -174,8 +174,7 @@ public class VentanaErrores extends Activity {
 
             btn_opcion1.setText("REGRESAR AL MENU");
             btn_opcion2.setText(R.string.btn_salir);
-            tv_mensaje.setText("PARA PODER HACER UN PAGO DE TARJETAS NECESITA COMO MÍNIMO UNA TARJETA DE CRÉDITO Y UNA DE DÉBITO O" +
-                    " CRÉDITO DE OTRO BANCO");
+            tv_mensaje.setText(R.string.mensaje_poder_hacer_pago);
 
             btn_opcion1.setOnClickListener(new View.OnClickListener() {
                 @Override

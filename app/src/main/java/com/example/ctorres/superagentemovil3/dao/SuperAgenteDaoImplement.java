@@ -28,6 +28,60 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public OperarioEntity ValidarClaveOperario(String pk_ope_valid_pass, String pass_ope_valid) {
+        OperarioEntity listaUsuario = new OperarioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarClaveOperario/?pk_ope_valid_pass=" + pk_ope_valid_pass + "&pass_ope_valid=" + pass_ope_valid;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        listaUsuario.setRptaCambioClaveOperario(utils.getValueStringOrNull(jsonObject, "rpta_operario"));
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
+    public OperarioEntity CambioContraOperario(String nueva_clave_ope, String clave_ope, String pkCom) {
+        OperarioEntity listaUsuario = new OperarioEntity();
+
+        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/CambioContraOperario/?nueva_clave_ope=" + nueva_clave_ope + "&clave_ope=" + clave_ope + "&pkCom=" + pkCom;
+
+        try {
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        listaUsuario.setRptaCambioClaveOperario(utils.getValueStringOrNull(jsonObject, "rpta_operario"));
+                    }
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
     public UsuarioEntity LoginValidaCelularCliente(String numero) {
         UsuarioEntity listaUsuario = new UsuarioEntity();
 

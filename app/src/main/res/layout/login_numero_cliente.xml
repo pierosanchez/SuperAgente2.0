@@ -51,7 +51,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_marginLeft="5dp"
-                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="@string/tv_ingrese_numero_celular"
                             android:textColor="@color/color_blanco"
@@ -91,6 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -109,7 +109,7 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!--<LinearLayout
                         style="@style/linearLayoutStyle"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
@@ -126,7 +126,7 @@
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             android:textColor="@color/color_blanco"
                             android:textStyle="bold" />
-                    </LinearLayout>
+                    </LinearLayout>-->
 
                 </LinearLayout>
 

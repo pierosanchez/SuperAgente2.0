@@ -15,6 +15,7 @@ import com.example.ctorres.superagentemovil3.entity.EmpresasServiciosEntity;
 import com.example.ctorres.superagentemovil3.entity.MonedaEntity;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
 import com.example.ctorres.superagentemovil3.entity.OperadorEntity;
+import com.example.ctorres.superagentemovil3.entity.OperarioEntity;
 import com.example.ctorres.superagentemovil3.entity.ServiciosPublicEntity;
 import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.TipoTarjetaEntity;
@@ -98,4 +99,6 @@ public interface SuperAgenteDaoInterface {
     BeneficiarioEntity DetalleTarjetaBeneficiario(int idcuentabenef);
     DeudasTarjetas ValidaDeudaTarjetaCliente(String idCliente);
     UsuarioEntity LoginValidaCelularCliente(String numero);
+    OperarioEntity CambioContraOperario(String nueva_clave_ope, String clave_ope, String pkCom);
+    OperarioEntity ValidarClaveOperario(String pk_ope_valid_pass, String pass_ope_valid);
 }

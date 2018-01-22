@@ -80,7 +80,7 @@ public class TerminosCondiciones extends Activity {
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TerminosCondiciones.this, LoginActivity.class);
+                Intent intent = new Intent(TerminosCondiciones.this, LoginNumeroCliente.class);
                 startActivityForResult(intent, 0);
                 finish();
             }

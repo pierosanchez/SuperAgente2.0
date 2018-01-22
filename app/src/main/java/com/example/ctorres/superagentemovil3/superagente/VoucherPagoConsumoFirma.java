@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.ctorres.superagentemovil3.adapter.NumeroUnicoAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.NumeroUnico;
+import com.example.ctorres.superagentemovil3.entity.OperarioEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.entity.VoucherPagoConsumoEntity;
 
@@ -41,6 +43,10 @@ public class VoucherPagoConsumoFirma extends Activity {
     TextView tv_nombre_comercio, tv_direccion_comercio, tv_distrito_comercio, txt_numero_unico_voucher_consumos;
     NumeroUnicoAdapter numeroUnicoAdapter;
     ArrayList<NumeroUnico> numeroUnicoArrayList;
+    //Parte del Dialog para el cambio de clave del operario
+    EditText txt_contra_actual_ope, txt_contra_nueva_ope, txt_contra_confirm_ope;
+    Button btn_guardar_contra_ope;
+    String validaClaveOperario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +85,15 @@ public class VoucherPagoConsumoFirma extends Activity {
         parteRazon = extras.getString("parteRazon");
         id_com = extras.getString("id_com");
         nro_unico = extras.getString("nro_unico");
+        validaClaveOperario = extras.getString("validaClaveOperario");
         importe = tipo_moneda + " " + convertirImporte();
         tarjeta = emisor_tarjeta + " " + tarjeta_cargo;
         fechaV = "FECHA: " + obtenerFecha();
         horaV = "HORA: " + obtenerHora();
+
+        if (validaClaveOperario.equals("02")){
+            CambioClaveOperarioDialog();
+        }
 
         VoucherPagoConsumoFirma.getNumUnico numUnico = new VoucherPagoConsumoFirma.getNumUnico();
         numUnico.execute();
@@ -238,5 +249,80 @@ public class VoucherPagoConsumoFirma extends Activity {
 
         AlertDialog dialog = alertDialog.create();
         dialog.show();
+    }
+
+    private void CambioClaveOperarioDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(VoucherPagoConsumoFirma.this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_nueva_clave_operario, null);
+
+        txt_contra_actual_ope = (EditText) view.findViewById(R.id.txt_contra_actual_ope);
+        txt_contra_nueva_ope = (EditText) view.findViewById(R.id.txt_contra_nueva_ope);
+        txt_contra_confirm_ope = (EditText) view.findViewById(R.id.txt_contra_confirm_ope);
+
+        btn_guardar_contra_ope = (Button) view.findViewById(R.id.btn_guardar_contra_ope);
+
+        btn_guardar_contra_ope.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String _claveComercio = txt_contra_actual_ope.getText().toString();
+                String _claveNuevaComercio = txt_contra_nueva_ope.getText().toString();
+                String _claveNuevaConfirmComercio = txt_contra_confirm_ope.getText().toString();
+
+                if (_claveComercio.length() != 0 && _claveNuevaComercio.length() != 0 && _claveNuevaConfirmComercio.length() != 0){
+                    VoucherPagoConsumoFirma.cambioClaveOperario cambioClave = new VoucherPagoConsumoFirma.cambioClaveOperario();
+                    cambioClave.execute();
+
+                    finish();
+                } else if (_claveComercio.length() == 0) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "Ingrese la clave del operario", Toast.LENGTH_LONG).show();
+                } else if (_claveNuevaComercio.length() == 0) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "Ingrese la nueva clave del operario", Toast.LENGTH_LONG).show();
+                } else if (_claveNuevaConfirmComercio.length() == 0) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "Confirme la clave del operario", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private class cambioClaveOperario extends AsyncTask<String, Void, OperarioEntity> {
+
+        String _claveComercio = txt_contra_actual_ope.getText().toString();
+        String _claveNuevaComercio = txt_contra_nueva_ope.getText().toString();
+
+        @Override
+        protected OperarioEntity doInBackground(String... params) {
+            OperarioEntity user;
+            try {
+
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.CambioContraOperario(_claveNuevaComercio, _claveComercio, id_com);
+
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+
+        }
+
+        @Override
+        protected void onPostExecute(OperarioEntity operarioEntity) {
+            if (operarioEntity != null) {
+                if (operarioEntity.getRptaCambioClaveOperario().equals("02")) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "La nueva clave no puede ser igual a la anterior", Toast.LENGTH_LONG).show();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("00")) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "La clave ha sido cambiada satisfactoriamente", Toast.LENGTH_LONG).show();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("03")) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "Esta clave ya esta siendo usada por otro usuario", Toast.LENGTH_LONG).show();
+                } else if (operarioEntity.getRptaCambioClaveOperario().equals("01")) {
+                    Toast.makeText(VoucherPagoConsumoFirma.this, "El operario no existe", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }

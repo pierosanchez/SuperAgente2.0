@@ -74,6 +74,15 @@ public class ContrasenaOlvidada extends Activity {
                 }
             }
         });
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ContrasenaOlvidada.this, LoginNumeroCliente.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private class validarCelularCliente extends AsyncTask<String, Void, UsuarioEntity> {

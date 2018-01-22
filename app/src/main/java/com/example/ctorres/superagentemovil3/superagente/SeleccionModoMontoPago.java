@@ -144,12 +144,20 @@ public class SeleccionModoMontoPago extends Activity {
                     deudasTarjetasSolesAdapter = new DeudasTarjetasSolesAdapter(deudasTarjetasSolesArrayList, getApplication());
 
                     ejecutarListaSoles();
+                    tv_tipo_moneda_modo_monto_1.setText(rdbtn_soles.getText().toString());
+                    tv_tipo_moneda_modo_monto_2.setText(rdbtn_soles.getText().toString());
+                    tv_tipo_moneda_modo_monto_3.setText(rdbtn_soles.getText().toString());
+                    tv_tipo_moneda_modo_monto_4.setText(rdbtn_soles.getText().toString());
                 } else if (checkedId == R.id.rdbtn_dolares){
                     tipo_moneda_deuda = rdbtn_dolares.getText().toString();
                     deudasTarjetasDolaresArrayList = null;
                     deudasTarjetasDolaresAdapter = new DeudasTarjetasDolaresAdapter(deudasTarjetasDolaresArrayList, getApplication());
 
                     ejecutarListaDolares();
+                    tv_tipo_moneda_modo_monto_1.setText(rdbtn_dolares.getText().toString());
+                    tv_tipo_moneda_modo_monto_2.setText(rdbtn_dolares.getText().toString());
+                    tv_tipo_moneda_modo_monto_3.setText(rdbtn_dolares.getText().toString());
+                    tv_tipo_moneda_modo_monto_4.setText(rdbtn_dolares.getText().toString());
                 }
             }
         });
@@ -210,42 +218,50 @@ public class SeleccionModoMontoPago extends Activity {
                             if (montoCuenta <= 0) {
                                 Toast.makeText(SeleccionModoMontoPago.this, "el monto ingresado debe ser mayor a 0", Toast.LENGTH_LONG).show();
                             } else {
-                                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                                inputMethodManager.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
+                                if (!rdbtn_soles.isChecked() && !rdbtn_dolares.isChecked()){
+                                    Toast.makeText(SeleccionModoMontoPago.this, "Seleccione el tipo de moneda a pagar", Toast.LENGTH_LONG).show();
+                                } else if (rdbtn_soles.isChecked() || rdbtn_dolares.isChecked()) {
+                                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                                    inputMethodManager.toggleSoftInput(InputMethodManager.RESULT_HIDDEN, 0);
 
-                                Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
-                                intent.putExtra("monto", obtenerMonto());
-                                //intent.putExtra("imagebitmap", bmp);
-                                intent.putExtra("usuario", usuario);
-                                intent.putExtra("num_tarjeta", num_tarjeta);
-                                intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                                intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                                intent.putExtra("banco_tarjeta", banco_tarjeta);
-                                intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                                intent.putExtra("cliente", cliente);
-                                intent.putExtra("cli_dni", cli_dni);
-                                intent.putExtra("desc_corta_banco", desc_corta_banco);
-                                startActivityForResult(intent, 0);
-                                finish();
+                                    Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
+                                    intent.putExtra("monto", obtenerMonto());
+                                    //intent.putExtra("imagebitmap", bmp);
+                                    intent.putExtra("usuario", usuario);
+                                    intent.putExtra("num_tarjeta", num_tarjeta);
+                                    intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                                    intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                                    intent.putExtra("banco_tarjeta", banco_tarjeta);
+                                    intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                                    intent.putExtra("cliente", cliente);
+                                    intent.putExtra("cli_dni", cli_dni);
+                                    intent.putExtra("desc_corta_banco", desc_corta_banco);
+                                    startActivityForResult(intent, 0);
+                                    finish();
+                                }
                             }
                         } else {
                             Toast.makeText(SeleccionModoMontoPago.this, "Ingrese el monto a cuenta", Toast.LENGTH_LONG).show();
                         }
                     } else {
-                        Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
-                        intent.putExtra("monto", obtenerMonto());
-                        //intent.putExtra("imagebitmap", bmp);
-                        intent.putExtra("usuario", usuario);
-                        intent.putExtra("num_tarjeta", num_tarjeta);
-                        intent.putExtra("tipo_tarjeta", tipo_tarjeta);
-                        intent.putExtra("emisor_tarjeta", emisor_tarjeta);
-                        intent.putExtra("banco_tarjeta", banco_tarjeta);
-                        intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
-                        intent.putExtra("cliente", cliente);
-                        intent.putExtra("cli_dni", cli_dni);
-                        intent.putExtra("desc_corta_banco", desc_corta_banco);
-                        startActivityForResult(intent, 0);
-                        finish();
+                        if (!rdbtn_soles.isChecked() && !rdbtn_dolares.isChecked()){
+                            Toast.makeText(SeleccionModoMontoPago.this, "Seleccione el tipo de moneda a pagar", Toast.LENGTH_LONG).show();
+                        } else if (rdbtn_soles.isChecked() || rdbtn_dolares.isChecked()) {
+                            Intent intent = new Intent(SeleccionModoMontoPago.this, SeleccionTarjetaCargo.class);
+                            intent.putExtra("monto", obtenerMonto());
+                            //intent.putExtra("imagebitmap", bmp);
+                            intent.putExtra("usuario", usuario);
+                            intent.putExtra("num_tarjeta", num_tarjeta);
+                            intent.putExtra("tipo_tarjeta", tipo_tarjeta);
+                            intent.putExtra("emisor_tarjeta", emisor_tarjeta);
+                            intent.putExtra("banco_tarjeta", banco_tarjeta);
+                            intent.putExtra("tipo_moneda_deuda", tipo_moneda_deuda);
+                            intent.putExtra("cliente", cliente);
+                            intent.putExtra("cli_dni", cli_dni);
+                            intent.putExtra("desc_corta_banco", desc_corta_banco);
+                            startActivityForResult(intent, 0);
+                            finish();
+                        }
                     }
                 } else {
                     Toast.makeText(SeleccionModoMontoPago.this, "SELECCIONE ALGUNA OPCION DE PAGO", Toast.LENGTH_LONG).show();
@@ -408,10 +424,10 @@ public class SeleccionModoMontoPago extends Activity {
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoMensual())));
                 txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasSolesArrayList.get(0).getMontoTotal())));
-                tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                /*tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
-                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasSolesArrayList.get(0).getSignoMoneda());*/
                 //rdbtn_dolares.setVisibility(View.INVISIBLE);
             }
         }
@@ -462,10 +478,10 @@ public class SeleccionModoMontoPago extends Activity {
                 txt_monto_minimo.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMinimo())));
                 txt_monto_mensual.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoMensual())));
                 txt_monto_total.setText(String.valueOf(decimal.format(deudasTarjetasDolaresArrayList.get(0).getMontoTotal())));
-                tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                /*tv_tipo_moneda_modo_monto_1.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_2.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
                 tv_tipo_moneda_modo_monto_3.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
-                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());
+                tv_tipo_moneda_modo_monto_4.setText(deudasTarjetasDolaresArrayList.get(0).getSignoMoneda());*/
                 //rdbtn_soles.setVisibility(View.INVISIBLE);
             }
         }
@@ -499,11 +515,22 @@ public class SeleccionModoMontoPago extends Activity {
                 } else if (entity.getRptaDeudaTarjeta().equals("01")) {
                     rdbtn_soles.setEnabled(false);
                     rdbtn_dolares.setChecked(true);
+                    Toast.makeText(SeleccionModoMontoPago.this, "Usted solo tiene deuda en dolares", Toast.LENGTH_LONG).show();
                 } else if (entity.getRptaDeudaTarjeta().equals("02")) {
                     rdbtn_dolares.setEnabled(false);
                     rdbtn_soles.setChecked(true);
+                    Toast.makeText(SeleccionModoMontoPago.this, "Usted solo tiene deuda en soles", Toast.LENGTH_LONG).show();
                 } else if (entity.getRptaDeudaTarjeta().equals("03")) {
-                    NoDeudas();
+                    //NoDeudas();
+                    Toast.makeText(SeleccionModoMontoPago.this, "Usted, no cuenta con deudas pendientes", Toast.LENGTH_LONG).show();
+                    rdbtn_soles.setChecked(true);
+                    txt_monto_minimo.setText("0.00");
+                    txt_monto_mensual.setText("0.00");
+                    txt_monto_total.setText("0.00");
+                    /*tv_tipo_moneda_modo_monto_1.setText("S/.");
+                    tv_tipo_moneda_modo_monto_2.setText("S/.");
+                    tv_tipo_moneda_modo_monto_3.setText("S/.");
+                    tv_tipo_moneda_modo_monto_4.setText("S/.");*/
                 }
             } else {
                 Toast.makeText(SeleccionModoMontoPago.this, "Hubo un error en traer los datos", Toast.LENGTH_LONG).show();
@@ -511,7 +538,7 @@ public class SeleccionModoMontoPago extends Activity {
         }
     }
 
-    public void NoDeudas() {
+    private void NoDeudas() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(SeleccionModoMontoPago.this);
         alertDialog.setMessage("Usted, no cuenta con deudas pendientes");
         alertDialog.setTitle("No existen deudas");
