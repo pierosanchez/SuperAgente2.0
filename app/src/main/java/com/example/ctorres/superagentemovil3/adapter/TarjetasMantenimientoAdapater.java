@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -60,13 +61,88 @@ public class TarjetasMantenimientoAdapater extends BaseAdapter {
         View view = layoutInflater.inflate(R.layout.row_listado_cuenta_mantenimiento, null);
 
         viewHolder.chkb_registro = (TextView) view.findViewById(R.id.chkb_registro);
+        viewHolder.tv_tipo_tarjeta = (TextView) view.findViewById(R.id.tv_tipo_tarjeta);
+
+        viewHolder.iv_emisor_tarjeta_mantenimiento = (ImageView) view.findViewById(R.id.iv_emisor_tarjeta_mantenimiento);
 
         viewHolder.chkb_registro.setText(String.valueOf(getItem(position).getNumeroTarjeta()));
 
         UsuarioEntity data = getItem(position);
 
         if (data != null) {
-            viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+            if (data.getCod_emisor_tarjeta() == 1) {
+                if (data.getTipo_tarjeta() == 1) {
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.visaicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
+                } else {
+                    viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.visaicon);
+                    //viewHolder.tv_emisor_tarjeta.setText("Débito");
+                    viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
+                }
+            } else if (data.getCod_emisor_tarjeta() == 2) {
+                if (data.getTipo_tarjeta() == 1) {
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.mastercardlogo);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
+                } else {
+                    viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.mastercardlogo);
+                    //viewHolder.tv_emisor_tarjeta.setText("Débito");
+                    viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
+                }
+            } else {
+                if (data.getTipo_tarjeta() == 1) {
+                    if (data.getValidacionTarjeta().equals("Firma")) {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    } else if (data.getValidacionTarjeta().equals("Pin")){
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON PIN");
+                    } else {
+                        viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.americanexpressicon);
+                        //viewHolder.tv_emisor_tarjeta.setText("Crédito");
+                        viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                        viewHolder.tv_tipo_tarjeta.setText("CRÉDITO CON FIRMA");
+                    }
+                } else {
+                    viewHolder.iv_emisor_tarjeta_mantenimiento.setImageResource(R.drawable.americanexpressicon);
+                    //viewHolder.tv_emisor_tarjeta.setText("Débito");
+                    viewHolder.chkb_registro.setText(data.getNumeroTarjeta());
+                    viewHolder.tv_tipo_tarjeta.setText("DÉBITO CON PIN");
+                }
+            }
         } else {
             viewHolder.chkb_registro.setText("");
         }
@@ -75,7 +151,8 @@ public class TarjetasMantenimientoAdapater extends BaseAdapter {
     }
 
     public static final class ViewHolder{
-        TextView chkb_registro;
+        TextView chkb_registro, tv_tipo_tarjeta;
+        ImageView iv_emisor_tarjeta_mantenimiento;
     }
 
     public void setNewListUsuario(ArrayList<UsuarioEntity> usuarioEntities){

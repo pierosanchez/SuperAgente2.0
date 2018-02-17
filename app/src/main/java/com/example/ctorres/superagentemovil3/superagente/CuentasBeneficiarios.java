@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +26,11 @@ public class CuentasBeneficiarios extends Activity {
 
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
+    String tipoValidacion[] = {"Pin", "Firma"};
     private RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
-    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
+    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
     private EditText txt_cod_interbancario, txt_numero_tarjeta_beneficiario;
-    String dni_benef;
+    String dni_benef, validacionTipoTarjeta;
     private LinearLayout ll_datos_tarjeta_beneficiario;
     private Button btn_agregar_cuenta_beneficiario, btn_nuevo_beneficiario;
     private UsuarioEntity usuario;
@@ -46,6 +48,7 @@ public class CuentasBeneficiarios extends Activity {
 
         spinnerTipoTarjeta = (Spinner) findViewById(R.id.spinnerTipoTarjeta);
         spinnerBancoTarjeta = (Spinner) findViewById(R.id.spinnerBancoTarjeta);
+        spinnerValidacionTarjeta = (Spinner) findViewById(R.id.spinnerValidacionTarjeta);
 
         /*txt_cod_interbancario = (EditText) findViewById(R.id.txt_cod_interbancario);
         txt_numero_tarjeta_beneficiario = (EditText) findViewById(R.id.txt_numero_tarjeta_beneficiario);*/
@@ -69,6 +72,7 @@ public class CuentasBeneficiarios extends Activity {
         cargarBancoTarjeta();
         numeroTarjetaBeneficiario();
         numeroCodigoInterbancarioBeneficiario();
+        cargarValidacionTarjeta();
 
         Bundle bundle = getIntent().getExtras();
         dni_benef = bundle.getString("dni_benef");
@@ -104,6 +108,18 @@ public class CuentasBeneficiarios extends Activity {
                 activarIngresoTarjeta();
             }
         });*/
+
+        spinnerValidacionTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                validacionTipoTarjeta = parent.getAdapter().getItem(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btn_agregar_cuenta_beneficiario.setOnClickListener(new View.OnClickListener() {
 
@@ -200,6 +216,11 @@ public class CuentasBeneficiarios extends Activity {
 
     }
 
+    public void cargarValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorBanco);
+    }
+
     public void cargarTipoTarjeta(){
         ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayTipoTarjeta);
         spinnerTipoTarjeta.setAdapter(adaptadorBanco);
@@ -286,7 +307,7 @@ public class CuentasBeneficiarios extends Activity {
                 }
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
+                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta(), validacionTipoTarjeta);//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
 
             } catch (Exception e) {
                 user = null;

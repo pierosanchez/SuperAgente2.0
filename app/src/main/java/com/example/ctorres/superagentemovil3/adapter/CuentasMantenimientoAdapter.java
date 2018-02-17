@@ -65,26 +65,33 @@ public class CuentasMantenimientoAdapter extends BaseAdapter {
         View view = layoutInflater.inflate(R.layout.row_listado_cuenta_mantenimiento, null);
 
         viewHolder.chkb_registro = (TextView) view.findViewById(R.id.chkb_registro);
+        viewHolder.tv_tipo_tarjeta = (TextView) view.findViewById(R.id.tv_tipo_tarjeta);
+        viewHolder.tv_tipo_moneda_cuenta = (TextView) view.findViewById(R.id.tv_tipo_moneda_cuenta);
 
         viewHolder.iv_eliminar_beneficiario = (ImageView) view.findViewById(R.id.iv_eliminar_beneficiario);
         viewHolder.iv_editar_beneficiario = (ImageView) view.findViewById(R.id.iv_editar_beneficiario);
 
         viewHolder.chkb_registro.setText(String.valueOf(getItem(position).getNumCuenta()));
+        viewHolder.tv_tipo_tarjeta.setText(String.valueOf(getItem(position).getDescBreveBanco()));
+        viewHolder.tv_tipo_moneda_cuenta.setText(String.valueOf(getItem(position).getSignoMoneda()));
 
         final CuentaEntity data = getItem(position);
 
         if (data != null) {
             viewHolder.chkb_registro.setText(data.getNumCuenta());
-
+            viewHolder.tv_tipo_tarjeta.setText(data.getDescBreveBanco());
+            viewHolder.tv_tipo_moneda_cuenta.setText(data.getSignoMoneda());
         } else {
             viewHolder.chkb_registro.setText("");
+            viewHolder.tv_tipo_tarjeta.setText("");
+            viewHolder.tv_tipo_moneda_cuenta.setText("");
         }
 
         return view;
     }
 
     public static final class ViewHolder{
-        TextView chkb_registro;
+        TextView chkb_registro, tv_tipo_tarjeta, tv_tipo_moneda_cuenta;
         ImageView iv_editar_beneficiario, iv_eliminar_beneficiario;
     }
 

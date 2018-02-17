@@ -53,21 +53,25 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center">
 
+                    <!--android:layout_width="180dp"-->
                     <EditText
                         android:id="@+id/tx_valida_num_cel_usuario"
-                        android:layout_width="180dp"
+                        android:layout_width="280dp"
                         android:layout_height="30dp"
                         android:background="@color/color_blanco"
                         android:maxLength="9"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        android:gravity="center"
+                        android:enabled="false"
+                        android:textColor="@android:color/black"/>
 
-                    <Button
+                    <!--<Button
                         android:id="@+id/btn_validar"
                         android:layout_width="100dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
-                        android:text="@string/btn_validar" />
+                        android:text="@string/btn_validar" />-->
 
                 </LinearLayout>
 
@@ -94,7 +98,8 @@
                     android:layout_marginTop="15dp"
                     android:background="@color/color_blanco"
                     android:enabled="false"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
@@ -118,7 +123,8 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="15dp"
                     android:background="@color/color_blanco"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
@@ -142,7 +148,8 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="15dp"
                     android:background="@color/color_blanco"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
@@ -154,7 +161,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/tv_olvido_pregunta_secreta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tv_olvide_pregunta_secreta"

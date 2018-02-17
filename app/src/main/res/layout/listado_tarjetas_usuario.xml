@@ -100,7 +100,7 @@
                 <ListView
                     android:id="@+id/lv_tarjetas_usuario_mant"
                     android:layout_width="330dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="250dp"
                     android:descendantFocusability="blocksDescendants"/>
 
             </LinearLayout>

@@ -135,7 +135,7 @@
                 <Button
                     android:id="@+id/btn_opcion1"
                     android:layout_width="175dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@color/color_blanco"
                     android:text="@string/btn_regresar" />
@@ -143,8 +143,8 @@
                 <Button
                     android:id="@+id/btn_opcion2"
                     android:layout_width="175dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="9dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:background="@color/color_blanco"
                     android:text="@string/btn_salir" />

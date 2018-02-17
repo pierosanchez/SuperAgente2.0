@@ -55,7 +55,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/color_blanco"
                 android:inputType="textPassword"
-                android:maxLength="8"/>
+                android:maxLength="8"
+                android:gravity="center"/>
             <!--</android.support.design.widget.TextInputLayout>-->
 
             <TextView
@@ -72,7 +73,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@color/color_blanco"
                 android:inputType="textPassword"
-                android:maxLength="8"/>
+                android:maxLength="8"
+                android:gravity="center"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -101,7 +103,17 @@
                 android:layout_width="250dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/color_blanco" />
+                android:background="@color/color_blanco"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/tv_fecha_nac_cli"
+                android:layout_width="250dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/color_blanco"
+                android:gravity="center"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_siguiente"

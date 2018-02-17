@@ -192,7 +192,7 @@ public class VoucherRecargaTelefonica extends Activity {
 
     public void salir() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea salir");
+        alertDialog.setMessage("¿Está seguro que desea salir");
         alertDialog.setTitle("Cancelar");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,8 +12,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
+import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 import com.example.ctorres.superagentemovil3.utils.Constante;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class VentanaErrores extends Activity {
 
@@ -20,7 +26,7 @@ public class VentanaErrores extends Activity {
     UsuarioEntity usuario;
     TextView tv_titulo, tv_mensaje, mensaje_ayuda;
     LinearLayout ll_boton_opcion3;
-    String numCliente, cliente, cli_dni;
+    String numCliente, cliente, cli_dni, asuntoMail, bodyMail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +45,7 @@ public class VentanaErrores extends Activity {
 
         String callingActivity = this.getCallingActivity().getClassName();
 
-        if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginActivity")){
+        if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginActivity")) {
             /*Bundle bundle = getIntent().getExtras();
             usuario = bundle.getParcelable("usuario");
             numCliente = bundle.getString("movil");*/
@@ -66,10 +72,10 @@ public class VentanaErrores extends Activity {
                     finish();
                 }
             });
-        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroCliente")){
-            /*Bundle bundle = getIntent().getExtras();
-            usuario = bundle.getParcelable("usuario");
-            numCliente = bundle.getString("movil");*/
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginNumeroCliente")) {
+            Bundle bundle = getIntent().getExtras();
+            //usuario = bundle.getParcelable("usuario");
+            numCliente = bundle.getString("numero");
 
 
             btn_opcion1.setText("Reintentar");
@@ -89,7 +95,7 @@ public class VentanaErrores extends Activity {
                 @Override
                 public void onClick(View v) {
                     Intent sanipesIntent = new Intent(VentanaErrores.this, TerminosCondiciones.class);
-                    //sanipesIntent.putExtra("movil", numCliente);
+                    sanipesIntent.putExtra("movil", numCliente);
                     startActivity(sanipesIntent);
                     finish();
                 }
@@ -172,7 +178,7 @@ public class VentanaErrores extends Activity {
 
             tv_titulo.setText("NO PUEDE REALIZAR EL PAGO DE TARJETAS");
 
-            btn_opcion1.setText("REGRESAR AL MENU");
+            btn_opcion1.setText(R.string.btn_regresar_menu);
             btn_opcion2.setText(R.string.btn_salir);
             tv_mensaje.setText(R.string.mensaje_poder_hacer_pago);
 
@@ -196,14 +202,57 @@ public class VentanaErrores extends Activity {
             });
         } else if (callingActivity.equals(Constante.ACTIVITYROOT + "LoginPasswordCliente")) {
 
+            Bundle bundle = getIntent().getExtras();
+            numCliente = bundle.getString("numero");
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            };
+
+            Timer timer = new Timer();
+            timer.schedule(task, 30000);
+
             tv_titulo.setText(R.string.mensaje_clave_errada_exceso_intentos);
             mensaje_ayuda.setVisibility(View.GONE);
+
+            btn_opcion1.setVisibility(View.GONE);
+            btn_opcion2.setVisibility(View.VISIBLE);
+            ll_boton_opcion3.setVisibility(View.VISIBLE);
+            btn_opcion3.setVisibility(View.VISIBLE);
+            btn_opcion2.setText(R.string.btn_ha_olvidado_clave_acceso);
+            btn_opcion3.setText(R.string.btn_salir);
+            tv_mensaje.setText(R.string.intentos_mas_limite);
+
+            btn_opcion3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    salir();
+                }
+            });
+
+            btn_opcion2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent sanipesIntent = new Intent(VentanaErrores.this, ContrasenaOlvidada.class);
+                    sanipesIntent.putExtra("numero", numCliente);
+                    startActivity(sanipesIntent);
+                    finish();
+                }
+            });
+
+        } else if (callingActivity.equals(Constante.ACTIVITYROOT + "ContrasenaOlvidada")) {
+
+            tv_titulo.setText(R.string.titulo_recuperacion_segunda_clave);
 
             btn_opcion1.setVisibility(View.GONE);
             btn_opcion2.setVisibility(View.GONE);
             ll_boton_opcion3.setVisibility(View.VISIBLE);
             btn_opcion3.setText(R.string.btn_salir);
-            tv_mensaje.setText(R.string.intentos_mas_limite);
+            tv_mensaje.setText(R.string.tv_msg_llegara_correo);
+            mensaje_ayuda.setText(R.string.tv_msg_llame_central_servicio);
 
             btn_opcion3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -217,7 +266,7 @@ public class VentanaErrores extends Activity {
 
     public void salir() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
+        alertDialog.setMessage("¿Está seguro que desea salir de la aplicación?");
         alertDialog.setTitle("Salir");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
@@ -236,4 +285,20 @@ public class VentanaErrores extends Activity {
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
+
+    /*private class EnvioCorreoElectronico extends AsyncTask<String, Void, UsuarioEntity> {
+
+        @Override
+        protected UsuarioEntity doInBackground(String... params) {
+            UsuarioEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.EnvioCorreo(correo, "CAMBIO DE CLAVE DE ACCESO", "SU CLAVE DE ACCESO HA SIDO CAMBIADA. SI USTED NO SOLICITÓ ESTE CAMBIO, PORFAVOR CONTÁCTESE CON NOSTROS.");
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+    }*/
 }

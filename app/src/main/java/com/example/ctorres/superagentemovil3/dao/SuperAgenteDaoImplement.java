@@ -9,6 +9,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.URLClassLoader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -28,12 +29,62 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
+    public UsuarioEntity getCorreoCliente(String PkCliente) {
+        UsuarioEntity listaUsuario = new UsuarioEntity();
+
+        try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/getCorreoCliente/?PkCliente=" + URLEncoder.encode(PkCliente, "UTF-8");
+
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    listaUsuario.setEmail(utils.getValueStringOrNull(jsonObject, "email"));
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
+    public UsuarioEntity EnvioCorreo(String emailTo, String asunto, String body) {
+        UsuarioEntity listaUsuario = new UsuarioEntity();
+
+        try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/EnvioCorreoCambioClave/?emailTo=" + URLEncoder.encode(emailTo, "UTF-8") + "&asunto=" + URLEncoder.encode(asunto, "UTF-8") + "&body=" + URLEncoder.encode(body, "UTF-8");
+
+            JSONArray jsonArray = utils.getJSONArrayfromURL(url);
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
+                    //JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    listaUsuario.setEmail(emailTo);
+                } else {
+                    listaUsuario = null;
+                }
+            } else {
+                listaUsuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuario;
+    }
+
+    @Override
     public OperarioEntity ValidarClaveOperario(String pk_ope_valid_pass, String pass_ope_valid) {
         OperarioEntity listaUsuario = new OperarioEntity();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarClaveOperario/?pk_ope_valid_pass=" + pk_ope_valid_pass + "&pass_ope_valid=" + pass_ope_valid;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/ValidarClaveOperario/?pk_ope_valid_pass=" + URLEncoder.encode(pk_ope_valid_pass, "UTF-8") + "&pass_ope_valid=" + URLEncoder.encode(pass_ope_valid, "UTF-8");
+
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
                 if (jsonArray.length() > 0) {
@@ -58,9 +109,9 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     public OperarioEntity CambioContraOperario(String nueva_clave_ope, String clave_ope, String pkCom) {
         OperarioEntity listaUsuario = new OperarioEntity();
 
-        String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/CambioContraOperario/?nueva_clave_ope=" + nueva_clave_ope + "&clave_ope=" + clave_ope + "&pkCom=" + pkCom;
-
         try {
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/CambioContraOperario/?nueva_clave_ope=" + URLEncoder.encode(nueva_clave_ope, "UTF-8") + "&clave_ope=" + URLEncoder.encode(clave_ope, "UTF-8") + "&pkCom=" + URLEncoder.encode(pkCom, "UTF-8");
+
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
             if (jsonArray != null) {
                 if (jsonArray.length() > 0) {
@@ -279,20 +330,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -307,20 +358,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -335,20 +386,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -363,20 +414,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -391,20 +442,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -419,20 +470,20 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "error"));
                     }
-                }else {
+                } else {
                     tipoTarjetaEntity = null;
                 }
             } else {
                 tipoTarjetaEntity = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -447,8 +498,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         ComercioEntity tipoTarjetaEntity = new ComercioEntity();
@@ -458,13 +509,13 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         tipoTarjetaEntity.setRaz_social_comercio(utils.getValueStringOrNull(jsonObject, "raz_social_comercio"));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -479,8 +530,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
@@ -492,13 +543,13 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -513,8 +564,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
@@ -526,13 +577,13 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -577,7 +628,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             } else {
                 voucherPagoServicio = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             voucherPagoServicio = null;
         }
@@ -586,7 +637,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
     @Override
     public VoucherTransferenciasEntity ingresarVoucherTransferencias(String numero_unicoT, String fechaT, String horaT, String remitente, String bancoT, String tarjeta_cargoT, String importe_transferencia, String monto_comision, String comision_delivery, String comision_cheque, String importe_total, String beneficiario, String tipo_transferencia, String idclienteT, String tipo_monedaT) {
-        VoucherTransferenciasEntity voucherPagoServicio ;
+        VoucherTransferenciasEntity voucherPagoServicio;
 
         try {
             String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherTransferencias/?numero_unicoT=" + URLEncoder.encode(numero_unicoT, "UTF-8") +
@@ -632,7 +683,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             } else {
                 voucherPagoServicio = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             voucherPagoServicio = null;
         }
@@ -641,7 +692,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
     @Override
     public VoucherPagoConsumoEntity ingresarVoucherPagoConsumo(String numero_unicoPC, String fechaPC, String horaPC, String importePC, String nro_tarjetaPC, String marca_tarjetaPC, String banco_tarjetaPC, String nombre_comercioPC, String direccion_comercioPC, String distrito_comercioPC, String idclientePC, String idcomercioPC) {
-        VoucherPagoConsumoEntity voucherPagoServicio ;
+        VoucherPagoConsumoEntity voucherPagoServicio;
 
         try {
             String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherPagoConsumos/?numero_unicoPC=" + URLEncoder.encode(numero_unicoPC, "UTF-8") +
@@ -680,7 +731,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             } else {
                 voucherPagoServicio = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             voucherPagoServicio = null;
         }
@@ -689,7 +740,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
     @Override
     public VoucherPagoServicioEntity ingresarVoucherServicio(String numero_unicoS, String fechaS, String horaS, String servicio, String tipo_servicio, String cod_clienteS, String nombre_tipo_servicio, String persona_paga, String dni_persona, String forma_pagoS, String importeS, String comisionS, String totalS) {
-        VoucherPagoServicioEntity voucherPagoServicio ;
+        VoucherPagoServicioEntity voucherPagoServicio;
 
         try {
             String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarVoucherPagoServicio/?numero_unicoS=" + URLEncoder.encode(numero_unicoS, "UTF-8") +
@@ -731,7 +782,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             } else {
                 voucherPagoServicio = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             voucherPagoServicio = null;
         }
@@ -740,7 +791,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
     @Override
     public VoucherPagoRecargaEntity ingresarVoucherRecargas(String numero_unicoR, String fechaR, String horaR, String recarga, String forma_pagoR, String importeR, String comision_recarga, String totalR, String bancoR, String nro_tarjetaR, String tipo_monedaR, String idclienteR) {
-        VoucherPagoRecargaEntity voucherPagoServicio ;
+        VoucherPagoRecargaEntity voucherPagoServicio;
 
         try {
             String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarVoucherRecargas/?numero_unicoR=" + URLEncoder.encode(numero_unicoR, "UTF-8") +
@@ -780,7 +831,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
             } else {
                 voucherPagoServicio = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             voucherPagoServicio = null;
         }
@@ -795,21 +846,21 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         NumeroUnico tipoTarjetaEntity = new NumeroUnico();
                         tipoTarjetaEntity.setNumeroUnico(utils.getValueStringOrNull(jsonObject, "numero_unico"));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return listaTipoTarjeta;
@@ -823,8 +874,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         DeudasTarjetas tipoTarjetaEntity = new DeudasTarjetas();
@@ -836,13 +887,13 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         tipoTarjetaEntity.setIdDeudaTarjetaCliente(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "id_deuda_tarjeta_cliente")));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -858,8 +909,8 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
 
         try {
             JSONArray jsonArray = utils.getJSONArrayfromURL(url);
-            if (jsonArray != null){
-                if (jsonArray.length() > 0){
+            if (jsonArray != null) {
+                if (jsonArray.length() > 0) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         TipoTarjetaEntity tipoTarjetaEntity = new TipoTarjetaEntity();
@@ -867,13 +918,13 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         tipoTarjetaEntity.setDescTipoTarjeta(utils.getValueStringOrNull(jsonObject, "desc_tipo_tarjeta"));
                         listaTipoTarjeta.add(tipoTarjetaEntity);
                     }
-                }else {
+                } else {
                     listaTipoTarjeta = null;
                 }
             } else {
                 listaTipoTarjeta = null;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -1188,6 +1239,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     user.setProvincia(utils.getValueStringOrNull(jsonObject, "provincia"));
                     user.setApe_materno(utils.getValueStringOrNull(jsonObject, "segundo_apellido"));
                     user.setSexo(utils.getValueStringOrNull(jsonObject, "sexo"));
+                    user.setRptaReniec(utils.getValueStringOrNull(jsonObject, "rpta_reniec"));
                     listaUsuario.add(user);
                 } else {
                     listaUsuario = null;
@@ -1239,7 +1291,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
         try {
             user = new UsuarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/OlvidoClaveAcceso/?identiCli=" + idcliente + "&response_q=" + respuesta + "&newPass=" + newPass;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/OlvidoClaveAcceso/?identiCli=" + URLEncoder.encode(idcliente, "UTF-8") + "&response_q=" + URLEncoder.encode(respuesta, "UTF-8") + "&newPass=" + URLEncoder.encode(newPass, "UTF-8");
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -1276,6 +1328,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         UsuarioEntity usuarioEntity = new UsuarioEntity();
                         usuarioEntity.setPregunta(utils.getValueStringOrNull(jsonObject, "pregunta"));
+                        usuarioEntity.setEmail(utils.getValueStringOrNull(jsonObject, "email"));
                         listaUsuario.add(usuarioEntity);
                     }
                 } else {
@@ -1646,6 +1699,10 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                         cuentaEntity.setIdcliente(utils.getValueStringOrNull(jsonObject, "idcliente"));
                         cuentaEntity.setNumCuenta(utils.getValueStringOrNull(jsonObject, "numCuenta"));
                         cuentaEntity.setIdcuenta(utils.getValueStringOrNull(jsonObject, "idcuenta"));
+                        cuentaEntity.setTipo_moneda(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_tipo_moneda")));
+                        cuentaEntity.setDescBreveBanco(utils.getValueStringOrNull(jsonObject, "desc_breve_banco"));
+                        cuentaEntity.setCod_banco(Integer.parseInt(utils.getValueStringOrNull(jsonObject, "cod_banco")));
+                        cuentaEntity.setSignoMoneda(utils.getValueStringOrNull(jsonObject, "signo_moneda"));
                         listaCuentas.add(cuentaEntity);
                     }
                 } else {
@@ -2078,7 +2135,7 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
                     + "&birth=" + URLEncoder.encode(birth, "UTF-8")
                     + "&password=" + URLEncoder.encode(password, "UTF-8")
                     + "&DNI=" + URLEncoder.encode(DNI, "UTF-8")
-                    + "&abonos=" + URLEncoder.encode(String.valueOf(abonos), "UTF-8") ;
+                    + "&abonos=" + URLEncoder.encode(String.valueOf(abonos), "UTF-8");
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -2141,12 +2198,12 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public BeneficiarioEntity getInsertarCuentasBeneficiario(String dni_b, String cod_interbancario, String num_tarjeta_beneficiario, int cod_emisor_tarjeta, int cod_banco, int cod_tipo_cuenta) {
+    public BeneficiarioEntity getInsertarCuentasBeneficiario(String dni_b, String cod_interbancario, String num_tarjeta_beneficiario, int cod_emisor_tarjeta, int cod_banco, int cod_tipo_cuenta, String VAlida_Card) {
         BeneficiarioEntity benef;
         try {
             benef = new BeneficiarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarCuentasBeneficiario/?dni_b=" + dni_b + "&cod_interbancario=" + cod_interbancario + "&num_tarjeta_beneficiario=" + num_tarjeta_beneficiario + "&cod_emisor_tarjeta=" + cod_emisor_tarjeta + "&cod_banco=" + cod_banco + "&cod_tipo_cuenta=" + cod_tipo_cuenta;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/InsertarCuentasBeneficiario/?dni_b=" + dni_b + "&cod_interbancario=" + cod_interbancario + "&num_tarjeta_beneficiario=" + num_tarjeta_beneficiario + "&cod_emisor_tarjeta=" + cod_emisor_tarjeta + "&cod_banco=" + cod_banco + "&cod_tipo_cuenta=" + cod_tipo_cuenta + "&VAlida_Card=" + VAlida_Card;
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());
@@ -2417,12 +2474,12 @@ public class SuperAgenteDaoImplement implements SuperAgenteDaoInterface {
     }
 
     @Override
-    public BeneficiarioEntity IngresarTarjetaBeneficiario(String DNI_BENEF, String tarjeta_BENEF, int cod_emisor_tarjeta_BENEF, int cod_banco_BENEF, int cod_tipo_cuenta_BENEF) {
+    public BeneficiarioEntity IngresarTarjetaBeneficiario(String DNI_BENEF, String tarjeta_BENEF, int cod_emisor_tarjeta_BENEF, int cod_banco_BENEF, int cod_tipo_cuenta_BENEF, String Valid_Card) {
         BeneficiarioEntity beneficiarioEntity;
         try {
             beneficiarioEntity = new BeneficiarioEntity();
 
-            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarTarjetaBeneficiario/?DNI_BENEF=" + DNI_BENEF + "&tarjeta_BENEF=" + tarjeta_BENEF + "&cod_emisor_tarjeta_BENEF=" + cod_emisor_tarjeta_BENEF + "&cod_banco_BENEF=" + cod_banco_BENEF + "&cod_tipo_cuenta_BENEF=" + cod_tipo_cuenta_BENEF;
+            String url = Constante.IPORHOST + "webApi_2/apigeneral/ApiGeneral/IngresarTarjetaBeneficiario/?DNI_BENEF=" + DNI_BENEF + "&tarjeta_BENEF=" + tarjeta_BENEF + "&cod_emisor_tarjeta_BENEF=" + cod_emisor_tarjeta_BENEF + "&cod_banco_BENEF=" + cod_banco_BENEF + "&cod_tipo_cuenta_BENEF=" + cod_tipo_cuenta_BENEF + "&Valid_Card=" + Valid_Card;
 
             JSONArray arrayJason = utils.getJSONArrayfromURL(url);
             Log.e("Json", arrayJason.toString());

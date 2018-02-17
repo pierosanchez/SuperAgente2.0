@@ -2,6 +2,7 @@ package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +29,7 @@ public class CambioClaveAcceso extends Activity {
     String usu;
     DetalleClaveAccesoAdapter detalleClaveAccesoAdapter;
     ArrayList<UsuarioEntity> usuarioEntityArrayList;
-    String cliente, cli_dni;
+    String cliente, cli_dni, correo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +62,12 @@ public class CambioClaveAcceso extends Activity {
                 String nueva_clave_confirmacion = txt_confirme_nueva_clave_acceso.getText().toString();
 
                 if (nueva_clave.equals(nueva_clave_confirmacion)) {
-                    CambioClaveAcceso.actualizarClaveAcceso validador = new CambioClaveAcceso.actualizarClaveAcceso();
-                    validador.execute();
+                    if (nueva_clave.length() >= 8) {
+                        CambioClaveAcceso.actualizarClaveAcceso validador = new CambioClaveAcceso.actualizarClaveAcceso();
+                        validador.execute();
+                    } else {
+                        Toast.makeText(CambioClaveAcceso.this, "La clave debe tener 8 caractéres como mínimo", Toast.LENGTH_SHORT).show();
+                    }
                 } else if (!nueva_clave.equals(nueva_clave_confirmacion)) {
                     Toast.makeText(CambioClaveAcceso.this, "No coinciden las nuevas contraseñas ingresadas", Toast.LENGTH_SHORT).show();
                 }
@@ -112,6 +117,10 @@ public class CambioClaveAcceso extends Activity {
                 } else if (usuarioEntity.getRpta_cambio_clave().equals("3")) {
                     Toast.makeText(CambioClaveAcceso.this, "La contraseña ingresada no puede ser igual a la anterior", Toast.LENGTH_SHORT).show();
                 } else if (usuarioEntity.getRpta_cambio_clave().equals("0")) {
+                    //sendEmail();
+                    CambioClaveAcceso.EnvioCorreoElectronico envioCorreo = new CambioClaveAcceso.EnvioCorreoElectronico();
+                    envioCorreo.execute();
+
                     Intent intent = new Intent(CambioClaveAcceso.this, CambioClaveAccesoExitosa.class);
                     intent.putExtra("usuario", usuario);
                     startActivity(intent);
@@ -156,7 +165,46 @@ public class CambioClaveAcceso extends Activity {
             detalleClaveAccesoAdapter.setNewListBeneficiario(usuarioEntityArrayList);
             detalleClaveAccesoAdapter.notifyDataSetChanged();
             txt_primera_pregunta_cambio.setText(usuarioEntityArrayList.get(0).getPregunta());
+            correo = detalleClaveAccesoAdapter.getItem(0).getEmail();
         }
     }
 
+    private class EnvioCorreoElectronico extends AsyncTask<String, Void, UsuarioEntity> {
+
+        @Override
+        protected UsuarioEntity doInBackground(String... params) {
+            UsuarioEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.EnvioCorreo(correo, "CAMBIO DE CLAVE DE ACCESO", "SU CLAVE DE ACCESO HA SIDO CAMBIADA. SI USTED NO SOLICITÓ ESTE CAMBIO, POR FAVOR CONTÁCTESE CON NOSOTROS.");
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+    }
+
+    /*private class getCorreoElectronico extends AsyncTask<String, Void, UsuarioEntity> {
+
+        @Override
+        protected UsuarioEntity doInBackground(String... params) {
+            UsuarioEntity user;
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                user = dao.getCorreoCliente(usuario.getUsuarioId());
+            } catch (Exception e) {
+                user = null;
+                //flag_clic_ingreso = 0;;
+            }
+            return user;
+        }
+
+        @Override
+        protected void onPostExecute(UsuarioEntity usuarioEntity) {
+            if (usuarioEntity != null){
+                correo = usuarioEntity.getEmail();
+            }
+        }
+    }*/
 }

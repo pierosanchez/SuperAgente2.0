@@ -1,6 +1,8 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,6 +37,7 @@ public class LoginPasswordCliente extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_password_cliente);
 
+
         clave_acceso = (EditText) findViewById(R.id.clave_acceso);
 
         btn_aceptar = (Button) findViewById(R.id.btn_aceptar);
@@ -64,9 +67,7 @@ public class LoginPasswordCliente extends Activity {
         btn_salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginPasswordCliente.this, LoginNumeroCliente.class);
-                startActivityForResult(intent, 0);
-                finish();
+                salir();
             }
         });
 
@@ -74,7 +75,7 @@ public class LoginPasswordCliente extends Activity {
             @Override
             public void onClick(View v) {
                 Intent sanipesIntent = new Intent(LoginPasswordCliente.this, ContrasenaOlvidada.class);
-                //sanipesIntent.putExtra("cliente", userEntity.getNombreApellido());
+                sanipesIntent.putExtra("numero", numero);
                 startActivity(sanipesIntent);
                 finish();
             }
@@ -111,6 +112,7 @@ public class LoginPasswordCliente extends Activity {
                         circleProgressBar.setVisibility(View.GONE);
                     } else if (validar == 4) {
                         Intent sanipesIntent = new Intent(LoginPasswordCliente.this, VentanaErrores.class);
+                        sanipesIntent.putExtra("numero", numero);
                         startActivityForResult(sanipesIntent, 0);
                         finish();
                     }
@@ -179,5 +181,30 @@ public class LoginPasswordCliente extends Activity {
         }
 
         return result;
+    }
+
+    public void salir() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage("¿Está seguro que desea salir de la aplicación?");
+        alertDialog.setTitle("Salir");
+        alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(LoginPasswordCliente.this, LoginNumeroCliente.class);
+                startActivityForResult(intent, 0);
+                finish();
+            }
+        });
+
+        alertDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

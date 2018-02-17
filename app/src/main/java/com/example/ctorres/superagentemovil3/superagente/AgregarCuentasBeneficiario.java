@@ -32,8 +32,9 @@ public class AgregarCuentasBeneficiario extends Activity {
 
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
+    String tipoValidacion[] = {"Pin", "Firma"};
     private RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
-    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
+    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
     private EditText txt_cod_interbancario, txt_numero_tarjeta_beneficiario;
     String dni_benef;
     private LinearLayout ll_datos_tarjeta_beneficiario;
@@ -42,7 +43,7 @@ public class AgregarCuentasBeneficiario extends Activity {
     private BeneficiarioEntity beneficiarioEntityU;
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     EditText txt_cod_interbancario1, txt_cod_interbancario2, txt_cod_interbancario3, txt_cod_interbancario4;
-    String cliente, cli_dni;
+    String cliente, cli_dni, validacionTipoTarjeta;
     ArrayList<BancosEntity> bancosEntityArrayList;
     ArrayList<TarjetaBinEntity> tarjetaBinEntityArrayList;
     GetTarjetaBinAdapter getTarjetaBinAdapter;
@@ -60,6 +61,7 @@ public class AgregarCuentasBeneficiario extends Activity {
 
         spinnerTipoTarjeta = (Spinner) findViewById(R.id.spinnerTipoTarjeta);
         spinnerBancoTarjeta = (Spinner) findViewById(R.id.spinnerBancoTarjeta);
+        spinnerValidacionTarjeta = (Spinner) findViewById(R.id.spinnerValidacionTarjeta);
 
         txt_numero_tarjeta_beneficiario1 = (EditText) findViewById(R.id.txt_numero_tarjeta_beneficiario1);
         txt_numero_tarjeta_beneficiario2 = (EditText) findViewById(R.id.txt_numero_tarjeta_beneficiario2);
@@ -80,6 +82,7 @@ public class AgregarCuentasBeneficiario extends Activity {
         cargarBancoTarjeta();
         numeroTarjetaBeneficiario();
         numeroCodigoInterbancarioBeneficiario();
+        cargarValidacionTarjeta();
 
         Bundle bundle = getIntent().getExtras();
         dni_benef = bundle.getString("dni_benef");
@@ -114,6 +117,18 @@ public class AgregarCuentasBeneficiario extends Activity {
             public void onClick(View v) {
                 rdbtn_amex_option.setChecked(false);
                 rdbtn_mc_option.setChecked(false);
+            }
+        });
+
+        spinnerValidacionTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                validacionTipoTarjeta = parent.getAdapter().getItem(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -190,6 +205,11 @@ public class AgregarCuentasBeneficiario extends Activity {
 
             }
         });
+    }
+
+    public void cargarValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorBanco);
     }
 
     private void ejecutarLista() {
@@ -307,7 +327,7 @@ public class AgregarCuentasBeneficiario extends Activity {
                 }
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta());//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
+                user = dao.getInsertarCuentasBeneficiario(dni_benef, codigo_interbancario, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta(), validacionTipoTarjeta);//, obtenerEmisorTarjeta(), obtenerBancoTarjeta(), obtenerTipoTarjeta());
 
             } catch (Exception e) {
                 user = null;
@@ -326,7 +346,7 @@ public class AgregarCuentasBeneficiario extends Activity {
                     Toast.makeText(AgregarCuentasBeneficiario.this, "Ingresado correctamente", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_LONG).show();
+                //Toast.makeText(AgregarCuentasBeneficiario.this, "Hubo un error", Toast.LENGTH_LONG).show();
             }
         }
     }

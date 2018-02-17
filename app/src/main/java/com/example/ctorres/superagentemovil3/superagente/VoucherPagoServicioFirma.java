@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.format.Time;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,6 +39,9 @@ import com.kosalgeek.genasync12.PostResponseAsyncTask;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -46,10 +53,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import org.jibble.simpleftp.*;
 
 public class VoucherPagoServicioFirma extends Activity {
 
@@ -153,9 +164,7 @@ public class VoucherPagoServicioFirma extends Activity {
                 if (signImage.getDrawable() == null) {
                     Toast.makeText(VoucherPagoServicioFirma.this, "Por favor registre su firma", Toast.LENGTH_LONG).show();
                 } else {
-
-                    //post();
-
+                    startSave();
                     Intent intent = new Intent(VoucherPagoServicioFirma.this, MenuCliente.class);
                     intent.putExtra("usuario", usuario);
                     intent.putExtra("cliente", cliente);
@@ -273,79 +282,72 @@ public class VoucherPagoServicioFirma extends Activity {
         return decimal.format(convert);
     }
 
-    public String drawableToBitmapToString(ImageView imageView) {
-        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView.getDrawable();
-        Bitmap bitmap = bitmapDrawable.getBitmap();
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] b = byteArrayOutputStream.toByteArray();
-        String temp = Base64.encodeToString(b, Base64.DEFAULT);
-
-        return temp;
+    public static Bitmap viewToBitmap(View view, int width, int heigth) {
+        Bitmap bitmap = Bitmap.createBitmap(width, heigth, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
     }
 
-    public void post() {
-        HashMap<String, String> postData = new HashMap<String, String>();
-        postData.put("image", drawableToBitmapToString(signImage));
-        //postData.put("keyCliente", usuario.getUsuarioId());
-
-        PostResponseAsyncTask task = new PostResponseAsyncTask(VoucherPagoServicioFirma.this, postData, new AsyncResponse() {
-            @Override
-            public void processFinish(String s) {
-                if (s.contains("uploaded_success")) {
-                    Toast.makeText(VoucherPagoServicioFirma.this, "Imagen ingresada", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(VoucherPagoServicioFirma.this, "Imagen no ingresada, hubo un error" + s, Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        task.execute("http://10.0.2.2/news/index.php");
-        //task.execute("http://localhost:4532/apigeneral/ApiGeneral/InsertarFirmaCliente");
-        task.setEachExceptionsHandler(new EachExceptionsHandler() {
-            @Override
-            public void handleIOException(IOException e) {
-                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Servidor", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void handleMalformedURLException(MalformedURLException e) {
-                Toast.makeText(VoucherPagoServicioFirma.this, "Error de URL", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void handleProtocolException(ProtocolException e) {
-                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Protocolo", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void handleUnsupportedEncodingException(UnsupportedEncodingException e) {
-                Toast.makeText(VoucherPagoServicioFirma.this, "Error de Codificación", Toast.LENGTH_LONG).show();
-            }
-        });
+    private File getDisc(){
+        return new File(getFilesDir(), "image demo");
     }
 
-    public void GetText(){
+    public void startSave(){
+        FileOutputStream fileOutputStream = null;
+        File file = getDisc();
+        if (!file.exists() && !file.mkdirs()){
+            //Toast.makeText(VoucherPagoServicioFirma.this, "No se pudo crear la carpeta en el celular", Toast.LENGTH_LONG).show();
+            file.mkdirs();
+            //return;
+        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmsshhmmss");
+        String date = simpleDateFormat.format(new Date());
+        String name = "Img" + date + ".jpg";
+        String file_name = file.getAbsolutePath() + "/" + name;
+        File new_file = new File(file_name);
         try {
-            URL url = new URL("http://190.117.112.163/webApi_2/apigeneral/ApiGeneral/InsertarFirmaCliente");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            String urlParameters = "img=" + drawableToBitmapToString(signImage) + "&keyCliente=" + usuario.getUsuarioId();
-            connection.setRequestMethod("POST");
-
-            connection.setDoOutput(true);
-            DataOutputStream dstream = new DataOutputStream(connection.getOutputStream());
-            dstream.writeBytes(urlParameters);
-            dstream.flush();
-            dstream.close();
-
-            Toast.makeText(VoucherPagoServicioFirma.this, "Response Code " + connection.getResponseCode(), Toast.LENGTH_LONG).show();
-
-        } catch (MalformedURLException e) {
+            fileOutputStream = new FileOutputStream(new_file);
+            Bitmap bitmap = viewToBitmap(signImage, signImage.getWidth(), signImage.getHeight());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            Toast.makeText(VoucherPagoServicioFirma.this, "imagen guardada exitosamente", Toast.LENGTH_LONG).show();
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (FileNotFoundException e){
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        refreshGallery(new_file);
+    }
 
+    public void refreshGallery(File file){
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+        sendBroadcast(intent);
+    }
+
+    private void sendImageFTP(){
+        SimpleFTP ftp = new SimpleFTP();
+
+        try {
+            //conectar a algun servidor FTP en el puerto 21.
+            ftp.connect("192.168.1.90", 21, "administrador", "$osc2428339");
+
+            //settear modo binario
+            ftp.bin();
+
+            //cambiar hacia el nuevo directorio de trabajo en el servidor FTP
+            ftp.cwd("\\\\192.168.1.90\\images");
+
+            //subir los archivos
+            ftp.stor(new File(getDisc().getPath()));
+
+            ftp.disconnect();
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private class getNumUnico extends AsyncTask<String, Void, VoucherPagoServicioEntity> {

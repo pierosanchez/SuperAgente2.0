@@ -46,7 +46,7 @@ public interface SuperAgenteDaoInterface {
     ArrayList<UsuarioEntity> listarTarjetas(String idCliente);
     ArrayList<CuentaEntity> listarCuentasUsuario(String idCliente);
     BeneficiarioEntity eliminarBeneficiarioUsuario(String usuarioId);
-    BeneficiarioEntity getInsertarCuentasBeneficiario(String dni_b, String cod_interbancario, String num_tarjeta_beneficiario, int cod_emisor_tarjeta, int cod_banco, int cod_tipo_cuenta);
+    BeneficiarioEntity getInsertarCuentasBeneficiario(String dni_b, String cod_interbancario, String num_tarjeta_beneficiario, int cod_emisor_tarjeta, int cod_banco, int cod_tipo_cuenta, String VAlida_Card);
     UsuarioEntity eliminarTarjetaUsuario(String benef_dni);
     CuentaEntity eliminarCuentaUsuario(String id_tarjeta);
     BeneficiarioEntity actualizarBeneficiario(String name, String lastname, String cel1, String cel2, String e_mail, String birth, String password, String DNI, int abonos);
@@ -64,7 +64,7 @@ public interface SuperAgenteDaoInterface {
     UsuarioEntity actualizarDomicilioCliente(String departamento, String provincia, String distrito, String direccion, String tel_fijo, String idcliente);
     ArrayList<ClubsEntity> ListadoClubs();
     BeneficiarioEntity IngresarCuentaBeneficiario(String beneficiario_DNI, String beneficiario_cuenta);
-    BeneficiarioEntity IngresarTarjetaBeneficiario(String DNI_BENEF, String tarjeta_BENEF, int cod_emisor_tarjeta_BENEF, int cod_banco_BENEF, int cod_tipo_cuenta_BENEF);
+    BeneficiarioEntity IngresarTarjetaBeneficiario(String DNI_BENEF, String tarjeta_BENEF, int cod_emisor_tarjeta_BENEF, int cod_banco_BENEF, int cod_tipo_cuenta_BENEF, String Valid_Card);
     UsuarioEntity validarCelularCliente(String numCel);
     ArrayList<UsuarioEntity> ListadoDomicilioUsuario(String usuario_id);
     ArrayList<BancosEntity> ListadoBancos();
@@ -101,4 +101,6 @@ public interface SuperAgenteDaoInterface {
     UsuarioEntity LoginValidaCelularCliente(String numero);
     OperarioEntity CambioContraOperario(String nueva_clave_ope, String clave_ope, String pkCom);
     OperarioEntity ValidarClaveOperario(String pk_ope_valid_pass, String pass_ope_valid);
+    UsuarioEntity EnvioCorreo(String emailTo, String asunto, String body);
+    UsuarioEntity getCorreoCliente(String PkCliente);
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SúperAgente Cliente</string>
+    <string name="app_name">Súper Agente Cliente</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -9,6 +9,7 @@
     <string name="msg_error_ingresar_apellido">Ingrese el apellido</string>
     <string name="msg_error_ingresar_email">Ingrese el email</string>
     <string name="msg_error_ingresar_movil">Ingrese el movil</string>
+    <string name="msg_error_digito_control_dni">Ingrese el dígito de control del DNI</string>
     <string name="titulo_salir">Salir</string>
     <string name="title_confirmar">Confirmar</string>
     <string name="msg_confirmacion_salida">¿Seguro que desea salir?</string>
@@ -21,6 +22,11 @@
     <string name="mensaje_clave_errada_exceso_intentos">CLAVE ERRADA - EXCESO DE INTENTOS</string>
     <string name="intentos_mas_limite">HA INTENTADO INGRESAR SU CLAVE MÁS VECES QUE EL LÍMITE PERMITIDO, POR SU SEGURIDAD COMUNÍQUESE CON LA CENTRAL DE SERVICIO AL CLIENTE</string>
     <string name="mensaje_poder_hacer_pago">PARA PODER HACER UN PAGO DE TARJETAS NECESITA COMO MÍNIMO UNA TARJETA DE CRÉDITO Y UNA DE DÉBITO O</string>
+
+    <!-- Correo de combio de clave de acceso -->
+
+    <string name="mail_asunto">CAMBIO DE CLAVE DE ACCESO</string>
+    <string name="mail_mensaje">SU CLAVE DE ACCESO HA SIDO CAMBIADA. SI USTED NO SOLICITÓ ESTE CAMBIO, PORFAVOR CONTÁCTESE CON NOSTROS.</string>
 
     <!-- Botones -->
 
@@ -578,7 +584,7 @@
 
     <string name="tv_numero_celular_no_registrado">NÚMERO DE CELULAR NO REGISTRADO</string>
     <string name="tv_ingrese_num_celular">INGRESE SU NÚMERO DE CELULAR</string>
-    <string name="tv_duda_queja">SI TIENE ALGUNA DUDA O INCONVENIENTE PUEDES LLAMARNOS AL:</string>
+    <string name="tv_duda_queja">SI TIENE ALGUNA DUDA O INCONVENIENTE PUEDE LLAMARNOS AL:</string>
     <string name="tv_telefono_central_atencion_cliente">(511) 601-1360</string>
     <string name="tv_email_atencion_cliente">E-Mail</string>
     <string name="tv_correo_cliente_base_peru">correocliente@baseperu.com</string>
@@ -623,7 +629,7 @@
     <string name="titulo_recuperacion_clave">RECUPERACIÓN DE CLAVE</string>
     <string name="tv_pregunta_autenticacion">PREGUNTA DE AUTENTICACIÓN</string>
     <string name="tv_ingrese_respuesta_olvide_contraseña">INGRESE RESPUESTA</string>
-    <string name="tv_olvide_pregunta_secreta">¿HAZ OLVIDADO TU PREGUNTA SECRETA?</string>
+    <string name="tv_olvide_pregunta_secreta">¿HA OLVIDADO SU PREGUNTA DE AUTENTICACIÓN?</string>
     <string name="tv_nueva_clave_por_olvido">INGRESE SU NUEVA CLAVE</string>
     <string name="tv_numero_cel_olvido">INGRESE SU NÚMERO DE CELULAR</string>
 
@@ -673,7 +679,7 @@
     <string name="tv_nro_telefono">NRO. DE TELÉFONO :</string>
     <string name="tv_operador">OPERADOR :</string>
     <string name="tv_selec_monto">SELECCIONAR MONTO :</string>
-    <string name="btn_regresar_menu">REGRESAR MENÚ</string>
+    <string name="btn_regresar_menu">REGRESAR AL MENÚ</string>
     <string name="btn_salir_recarga">SALIR</string>
 
     <!-- pantalla de recargas - Seleccion Medio Pago -->
@@ -744,5 +750,11 @@
     <string name="tv_contra_actual_operario">CONTRASEÑA ACTUAL</string>
     <string name="tv_nueva_contra_operario">NUEVA CONTRASEÑA</string>
     <string name="tv_confirma_contra_operario">CONFIRMAR CONTRASEÑA</string>
+
+    <!-- Pantalla de recuperacion de la segunda clave de acceso -->
+
+    <string name="titulo_recuperacion_segunda_clave">RECUPERACIÓN DE CLAVE</string>
+    <string name="tv_msg_llegara_correo">EN BREVE LLEGARÁ UN CORREO ELECTRÓNICO PARA RESTABLECER SU CONTRASEÑA</string>
+    <string name="tv_msg_llame_central_servicio">UNA VEZ OBTENIDA SU NUEVA CONTRASEÑA LLAME A LA CENTRAL DE SERVICIO AL CLIENTE PARA GARANTIZAR SU TOTAL SEGURIDAD</string>
 
 </resources>

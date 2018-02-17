@@ -1,14 +1,17 @@
 package com.example.ctorres.superagentemovil3.superagente;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,6 +56,7 @@ public class AgregarTarjetasUsuario extends Activity {
     GetTarjetaBinAdapter getTarjetaBinAdapter;
     int bancos;
     String cliente, cli_dni, validacionTipoTarjeta;
+    private int mYear, mMonth, mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -203,6 +207,30 @@ public class AgregarTarjetasUsuario extends Activity {
                 ejecutarListaTarjetasBin();
             }
         });*/
+
+        txt_fecha_vcto_tarjeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AgregarTarjetasUsuario.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                txt_fecha_vcto_tarjeta.setText((monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+                datePickerDialog.show();
+            }
+        });
     }
 
     private void numeroTarjeta() {
@@ -429,7 +457,10 @@ public class AgregarTarjetasUsuario extends Activity {
             // arg2 = month
             // arg3 = day
             showDate(arg1, arg2 + 1);
+
         }
+
+
     };
 
     private void showDate(int year, int month) {

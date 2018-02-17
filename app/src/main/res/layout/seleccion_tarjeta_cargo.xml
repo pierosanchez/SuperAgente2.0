@@ -44,7 +44,7 @@
                 <ListView
                     android:id="@+id/lv_tarjetas_cargo_usuario"
                     android:layout_width="330dp"
-                    android:layout_height="200dp">
+                    android:layout_height="270dp">
 
 
                 </ListView>

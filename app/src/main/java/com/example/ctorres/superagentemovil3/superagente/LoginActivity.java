@@ -361,8 +361,11 @@ public class LoginActivity extends Activity {
 
         if (cursor.getCount() > 0) {
             result = true;
+            cursor.getString(0); //obtiene el valor de la columna que se pasa como parametro aun queda probar esta parte del codigo
+            cursor.close();
         } else {
             result = false;
+            cursor.close();
         }
 
         return result;

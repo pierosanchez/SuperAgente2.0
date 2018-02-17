@@ -31,9 +31,10 @@ public class AgregarTarjetaBeneficiario extends Activity {
 
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
+    String tipoValidacion[] = {"Pin", "Firma"};
     private RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
-    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
-    String dni_benef, cliente, cli_dni;
+    private Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
+    String dni_benef, cliente, cli_dni, validacionTipoTarjeta;
     private UsuarioEntity usuario;
     EditText txt_numero_tarjeta_beneficiario1, txt_numero_tarjeta_beneficiario2, txt_numero_tarjeta_beneficiario3, txt_numero_tarjeta_beneficiario4;
     Button btn_agregar_tarjeta_beneficiario;
@@ -71,6 +72,7 @@ public class AgregarTarjetaBeneficiario extends Activity {
         cargarTipoTarjeta();
         //cargarBancoTarjeta();
         numeroTarjetaBeneficiario();
+        cargarValidacionTarjeta();
 
         Bundle bundle = getIntent().getExtras();
         dni_benef = bundle.getString("dni_benef");
@@ -135,6 +137,18 @@ public class AgregarTarjetaBeneficiario extends Activity {
             }
         });
 
+        spinnerValidacionTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                validacionTipoTarjeta = parent.getAdapter().getItem(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -146,6 +160,11 @@ public class AgregarTarjetaBeneficiario extends Activity {
 
             }
         });
+    }
+
+    public void cargarValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorBanco);
     }
 
     private class insertarTarjetaBeneficiario extends AsyncTask<String, Void, BeneficiarioEntity> {
@@ -164,7 +183,7 @@ public class AgregarTarjetaBeneficiario extends Activity {
             try {
 
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.IngresarTarjetaBeneficiario(dni_benef, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta());
+                user = dao.IngresarTarjetaBeneficiario(dni_benef, tarjeta, obtenerEmisorTarjeta(), bancos, obtenerTipoTarjeta(), validacionTipoTarjeta);
 
             } catch (Exception e) {
                 user = null;

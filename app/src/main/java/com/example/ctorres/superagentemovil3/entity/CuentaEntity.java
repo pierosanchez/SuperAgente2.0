@@ -8,8 +8,11 @@ import android.os.Parcelable;
  */
 
 public class CuentaEntity {
-    String numCuenta, banco, tipoCuenta, tipoMoneda, idcliente, idcuenta;
-    int cod_banco, tipo_moneda;
+    private String numCuenta, banco, tipoCuenta, tipoMoneda, idcliente, idcuenta;
+    private int cod_banco, tipo_moneda;
+    private String signoMoneda;
+    private String descBreveBanco;
+
 
     public CuentaEntity() {
     }
@@ -23,6 +26,22 @@ public class CuentaEntity {
         this.idcuenta = idcuenta;
         this.cod_banco = cod_banco;
         this.tipo_moneda = tipo_moneda;
+    }
+
+    public String getSignoMoneda() {
+        return signoMoneda;
+    }
+
+    public void setSignoMoneda(String signoMoneda) {
+        this.signoMoneda = signoMoneda;
+    }
+
+    public String getDescBreveBanco() {
+        return descBreveBanco;
+    }
+
+    public void setDescBreveBanco(String descBreveBanco) {
+        this.descBreveBanco = descBreveBanco;
     }
 
     public int getTipo_moneda() {

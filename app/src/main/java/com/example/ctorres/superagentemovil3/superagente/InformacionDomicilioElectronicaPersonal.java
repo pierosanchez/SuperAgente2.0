@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
 import com.example.ctorres.superagentemovil3.adapter.DepartamentosUbigeoAdapter;
@@ -83,18 +84,32 @@ public class InformacionDomicilioElectronicaPersonal extends Activity {
             @Override
             public void onClick(View v) {
 
-                InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion validarUsuarioDireccion = new InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion();
-                validarUsuarioDireccion.execute();
+                String direccion = txt_direccion.getText().toString();
+                String telefono = txt_tel_fijo.getText().toString();
+                if (telefono.length() == 9 && direccion.length() != 0) {
+                    InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion validarUsuarioDireccion = new InformacionDomicilioElectronicaPersonal.ValidarUsuarioDireccion();
+                    validarUsuarioDireccion.execute();
 
-                /*Intent sanipesIntent = new Intent(InformacionDomicilioElectronicaPersonal.this, ClaveAcceso.class);
-                sanipesIntent.putExtra("usuario", usuario);
-                startActivity(sanipesIntent);
-                finish();*/
+                    /*Intent sanipesIntent = new Intent(InformacionDomicilioElectronicaPersonal.this, ClaveAcceso.class);
+                    sanipesIntent.putExtra("usuario", usuario);
+                    startActivity(sanipesIntent);
+                    finish();*/
 
-                Intent sanipesIntent = new Intent(InformacionDomicilioElectronicaPersonal.this, ClaveAcceso.class);
-                sanipesIntent.putExtra("usuario", usuario);
-                startActivity(sanipesIntent);
-                finish();
+                    Intent sanipesIntent = new Intent(InformacionDomicilioElectronicaPersonal.this, ClaveAcceso.class);
+                    sanipesIntent.putExtra("usuario", usuario);
+                    startActivity(sanipesIntent);
+                    finish();
+
+                } else {
+                    if (telefono.length() == 0) {
+                        Toast.makeText(InformacionDomicilioElectronicaPersonal.this, "Ingrese su telefono fijo", Toast.LENGTH_LONG).show();
+                    } else if (direccion.length() == 0) {
+                        Toast.makeText(InformacionDomicilioElectronicaPersonal.this, "Ingrese su dirección", Toast.LENGTH_LONG).show();
+                    } else if (direccion.length() == 0 && telefono.length() == 0) {
+                        Toast.makeText(InformacionDomicilioElectronicaPersonal.this, "Ingrese sus datos por favor", Toast.LENGTH_LONG).show();
+                    }
+                }
+
             }
         });
 

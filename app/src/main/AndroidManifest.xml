@@ -101,7 +101,7 @@
         <activity android:name=".superagente.IngresoMontoPagoPinRecargas" />
         <activity android:name=".superagente.VoucherRecargaTelefonicaFirma" />
         <activity android:name=".superagente.LoginNumeroCliente" />
-        <activity android:name=".superagente.LoginPasswordCliente"></activity>
+        <activity android:name=".superagente.LoginPasswordCliente" />
     </application>
 
 </manifest>

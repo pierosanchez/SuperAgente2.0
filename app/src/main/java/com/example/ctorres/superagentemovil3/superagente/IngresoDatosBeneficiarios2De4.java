@@ -354,7 +354,7 @@ public class IngresoDatosBeneficiarios2De4 extends Activity {
     @SuppressWarnings("deprecation")
     public void setDate(View view) {
         showDialog(999);
-        Toast.makeText(getApplicationContext(), "ca", Toast.LENGTH_SHORT)
+        Toast.makeText(getApplicationContext(), "Seleccione la fecha de Necimiento", Toast.LENGTH_LONG)
                 .show();
     }
 

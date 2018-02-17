@@ -14,9 +14,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:gravity="center"
-        android:text="SUPER AGENTE MOVIL"
+        android:text="SUPER AGENTE MOVIL v1.0.01"
         android:textColor="@color/color_blanco"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
 </RelativeLayout>

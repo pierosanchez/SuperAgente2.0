@@ -85,7 +85,6 @@ public class SeleccionServicioPagar extends Activity {
                 servicio = empresasServiciosAdapter.getItem(position).getDes_emp_servicio();
                 tipo_servicio_publico = empresasServiciosAdapter.getItem(position).getCod_tipo_emps_servicio();
                 tv_nombre_recibo_usuario.setText(empresasServiciosAdapter.getItem(position).getNombre_recibo());
-
                 if (tipo_servicio_publico == 3) {
 
                     sp_seleccion_tipo_servicio.setVisibility(View.GONE);

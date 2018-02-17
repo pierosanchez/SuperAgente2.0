@@ -61,6 +61,7 @@ public class UsuarioEntity implements Parcelable {
     private String validacionTarjeta;
     private String validaModi;
     private String validaLoginCelular;
+    private String rptaReniec;
 
 
     public String getValidaLoginCelular() {
@@ -69,6 +70,14 @@ public class UsuarioEntity implements Parcelable {
 
     public void setValidaLoginCelular(String validaLoginCelular) {
         this.validaLoginCelular = validaLoginCelular;
+    }
+
+    public String getRptaReniec() {
+        return rptaReniec;
+    }
+
+    public void setRptaReniec(String rptaReniec) {
+        this.rptaReniec = rptaReniec;
     }
 
     public String getValidaModi() {

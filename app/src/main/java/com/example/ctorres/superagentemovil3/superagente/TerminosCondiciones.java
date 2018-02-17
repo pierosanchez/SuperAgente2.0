@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Timer;
@@ -44,6 +46,7 @@ public class TerminosCondiciones extends Activity {
     private RadioButton rdbtn_acepta_condiciones;
     private Button btn_aceptar, btnRegresar;
     String numCliente;
+    private TextView tv_terminos_condiciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -54,15 +57,19 @@ public class TerminosCondiciones extends Activity {
         //btn_aceptar = (Button) findViewById(R.id.btnAceptar) ;
         btnRegresar = (Button) findViewById(R.id.btnRegresar) ;
 
-        /*Bundle bundle = getIntent().getExtras();
-        numCliente = bundle.getString("movil");*/
+        tv_terminos_condiciones = (TextView) findViewById(R.id.tv_terminos_condiciones);
+
+        Bundle bundle = getIntent().getExtras();
+        numCliente = bundle.getString("movil");
+
+        tv_terminos_condiciones.setMovementMethod(new ScrollingMovementMethod());
 
         rdbtn_acepta_condiciones.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 //btn_aceptar.setEnabled(true);
                 Intent intent = new Intent(TerminosCondiciones.this, InformacionPersonalActivity.class);
-                //intent.putExtra("movil", numCliente);
+                intent.putExtra("movil", numCliente);
                 startActivity(intent);
                 finish();
             }

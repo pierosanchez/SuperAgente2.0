@@ -200,8 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="65dp"
                     android:background="@color/color_blanco"
-                    android:gravity="center"
-                    android:onClick="setDate" />
+                    android:gravity="center" />
 
             </LinearLayout>
 

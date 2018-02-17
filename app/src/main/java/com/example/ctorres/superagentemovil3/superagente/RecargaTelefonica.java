@@ -253,7 +253,7 @@ public class RecargaTelefonica extends Activity {
 
     public void salir(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("¿Esta seguro que desea salir de la aplicación?");
+        alertDialog.setMessage("¿Está seguro que desea salir de la aplicación?");
         alertDialog.setTitle("Salir");
         alertDialog.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override

@@ -6,11 +6,14 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,9 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ctorres.superagentemovil3.R;
+import com.example.ctorres.superagentemovil3.adapter.BancosAdapter;
 import com.example.ctorres.superagentemovil3.adapter.GetTarjetaBinAdapter;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoImplement;
 import com.example.ctorres.superagentemovil3.dao.SuperAgenteDaoInterface;
+import com.example.ctorres.superagentemovil3.entity.BancosEntity;
 import com.example.ctorres.superagentemovil3.entity.TarjetaBinEntity;
 import com.example.ctorres.superagentemovil3.entity.UsuarioEntity;
 
@@ -37,16 +42,21 @@ public class InformacionTarjeta extends Activity {
     //private EditText confirmNroTarjetaDigito1, confirmNroTarjetaDigito2, confirmNroTarjetaDigito3, confirmNroTarjetaDigito4;
     private Button agregarTarjeta, terminar, btnRegresar, btn_validar_tarjeta;
     private View rootView;
-    private String numeroTarjeta, confirmNumeroTarjeta;
+    private String numeroTarjeta, confirmNumeroTarjeta, validacionTipoTarjeta;
     private UsuarioEntity usuario;
-    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta;
+    Spinner spinnerTipoTarjeta, spinnerBancoTarjeta, spinnerValidacionTarjeta;
     String arrayTipoTarjeta[] = {"Débito", "Crédito"};
+    String tipoValidacion[] = {"Pin", "Firma"};
     String arrayBancoTarjeta[] = {"Scotiabank", "BCP", "Interbank", "BBVA", "Otros"};
     private Calendar calendar;
     private int year, month, day;
+    private int bancos;
     RadioButton rdbtn_visa_option, rdbtn_amex_option, rdbtn_mc_option;
     GetTarjetaBinAdapter getTarjetaBinAdapter;
     ArrayList<TarjetaBinEntity> tarjetaBinEntityArrayList;
+    ArrayList<BancosEntity> bancosEntityArrayList;
+    BancosAdapter bancosAdapter;
+    private int mYear, mMonth, mDay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +72,13 @@ public class InformacionTarjeta extends Activity {
 
         spinnerTipoTarjeta = (Spinner) findViewById(R.id.spinnerTipoTarjeta);
         spinnerBancoTarjeta = (Spinner) findViewById(R.id.spinnerBancoTarjeta);
+        spinnerValidacionTarjeta = (Spinner) findViewById(R.id.spinnerValidacionTarjeta);
 
 
         agregarTarjeta = (Button) findViewById(R.id.agregarTarjeta);
         terminar = (Button) findViewById(R.id.terminar);
         btnRegresar = (Button) findViewById(R.id.btnRegresar);
-        btn_validar_tarjeta = (Button) findViewById(R.id.btn_validar_tarjeta);
+        //btn_validar_tarjeta = (Button) findViewById(R.id.btn_validar_tarjeta);
 
         rdbtn_visa_option = (RadioButton) findViewById(R.id.rdbtn_visa_option);
         rdbtn_amex_option = (RadioButton) findViewById(R.id.rdbtn_amex_option);
@@ -88,7 +99,14 @@ public class InformacionTarjeta extends Activity {
         numeroTarjeta();
         //confirmarNumeroTarjeta();
         cargarTipoTarjeta();
-        cargarBancoTarjeta();
+        //cargarBancoTarjeta();
+        cargarValidacionTarjeta();
+
+        bancosEntityArrayList = null;
+        bancosAdapter = new BancosAdapter(bancosEntityArrayList, getApplication());
+        spinnerBancoTarjeta.setAdapter(bancosAdapter);
+
+        ejecutarLista();
 
 
         rdbtn_mc_option.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +130,47 @@ public class InformacionTarjeta extends Activity {
             public void onClick(View v) {
                 rdbtn_amex_option.setChecked(false);
                 rdbtn_mc_option.setChecked(false);
+            }
+        });
+
+        spinnerValidacionTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                validacionTipoTarjeta = parent.getAdapter().getItem(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerTipoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (parent.getAdapter().getItem(position).equals("Débito")){
+                    spinnerValidacionTarjeta.setEnabled(false);
+                    spinnerValidacionTarjeta.setSelection(0);
+                } else if (parent.getAdapter().getItem(position).equals("Crédito")){
+                    spinnerValidacionTarjeta.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spinnerBancoTarjeta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bancos = bancosAdapter.getItem(position).getCod_banco();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
@@ -169,13 +228,37 @@ public class InformacionTarjeta extends Activity {
             }
         });
 
-        btn_validar_tarjeta.setOnClickListener(new View.OnClickListener() {
+        /*btn_validar_tarjeta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tarjetaBinEntityArrayList = null;
                 getTarjetaBinAdapter = new GetTarjetaBinAdapter(tarjetaBinEntityArrayList, getApplication());
 
                 ejecutarListaTarjetasBin();
+            }
+        });*/
+
+        txt_fecha_vcto_tarjeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(InformacionTarjeta.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                txt_fecha_vcto_tarjeta.setText((monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                ((ViewGroup) datePickerDialog.getDatePicker()).findViewById(Resources.getSystem().getIdentifier("day", "id", "android")).setVisibility(View.GONE);
+                datePickerDialog.show();
             }
         });
 
@@ -249,6 +332,29 @@ public class InformacionTarjeta extends Activity {
             }
 
         });
+
+        nroTarjetaDigito4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (nroTarjetaDigito4.getText().toString().length() == 4)     //size as per your requirement
+                {
+                    tarjetaBinEntityArrayList = null;
+                    getTarjetaBinAdapter = new GetTarjetaBinAdapter(tarjetaBinEntityArrayList, getApplication());
+
+                    ejecutarListaTarjetasBin();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private class ValidarTarjeta extends AsyncTask<String, Void, UsuarioEntity> {
@@ -266,11 +372,9 @@ public class InformacionTarjeta extends Activity {
         protected UsuarioEntity doInBackground(String... params) {
             UsuarioEntity user;
             try {
-                String validar="123";
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta(), validar);
+                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), bancos, validacionTipoTarjeta);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
-
             } catch (Exception e) {
                 user = null;
                 //flag_clic_ingreso = 0;;
@@ -314,17 +418,14 @@ public class InformacionTarjeta extends Activity {
         protected UsuarioEntity doInBackground(String... params) {
             UsuarioEntity user;
             try {
-                String validar="123";
                 SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
-                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta(), validar);
+                user = dao.getValidarTarjeta(usuario.getUsuarioId(), numeroTarjeta, venimientoTarjeta, obtenerTipoTarjeta(), obtenerEmisorTarjeta(), obtenerBancoTarjeta(), validacionTipoTarjeta);
                 usuario.setValidaTarjeta(user.getValidaTarjeta());
-
             } catch (Exception e) {
                 user = null;
                 //flag_clic_ingreso = 0;;
             }
             return user;
-
         }
 
         @Override
@@ -350,6 +451,39 @@ public class InformacionTarjeta extends Activity {
             } else {
 
             }
+        }
+    }
+
+    private void ejecutarLista() {
+
+        try {
+            InformacionTarjeta.ListadoEmpresas listadoEmpresas = new InformacionTarjeta.ListadoEmpresas();
+            listadoEmpresas.execute();
+        } catch (Exception e) {
+            //listadoBeneficiario = null;
+        }
+
+    }
+
+    private class ListadoEmpresas extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... params) {
+
+            try {
+                SuperAgenteDaoInterface dao = new SuperAgenteDaoImplement();
+                bancosEntityArrayList = dao.ListadoBancos();
+            } catch (Exception e) {
+                //fldag_clic_ingreso = 0;;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            //usuarioEntityArrayList.remove(banco = banco_tarjeta);
+            bancosAdapter.setNewListbancos(bancosEntityArrayList);
+            bancosAdapter.notifyDataSetChanged();
         }
     }
 
@@ -461,11 +595,16 @@ public class InformacionTarjeta extends Activity {
         spinnerBancoTarjeta.setAdapter(adaptadorBanco);
     }
 
-    public String validaTipoTarjeta() {
+    public void cargarValidacionTarjeta() {
+        ArrayAdapter<String> adaptadorBanco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, tipoValidacion);
+        spinnerValidacionTarjeta.setAdapter(adaptadorBanco);
+    }
+
+    /*public String validaTipoTarjeta() {
         String tipo = "";
         tipo = spinnerTipoTarjeta.getSelectedItem().toString();
         return tipo;
-    }
+    }*/
 
     //Metodos para el DatePicker
     @SuppressWarnings("deprecation")
@@ -559,36 +698,40 @@ public class InformacionTarjeta extends Activity {
             super.onPostExecute(aVoid);
             getTarjetaBinAdapter.setNewListTarjetaBin(tarjetaBinEntityArrayList);
             getTarjetaBinAdapter.notifyDataSetChanged();
-            if (getTarjetaBinAdapter.getItem(0).getMarca().equals("Mastercard ")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_mc_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_mc_option.setChecked(true);
-                } else {
-                    rdbtn_mc_option.setChecked(true);
+            if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("00")) {
+                if (getTarjetaBinAdapter.getItem(0).getMarca().equals("Mastercard ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_mc_option.setChecked(true);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_mc_option.setChecked(true);
+                    } else {
+                        rdbtn_mc_option.setChecked(true);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("AMEX ")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_amex_option.setChecked(true);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_amex_option.setChecked(true);
+                    } else {
+                        rdbtn_amex_option.setChecked(true);
+                    }
+                } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("VISA")) {
+                    if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")) {
+                        spinnerTipoTarjeta.setSelection(1);
+                        rdbtn_visa_option.setChecked(true);
+                    } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")) {
+                        spinnerTipoTarjeta.setSelection(0);
+                        rdbtn_visa_option.setChecked(true);
+                    } else {
+                        rdbtn_visa_option.setChecked(true);
+                    }
                 }
-            } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("AMEX ")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_amex_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_amex_option.setChecked(true);
-                } else {
-                    rdbtn_amex_option.setChecked(true);
-                }
-            } else if (getTarjetaBinAdapter.getItem(0).getMarca().equals("VISA")){
-                if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Crédito")){
-                    spinnerTipoTarjeta.setSelection(1);
-                    rdbtn_visa_option.setChecked(true);
-                } else if (getTarjetaBinAdapter.getItem(0).getTipo_tarjeta().equals("Debito")){
-                    spinnerTipoTarjeta.setSelection(0);
-                    rdbtn_visa_option.setChecked(true);
-                } else {
-                    rdbtn_visa_option.setChecked(true);
-                }
+            } else if (getTarjetaBinAdapter.getItem(0).getRpta_bin().equals("01")){
+                Toast.makeText(InformacionTarjeta.this, "El numero de BIN no existe", Toast.LENGTH_LONG).show();
             }
         }
     }

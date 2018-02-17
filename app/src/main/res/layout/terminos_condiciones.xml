@@ -28,15 +28,15 @@
                 android:textSize="23dp" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv_terminos_condiciones"
                 android:layout_width="320dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:layout_weight="0.62"
                 android:background="@drawable/borders"
-                android:gravity="center"
-                android:text="@string/tv_terminos" />
+                android:text="@string/terminos_condiciones"
+                android:scrollbars="vertical"/>
 
             <RadioButton
                 android:id="@+id/radioTerminosCondiciones"
